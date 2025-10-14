@@ -51,6 +51,7 @@
                 }
 
                 input[type="text"], input[type="number"], input[type="email"], input[type="url"] {
+                    border: none !important;
                     @apply border-b! border-[var(--color-blanc)]! font-normal! py-[5px]! px-[10px]! bg-[var(--color-violet)]! text-[var(--color-blanc)]!;
                 }
 
@@ -89,7 +90,7 @@
                     outline: none !important;
                     border: none !important;
                     background: var(--color-purple) !important;
-                    @apply border-b! border-[var(--color-blanc)]! font-normal! p-[10px]!;
+                    @apply border-b! border-[var(--color-blanc)]! font-normal! p-[10px]! text-[var(--color-blanc)]!;
                 }
             }
 
@@ -128,7 +129,7 @@
                 }
 
                 span {
-                    @apply font-light! opacity-50! text-[var(--color-blanc)]! text-[20px]! p-0!;
+                    @apply font-light! opacity-100! text-[var(--color-blanc)]! text-[20px]! p-0!;
                 }
 
                 i {
@@ -236,7 +237,7 @@
         }
 
         .twofpin {
-            @apply block! w-[40px]! text-center! border-b! border-[var(--color-blanc)]! font-normal! py-[10px]! bg-[var(--color-purple)]!;
+            @apply block! w-[40px]! text-center! border-b! border-[var(--color-blanc)]! font-normal! py-[10px]! bg-[var(--color-purple)]! text-[var(--color-blanc)]!;
         }
     }
 
