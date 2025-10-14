@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css');
+
+@import "tailwindcss";
+
+@theme {
+    --font-roboto: "Roboto", sans-serif;
+    --color-blanc: #FFFFFF;
+    --color-rose: #D60093;
+    --color-violet: #4E006F;
+    --color-purple: #290033;
+}
+
+@layer reset {
+    /* Réinitialisation des styles par défaut */
+}
+
+@layer base {
+    /* Styles de base de l'application */
+    form {
+        @apply w-full bg-[var(--color-violet)] py-[30px] px-[40px] text-[var(--color-blanc)] rounded-[40px];
+
+        h3 {
+            @apply block w-full text-center font-bold text-[var(--color-blanc)] text-[30px]! mb-[20px];
+        }
+        h4 {
+            @apply block w-full text-center font-normal text-[var(--color-blanc)] text-[24px]! mb-[20px];
+        }
+
+        i.value {
+            @apply not-italic font-light opacity-50 text-[var(--color-blanc)];
+        }
+
+        label {
+            @apply flex flex-col w-full text-left font-bold text-[var(--color-blanc)] text-[20px]! mb-[20px];
+
+
+
+            span {
+                @apply pb-[10px] pt-[20px];
+
+                i {
+                    @apply font-light not-italic;
+                }
+            }
+
+            input:focus {
+                outline: none !important;
+                @apply border-b! border-[var(--color-blanc)]!;
+            }
+
+            input[type="text"], input[type="number"], input[type="email"], input[type="url"] {
+                @apply border-b border-[var(--color-blanc)] font-normal py-[5px] px-[10px];
+            }
+
+            input::placeholder {
+                @apply font-light;
+            }
+
+            input[type="file"] {
+                border: none;
+                @apply  font-light text-[var(--color-blanc)] text-[20px]!;
+            }
+            input[type="file"]:focus {
+                outline: none !important;
+                border: none !important;
+            }
+
+            input[type="file"]::file-selector-button {
+                @apply bg-[var(--color-rose)] text-[20px] text-[var(--color-blanc)] font-normal cursor-pointer p-[10px] px-[20px] rounded-[5px];
+            }
+
+            select {
+                outline: none !important;
+                -webkit-appearance: none; /* Chrome, Safari, Edge */
+                -moz-appearance: none;    /* Firefox */
+                appearance: none;
+                background-image: url("../img/fleche-select.png");
+                background-repeat: no-repeat;
+                background-position: right .75rem center;
+                background-size: 16px 10px;
+                cursor: pointer;
+                @apply bg-[var(--color-blanc)] text-[var(--color-violet)] p-[10px];
+            }
+
+            textarea {
+                outline: none !important;
+                border: none !important;
+                background: var(--color-purple);
+                @apply border-b! border-[var(--color-blanc)]! font-normal p-[10px];
+            }
+        }
+
+        label.checkbox {
+            @apply flex flex-row gap-[20px] justify-start items-center w-full py-[20px];
+
+            input[type="checkbox"] {
+                appearance: none;
+                background-color: var(--color-blanc);
+                margin: 0;
+                font: inherit;
+                color: currentColor;
+                width: 1.15em;
+                height: 1.15em;
+                border: 1px solid var(--color-rose) !important;
+                border-radius: 0.15em;
+                transform: translateY(-0.075em);
+                display: grid;
+                place-content: center;
+            }
+
+            input[type="checkbox"]::before {
+                border: 1px solid var(--color-rose) !important;
+                content: "";
+                width: 0.65em;
+                height: 0.65em;
+                transform: scale(0);
+                transition: 120ms transform ease-in-out;
+                box-shadow: inset 1em 1em var(--color-rose);
+                /* Windows High Contrast Mode */
+                background-color: var(--color-blanc);
+            }
+
+            input[type="checkbox"]:checked::before {
+                transform: scale(1);
+            }
+
+            span {
+                @apply font-light opacity-50 text-[var(--color-blanc)] text-[20px]! p-0!;
+            }
+            i{
+                @apply text-[20px] text-[var(--color-rose)] font-normal cursor-pointer;
+            }
+
+        }
+
+        button[type="submit"], button[type="button"] {
+            @apply bg-[var(--color-rose)] text-[20px] text-[var(--color-blanc)] font-normal cursor-pointer p-[10px] px-[20px] rounded-[5px];
+            :focus {
+                outline: none !important;
+            }
+        }
+    }
+}
+
+@layer components {
+    /* Composants réutilisables */
+
+    .coltwo {
+        @apply w-full flex flex-col md:flex-row justify-between items-center gap-[20px];
+    }
+
+    .step-actif {
+        .step-number {
+            @apply bg-[var(--color-rose)]!;
+        }
+        .step-title {
+            @apply text-[var(--color-rose)]!;
+        }
+    }
+
+
+    input[type="radio"]{
+        display: none !important;
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+
+
+        .option {
+            background: var(--color-violet);
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 0 10px;
+            border: 1px solid var(--color-blanc);
+            transition: all 0.3s ease;
+
+            .dot {
+               display: none;
+            }
+            span{
+                @apply text-[20px] text-[var(--color-blanc)] font-normal cursor-pointer p-[10px] px-[20px];
+            }
+        }
+    }
+    .wrapper .option .dot::before{
+    }
+
+    #option-1:checked:checked ~ .option-1,
+    #option-2:checked:checked ~ .option-2,
+    #option-3:checked:checked ~ .option-3,
+    #option-4:checked:checked ~ .option-4{
+        border-color: var(--color-blanc);
+        background: var(--color-rose);
+    }
+    #option-1:checked:checked ~ .option-1 .dot,
+    #option-2:checked:checked ~ .option-2 .dot,
+    #option-3:checked:checked ~ .option-3 .dot,
+    #option-4:checked:checked ~ .option-4 .dot{
+        background: var(--color-blanc);
+    }
+    #option-1:checked:checked ~ .option-1 .dot::before,
+    #option-2:checked:checked ~ .option-2 .dot::before,
+    #option-3:checked:checked ~ .option-3 .dot::before,
+    #option-4:checked:checked ~ .option-4 .dot::before{
+        opacity: 1;
+        transform: scale(1);
+    }
+    #option-1:checked:checked ~ .option-1 span,
+    #option-2:checked:checked ~ .option-2 span,
+    #option-3:checked:checked ~ .option-3 span,
+    #option-4:checked:checked ~ .option-4 span{
+        @apply text-[20px] text-[var(--color-blanc)] font-normal cursor-pointer p-[10px] px-[20px];
+    }
+
+    .twofpin {
+        @apply block! w-[40px]! text-center border-b! border-[var(--color-blanc)]! font-normal! py-[10px] bg-[var(--color-purple)];
+    }
+
+}
+
+
+@layer utilities {
+    /* Utilitaires personnalisés */
+}
