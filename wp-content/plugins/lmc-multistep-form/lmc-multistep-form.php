@@ -4,6 +4,7 @@
  * Description: Formulaire multi-étapes en PHP.
  * Version: 1.0
  * Author: LMC
+ * https://lepc.lmc-dev.fr/lmc-form/
  */
 
 /**
@@ -77,7 +78,7 @@ function lmc_php_form() {
     ob_start();
     ?>
 
-    <div class="lmc-multistep-form w-full m-auto max-w-[1140px]! py-[40px] font-roboto">
+    <div class="w-full! m-auto! max-w-[1140px]! py-[40px]! font-roboto!" id="lmc-multistep-form">
         <?php include_once 'src/form/steps.php'; ?>
         <form method="post">
             <?php

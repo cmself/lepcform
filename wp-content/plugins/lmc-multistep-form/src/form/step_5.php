@@ -1,12 +1,12 @@
-<div class="relative w-full min-h-[50px]">
-    <button type="button" class="absolute top-0 left-0" id="go-back"><i class="fa-solid fa-arrow-left"></i> Retour</button>
+<div class="relative! w-full! min-h-[50px]!">
+    <button type="button" class="absolute! top-0! left-0!" id="go-back"><i class="fa-solid fa-arrow-left"></i> Retour</button>
     <h3>Étape 4 : Paiement</h3>
     <h4>Vous recevrez une facture acquittée ainsi que la charte dès réception de votre règlement.</h4>
 </div>
 
 <p>
     <label for="nom"><span>Choisissez votre méthode de paiement :</span>
-        <div class="wrapper flex flex-col! gap-[5px]! w-full!">
+        <div class="wrapper flex! flex-col! gap-[5px]! w-full!">
             <input type="radio" name="select" id="option-1">
             <input type="radio" name="select" id="option-2">
             <input type="radio" name="select" id="option-3">
@@ -14,28 +14,28 @@
 
                 <label for="option-1" class="option option-1">
                     <div class="dot"></div>
-                    <div class="flex flex-row justify-between items-center w-full">
+                    <div class="flex! flex-row! justify-between! items-center! w-full!">
                     <span>Régler par carte bancaire via le service de paiement sécurisé HelloAsso</span> <img src="<?php echo plugin_dir_url('/') . 'lmc-multistep-form/assets/img/helloasso.png'; ?>">
                     </div>
                 </label>
 
                 <label for="option-2" class="option option-2">
                     <div class="dot"></div>
-                    <div class="flex flex-row justify-between items-center w-full">
+                    <div class="flex! flex-row! justify-between! items-center! w-full!">
                     <span>Régler par virement </span><i class="fa-solid fa-building-columns"></i>
                     </div>
                 </label>
 
                 <label for="option-3" class="option option-3">
                     <div class="dot"></div>
-                    <div class="flex flex-row justify-between items-center w-full">
+                    <div class="flex! flex-row! justify-between! items-center! w-full!">
                     <span>Demander une facture non acquittée</span><i class="fa-regular fa-file-lines"></i>
                     </div>
                 </label>
 
                 <label for="option-4" class="option option-4">
                     <div class="dot"></div>
-                    <div class="flex flex-row justify-between items-center w-full">
+                    <div class="flex! flex-row! justify-between! items-center! w-full!">
                     <span>Besoin d'aide ? Contactez nous</span><i class="fa-regular fa-envelope"></i>
                     </div>
                 </label>
@@ -45,9 +45,9 @@
     </label>
 </p>
 
-<div id="content_2" class="block w-full text-left font-normal text-[var(--color-blanc)] text-[24px]! mb-[20px]"></div>
-<div id="content_3" class="block w-full"></div>
-<div id="content_4" class="block w-full"></div>
+<div id="content_2" class="block! w-full! text-left! font-normal! text-[var(--color-blanc)]! text-[24px]! mb-[20px]!"></div>
+<div id="content_3" class="block! w-full!"></div>
+<div id="content_4" class="block! w-full!"></div>
 
 <p>
     <label for="politique" class="checkbox">
@@ -57,11 +57,11 @@
 </p>
 
 <p>
-<div class="g-recaptcha flex flex-row justify-center items-center w-full mb-[40px]" data-sitekey="6LfNBOorAAAAADz2yypqgW6kOxvqCeBB4T80Ycdt"></div>
+<div class="g-recaptcha flex! flex-row! justify-center! items-center! w-full! mb-[40px]!" data-sitekey="6LfNBOorAAAAADz2yypqgW6kOxvqCeBB4T80Ycdt"></div>
 </p>
 
 <input type="hidden" name="step" value="6">
-<p class="block w-full text-center"><button type="submit">Valider le formulaire <i class="fa-solid fa-arrow-right"></i></button></p>
+<p class="block! w-full! text-center!"><button type="submit">Valider le formulaire <i class="fa-solid fa-arrow-right"></i></button></p>
 
 <script>
 

@@ -1,17 +1,17 @@
-<div class="relative w-full min-h-[50px]">
-    <button type="button" class="absolute top-0 left-0" id="go-back"><i class="fa-solid fa-arrow-left"></i> Retour</button>
+<div class="relative! w-full! min-h-[50px]!">
+    <button type="button" class="absolute! top-0! left-0!" id="go-back"><i class="fa-solid fa-arrow-left"></i> Retour</button>
     <h3>Étape 2 : Interlocuteurs</h3>
     <h4>Informations du contact principal</h4>
 </div>
 
     <div class="coltwo">
-        <div class="w-full">
+        <div class="w-full!">
             <p>
                 <label for="prenom_0"><span>Prénom * :</span> <input type="text" id="prenom_0" name="prenom_0"
                                                                    placeholder="Prénom" required></label>
             </p>
         </div>
-        <div class="w-full">
+        <div class="w-full!">
             <p>
                 <label for="nom_0"><span>Nom * :</span> <input type="text" id="nom_0" name="nom_0" placeholder="Nom" required></label>
             </p>
@@ -69,9 +69,9 @@
 
 
     <input type="hidden" name="step" value="3">
-    <p class="block w-full text-center text-[var(--color-blanc)] text-[20px] font-light py-[20px] opacity-50">* champs
+    <p class="block! w-full! text-center! text-[var(--color-blanc)]! text-[20px]! font-light! py-[20px]! opacity-50!">* champs
         nécessaires pour valider l’étape</p>
-    <p class="block w-full text-center">
+    <p class="block! w-full! text-center!">
         <button type="button" id="addBtn"><i class="fa-solid fa-user-plus mr-[20px]"></i> Ajouter un contact</button>
         <button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button>
     </p>
@@ -111,20 +111,20 @@
             newDiv.classList.add('user');
             newDiv.id = 'N_' + (currentContacts+1);
             newDiv.innerHTML = `
-            <div class="relative w-full min-h-[50px]">
-            <button type="button" class="absolute top-0 right-0" onclick="suppUser('N_` + (currentContacts+1) + `')"><i class="fa-solid fa-user-minus mr-[20px]"></i> Supprimer le contact</button>
+            <div class="relative! w-full! min-h-[50px]!">
+            <button type="button" class="absolute! top-0! right-0!" onclick="suppUser('N_` + (currentContacts+1) + `')"><i class="fa-solid fa-user-minus mr-[20px]"></i> Supprimer le contact</button>
                 <h4>` + (currentContacts+2) + `ème contact </h4>
             </div>
 
 
 <div class="coltwo">
-        <div class="w-full">
+        <div class="w-full!">
             <p>
                 <label for="prenom_` + (currentContacts+1) + `"><span>Prénom * :</span> <input type="text" id="prenom_` + (currentContacts+1) + `" name="prenom_` + (currentContacts+1) + `"
                                                                    placeholder="Prénom" required></label>
             </p>
         </div>
-        <div class="w-full">
+        <div class="w-full!">
             <p>
                 <label for="nom-` + (currentContacts+1) + `"><span>Nom * :</span> <input type="text" id="nom_` + (currentContacts+1) + `" name="nom_` + (currentContacts+1) + `" placeholder="Nom" required></label>
             </p>
@@ -218,19 +218,19 @@
             newUser.classList.add('user');
             newUser.id = 'N_' + (i + 1);
             newUser.innerHTML = `
- <div class="relative w-full min-h-[50px]">
- <button type="button" class="absolute top-0 right-0" onclick="suppUser('N_` + (i+1) + `')"><i class="fa-solid fa-user-minus mr-[20px]"></i> Supprimer le contact</button>
+ <div class="relative! w-full! min-h-[50px]!">
+ <button type="button" class="absolute! top-0! right-0!" onclick="suppUser('N_` + (i+1) + `')"><i class="fa-solid fa-user-minus mr-[20px]"></i> Supprimer le contact</button>
                 <h4>` + (i+2) + `ème contact </h4>
 
             </div>
             <div class="coltwo">
-        <div class="w-full">
+        <div class="w-full!">
             <p>
                 <label for="prenom_` + (i + 1) + `"><span>Prénom * :</span> <input type="text" id="prenom_` + (i + 1) + `" name="prenom_` + (i + 1) + `"
                                                                    placeholder="Prénom" required></label>
             </p>
         </div>
-        <div class="w-full">
+        <div class="w-full!">
             <p>
                 <label for="nom-` + (i + 1) + `"><span>Nom * :</span> <input type="text" id="nom_` + (i + 1) + `" name="nom_` + (i + 1) + `" placeholder="Nom" required></label>
             </p>

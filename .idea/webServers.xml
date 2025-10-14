@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="c592683f-c8a2-4e8a-90b7-968f870a4968" name="DEV">
+        <fileTransfer accessType="SFTP" host="sftp.sd5.gpaas.net" port="22" sshConfigId="9d7f983b-089f-4802-9ee9-c3691492dec7" sshConfig="Sandbox Wordpress">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

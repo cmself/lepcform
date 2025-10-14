@@ -17,127 +17,132 @@
 
 @layer base {
     /* Styles de base de l'application */
-    form {
-        @apply w-full bg-[var(--color-violet)] py-[30px] px-[40px] text-[var(--color-blanc)] rounded-[40px];
+    #lmc-multistep-form {
+        form {
+            @apply w-full! bg-[var(--color-violet)]! py-[30px]! px-[40px]! text-[var(--color-blanc)]! rounded-[40px]!;
 
-        h3 {
-            @apply block w-full text-center font-bold text-[var(--color-blanc)] text-[30px]! mb-[20px];
-        }
-        h4 {
-            @apply block w-full text-center font-normal text-[var(--color-blanc)] text-[24px]! mb-[20px];
-        }
+            h3 {
+                @apply block! w-full! text-center! font-bold! text-[var(--color-blanc)]! text-[30px]! mb-[20px]!;
+            }
 
-        i.value {
-            @apply not-italic font-light opacity-50 text-[var(--color-blanc)];
-        }
+            h4 {
+                @apply block! w-full! text-center! font-normal! text-[var(--color-blanc)]! text-[24px]! mb-[20px]!;
+            }
 
-        label {
-            @apply flex flex-col w-full text-left font-bold text-[var(--color-blanc)] text-[20px]! mb-[20px];
+            i.value {
+                @apply not-italic! font-light! opacity-50! text-[var(--color-blanc)]!;
+            }
+
+            label {
+                @apply flex! flex-col! w-full! text-left! font-bold! text-[var(--color-blanc)]! text-[20px]! mb-[20px]!;
 
 
+                span {
+                    @apply pb-[10px] pt-[20px];
 
-            span {
-                @apply pb-[10px] pt-[20px];
+                    i {
+                        @apply font-light! not-italic!;
+                    }
+                }
 
-                i {
-                    @apply font-light not-italic;
+                input:focus {
+                    outline: none !important;
+                    @apply border-b! border-[var(--color-blanc)]!;
+                }
+
+                input[type="text"], input[type="number"], input[type="email"], input[type="url"] {
+                    @apply border-b! border-[var(--color-blanc)]! font-normal! py-[5px]! px-[10px]! bg-[var(--color-violet)]! text-[var(--color-blanc)]!;
+                }
+
+                input::placeholder {
+                    @apply font-light!;
+                }
+
+                input[type="file"] {
+                    border: none !important;
+                    @apply font-light! text-[var(--color-blanc)]! text-[20px]!;
+                }
+
+                input[type="file"]:focus {
+                    outline: none !important;
+                    border: none !important;
+                }
+
+                input[type="file"]::file-selector-button {
+                    @apply bg-[var(--color-rose)]! text-[20px]! text-[var(--color-blanc)]! font-normal! cursor-pointer! p-[10px]! px-[20px]! rounded-[5px]!;
+                }
+
+                select {
+                    outline: none !important;
+                    -webkit-appearance: none !important;
+                    -moz-appearance: none !important;
+                    appearance: none !important;
+                    background-image: url("../img/fleche-select.png") !important;
+                    background-repeat: no-repeat !important;
+                    background-position: right .75rem center !important;
+                    background-size: 16px 10px !important;
+                    cursor: pointer !important;
+                    @apply bg-[var(--color-blanc)]! text-[var(--color-violet)]! p-[10px]!;
+                }
+
+                textarea {
+                    outline: none !important;
+                    border: none !important;
+                    background: var(--color-purple) !important;
+                    @apply border-b! border-[var(--color-blanc)]! font-normal! p-[10px]!;
                 }
             }
 
-            input:focus {
-                outline: none !important;
-                @apply border-b! border-[var(--color-blanc)]!;
+            label.checkbox {
+                @apply flex! flex-row! gap-[20px]! justify-start! items-center! w-full! py-[20px]!;
+
+                input[type="checkbox"] {
+                    appearance: none !important;
+                    background-color: var(--color-blanc) !important;
+                    margin: 0 !important;
+                    font: inherit !important;
+                    color: currentColor !important;
+                    width: 30px !important;
+                    height: 20px !important;
+                    border: 1px solid var(--color-rose) !important;
+                    border-radius: 0.15em !important;
+                    transform: translateY(-0.075em) !important;
+                    display: grid !important;
+                    place-content: center !important;
+                }
+
+                input[type="checkbox"]::before {
+                    border: 1px solid var(--color-rose) !important;
+                    content: "" !important;
+                    width: 10px !important;
+                    height: 10px !important;
+                    transform: scale(0) !important;
+                    transition: 120ms transform ease-in-out !important;
+                    box-shadow: inset 1em 1em var(--color-rose) !important;
+                    /* Windows High Contrast Mode */
+                    background-color: var(--color-blanc) !important;
+                }
+
+                input[type="checkbox"]:checked::before {
+                    transform: scale(1) !important;
+                }
+
+                span {
+                    @apply font-light! opacity-50! text-[var(--color-blanc)]! text-[20px]! p-0!;
+                }
+
+                i {
+                    @apply text-[20px]! text-[var(--color-rose)]! font-normal! cursor-pointer!;
+                }
+
             }
 
-            input[type="text"], input[type="number"], input[type="email"], input[type="url"] {
-                @apply border-b border-[var(--color-blanc)] font-normal py-[5px] px-[10px];
-            }
+            button[type="submit"], button[type="button"] {
+                @apply bg-[var(--color-rose)]! text-[20px]! text-[var(--color-blanc)]! font-normal! cursor-pointer! p-[10px]! px-[20px]! rounded-[5px]!;
 
-            input::placeholder {
-                @apply font-light;
-            }
-
-            input[type="file"] {
-                border: none;
-                @apply  font-light text-[var(--color-blanc)] text-[20px]!;
-            }
-            input[type="file"]:focus {
-                outline: none !important;
-                border: none !important;
-            }
-
-            input[type="file"]::file-selector-button {
-                @apply bg-[var(--color-rose)] text-[20px] text-[var(--color-blanc)] font-normal cursor-pointer p-[10px] px-[20px] rounded-[5px];
-            }
-
-            select {
-                outline: none !important;
-                -webkit-appearance: none; /* Chrome, Safari, Edge */
-                -moz-appearance: none;    /* Firefox */
-                appearance: none;
-                background-image: url("../img/fleche-select.png");
-                background-repeat: no-repeat;
-                background-position: right .75rem center;
-                background-size: 16px 10px;
-                cursor: pointer;
-                @apply bg-[var(--color-blanc)] text-[var(--color-violet)] p-[10px];
-            }
-
-            textarea {
-                outline: none !important;
-                border: none !important;
-                background: var(--color-purple);
-                @apply border-b! border-[var(--color-blanc)]! font-normal p-[10px];
-            }
-        }
-
-        label.checkbox {
-            @apply flex flex-row gap-[20px] justify-start items-center w-full py-[20px];
-
-            input[type="checkbox"] {
-                appearance: none;
-                background-color: var(--color-blanc);
-                margin: 0;
-                font: inherit;
-                color: currentColor;
-                width: 30px;
-                height: 20px;
-                border: 1px solid var(--color-rose) !important;
-                border-radius: 0.15em;
-                transform: translateY(-0.075em);
-                display: grid;
-                place-content: center;
-            }
-
-            input[type="checkbox"]::before {
-                border: 1px solid var(--color-rose) !important;
-                content: "";
-                width: 10px;
-                height: 10px;
-                transform: scale(0);
-                transition: 120ms transform ease-in-out;
-                box-shadow: inset 1em 1em var(--color-rose);
-                /* Windows High Contrast Mode */
-                background-color: var(--color-blanc);
-            }
-
-            input[type="checkbox"]:checked::before {
-                transform: scale(1);
-            }
-
-            span {
-                @apply font-light opacity-50 text-[var(--color-blanc)] text-[20px]! p-0!;
-            }
-            i{
-                @apply text-[20px] text-[var(--color-rose)] font-normal cursor-pointer;
-            }
-
-        }
-
-        button[type="submit"], button[type="button"] {
-            @apply bg-[var(--color-rose)] text-[20px] text-[var(--color-blanc)] font-normal cursor-pointer p-[10px] px-[20px] rounded-[5px];
-            :focus {
-                outline: none !important;
+                :focus {
+                    outline: none !important;
+                }
             }
         }
     }
@@ -146,84 +151,93 @@
 @layer components {
     /* Composants réutilisables */
 
-    .coltwo {
-        @apply w-full flex flex-col md:flex-row justify-between items-center gap-[20px];
-    }
+    #lmc-multistep-form {
 
-    .step-actif {
-        .step-number {
-            @apply bg-[var(--color-rose)]!;
+        .coltwo {
+            @apply w-full! flex! flex-col! md:flex-row! justify-between! items-center! gap-[20px]!;
         }
-        .step-title {
-            @apply text-[var(--color-rose)]!;
-        }
-    }
 
-
-    input[type="radio"]{
-        display: none !important;
-    }
-
-    .wrapper {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 20px;
-
-
-        .option {
-            background: var(--color-violet);
-            height: 100%;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            padding: 0 10px;
-            border: 1px solid var(--color-blanc);
-            transition: all 0.3s ease;
-
-            .dot {
-               display: none;
+        .step-actif {
+            .step-number {
+                @apply bg-[var(--color-rose)]!;
             }
-            span{
-                @apply text-[20px] text-[var(--color-blanc)] font-normal cursor-pointer p-[10px] px-[20px];
+
+            .step-title {
+                @apply text-[var(--color-rose)]!;
             }
         }
-    }
-    .wrapper .option .dot::before{
-    }
 
-    #option-1:checked:checked ~ .option-1,
-    #option-2:checked:checked ~ .option-2,
-    #option-3:checked:checked ~ .option-3,
-    #option-4:checked:checked ~ .option-4{
-        border-color: var(--color-blanc);
-        background: var(--color-rose);
-    }
-    #option-1:checked:checked ~ .option-1 .dot,
-    #option-2:checked:checked ~ .option-2 .dot,
-    #option-3:checked:checked ~ .option-3 .dot,
-    #option-4:checked:checked ~ .option-4 .dot{
-        background: var(--color-blanc);
-    }
-    #option-1:checked:checked ~ .option-1 .dot::before,
-    #option-2:checked:checked ~ .option-2 .dot::before,
-    #option-3:checked:checked ~ .option-3 .dot::before,
-    #option-4:checked:checked ~ .option-4 .dot::before{
-        opacity: 1;
-        transform: scale(1);
-    }
-    #option-1:checked:checked ~ .option-1 span,
-    #option-2:checked:checked ~ .option-2 span,
-    #option-3:checked:checked ~ .option-3 span,
-    #option-4:checked:checked ~ .option-4 span{
-        @apply text-[20px] text-[var(--color-blanc)] font-normal cursor-pointer p-[10px] px-[20px];
-    }
 
-    .twofpin {
-        @apply block! w-[40px]! text-center border-b! border-[var(--color-blanc)]! font-normal! py-[10px] bg-[var(--color-purple)];
+        input[type="radio"] {
+            display: none !important;
+        }
+
+        .wrapper {
+            display: flex !important;
+            flex-direction: row;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 20px !important;
+
+
+            .option {
+                background: var(--color-violet) !important;
+                height: 100% !important;
+                width: 100% !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                cursor: pointer !important;
+                padding: 0 10px !important;
+                border: 1px solid var(--color-blanc) !important;
+                transition: all 0.3s ease !important;
+
+                .dot {
+                    display: none !important;
+                }
+
+                span {
+                    @apply text-[20px]! text-[var(--color-blanc)]! font-normal! cursor-pointer! py-[10px]  px-[20px]!;
+                }
+            }
+        }
+
+        .wrapper .option .dot::before {
+        }
+
+        #option-1:checked:checked ~ .option-1,
+        #option-2:checked:checked ~ .option-2,
+        #option-3:checked:checked ~ .option-3,
+        #option-4:checked:checked ~ .option-4 {
+            border-color: var(--color-blanc) !important;
+            background: var(--color-rose) !important;
+        }
+
+        #option-1:checked:checked ~ .option-1 .dot,
+        #option-2:checked:checked ~ .option-2 .dot,
+        #option-3:checked:checked ~ .option-3 .dot,
+        #option-4:checked:checked ~ .option-4 .dot {
+            background: var(--color-blanc) !important;
+        }
+
+        #option-1:checked:checked ~ .option-1 .dot::before,
+        #option-2:checked:checked ~ .option-2 .dot::before,
+        #option-3:checked:checked ~ .option-3 .dot::before,
+        #option-4:checked:checked ~ .option-4 .dot::before {
+            opacity: 1 !important;
+            transform: scale(1) !important;
+        }
+
+        #option-1:checked:checked ~ .option-1 span,
+        #option-2:checked:checked ~ .option-2 span,
+        #option-3:checked:checked ~ .option-3 span,
+        #option-4:checked:checked ~ .option-4 span {
+            @apply text-[20px]! text-[var(--color-blanc)]! font-normal! cursor-pointer! py-[10px] px-[20px]!;
+        }
+
+        .twofpin {
+            @apply block! w-[40px]! text-center! border-b! border-[var(--color-blanc)]! font-normal! py-[10px]! bg-[var(--color-purple)]!;
+        }
     }
 
 }
@@ -231,4 +245,7 @@
 
 @layer utilities {
     /* Utilitaires personnalisés */
+    #lmc-multistep-form {
+
+    }
 }

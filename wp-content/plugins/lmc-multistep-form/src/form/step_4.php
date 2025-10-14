@@ -1,5 +1,5 @@
-<div class="relative w-full min-h-[50px]">
-    <button type="button" class="absolute top-0 left-0" id="go-back"><i class="fa-solid fa-arrow-left"></i> Retour</button>
+<div class="relative! w-full! min-h-[50px]!">
+    <button type="button" class="absolute! top-0! left-0!" id="go-back"><i class="fa-solid fa-arrow-left"></i> Retour</button>
     <h3>Étape 3 : Votre politique de diversité</h3>
 </div>
 
@@ -113,6 +113,6 @@
 
 
 <input type="hidden" name="step" value="5">
-<p class="block w-full text-center text-[var(--color-blanc)] text-[20px] font-light py-[20px] opacity-50">* champs nécessaires pour valider l’étape</p>
-<p class="block w-full text-center"><button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button></p>
+<p class="block! w-full! text-center! text-[var(--color-blanc)]! text-[20px]! font-light! py-[20px]! opacity-50!">* champs nécessaires pour valider l’étape</p>
+<p class="block! w-full! text-center!"><button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button></p>
 

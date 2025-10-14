@@ -56,12 +56,12 @@
 <p><label for="adresse"><span>Adresse postale * :</span> <input type="text" id="adresse" name="adresse" placeholder="Adresse" required></label></p>
 
 <div class="coltwo">
-    <div class="w-full">
+    <div class="w-full!">
         <p>
             <label for="ville"><span>Ville * :</span> <input type="text" id="ville" name="ville" placeholder="ville" required></label>
         </p>
     </div>
-    <div class="w-full">
+    <div class="w-full!">
         <p>
             <label for="cp"><span>Code postal * :</span> <input type="text" id="cp" name="cp" placeholder="00000" required></label>
         </p>
@@ -69,12 +69,12 @@
 </div>
 
 <div class="coltwo">
-    <div class="w-full">
+    <div class="w-full!">
         <p>
             <label for="email"><span>Email de l’organisation * :</span> <input type="email" id="email" name="email" placeholder="Email" required></label>
         </p>
     </div>
-    <div class="w-full">
+    <div class="w-full!">
         <p>
             <label for="internet"><span>Site internet * :</span> <input type="url" id="internet" name="internet" placeholder="Url du site" required></label>
         </p>
@@ -165,5 +165,5 @@
 </p>
 
 <input type="hidden" name="step" value="2">
-<p class="block w-full text-center text-[var(--color-blanc)] text-[20px] font-light py-[20px] opacity-50">* champs nécessaires pour valider l’étape</p>
-<p class="block w-full text-center"><button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button></p>
+<p class="block! w-full! text-center! text-[var(--color-blanc)]! text-[20px]! font-light! py-[20px]! opacity-50!">* champs nécessaires pour valider l’étape</p>
+<p class="block! w-full! text-center!"><button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button></p>
