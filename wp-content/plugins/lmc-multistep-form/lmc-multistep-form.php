@@ -24,6 +24,7 @@ function lmc_enqueue_assets() {
     wp_enqueue_style('lmc-style', plugin_dir_url(__FILE__) . 'assets/css/style.css');
     wp_enqueue_script('lmc-popperjs','https://unpkg.com/@popperjs/core@2' , false, true);
     wp_enqueue_script('lmc-tippyjs','https://unpkg.com/tippy.js@6' , false, true);
+    wp_enqueue_script('lmc-recaptcha','https://www.google.com/recaptcha/api.js' , false, true);
     wp_enqueue_script('lmc-script', plugin_dir_url(__FILE__) . 'assets/js/script.js', array('jquery'), false, true);
 }
 add_action('wp_enqueue_scripts', 'lmc_enqueue_assets');

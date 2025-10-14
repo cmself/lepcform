@@ -154,7 +154,8 @@
 </p>
 
 
-<p><label for="politique"><span>Présentation de votre politique diversité et des raisons de votre engagement (1000 caractères max)</span>
+<p>
+    <label for="politique"><span>Présentation de votre politique diversité et des raisons de votre engagement (1000 caractères max)</span>
         <textarea id="politique" name="politique" rows="10" placeholder="Présentation (1000 caractères max)"></textarea>
     </label>
 </p>
