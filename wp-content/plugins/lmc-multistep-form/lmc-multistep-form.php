@@ -38,6 +38,30 @@ use GuzzleHttp\Exception\ClientException;
 
 function lmc_php_form() {
 
+    // Le cookie
+    if (!isset($_COOKIE["lmc-multistep-form"])) {
+        setcookie(
+            "lmc-multistep-form",
+            "abc12345",
+            [
+                'expires' => time() + 86400, // 1 jour
+                'path' => '/',
+                'domain' => 'lmc-lepc.com',
+                'secure' => true,     // envoyé seulement via HTTPS
+                'httponly' => true,   // inaccessible en JavaScript
+                'samesite' => 'Strict' // protège contre les attaques CSRF
+            ]
+        );
+    }
+
+/*
+    if (isset($_COOKIE["lmc-multistep-form"])) {
+        echo "Bonjour " . $_COOKIE["lmc-multistep-form"];
+    } else {
+        echo "Aucun cookie trouvé.";
+    }
+ */
+
     // Enregistrement des tentatives suspectes
     $logFile = 'lmc-multistep-form.log';
     function logLmc($reason) {
@@ -68,6 +92,7 @@ function lmc_php_form() {
     if (!isset($_SESSION['lmc_data'])) {
         $_SESSION['lmc_data'] = [];
     }
+
 
     // Génération du token côté serveur
     if (!isset($_SESSION['lmc_data']['csrf_token'])) {
