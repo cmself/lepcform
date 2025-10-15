@@ -38,6 +38,23 @@ use GuzzleHttp\Exception\ClientException;
 
 function lmc_php_form() {
 
+    // Enregistrement des tentatives suspectes
+    $logFile = 'lmc-multistep-form.log';
+    function logLmc($reason) {
+        global $logFile;
+        $entry = date('Y-m-d H:i:s') . " - IP: " . $_SERVER['REMOTE_ADDR'] . " - Motif: $reason\n";
+        file_put_contents($logFile, $entry, FILE_APPEND);
+    }
+
+
+    //Vérification du Referer pour bloquer les requêtes externes
+    if (!isset($_SERVER['HTTP_REFERER']) || parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST) !== $_SERVER['HTTP_HOST']) {
+        logLmc("Requête suspecte (Referer invalide)");
+        die("Erreur : Requête suspecte.");
+    }
+
+
+
     $client = new Client([
         'verify' => false, // pas sécurisé, uniquement pour test
         'headers' => [
@@ -49,10 +66,17 @@ function lmc_php_form() {
 
     include_once 'src/api/ohme.php';
 
-
-
     if (!isset($_SESSION['lmc_data'])) {
         $_SESSION['lmc_data'] = [];
+    }
+
+    // Génération du token côté serveur
+    $_SESSION['lmc_data']['csrf_token'] = bin2hex(random_bytes(32));
+
+    // Implémentation du compteur de tentatives
+    if (!isset($_SESSION['lmc_data']['attempts'])) {
+        $_SESSION['lmc_data']['attempts'] = 0;
+        $_SESSION['lmc_data']['attempt_time'] = time();
     }
 
     // Déterminer l’étape actuelle

@@ -1,4 +1,36 @@
 <?php
+
+// Token CSRF
+if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
+    logAttempt("Token CSRF invalide");
+    die("Erreur : Requête invalide.");
+}
+
+// Honey Pot pour piéger les robots
+if (!empty($_POST['honeypot'])) {
+    logAttempt("Honey Pot rempli (robot détecté)");
+    die("Erreur : Robot détecté.");
+}
+
+// Test de rapidité d’envoi
+if (isset($_POST['formStartTime'])) {
+    $duration = time() - (int) ($_POST['formStartTime'] / 1000);
+    if ($duration < 3) {
+        logAttempt("Envoi trop rapide ($duration s)");
+        die("Erreur : Envoi trop rapide.");
+    }
+}
+
+// Limiter le nombre de tentatives
+if ($_SESSION['lmc_data']['attempts'] >= 5 && (time() - $_SESSION['lmc_data']['attempt_time'] < 300)) {
+    logAttempt("Trop de tentatives depuis IP: " . $_SERVER['REMOTE_ADDR']);
+    die("Erreur : Trop de tentatives. Veuillez réessayer plus tard.");
+}
+$_SESSION['lmc_data']['attempts']++;
+if ($_SESSION['lmc_data']['attempts'] === 1) {
+    $_SESSION['lmc_data']['attempt_time'] = time();
+}
+
 // Soumission finale : traiter les données
 $data = $_SESSION['lmc_data'];
 $data['confirmation'] = 'OK';

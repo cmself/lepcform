@@ -15,6 +15,10 @@
         <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" data-hs-pin-input-item="">
     </p>
 
+<input type="hidden" id="formStartTime" name="formStartTime">
+<script>document.getElementById('formStartTime').value = Date.now();</script>
+<input type="text" name="honeypot" id="honeypot" style="display:none;">
+<input type="hidden" name="csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
 <input type="hidden" name="step" value="4">
 <p class="block! w-full! text-center!">
     <button type="submit"><i class="fa-solid fa-rotate-left"></i> Renvoyer le code</button>
