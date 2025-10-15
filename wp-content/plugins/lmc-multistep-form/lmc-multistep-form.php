@@ -38,29 +38,19 @@ use GuzzleHttp\Exception\ClientException;
 
 function lmc_php_form() {
 
-    // Le cookie
-    if (!isset($_COOKIE["lmc-multistep-form"])) {
-        setcookie(
-            "lmc-multistep-form",
-            "abc12345",
-            [
-                'expires' => time() + 86400, // 1 jour
-                'path' => '/',
-                'domain' => 'lmc-lepc.com',
-                'secure' => true,     // envoyé seulement via HTTPS
-                'httponly' => true,   // inaccessible en JavaScript
-                'samesite' => 'Strict' // protège contre les attaques CSRF
-            ]
-        );
-    }
-
-/*
-    if (isset($_COOKIE["lmc-multistep-form"])) {
-        echo "Bonjour " . $_COOKIE["lmc-multistep-form"];
-    } else {
-        echo "Aucun cookie trouvé.";
-    }
- */
+    // Exemple : Création de la base de données
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'lmc_multistep_submissions';
+    $wpdb->query("
+                CREATE TABLE IF NOT EXISTS $table_name (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    nom VARCHAR(255),
+                    email VARCHAR(255),
+                    adresse VARCHAR(255),
+                    ville VARCHAR(255),
+                    date_submitted DATETIME DEFAULT CURRENT_TIMESTAMP
+                ) ENGINE=InnoDB;
+            ");
 
     // Enregistrement des tentatives suspectes
     $logFile = 'lmc-multistep-form.log';
@@ -93,11 +83,39 @@ function lmc_php_form() {
         $_SESSION['lmc_data'] = [];
     }
 
-
     // Génération du token côté serveur
     if (!isset($_SESSION['lmc_data']['csrf_token'])) {
         $_SESSION['lmc_data']['csrf_token'] = bin2hex(random_bytes(32));
     }
+
+    // Le cookie
+    if (!isset($_COOKIE["lmc-multistep-form"])) {
+        setcookie(
+            "lmc-multistep-form",
+            $_SESSION['lmc_data']['csrf_token'],
+            [
+                'expires' => time() + 86400, // 1 jour
+                'path' => '/',
+                'domain' => 'lmc-lepc.com',
+                'secure' => true,     // envoyé seulement via HTTPS
+                'httponly' => true,   // inaccessible en JavaScript
+                'samesite' => 'Strict' // protège contre les attaques CSRF
+            ]
+        );
+    }
+
+    if (isset($_COOKIE["lmc-multistep-form"])) {
+        // vérifier si existe
+        $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_COOKIE["lmc-multistep-form"]}'", OBJECT );
+
+        if (count($results) < 1) {
+            // Enregistrement la session en  base de données
+            $wpdb->insert($table_name, [
+                'cookie' => $_COOKIE["lmc-multistep-form"]
+            ]);
+        }
+    }
+
 
     // Implémentation du compteur de tentatives
     if (!isset($_SESSION['lmc_data']['attempts'])) {
