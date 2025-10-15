@@ -43,17 +43,16 @@ function lmc_php_form() {
     function logLmc($reason) {
         global $logFile;
         $entry = date('Y-m-d H:i:s') . " - IP: " . $_SERVER['REMOTE_ADDR'] . " - Motif: $reason\n";
-        file_put_contents($logFile, $entry, FILE_APPEND);
+        //file_put_contents($logFile, $entry, FILE_APPEND);
     }
 
-
     //Vérification du Referer pour bloquer les requêtes externes
+    /*
     if (!isset($_SERVER['HTTP_REFERER']) || parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST) !== $_SERVER['HTTP_HOST']) {
         logLmc("Requête suspecte (Referer invalide)");
         die("Erreur : Requête suspecte.");
     }
-
-
+    */
 
     $client = new Client([
         'verify' => false, // pas sécurisé, uniquement pour test
