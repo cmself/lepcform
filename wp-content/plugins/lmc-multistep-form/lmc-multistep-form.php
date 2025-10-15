@@ -70,7 +70,9 @@ function lmc_php_form() {
     }
 
     // Génération du token côté serveur
-    $_SESSION['lmc_data']['csrf_token'] = bin2hex(random_bytes(32));
+    if (!isset($_SESSION['lmc_data']['csrf_token'])) {
+        $_SESSION['lmc_data']['csrf_token'] = bin2hex(random_bytes(32));
+    }
 
     // Implémentation du compteur de tentatives
     if (!isset($_SESSION['lmc_data']['attempts'])) {

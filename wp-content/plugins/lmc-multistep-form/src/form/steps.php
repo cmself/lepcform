@@ -12,7 +12,7 @@
         <span class="step-number block w-[40px] h-[40px] rounded-full bg-[var(--color-violet)] text-center text-[var(--color-blanc)] text-[30px] font-bold">3</span>
         <span class="step-title text-[var(--color-violet)] text-[18px] font-medium">Votre politique de diversité</span>
     </div>
-    <div class="item item-4 flex flex-row items-center justify-center gap-[10px]  <?php if ($step == 5): ?>step-actif <?php endif; ?>">
+    <div class="item item-4 flex flex-row items-center justify-center gap-[10px]  <?php if ($step == 5 || $step == 6): ?>step-actif <?php endif; ?>">
         <span class="step-number block w-[40px] h-[40px] rounded-full bg-[var(--color-violet)] text-center text-[var(--color-blanc)] text-[30px] font-bold">4</span>
         <span class="step-title text-[var(--color-violet)] text-[18px] font-medium">Paiement</span>
     </div>
