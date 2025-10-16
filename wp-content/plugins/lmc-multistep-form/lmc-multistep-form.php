@@ -160,13 +160,13 @@ function lmc_php_form() {
 
     // Déterminer l’étape actuelle
     $step = isset($_POST['step']) ? intval($_POST['step']) : 1;
-    /*
-    if(isset($_GET['step']) && !empty($_GET['step'])){
-        $step = $_GET['step'];
-    }else{
-        $step = isset($_POST['step']) ? intval($_POST['step']) : 1;
+
+    if (isset($_SESSION['lmc_data']['step'])) {
+        $step = $_SESSION['lmc_data']['step'];
+        unset($_SESSION['lmc_data']['step']);
     }
-    */
+
+    echo $_SESSION['lmc_data']['step'];
 
     // Sauvegarder les données de l’étape précédente
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -182,6 +182,7 @@ function lmc_php_form() {
             include_once 'src/actions/step_6.php';
         }
     }
+
 
     // Formulaire multi-étapes
     ob_start();
