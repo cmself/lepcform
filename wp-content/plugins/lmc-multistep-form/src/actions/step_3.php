@@ -54,6 +54,39 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
                         ['cookie' => $_COOKIE["lmc-multistep-form"]]);
 
                     $_SESSION['lmc_data']['step3_otp'] = 'Code vérifié';
+
+
+                    //allow_url_fopen doit être activé dans php.ini pour que file_get_contents() accède à des URLs distantes.
+                    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+                        $url = "https";
+                    else
+                        $url = "http";
+
+                    $url .= "://";
+                    $url .= $_SERVER['HTTP_HOST'];
+                    $url .= $_SERVER['REQUEST_URI'];
+
+                    $data = ['step' => '4', 'step3_csrf_token' => $_SESSION['lmc_data']['csrf_token']];
+                    $json = json_encode($data);
+
+                    $opts = [
+                        'http' => [
+                            'method'  => 'POST',
+                            'header'  => "Content-Type: application/json\r\n" .
+                                         "Content-Length: " . strlen($json) . "\r\n",
+                            'content' => $json,
+                            'timeout' => 10
+                        ]
+                    ];
+
+                    $context = stream_context_create($opts);
+                    $response = @file_get_contents($url, false, $context);
+
+                    if ($response === false) {
+                        $error = isset($http_response_header) ? implode("\n", $http_response_header) : 'Erreur inconnue';
+                        echo "Requête échouée :\n" . $error;
+                    }
+
                 }
 
             }
