@@ -7,19 +7,19 @@
     <div class="coltwo">
         <div class="w-full!">
             <p>
-                <label for="prenom_0"><span>Prénom * :</span> <input type="text" id="prenom_0" name="prenom_0"
+                <label for="step2_prenom_0"><span>Prénom * :</span> <input type="text" id="step2_prenom_0" name="step2_prenom_0"
                                                                    placeholder="Prénom" required></label>
             </p>
         </div>
         <div class="w-full!">
             <p>
-                <label for="nom_0"><span>Nom * :</span> <input type="text" id="nom_0" name="nom_0" placeholder="Nom" required></label>
+                <label for="step2_nom_0"><span>Nom * :</span> <input type="text" id="step2_nom_0" name="step2_nom_0" placeholder="Nom" required></label>
             </p>
         </div>
     </div>
 
-    <p><label for="fonction_0"><span>Fonction dans l’organisation * :</span>
-            <select name="fonction_0" id="fonction_0" required>
+    <p><label for="step2_fonction_0"><span>Fonction dans l’organisation * :</span>
+            <select name="step2_fonction_0" id="step2_fonction_0" required>
                 <?php
                 if ($options):
                     ?>
@@ -37,12 +37,12 @@
     </p>
 
     <p>
-        <label for="email_0"><span>Email * :</span> <input type="email" id="email_0" name="email_0" placeholder="Email"
+        <label for="step2_email_0"><span>Email * :</span> <input type="email" id="step2_email_0" name="step2_email_0" placeholder="Email"
                                                          required></label>
     </p>
 
-    <p><label for="role_0"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-            <select name="role_0" id="role_0" required>
+    <p><label for="step2_role_0"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
+            <select name="step2_role_0" id="step2_role_0" required>
                 <?php
                 if ($options):
                     ?>
@@ -60,17 +60,17 @@
     </p>
 
     <p>
-        <label for="signataire_0" class="checkbox"><input type="checkbox" id="signataire_0"
-                                                  name="signataire_0"/><span>Contact signataire</span> <i
+        <label for="step2_signataire_0" class="checkbox"><input type="checkbox" id="step2_signataire_0"
+                                                  name="step2_signataire_0" value="1"/><span>Contact signataire</span> <i
                     class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
     </p>
 
     <div class="useradd"></div>
 
-    <input type="hidden" id="formStartTime" name="formStartTime">
-    <script>document.getElementById('formStartTime').value = Date.now();</script>
-    <input type="text" name="honeypot" id="honeypot" style="display:none;">
-    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
+    <input type="hidden" id="step2_formStartTime" name="step2_formStartTime">
+    <script>document.getElementById('step2_formStartTime').value = Date.now();</script>
+    <input type="text" name="step2_honeypot" id="step2_honeypot" style="display:none;">
+    <input type="hidden" id="step2_csrf_token" name="step2_csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
     <input type="hidden" name="step" value="3">
     <p class="block! w-full! text-center! text-[var(--color-blanc)]! text-[20px]! font-light! py-[20px]! opacity-50!">* champs
         nécessaires pour valider l’étape</p>
@@ -123,19 +123,19 @@
 <div class="coltwo">
         <div class="w-full!">
             <p>
-                <label for="prenom_` + (currentContacts+1) + `"><span>Prénom * :</span> <input type="text" id="prenom_` + (currentContacts+1) + `" name="prenom_` + (currentContacts+1) + `"
+                <label for="step2_prenom_` + (currentContacts+1) + `"><span>Prénom * :</span> <input type="text" id="step2_prenom_` + (currentContacts+1) + `" name="step2_prenom_` + (currentContacts+1) + `"
                                                                    placeholder="Prénom" required></label>
             </p>
         </div>
         <div class="w-full!">
             <p>
-                <label for="nom-` + (currentContacts+1) + `"><span>Nom * :</span> <input type="text" id="nom_` + (currentContacts+1) + `" name="nom_` + (currentContacts+1) + `" placeholder="Nom" required></label>
+                <label for="step2_nom-` + (currentContacts+1) + `"><span>Nom * :</span> <input type="text" id="step2_nom_` + (currentContacts+1) + `" name="step2_nom_` + (currentContacts+1) + `" placeholder="Nom" required></label>
             </p>
         </div>
     </div>
 
-    <p><label for="fonction_` + (currentContacts+1) + `"><span>Fonction dans l’organisation * :</span>
-            <select name="fonction_` + (currentContacts+1) + `" id="fonction_` + (currentContacts+1) + `" required>
+    <p><label for="step2_fonction_` + (currentContacts+1) + `"><span>Fonction dans l’organisation * :</span>
+            <select name="step2_fonction_` + (currentContacts+1) + `" id="step2_fonction_` + (currentContacts+1) + `" required>
                 <?php
             if ($options):
             ?>
@@ -153,12 +153,12 @@
     </p>
 
     <p>
-        <label for="email_` + (currentContacts+1) + `"><span>Email * :</span> <input type="email" id="email_` + (currentContacts+1) + `" name="email_` + (currentContacts+1) + `" placeholder="Email"
+        <label for="step2_email_` + (currentContacts+1) + `"><span>Email * :</span> <input type="email" id="step2_email_` + (currentContacts+1) + `" name="step2_email_` + (currentContacts+1) + `" placeholder="Email"
                                                          required></label>
     </p>
 
-    <p><label for="role_` + (currentContacts+1) + `"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-            <select name="role_` + (currentContacts+1) + `" id="role_` + (currentContacts+1) + `" required>
+    <p><label for="step2_role_` + (currentContacts+1) + `"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
+            <select name="step2_role_` + (currentContacts+1) + `" id="step2_role_` + (currentContacts+1) + `" required>
                 <?php
             if ($options):
             ?>
@@ -176,10 +176,12 @@
     </p>
 
     <p>
-        <label class="checkbox"><input type="checkbox" id="signataire_` + (currentContacts+1) + `"
-                                                  name="signataire_` + (currentContacts+1) + `"/><span>Contact signataire</span> <i
+        <label for="step2_signataire_` + (currentContacts+1) + `" class="checkbox"><input type="checkbox" id="step2_signataire_` + (currentContacts+1) + `"
+                                                  name="step2_signataire_` + (currentContacts+1) + `" value="1"/><span>Contact signataire</span> <i
                     class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
-    </p>`;
+    </p>
+
+    <input type="hidden" id="step2_useradd_` + (currentContacts+1) + `" name="step2_useradd_` + (currentContacts+1) + `">`;
             container.appendChild(newDiv);
             if (currentContacts == 2){
                 addBtn.style.display = 'none';
@@ -229,19 +231,19 @@
             <div class="coltwo">
         <div class="w-full!">
             <p>
-                <label for="prenom_` + (i + 1) + `"><span>Prénom * :</span> <input type="text" id="prenom_` + (i + 1) + `" name="prenom_` + (i + 1) + `"
+                <label for="step2_prenom_` + (i + 1) + `"><span>Prénom * :</span> <input type="text" id="step2_prenom_` + (i + 1) + `" name="step2_prenom_` + (i + 1) + `"
                                                                    placeholder="Prénom" required></label>
             </p>
         </div>
         <div class="w-full!">
             <p>
-                <label for="nom-` + (i + 1) + `"><span>Nom * :</span> <input type="text" id="nom_` + (i + 1) + `" name="nom_` + (i + 1) + `" placeholder="Nom" required></label>
+                <label for="step2_nom-` + (i + 1) + `"><span>Nom * :</span> <input type="text" id="step2_nom_` + (i + 1) + `" name="step2_nom_` + (i + 1) + `" placeholder="Nom" required></label>
             </p>
         </div>
     </div>
 
-    <p><label for="fonction_` + (i + 1) + `"><span>Fonction dans l’organisation * :</span>
-            <select name="fonction_` + (i + 1) + `" id="fonction_` + (i + 1) + `" required>
+    <p><label for="step2_fonction_` + (i + 1) + `"><span>Fonction dans l’organisation * :</span>
+            <select name="step2_fonction_` + (i + 1) + `" id="step2_fonction_` + (i + 1) + `" required>
                 <?php
             if ($options):
             ?>
@@ -259,12 +261,12 @@
     </p>
 
     <p>
-        <label for="email_` + (i + 1) + `"><span>Email * :</span> <input type="email" id="email_` + (i + 1) + `" name="email_` + (i + 1) + `" placeholder="Email"
+        <label for="step2_email_` + (i + 1) + `"><span>Email * :</span> <input type="email" id="step2_email_` + (i + 1) + `" name="step2_email_` + (i + 1) + `" placeholder="Email"
                                                          required></label>
     </p>
 
-    <p><label for="role_` + (i + 1) + `"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-            <select name="role_` + (i + 1) + `" id="role_` + (i + 1) + `" required>
+    <p><label for="step2_role_` + (i + 1) + `"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
+            <select name="step2_role_` + (i + 1) + `" id="step2_role_` + (i + 1) + `" required>
                 <?php
             if ($options):
             ?>
@@ -282,10 +284,11 @@
     </p>
 
     <p>
-        <label class="checkbox"><input type="checkbox" id="signataire_` + (i + 1) + `"
-                                                  name="signataire_` + (i + 1) + `"/><span>Contact signataire</span> <i
+        <label for="step2_signataire_` + (i + 1) + ` class="checkbox"><input type="checkbox" id="step2_signataire_` + (i + 1) + `"
+                                                  name="step2_signataire_` + (i + 1) + `" value="1"/><span>Contact signataire</span> <i
                     class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
-    </p>`;
+    </p>
+    <input type="hidden" id="step2_useradd_` + (i + 1) + `" name="step2_useradd_` + (i + 1) + `">`;
             containerUser.appendChild(newUser);
 
         }

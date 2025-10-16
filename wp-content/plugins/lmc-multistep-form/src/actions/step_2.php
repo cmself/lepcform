@@ -1,4 +1,13 @@
 <?php
+/*
+$fichierActuel = $_SERVER['PHP_SELF'] ;
+if(!empty($_SERVER['QUERY_STRING']))
+{
+    $fichierActuel .= '?step=' . 2 ;
+}
+header('Location: ' . $fichierActuel);
+*/
+
 // Token CSRF
 if (!isset($_POST['step1_csrf_token']) || $_POST['step1_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
     logLmc("Token CSRF invalide");
@@ -21,30 +30,30 @@ if (isset($_POST['step1_formStartTime'])) {
 }
 
 
-$_SESSION['lmc_data']['step1_nom'] = sanitize_text_field($_POST['step1_nom']) ?: "";
-$_SESSION['lmc_data']['step1_siret'] = sanitize_text_field($_POST['step1_siret']) ?: "";
-$_SESSION['lmc_data']['step1_logo'] = sanitize_file_name($_POST['step1_logo']) ?: "";
-$_SESSION['lmc_data']['step1_ca'] = sanitize_text_field($_POST['step1_ca']) ?: "";
-$_SESSION['lmc_data']['step1_frais'] = sanitize_text_field($_POST['step1_frais']) ?: "";
-$_SESSION['lmc_data']['step1_adherent'] = sanitize_text_field($_POST['step1_adherent']) ?: "";
-$_SESSION['lmc_data']['step1_adresse'] = sanitize_text_field($_POST['step1_adresse']) ?: "";
-$_SESSION['lmc_data']['step1_ville'] = sanitize_text_field($_POST['step1_ville']) ?: "";
-$_SESSION['lmc_data']['step1_cp'] = sanitize_text_field($_POST['step1_cp']) ?: "";
-$_SESSION['lmc_data']['step1_email'] = sanitize_email($_POST['step1_email']) ?: "";
-$_SESSION['lmc_data']['step1_internet'] = sanitize_url($_POST['step1_internet']) ?: "";
-$_SESSION['lmc_data']['step1_collaborateurs'] = sanitize_text_field($_POST['step1_collaborateurs']) ?: "";
-$_SESSION['lmc_data']['step1_activite'] = sanitize_text_field($_POST['step1_activite']) ?: "";
-$_SESSION['lmc_data']['step1_structure'] = sanitize_text_field($_POST['step1_structure']) ?: "";
-$_SESSION['lmc_data']['step1_connaissance'] = sanitize_text_field($_POST['step1_connaissance']) ?: "";
-$_SESSION['lmc_data']['step1_politique'] = sanitize_textarea_field($_POST['step1_politique']) ?: "";
+$_SESSION['lmc_data']['step1_nom'] = isset($_POST['step1_nom']) ? sanitize_text_field($_POST['step1_nom']) : "";
+$_SESSION['lmc_data']['step1_siret'] = isset($_POST['step1_siret']) ? sanitize_text_field($_POST['step1_siret']) : "";
+$_SESSION['lmc_data']['step1_logo'] = isset($_POST['step1_logo']) ? sanitize_file_name($_POST['step1_logo']) : "";
+$_SESSION['lmc_data']['step1_ca'] = isset($_POST['step1_ca']) ? sanitize_text_field($_POST['step1_ca']) : "";
+$_SESSION['lmc_data']['step1_frais'] = isset($_POST['step1_frais']) ? sanitize_text_field($_POST['step1_frais']) : "";
+$_SESSION['lmc_data']['step1_adherent'] = isset($_POST['step1_adherent']) ? sanitize_text_field($_POST['step1_adherent']) : "";
+$_SESSION['lmc_data']['step1_adresse'] = isset($_POST['step1_adresse']) ? sanitize_text_field($_POST['step1_adresse']) : "";
+$_SESSION['lmc_data']['step1_ville'] = isset($_POST['step1_ville']) ? sanitize_text_field($_POST['step1_ville']) : "";
+$_SESSION['lmc_data']['step1_cp'] = isset($_POST['step1_cp']) ? sanitize_text_field($_POST['step1_cp']) : "";
+$_SESSION['lmc_data']['step1_email'] = isset($_POST['step1_email']) ? sanitize_email($_POST['step1_email']) : "";
+$_SESSION['lmc_data']['step1_internet'] = isset($_POST['step1_internet']) ? sanitize_url($_POST['step1_internet']) : "";
+$_SESSION['lmc_data']['step1_collaborateurs'] = isset($_POST['step1_collaborateurs']) ? sanitize_text_field($_POST['step1_collaborateurs']) : "";
+$_SESSION['lmc_data']['step1_activite'] = isset($_POST['step1_activite']) ? sanitize_text_field($_POST['step1_activite']) : "";
+$_SESSION['lmc_data']['step1_structure'] = isset($_POST['step1_structure']) ? sanitize_text_field($_POST['step1_structure']) : "";
+$_SESSION['lmc_data']['step1_connaissance'] = isset($_POST['step1_connaissance']) ? sanitize_text_field($_POST['step1_connaissance']) : "";
+$_SESSION['lmc_data']['step1_politique'] = isset($_POST['step1_politique']) ? sanitize_textarea_field($_POST['step1_politique']) : "";
 
 
 // vérifier si existe
 $step1_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_COOKIE["lmc-multistep-form"]}'", OBJECT );
 
-if ($step1_results) {
-    // Enregistrement les données en base de données
+if (count($step1_results) === 1) {
 
+    // Enregistrement les données en base de données
     $wpdb->update($table_name, [
         'step1_nom' => $_SESSION['lmc_data']['step1_nom'],
         'step1_siret' => $_SESSION['lmc_data']['step1_siret'],

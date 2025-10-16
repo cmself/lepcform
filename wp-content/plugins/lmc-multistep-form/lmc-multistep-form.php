@@ -83,13 +83,15 @@ function lmc_php_form() {
         $_SESSION['lmc_data'] = [];
     }
 
-    // Génération du token côté serveur
-    if (!isset($_SESSION['lmc_data']['csrf_token'])) {
-        $_SESSION['lmc_data']['csrf_token'] = bin2hex(random_bytes(32));
-    }
 
     // Le cookie
     if (!isset($_COOKIE["lmc-multistep-form"])) {
+
+        // Génération du token côté serveur
+        if (!isset($_SESSION['lmc_data']['csrf_token'])) {
+            $_SESSION['lmc_data']['csrf_token'] = "lmc-multistep-form_" . bin2hex(random_bytes(32)) . "_" . time();
+        }
+
         setcookie(
             "lmc-multistep-form",
             $_SESSION['lmc_data']['csrf_token'],
@@ -102,18 +104,34 @@ function lmc_php_form() {
                 'samesite' => 'Strict' // protège contre les attaques CSRF
             ]
         );
-    }
 
-    if (isset($_COOKIE["lmc-multistep-form"])) {
+        // vérifier si existe
+        $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
+
+        if (count($results) === 0) {
+            // Enregistrement la session en  base de données
+            $wpdb->insert($table_name, [
+                'cookie' => $_SESSION['lmc_data']['csrf_token']
+            ]);
+        }
+
+    }else{
+
+        // Récupération du token côté cookie
+        if (!isset($_SESSION['lmc_data']['csrf_token'])) {
+            $_SESSION['lmc_data']['csrf_token'] = $_COOKIE["lmc-multistep-form"];
+        }
+
         // vérifier si existe
         $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_COOKIE["lmc-multistep-form"]}'", OBJECT );
 
-        if (count($results) < 1) {
+        if (count($results) === 0) {
             // Enregistrement la session en  base de données
             $wpdb->insert($table_name, [
                 'cookie' => $_COOKIE["lmc-multistep-form"]
             ]);
         }
+
     }
 
 
@@ -125,10 +143,16 @@ function lmc_php_form() {
 
     // Déterminer l’étape actuelle
     $step = isset($_POST['step']) ? intval($_POST['step']) : 1;
+    /*
+    if(isset($_GET['step']) && !empty($_GET['step'])){
+        $step = $_GET['step'];
+    }else{
+        $step = isset($_POST['step']) ? intval($_POST['step']) : 1;
+    }
+    */
 
     // Sauvegarder les données de l’étape précédente
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
         if ($step == 2) {
             include_once 'src/actions/step_2.php';
         } elseif ($step == 3) {
