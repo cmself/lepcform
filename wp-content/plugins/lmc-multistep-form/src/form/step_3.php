@@ -21,7 +21,17 @@
 <script>document.getElementById('step3_formStartTime').value = Date.now();</script>
 <input type="text" name="step3_honeypot" id="step3_honeypot" style="display:none;">
 <input type="hidden" name="step3_csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
-<input type="hidden" name="step" value="3">
+<?php
+if(isset($_SESSION['lmc_data']['step']) && $_SESSION['lmc_data']['step'] == 4){
+    ?>
+    <input type="hidden" name="step" value="4">
+    <?php
+} else {
+    ?>
+    <input type="hidden" name="step" value="3">
+    <?php
+}
+?>
 <p class="block! w-full! text-center!">
     <button type="button" id="resend"><i class="fa-solid fa-rotate-left"></i> Renvoyer le code</button>
     <button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button>
@@ -35,6 +45,15 @@
         input.value = '2';
         form.submit();
     });
+
+    <?php
+    if(isset($_SESSION['lmc_data']['step']) && $_SESSION['lmc_data']['step'] == 4){
+    ?>
+    form.submit();
+    <?php
+    }
+    ?>
+
 
 
 

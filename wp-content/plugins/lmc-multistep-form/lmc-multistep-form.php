@@ -161,13 +161,6 @@ function lmc_php_form() {
     // Déterminer l’étape actuelle
     $step = isset($_POST['step']) ? intval($_POST['step']) : 1;
 
-    if (isset($_SESSION['lmc_data']['step'])) {
-        $step = $_SESSION['lmc_data']['step'];
-        unset($_SESSION['lmc_data']['step']);
-    }
-
-    echo $_SESSION['lmc_data']['step'];
-
     // Sauvegarder les données de l’étape précédente
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($step == 2) {
