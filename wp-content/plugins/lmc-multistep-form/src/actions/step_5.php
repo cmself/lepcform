@@ -19,4 +19,5 @@ if (isset($_POST['formStartTime'])) {
         die("Erreur : Envoi trop rapide.");
     }
 }
+
 ?>

@@ -1,4 +1,5 @@
 <?php
+
 /*
 $fichierActuel = $_SERVER['PHP_SELF'] ;
 if(!empty($_SERVER['QUERY_STRING']))

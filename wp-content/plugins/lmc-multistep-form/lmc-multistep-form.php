@@ -36,6 +36,7 @@ require 'vendor/autoload.php';
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 
+
 function lmc_php_form() {
 
     // Exemple : Création de la base de données
@@ -51,6 +52,13 @@ function lmc_php_form() {
                     date_submitted DATETIME DEFAULT CURRENT_TIMESTAMP
                 ) ENGINE=InnoDB;
             ");
+
+
+    function generate_otp(int $digits = 6): string {
+        $min = (int) pow(10, $digits - 1);
+        $max = (int) pow(10, $digits) - 1;
+        return (string) random_int($min, $max); // cryptographically secure
+    }
 
     // Enregistrement des tentatives suspectes
     $logFile = 'lmc-multistep-form.log';

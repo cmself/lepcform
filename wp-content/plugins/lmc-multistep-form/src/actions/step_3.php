@@ -1,5 +1,7 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+
 // Token CSRF
 if (!isset($_POST['step2_csrf_token']) || $_POST['step2_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
     logLmc("Token CSRF invalide");
@@ -86,6 +88,48 @@ if (count($step1_results) === 1) {
         'step2_signataire_3' => $_SESSION['lmc_data']['step2_signataire_3']
     ],
         ['cookie' => $_COOKIE["lmc-multistep-form"]]);
+
+
+
+
+
+
+    $otp = generate_otp(5);
+    $otpHash = password_hash($otp, PASSWORD_DEFAULT);
+    $expiresMinutes = 10;
+    $expiresAt = (new DateTime())->modify("+{$expiresMinutes} minutes")->format('Y-m-d H:i:s');
+
+    $wpdb->update($table_name, [
+        'step3_otp_hash' => $otpHash,
+        'step3_otp_expires' => $expiresAt
+    ],
+        ['cookie' => $_COOKIE["lmc-multistep-form"]]);
+
+
+    $mail = new PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->Host = 'mail.gandi.net';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'aurelien.boisselet@lmcfrance.com';
+        $mail->Password = 'AB@lou221020';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        $mail->setFrom('no-reply@lmcfrance.com', 'LEPC CHARTE');
+        $mail->addAddress('aurelien.boisselet@gmail.com');
+        $mail->Subject = 'Votre code de vérification';
+        $mail->isHTML(true);
+        $mail->Body = "<p>Votre code de vérification est <strong>{$otp}</strong>. Il expire dans {$expiresMinutes} minutes.</p>";
+
+        $mail->send();
+        echo json_encode(['status'=>'ok','message'=>'OTP envoyé']);
+    } catch (Exception $e) {
+        error_log("Mailer error: " . $mail->ErrorInfo);
+        http_response_code(500);
+        echo json_encode(['status'=>'error','message'=>'Échec envoi OTP']);
+    }
+
 }
 
 
