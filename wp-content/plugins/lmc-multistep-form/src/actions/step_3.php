@@ -107,27 +107,45 @@ if (count($step1_results) === 1) {
 
 
     $mail = new PHPMailer(true);
+
     try {
         $mail->isSMTP();
-        $mail->Host = 'mail.gandi.net';
+        $mail->Host =  MailHOST;
         $mail->SMTPAuth = true;
-        $mail->Username = 'aurelien.boisselet@lmcfrance.com';
-        $mail->Password = 'AB@lou221020';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->CharSet = "UTF-8";
+        $mail->isHTML(true);
+
+        $mail->Username = MailUSER;
+        $mail->Password = MailPWD;
+
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 587;
 
-        $mail->setFrom('no-reply@lmcfrance.com', 'LEPC CHARTE');
-        $mail->addAddress('aurelien.boisselet@gmail.com');
+        // pour local à sup en prod
+        $mail->SMTPOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            ]
+        ];
+
+        $mail->setFrom(MailSENDER);
+        $mail->addAddress('aurelien.boisselet@gmail.com', 'AB');
+
         $mail->Subject = 'Votre code de vérification';
-        $mail->isHTML(true);
         $mail->Body = "<p>Votre code de vérification est <strong>{$otp}</strong>. Il expire dans {$expiresMinutes} minutes.</p>";
 
         $mail->send();
-        echo json_encode(['status'=>'ok','message'=>'OTP envoyé']);
+        //echo json_encode(['status'=>'ok','message'=>'OTP envoyé']);
+
     } catch (Exception $e) {
+
+        //echo $mail->ErrorInfo;
         error_log("Mailer error: " . $mail->ErrorInfo);
-        http_response_code(500);
-        echo json_encode(['status'=>'error','message'=>'Échec envoi OTP']);
+        //http_response_code(500);
+        //echo json_encode(['status'=>'error','message'=>'Échec envoi OTP']);
+
     }
 
 }

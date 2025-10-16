@@ -37,6 +37,15 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 
 
+define('MailHOST', 'mail.gandi.net');
+define('MailUSER', 'hebergement@lmcfrance.com');
+define('MailPWD', '*xSe9r4BA0AndFUEu!0A');
+
+define('MailSENDER', 'hebergement@lmcfrance.com');
+define('MailNAME', 'lmc france');
+
+
+
 function lmc_php_form() {
 
     // Exemple : Création de la base de données
