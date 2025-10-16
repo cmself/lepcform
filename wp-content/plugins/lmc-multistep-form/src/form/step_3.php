@@ -2,25 +2,40 @@
     <button type="button" class="absolute! top-0! left-0!" id="go-back"><i class="fa-solid fa-arrow-left"></i> Retour</button>
     <h3>Étape 2 : Interlocuteurs</h3>
     <h4>Validation du contact principal</h4>
+    <h5><?= $_SESSION['lmc_data']['step3_otp'] ?></h5>
 </div>
 
     <p class="block! w-full! text-center!">
-        <label for="code" class="w-full! text-center!"><span class="w-full! text-center!">Entrez le code reçu à l’adresse : <i>micheldupont@gmail.com</i></span></label>
+        <label for="code" class="w-full! text-center!"><span class="w-full! text-center!">Entrez le code reçu à l’adresse : <i><?= $_SESSION['lmc_data']['step2_email_0'] ?></i></span></label>
     </p>
     <p class="flex! flex-row! justify-center! items-center! gap-[10px]! w-full! mb-[40px]!">
-        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" data-hs-pin-input-item="">
-        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" data-hs-pin-input-item="">
-        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" data-hs-pin-input-item="">
-        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" data-hs-pin-input-item="">
-        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" data-hs-pin-input-item="">
+        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin1" id="step3_pin1" data-hs-pin-input-item="">
+        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin2" id="step3_pin2" data-hs-pin-input-item="">
+        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin3" id="step3_pin3" data-hs-pin-input-item="">
+        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin4" id="step3_pin4" data-hs-pin-input-item="">
+        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin5" id="step3_pin5" data-hs-pin-input-item="">
     </p>
 
-<input type="hidden" id="formStartTime" name="formStartTime">
-<script>document.getElementById('formStartTime').value = Date.now();</script>
-<input type="text" name="honeypot" id="honeypot" style="display:none;">
-<input type="hidden" name="csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
-<input type="hidden" name="step" value="4">
+<input type="hidden" id="step3_otp" name="step3_otp" value="1">
+<input type="hidden" id="step3_formStartTime" name="step3_formStartTime">
+<script>document.getElementById('step3_formStartTime').value = Date.now();</script>
+<input type="text" name="step3_honeypot" id="step3_honeypot" style="display:none;">
+<input type="hidden" name="step3_csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
+<input type="hidden" name="step" value="3">
 <p class="block! w-full! text-center!">
-    <button type="submit"><i class="fa-solid fa-rotate-left"></i> Renvoyer le code</button>
+    <button type="button" id="resend"><i class="fa-solid fa-rotate-left"></i> Renvoyer le code</button>
     <button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button>
 </p>
+
+<script>
+    const form = document.getElementById('form-lmc-multistep-form');
+    const resend = document.getElementById('resend');
+    const input = document.getElementById('step3_otp');
+    resend.addEventListener('click', () => {
+        input.value = '2';
+        form.submit();
+    });
+
+
+
+</script>

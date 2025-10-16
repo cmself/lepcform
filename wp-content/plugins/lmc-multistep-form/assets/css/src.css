@@ -28,6 +28,9 @@
             h4 {
                 @apply block! w-full! text-center! font-normal! text-[var(--color-blanc)]! text-[24px]! mb-[20px]!;
             }
+            h5 {
+                @apply block! w-full! text-center! font-bold! text-[var(--color-rose)]! text-[22px]! mb-[20px]!;
+            }
 
             i.value {
                 @apply not-italic! font-light! opacity-50! text-[var(--color-blanc)]!;
