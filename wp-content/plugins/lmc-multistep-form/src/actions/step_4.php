@@ -1,24 +1,25 @@
+
 <?php
 
 // Token CSRF
 if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
-    logLmc("Token CSRF invalide");
-    die("Erreur : Requête invalide.");
+logLmc("Token CSRF invalide");
+die("Erreur : Requête invalide.");
 }
 
 // Honey Pot pour piéger les robots
 if (!empty($_POST['step3_honeypot'])) {
-    logLmc("Honey Pot rempli (robot détecté)");
-    die("Erreur : Robot détecté.");
+logLmc("Honey Pot rempli (robot détecté)");
+die("Erreur : Robot détecté.");
 }
 
 // Test de rapidité d’envoi
 if (isset($_POST['step3_formStartTime'])) {
-    $duration = time() - (int)($_POST['step3_formStartTime'] / 1000);
-    if ($duration < 3) {
-        logLmc("Envoi trop rapide ($duration s)");
-        die("Erreur : Envoi trop rapide.");
-    }
+$duration = time() - (int) ($_POST['step3_formStartTime'] / 1000);
+if ($duration < 3) {
+logLmc("Envoi trop rapide ($duration s)");
+die("Erreur : Envoi trop rapide.");
+}
 }
 
 ?>

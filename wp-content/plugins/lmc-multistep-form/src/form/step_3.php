@@ -3,11 +3,17 @@
     <h3>Étape 2 : Interlocuteurs</h3>
     <h4>Validation du contact principal</h4>
     <?php
+    if(isset($stepMAJ) && $stepMAJ == 4){
+        ?>
+        <h5>Validation en cours. Veuillez patienter</h5>
+        <div class="w-full! text-center!"><img src="<?= plugins_url('lmc-multistep-form/assets/img/loader.gif') ?>" alt="loader" class="loader inline-block!"></div>
+        <?php
+    }else{
     if(isset($step3_otp) && !empty($step3_otp)){
     ?>
     <h5><?= $step3_otp ?></h5>
         <?php
-    }
+    }}
     ?>
 </div>
 
