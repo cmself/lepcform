@@ -1,6 +1,6 @@
 <h3>Étape 1 : Organisation signataire</h3>
-<p><label for="step1_nom"><span>Nom de l’organisation * :</span> <input type="text" id="step1_nom" name="step1_nom" placeholder="Nom de l’organisation" required></label></p>
-<p><label for="step1_siret"><span>Numéro de SIRET * :</span> <input type="text" id="step1_siret" name="step1_siret" placeholder="SIRET" required></label></p>
+<p><label for="step1_nom"><span>Nom de l’organisation * :</span> <input type="text" id="step1_nom" name="step1_nom" placeholder="Nom de l’organisation" value="<?php echo (isset($value_form[0]->step1_nom) && !empty($value_form[0]->step1_nom)) ? $value_form[0]->step1_nom : ''; ?>" required></label></p>
+<p><label for="step1_siret"><span>Numéro de SIRET * :</span> <input type="text" id="step1_siret" name="step1_siret" placeholder="SIRET" value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" required></label></p>
 <p><label for="step1_logo"><span>Ajouter un logo :</span> <input type="file" id="step1_logo" name="step1_logo" placeholder="Logo"></label></p>
 <p><label for="step1_ca"><span>Le chiffre d’affaires * :</span>
         <select name="step1_ca" id="step1_ca" required>
@@ -11,7 +11,7 @@
             <?php
                 foreach ($options as $option):
                     ?>
-                    <option value="<?= $option ;?>"><?= $option ;?></option>
+                    <option value="<?= $option ;?>" <?php echo ($value_form[0]->step1_ca == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -28,7 +28,7 @@
                 <?php
                 foreach ($options as $option):
                     ?>
-                    <option value="<?= $option ;?>"><?= $option ;?></option>
+                    <option value="<?= $option ;?>" <?php echo ($value_form[0]->step1_frais == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -40,8 +40,8 @@
     <label>
         <span>Adhérent Les entreprises pour la Cité :</span>
         <div class="wrapper">
-            <input type="radio" name="step1_adherent" id="option-1" value="1">
-            <input type="radio" name="step1_adherent" id="option-2" value="0">
+            <input type="radio" name="step1_adherent" id="option-1" value="1" <?php echo ($value_form[0]->step1_adherent == 1) ? 'checked' : ''; ?>>
+            <input type="radio" name="step1_adherent" id="option-2" value="0"  <?php echo ($value_form[0]->step1_adherent == 0) ? 'checked' : ''; ?>>
             <label for="option-1" class="option option-1">
                 <div class="dot"></div>
                 <span>Oui</span>
@@ -53,17 +53,17 @@
         </div>
     </label>
 </p>
-<p><label for="step1_adresse"><span>Adresse postale * :</span> <input type="text" id="step1_adresse" name="step1_adresse" placeholder="Adresse" required></label></p>
+<p><label for="step1_adresse"><span>Adresse postale * :</span> <input type="text" id="step1_adresse" name="step1_adresse" placeholder="Adresse" value="<?php echo (isset($value_form[0]->step1_adresse) && !empty($value_form[0]->step1_adresse)) ? $value_form[0]->step1_adresse : ''; ?>" required></label></p>
 
 <div class="coltwo">
     <div class="w-full!">
         <p>
-            <label for="step1_ville"><span>Ville * :</span> <input type="text" id="step1_ville" name="step1_ville" placeholder="ville" required></label>
+            <label for="step1_ville"><span>Ville * :</span> <input type="text" id="step1_ville" name="step1_ville" placeholder="ville" value="<?php echo (isset($value_form[0]->step1_ville) && !empty($value_form[0]->step1_ville)) ? $value_form[0]->step1_ville : ''; ?>" required></label>
         </p>
     </div>
     <div class="w-full!">
         <p>
-            <label for="step1_cp"><span>Code postal * :</span> <input type="text" id="step1_cp" name="step1_cp" placeholder="00000" required></label>
+            <label for="step1_cp"><span>Code postal * :</span> <input type="text" id="step1_cp" name="step1_cp" placeholder="00000" value="<?php echo (isset($value_form[0]->step1_cp) && !empty($value_form[0]->step1_cp)) ? $value_form[0]->step1_cp : ''; ?>" required></label>
         </p>
     </div>
 </div>
@@ -71,12 +71,12 @@
 <div class="coltwo">
     <div class="w-full!">
         <p>
-            <label for="step1_email"><span>Email de l’organisation * :</span> <input type="email" id="step1_email" name="step1_email" placeholder="Email" required></label>
+            <label for="step1_email"><span>Email de l’organisation * :</span> <input type="email" id="step1_email" name="step1_email" placeholder="Email" value="<?php echo (isset($value_form[0]->step1_email) && !empty($value_form[0]->step1_email)) ? $value_form[0]->step1_email : ''; ?>" required></label>
         </p>
     </div>
     <div class="w-full!">
         <p>
-            <label for="step1_internet"><span>Site internet * :</span> <input type="url" id="step1_internet" name="step1_internet" placeholder="Url du site" required></label>
+            <label for="step1_internet"><span>Site internet * :</span> <input type="url" id="step1_internet" name="step1_internet" placeholder="Url du site" value="<?php echo (isset($value_form[0]->step1_internet) && !empty($value_form[0]->step1_internet)) ? $value_form[0]->step1_internet : ''; ?>" required></label>
         </p>
     </div>
 </div>
@@ -90,7 +90,7 @@
                 <?php
                 foreach ($options as $option):
                     ?>
-                    <option value="<?= $option ;?>"><?= $option ;?></option>
+                    <option value="<?= $option ;?>"  <?php echo ($value_form[0]->step1_collaborateurs == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -108,7 +108,7 @@
                 <?php
                 foreach ($options as $option):
                     ?>
-                    <option value="<?= $option ;?>"><?= $option ;?></option>
+                    <option value="<?= $option ;?>"  <?php echo ($value_form[0]->step1_activite == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -126,7 +126,7 @@
                 <?php
                 foreach ($options as $option):
                     ?>
-                    <option value="<?= $option ;?>"><?= $option ;?></option>
+                    <option value="<?= $option ;?>"  <?php echo ($value_form[0]->step1_structure == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -144,7 +144,7 @@
                 <?php
                 foreach ($options as $option):
                     ?>
-                    <option value="<?= $option ;?>"><?= $option ;?></option>
+                    <option value="<?= $option ;?>"  <?php echo ($value_form[0]->step1_connaissance == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -156,7 +156,7 @@
 
 <p>
     <label for="step1_politique"><span>Présentation de votre politique diversité et des raisons de votre engagement (1000 caractères max)</span>
-        <textarea id="step1_politique" name="step1_politique" rows="10" placeholder="Présentation (1000 caractères max)"></textarea>
+        <textarea id="step1_politique" name="step1_politique" rows="10" placeholder="Présentation (1000 caractères max)"><?php echo (isset($value_form[0]->step1_politique) && !empty($value_form[0]->step1_politique)) ? $value_form[0]->step1_politique : ''; ?></textarea>
     </label>
 </p>
 

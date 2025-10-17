@@ -134,6 +134,7 @@ function lmc_php_form() {
     }
     */
 
+
     $client = new Client([
         'verify' => false, // pas sécurisé, uniquement pour test
         'headers' => [
@@ -149,6 +150,11 @@ function lmc_php_form() {
         $_SESSION['lmc_data'] = [];
     }
 
+    // Implémentation du compteur de tentatives
+    if (!isset($_SESSION['lmc_data']['attempts'])) {
+        $_SESSION['lmc_data']['attempts'] = 0;
+        $_SESSION['lmc_data']['attempt_time'] = time();
+    }
 
     // Le cookie
     if (!isset($_COOKIE["lmc-multistep-form"])) {
@@ -202,11 +208,8 @@ function lmc_php_form() {
     }
 
 
-    // Implémentation du compteur de tentatives
-    if (!isset($_SESSION['lmc_data']['attempts'])) {
-        $_SESSION['lmc_data']['attempts'] = 0;
-        $_SESSION['lmc_data']['attempt_time'] = time();
-    }
+    $value_form = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
+
 
     // Déterminer l’étape actuelle
     $step = isset($_POST['step']) ? intval($_POST['step']) : 1;

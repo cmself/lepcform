@@ -1,14 +1,4 @@
 <?php
-
-/*
-$fichierActuel = $_SERVER['PHP_SELF'] ;
-if(!empty($_SERVER['QUERY_STRING']))
-{
-    $fichierActuel .= '?step=' . 2 ;
-}
-header('Location: ' . $fichierActuel);
-*/
-
 // Token CSRF
 if (!isset($_POST['step1_csrf_token']) || $_POST['step1_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
     logLmc("Token CSRF invalide");
