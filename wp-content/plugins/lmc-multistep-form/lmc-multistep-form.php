@@ -40,7 +40,6 @@ use GuzzleHttp\Exception\ClientException;
 define('MailHOST', 'mail.gandi.net');
 define('MailUSER', 'hebergement@lmcfrance.com');
 define('MailPWD', '*xSe9r4BA0AndFUEu!0A');
-
 define('MailSENDER', 'hebergement@lmcfrance.com');
 define('MailNAME', 'lmc france');
 
@@ -54,7 +53,7 @@ function lmc_php_form() {
     $wpdb->query("
                 CREATE TABLE IF NOT EXISTS $table_name (
                     id INT AUTO_INCREMENT PRIMARY KEY,
-                    nom VARCHAR(255),
+                    cookie text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
                     email VARCHAR(255),
                     adresse VARCHAR(255),
                     ville VARCHAR(255),
@@ -140,12 +139,12 @@ function lmc_php_form() {
         }
 
         // vérifier si existe
-        $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_COOKIE["lmc-multistep-form"]}'", OBJECT );
+        $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
         if (count($results) === 0) {
             // Enregistrement la session en  base de données
             $wpdb->insert($table_name, [
-                'cookie' => $_COOKIE["lmc-multistep-form"]
+                'cookie' => $_SESSION['lmc_data']['csrf_token']
             ]);
         }
 

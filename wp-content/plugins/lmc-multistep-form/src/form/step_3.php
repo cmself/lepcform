@@ -2,7 +2,13 @@
     <button type="button" class="absolute! top-0! left-0!" id="go-back"><i class="fa-solid fa-arrow-left"></i> Retour</button>
     <h3>Étape 2 : Interlocuteurs</h3>
     <h4>Validation du contact principal</h4>
-    <h5><?= $_SESSION['lmc_data']['step3_otp'] ?></h5>
+    <?php
+    if(isset($step3_otp) && !empty($step3_otp)){
+    ?>
+    <h5><?= $step3_otp ?></h5>
+        <?php
+    }
+    ?>
 </div>
 
     <p class="block! w-full! text-center!">
@@ -22,7 +28,7 @@
 <input type="text" name="step3_honeypot" id="step3_honeypot" style="display:none;">
 <input type="hidden" name="step3_csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
 <?php
-if(isset($_SESSION['lmc_data']['step']) && $_SESSION['lmc_data']['step'] == 4){
+if(isset($stepMAJ) && $stepMAJ == 4){
     ?>
     <input type="hidden" name="step" value="4">
     <?php
@@ -47,7 +53,7 @@ if(isset($_SESSION['lmc_data']['step']) && $_SESSION['lmc_data']['step'] == 4){
     });
 
     <?php
-    if(isset($_SESSION['lmc_data']['step']) && $_SESSION['lmc_data']['step'] == 4){
+    if(isset($stepMAJ) && $stepMAJ == 4){
     ?>
     form.submit();
     <?php

@@ -1,7 +1,5 @@
 <?php
 
-unset($_SESSION['lmc_data']['step']);
-
 // Token CSRF
 if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
     logLmc("Token CSRF invalide");

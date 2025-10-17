@@ -26,7 +26,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
     }
 
 
-    $step3_results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_COOKIE["lmc-multistep-form"]}'", OBJECT);
+    $step3_results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT);
 
     if (count($step3_results) === 1) {
 
@@ -36,7 +36,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
             $expiresAt = new DateTime($step3_results[0]->step3_otp_expires);
             if ($now > $expiresAt) {
 
-                $_SESSION['lmc_data']['step3_otp'] = 'Code expiré';
+                $step3_otp = 'Code expiré';
 
             } else {
 
@@ -44,16 +44,16 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
 
                 if (!password_verify($userOtp, $step3_results[0]->step3_otp_hash)) {
 
-                    $_SESSION['lmc_data']['step3_otp'] = 'Code invalide';
+                    $step3_otp = 'Code invalide';
 
                 } else {
 
                     $wpdb->update($table_name, [
                         'step3_otp_used' => 1
                     ],
-                        ['cookie' => $_COOKIE["lmc-multistep-form"]]);
+                        ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
 
-                    $_SESSION['lmc_data']['step'] = 4;
+                    $stepMAJ = 4;
 
                 }
 
@@ -88,14 +88,14 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
     }
 
     // vérifier si existe
-    $step2_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_COOKIE["lmc-multistep-form"]}'", OBJECT );
+    $step2_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
     if (count($step2_results) === 1) {
 
         $wpdb->update($table_name, [
             'step3_otp_used' => 0
         ],
-            ['cookie' => $_COOKIE["lmc-multistep-form"]]);
+            ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
 
         $otp = generate_otp(5);
         $otpHash = password_hash($otp, PASSWORD_DEFAULT);
@@ -106,7 +106,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
             'step3_otp_hash' => $otpHash,
             'step3_otp_expires' => $expiresAt
         ],
-            ['cookie' => $_COOKIE["lmc-multistep-form"]]);
+            ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
 
 
         $mail = new PHPMailer(true);
@@ -146,7 +146,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
         }
 
 
-        $_SESSION['lmc_data']['step3_otp'] = 'Code renvoyé par mail';
+        $step3_otp = 'Code renvoyé par mail';
 
     }
 
@@ -207,7 +207,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
 
 
     // vérifier si existe
-    $step2_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_COOKIE["lmc-multistep-form"]}'", OBJECT );
+    $step2_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
     if (count($step2_results) === 1) {
 
@@ -238,7 +238,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
             'step2_role_3' => $_SESSION['lmc_data']['step2_role_3'],
             'step2_signataire_3' => $_SESSION['lmc_data']['step2_signataire_3']
         ],
-            ['cookie' => $_COOKIE["lmc-multistep-form"]]);
+            ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
 
 
 
@@ -254,7 +254,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
             'step3_otp_hash' => $otpHash,
             'step3_otp_expires' => $expiresAt
         ],
-            ['cookie' => $_COOKIE["lmc-multistep-form"]]);
+            ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
 
 
         $mail = new PHPMailer(true);
@@ -292,6 +292,8 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
         } catch (Exception $e) {
             error_log("Mailer error: " . $mail->ErrorInfo);
         }
+
+        $step3_otp = 'Code envoyé par mail';
 
     }
 }

@@ -49,7 +49,7 @@ $_SESSION['lmc_data']['step1_politique'] = isset($_POST['step1_politique']) ? sa
 
 
 // vérifier si existe
-$step1_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_COOKIE["lmc-multistep-form"]}'", OBJECT );
+$step1_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
 if (count($step1_results) === 1) {
 
@@ -72,7 +72,7 @@ if (count($step1_results) === 1) {
         'step1_connaissance' => $_SESSION['lmc_data']['step1_connaissance'],
         'step1_politique' => $_SESSION['lmc_data']['step1_politique']
     ],
-    ['cookie' => $_COOKIE["lmc-multistep-form"]]);
+    ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
 }
 
 

@@ -40,8 +40,8 @@
     <label>
         <span>Adhérent Les entreprises pour la Cité :</span>
         <div class="wrapper">
-            <input type="radio" name="step1_adherent" id="option-1" value="1">
-            <input type="radio" name="step1_adherent" id="option-2" value="2">
+            <input type="radio" name="step1_adherent" id="option-1" value="TRUE">
+            <input type="radio" name="step1_adherent" id="option-2" value="FALSE">
             <label for="option-1" class="option option-1">
                 <div class="dot"></div>
                 <span>Oui</span>
