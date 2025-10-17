@@ -122,6 +122,21 @@ function lmc_php_form() {
         return $protocol . $host . $uri;
     }
 
+    function getCurrentUrlWithoutQuery() {
+        // Détermine le protocole
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
+            || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+        // Récupère le nom d’hôte
+        $host = $_SERVER['HTTP_HOST'];
+
+        // Récupère le chemin sans la query string
+        $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+        // Reconstruit l’URL
+        return $protocol . $host . $path;
+    }
+
 
     function generate_otp(int $digits = 6): string {
         $min = (int) pow(10, $digits - 1);
@@ -220,6 +235,12 @@ function lmc_php_form() {
 
 
     $value_form = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
+
+
+    if(isset($_GET['reload_step']) && !empty($_GET['reload_step'])){
+        $_POST['step'] = $_GET['reload_step'];
+        header('Location: ' . getCurrentUrlWithoutQuery());
+    }
 
 
     // Déterminer l’étape actuelle
