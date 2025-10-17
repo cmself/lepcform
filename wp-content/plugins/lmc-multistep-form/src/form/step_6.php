@@ -78,6 +78,6 @@
 <script>document.getElementById('step6_formStartTime').value = Date.now();</script>
 <input type="text" name="step6_honeypot" id="step6_honeypot" style="display:none;">
 <input type="hidden" name="step6_csrf_token" id="step6_csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
-<input type="hidden" name="step" value="6">
+<input type="hidden" name="step" value="7">
 <p class="block! w-full! text-center!"><button type="submit">Envoyer</button></p>
 

@@ -162,7 +162,8 @@ function lmc_php_form() {
             "lmc-multistep-form",
             $_SESSION['lmc_data']['csrf_token'],
             [
-                'expires' => time() + 86400, // 1 jour
+                // 1 day = 86400 Seconds
+                'expires' => time() + (86400 * 7), // 7 jours
                 'path' => '/',
                 'domain' => 'lmc-lepc.com',
                 'secure' => true,     // envoyé seulement via HTTPS

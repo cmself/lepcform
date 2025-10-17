@@ -21,24 +21,27 @@ if (isset($_POST['step6_formStartTime'])) {
     }
 }
 
-/*
+
 
 $data = $_SESSION['lmc_data'];
 $data['confirmation'] = 'OK';
 
-global $wpdb;
-$table_name = $wpdb->prefix . 'lmc_multistep_submissions';
-$wpdb->insert($table_name, [
-    'nom' => $data['nom'],
-    'email' => $data['email'],
-    'adresse' => $data['adresse'],
-    'ville' => $data['ville']
-]);
+// vérifier si existe
+$step1_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
+
+if (count($step1_results) === 1) {
+
+    $wpdb->delete($table_name, ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
+    unset($_SESSION['lmc_data']);
+    setcookie("lmc-multistep-form", "", time() - 3600);
+    $messageFin = '<strong>Merci !</strong> Votre formulaire a bien été envoyé.';
+
+}else{
+    $messageFin = '<strong>Erreur !</strong> Votre formulaire n\'a pas été envoyé.';
+}
 
 
-unset($_SESSION['lmc_data']);
 
-return '<p><strong>Merci !</strong> Votre formulaire a bien été envoyé.</p>';
-*/
+
 
 ?>
