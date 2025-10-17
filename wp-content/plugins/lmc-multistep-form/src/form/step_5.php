@@ -60,10 +60,10 @@
 <div class="g-recaptcha flex! flex-row! justify-center! items-center! w-full! mb-[40px]!" data-sitekey="6LfNBOorAAAAADz2yypqgW6kOxvqCeBB4T80Ycdt"></div>
 </p>
 
-<input type="hidden" id="formStartTime" name="formStartTime">
-<script>document.getElementById('formStartTime').value = Date.now();</script>
-<input type="text" name="honeypot" id="honeypot" style="display:none;">
-<input type="hidden" name="csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
+<input type="hidden" id="step5_formStartTime" name="step5_formStartTime">
+<script>document.getElementById('step5_formStartTime').value = Date.now();</script>
+<input type="text" name="step5_honeypot" id="step5_honeypot" style="display:none;">
+<input type="hidden" name="step5_csrf_token" id="step5_csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
 <input type="hidden" name="step" value="6">
 <p class="block! w-full! text-center!"><button type="submit">Valider le formulaire <i class="fa-solid fa-arrow-right"></i></button></p>
 

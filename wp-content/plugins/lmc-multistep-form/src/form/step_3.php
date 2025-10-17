@@ -32,7 +32,7 @@
 <input type="hidden" id="step3_formStartTime" name="step3_formStartTime">
 <script>document.getElementById('step3_formStartTime').value = Date.now();</script>
 <input type="text" name="step3_honeypot" id="step3_honeypot" style="display:none;">
-<input type="hidden" name="step3_csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
+<input type="hidden" name="step3_csrf_token" id="step3_csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
 <?php
 if(isset($stepMAJ) && $stepMAJ == 4){
     ?>

@@ -1,41 +1,31 @@
 <?php
 
 // Token CSRF
-if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
+if (!isset($_POST['step5_csrf_token']) || $_POST['step5_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
     logLmc("Token CSRF invalide");
     die("Erreur : Requête invalide.");
 }
 
 // Honey Pot pour piéger les robots
-if (!empty($_POST['honeypot'])) {
+if (!empty($_POST['step5_honeypot'])) {
     logLmc("Honey Pot rempli (robot détecté)");
     die("Erreur : Robot détecté.");
 }
 
 // Test de rapidité d’envoi
-if (isset($_POST['formStartTime'])) {
-    $duration = time() - (int) ($_POST['formStartTime'] / 1000);
+if (isset($_POST['step5_formStartTime'])) {
+    $duration = time() - (int) ($_POST['step5_formStartTime'] / 1000);
     if ($duration < 3) {
         logLmc("Envoi trop rapide ($duration s)");
         die("Erreur : Envoi trop rapide.");
     }
 }
 
-// Limiter le nombre de tentatives
-if ($_SESSION['lmc_data']['attempts'] >= 5 && (time() - $_SESSION['lmc_data']['attempt_time'] < 300)) {
-    logLmc("Trop de tentatives depuis IP: " . $_SERVER['REMOTE_ADDR']);
-    die("Erreur : Trop de tentatives. Veuillez réessayer plus tard.");
-}
-$_SESSION['lmc_data']['attempts']++;
-if ($_SESSION['lmc_data']['attempts'] === 1) {
-    $_SESSION['lmc_data']['attempt_time'] = time();
-}
+/*
 
-// Soumission finale : traiter les données
 $data = $_SESSION['lmc_data'];
 $data['confirmation'] = 'OK';
 
-// Exemple : Enregistrer dans la base de données
 global $wpdb;
 $table_name = $wpdb->prefix . 'lmc_multistep_submissions';
 $wpdb->insert($table_name, [
@@ -46,8 +36,9 @@ $wpdb->insert($table_name, [
 ]);
 
 
-// Nettoyer la session
 unset($_SESSION['lmc_data']);
 
 return '<p><strong>Merci !</strong> Votre formulaire a bien été envoyé.</p>';
+*/
+
 ?>
