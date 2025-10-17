@@ -49,9 +49,36 @@
     </label>
 </p>
 
-<div id="content_2" class="block! w-full! text-left! font-normal! text-[var(--color-blanc)]! text-[24px]! mb-[20px]!"></div>
-<div id="content_3" class="block! w-full!"></div>
-<div id="content_4" class="block! w-full!"></div>
+<div id="content_2" class="block! w-full! text-left! font-normal! text-[var(--color-blanc)]! text-[24px]! mb-[20px]!">
+    <?php if(isset($value_form[0]->step5_paiement) && $value_form[0]->step5_paiement == "VIREMENT"){ ?>
+        <div class="div_2">
+            Pour régler les frais de signature de la Charte de la diversité, merci d’effectuer un virement sur l’IBAN [insérer IBAN], en veillant à indiquer votre numéro de SIRET dans le libellé du virement. Vous pouvez également télécharger nos coordonnées bancaires en <a href="#" class="text-[var(--color-rose)]!">cliquant ici</a>
+        </div>
+    <?php  } ?>
+</div>
+<div id="content_3" class="block! w-full!">
+    <?php if(isset($value_form[0]->step5_paiement) && $value_form[0]->step5_paiement == "FACTURE"){ ?>
+        <div class="div_3">
+           <h4>Vous avez besoin d’une facture non acquittée ou d’un bon de commande ?</h4>
+            <p>
+                <label for="bc"><span>Numéro du bon de commande * :</span>
+                    <input type="text" id="step5_bc" name="step5_bc" placeholder="Numéro" value="<?php echo (isset($value_form[0]->step5_bc) && !empty($value_form[0]->step5_bc)) ? $value_form[0]->step5_bc : ''; ?>" required>
+                </label>
+            </p>
+        </div>
+    <?php  } ?>
+</div>
+<div id="content_4" class="block! w-full!">
+    <?php if(isset($value_form[0]->step5_paiement) && $value_form[0]->step5_paiement == "AIDE"){ ?>
+        <div class="div_4">
+           <p>
+               <label for="help"><span>Vous avez besoin d'aide pour réaliser le paiement, merci de nous envoyer un message. (1000 caractères max)</span>
+                   <textarea id="step5_help" name="step5_help" rows="10" placeholder="(1000 caractères max)"><?php echo (isset($value_form[0]->step5_help) && !empty($value_form[0]->step5_help)) ? $value_form[0]->step5_help : ''; ?></textarea>
+               </label>
+           </p>
+        </div>
+    <?php  } ?>
+</div>
 
 <p>
     <label for="step5_rgpd" class="checkbox">
@@ -102,27 +129,35 @@
 
     });
 
+
+
     option_2.addEventListener('click', () => {
 
         const element_2 = document.querySelector('.div_2');
         const element_3 = document.querySelector('.div_3');
         const element_4 = document.querySelector('.div_4');
 
-        if(element_2){
-            element_2.remove();
-        }
-        if(element_3){
-            element_3.remove();
-        }
-        if(element_4){
-            element_4.remove();
-        }
 
-        const div_2 = document.createElement('div');
-        div_2.classList.add('div_2');
-        div_2.innerHTML = `Pour régler les frais de signature de la Charte de la diversité, merci d’effectuer un virement sur l’IBAN [insérer IBAN], en veillant à indiquer votre numéro de SIRET dans le libellé du virement. Vous pouvez également télécharger nos coordonnées bancaires en <a href="#" class="text-[var(--color-rose)]!">cliquant ici</a>.`;
-        content_2.appendChild(div_2);
+
+            if (element_2) {
+                element_2.remove();
+            }
+            if (element_3) {
+                element_3.remove();
+            }
+            if (element_4) {
+                element_4.remove();
+            }
+
+            const div_2 = document.createElement('div');
+            div_2.classList.add('div_2');
+            div_2.innerHTML = `Pour régler les frais de signature de la Charte de la diversité, merci d’effectuer un virement sur l’IBAN [insérer IBAN], en veillant à indiquer votre numéro de SIRET dans le libellé du virement. Vous pouvez également télécharger nos coordonnées bancaires en <a href="#" class="text-[var(--color-rose)]!">cliquant ici</a>.`;
+            content_2.appendChild(div_2);
+
+
     });
+
+
 
     option_3.addEventListener('click', () => {
 
@@ -130,21 +165,25 @@
         const element_3 = document.querySelector('.div_3');
         const element_4 = document.querySelector('.div_4');
 
-        if(element_2){
-            element_2.remove();
-        }
-        if(element_3){
-            element_3.remove();
-        }
-        if(element_4){
-            element_4.remove();
-        }
 
-        const div_3 = document.createElement('div');
-        div_3.classList.add('div_3');
-        div_3.innerHTML = `<h4>Vous avez besoin d’une facture non acquittée ou d’un bon de commande ?</h4><p><label for="bc"><span>Numéro du bon de commande * :</span> <input type="text" id="step5_bc" name="step5_bc" placeholder="Numéro" value="<?php echo (isset($value_form[0]->step5_bc) && !empty($value_form[0]->step5_bc)) ? $value_form[0]->step5_bc : ''; ?>" required></label></p>`;
-        content_3.appendChild(div_3);
+            if (element_2) {
+                element_2.remove();
+            }
+            if (element_3) {
+                element_3.remove();
+            }
+            if (element_4) {
+                element_4.remove();
+            }
+
+            const div_3 = document.createElement('div');
+            div_3.classList.add('div_3');
+            div_3.innerHTML = `<h4>Vous avez besoin d’une facture non acquittée ou d’un bon de commande ?</h4><p><label for="bc"><span>Numéro du bon de commande * :</span> <input type="text" id="step5_bc" name="step5_bc" placeholder="Numéro" value="<?php echo (isset($value_form[0]->step5_bc) && !empty($value_form[0]->step5_bc)) ? $value_form[0]->step5_bc : ''; ?>" required></label></p>`;
+            content_3.appendChild(div_3);
+
     });
+
+
 
     option_4.addEventListener('click', () => {
 
@@ -152,20 +191,23 @@
         const element_3 = document.querySelector('.div_3');
         const element_4 = document.querySelector('.div_4');
 
-        if(element_2){
-            element_2.remove();
-        }
-        if(element_3){
-            element_3.remove();
-        }
-        if(element_4){
-            element_4.remove();
-        }
+            if (element_2) {
+                element_2.remove();
+            }
+            if (element_3) {
+                element_3.remove();
+            }
+            if (element_4) {
+                element_4.remove();
+            }
 
-        const div_4 = document.createElement('div');
-        div_4.classList.add('div_3');
-        div_4.innerHTML = `<p><label for="help"><span>Vous avez besoin d'aide pour réaliser le paiement, merci de nous envoyer un message. (1000 caractères max)</span><textarea id="step5_help" name="step5_help" rows="10" placeholder="(1000 caractères max)"><?php echo (isset($value_form[0]->step5_help) && !empty($value_form[0]->step5_help)) ? $value_form[0]->step5_help : ''; ?></textarea></label></p>`;
-        content_4.appendChild(div_4);
+            const div_4 = document.createElement('div');
+            div_4.classList.add('div_3');
+            div_4.innerHTML = `<p><label for="help"><span>Vous avez besoin d'aide pour réaliser le paiement, merci de nous envoyer un message. (1000 caractères max)</span><textarea id="step5_help" name="step5_help" rows="10" placeholder="(1000 caractères max)"><?php echo (isset($value_form[0]->step5_help) && !empty($value_form[0]->step5_help)) ? $value_form[0]->step5_help : ''; ?></textarea></label></p>`;
+            content_4.appendChild(div_4);
+
+
     });
+
 
 </script>
