@@ -18,6 +18,9 @@
 @layer base {
     /* Styles de base de l'application */
     #lmc-multistep-form {
+
+        font-family: var(--font-roboto) !important;
+
         form {
             @apply w-full! bg-[var(--color-violet)]! py-[30px]! px-[40px]! text-[var(--color-blanc)]! rounded-[40px]!;
 
