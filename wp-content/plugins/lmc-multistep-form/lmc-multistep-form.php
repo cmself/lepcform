@@ -237,14 +237,24 @@ function lmc_php_form() {
     $value_form = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
 
+
     if(isset($_GET['reload_step']) && !empty($_GET['reload_step'])){
-        $_POST['step'] = $_GET['reload_step'];
+        $_SESSION['lmc_data']['reload'] = $_GET['reload_step'];
         header('Location: ' . getCurrentUrlWithoutQuery());
     }
 
-
     // Déterminer l’étape actuelle
-    $step = isset($_POST['step']) ? intval($_POST['step']) : 1;
+
+    if(isset($_POST['step']) && !empty($_POST['step'])){
+        $step = intval($_POST['step']);
+    }else{
+        if (isset($_SESSION['lmc_data']['reload']) && !empty($_SESSION['lmc_data']['reload'])) {
+            $step = $_SESSION['lmc_data']['reload'];
+        }else{
+            $step = 1;
+        }
+    }
+
 
     // Sauvegarder les données de l’étape précédente
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
