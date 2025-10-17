@@ -1,5 +1,9 @@
 <div class="relative! w-full! min-h-[50px]!">
-    <button type="button" class="absolute! top-0! left-0!" id="go-back"><i class="fa-solid fa-arrow-left"></i> Retour</button>
+    <a href="<?= getCurrentUrl();?>?reload_step=2" class="absolute! top-0! left-0!">
+        <button type="button"><i class="fa-solid fa-arrow-left"></i> Retour</button>
+    </a>
+</div>
+<div class="relative! w-full!">
     <h3>Étape 2 : Interlocuteurs</h3>
     <h4>Validation du contact principal</h4>
     <?php

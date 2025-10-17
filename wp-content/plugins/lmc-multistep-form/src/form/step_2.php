@@ -1,5 +1,9 @@
 <div class="relative! w-full! min-h-[50px]!">
-    <button type="button" class="absolute! top-0! left-0!" id="go-back"><i class="fa-solid fa-arrow-left"></i> Retour</button>
+    <a href="<?= getCurrentUrl();?>?reload_step=1" class="absolute! top-0! left-0!">
+    <button type="button"><i class="fa-solid fa-arrow-left"></i> Retour</button>
+    </a>
+</div>
+<div class="relative! w-full!">
     <h3>Étape 2 : Interlocuteurs</h3>
     <h4>Informations du contact principal</h4>
 </div>
@@ -7,13 +11,12 @@
     <div class="coltwo">
         <div class="w-full!">
             <p>
-                <label for="step2_prenom_0"><span>Prénom * :</span> <input type="text" id="step2_prenom_0" name="step2_prenom_0"
-                                                                   placeholder="Prénom" required></label>
+                <label for="step2_prenom_0"><span>Prénom * :</span> <input type="text" id="step2_prenom_0" name="step2_prenom_0" placeholder="Prénom" value="<?php echo (isset($value_form[0]->step2_prenom_0) && !empty($value_form[0]->step2_prenom_0)) ? $value_form[0]->step2_prenom_0 : ''; ?>" required></label>
             </p>
         </div>
         <div class="w-full!">
             <p>
-                <label for="step2_nom_0"><span>Nom * :</span> <input type="text" id="step2_nom_0" name="step2_nom_0" placeholder="Nom" required></label>
+                <label for="step2_nom_0"><span>Nom * :</span> <input type="text" id="step2_nom_0" name="step2_nom_0" placeholder="Nom" value="<?php echo (isset($value_form[0]->step2_nom_0) && !empty($value_form[0]->step2_nom_0)) ? $value_form[0]->step2_nom_0 : ''; ?>" required></label>
             </p>
         </div>
     </div>
@@ -27,7 +30,7 @@
                     <?php
                     foreach ($options as $option):
                         ?>
-                        <option value="<?= $option; ?>"><?= $option; ?></option>
+                        <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_fonction_0 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
                     <?php
                     endforeach;
                 endif;
@@ -37,8 +40,7 @@
     </p>
 
     <p>
-        <label for="step2_email_0"><span>Email * :</span> <input type="email" id="step2_email_0" name="step2_email_0" placeholder="Email"
-                                                         required></label>
+        <label for="step2_email_0"><span>Email * :</span> <input type="email" id="step2_email_0" name="step2_email_0" placeholder="Email" value="<?php echo (isset($value_form[0]->step2_email_0) && !empty($value_form[0]->step2_email_0)) ? $value_form[0]->step2_email_0 : ''; ?>" required></label>
     </p>
 
     <p><label for="step2_role_0"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
@@ -50,7 +52,7 @@
                     <?php
                     foreach ($options as $option):
                         ?>
-                        <option value="<?= $option; ?>"><?= $option; ?></option>
+                        <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_role_0 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
                     <?php
                     endforeach;
                 endif;
@@ -61,11 +63,254 @@
 
     <p>
         <label for="step2_signataire_0" class="checkbox"><input type="checkbox" id="step2_signataire_0"
-                                                  name="step2_signataire_0" value="1"/><span>Contact signataire</span> <i
+                                                  name="step2_signataire_0" value="1" <?php echo ($value_form[0]->step2_signataire_0 == 1) ? 'checked' : ''; ?> /><span>Contact signataire</span> <i
                     class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
     </p>
 
-    <div class="useradd"></div>
+    <div class="useradd">
+
+
+        <?php if(isset($value_form[0]->step2_email_1) && !empty($value_form[0]->step2_email_1)){ ?>
+
+        <div class="user" id="N_1">
+
+            <div class="relative! w-full! min-h-[50px]!">
+                <button type="button" class="absolute! top-0! right-0!" onclick="suppUser('N_1')"><i class="fa-solid fa-user-minus mr-[20px]"></i> Supprimer le contact</button>
+            </div>
+
+            <div class="relative! w-full!">
+                <h4> 2ème contact </h4>
+            </div>
+
+
+            <div class="coltwo">
+                <div class="w-full!">
+                    <p>
+                        <label for="step2_prenom_1"><span>Prénom * :</span> <input type="text" id="step2_prenom_1" name="step2_prenom_1" placeholder="Prénom" value="<?php echo (isset($value_form[0]->step2_prenom_1) && !empty($value_form[0]->step2_prenom_1)) ? $value_form[0]->step2_prenom_1 : ''; ?>" required></label>
+                    </p>
+                </div>
+                <div class="w-full!">
+                    <p>
+                        <label for="step2_nom_1"><span>Nom * :</span> <input type="text" id="step2_nom_1" name="step2_nom_1" placeholder="Nom" value="<?php echo (isset($value_form[0]->step2_nom_1) && !empty($value_form[0]->step2_nom_1)) ? $value_form[0]->step2_nom_1 : ''; ?>" required></label>
+                    </p>
+                </div>
+            </div>
+
+            <p><label for="step2_fonction_1"><span>Fonction dans l’organisation * :</span>
+                    <select name="step2_fonction_1" id="step2_fonction_1" required>
+                        <?php
+                        if ($options):
+                            ?>
+                            <option>Choisir une réponse</option>
+                            <?php
+                            foreach ($options as $option):
+                                ?>
+                                <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_fonction_1 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
+                            <?php
+                            endforeach;
+                        endif;
+                        ?>
+                    </select>
+                </label>
+            </p>
+
+            <p>
+                <label for="step2_email_1"><span>Email * :</span> <input type="email" id="step2_email_1" name="step2_email_1" placeholder="Email" value="<?php echo (isset($value_form[0]->step2_email_1) && !empty($value_form[0]->step2_email_1)) ? $value_form[0]->step2_email_1 : ''; ?>" required></label>
+            </p>
+
+            <p><label for="step2_role_1"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
+                    <select name="step2_role_1" id="step2_role_1" required>
+                        <?php
+                        if ($options):
+                            ?>
+                            <option>Choisir une réponse</option>
+                            <?php
+                            foreach ($options as $option):
+                                ?>
+                                <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_role_1 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
+                            <?php
+                            endforeach;
+                        endif;
+                        ?>
+                    </select>
+                </label>
+            </p>
+
+            <p>
+                <label for="step2_signataire_1" class="checkbox"><input type="checkbox" id="step2_signataire_1"
+                                                                        name="step2_signataire_1" value="1" <?php echo ($value_form[0]->step2_signataire_1 == 1) ? 'checked' : ''; ?> /><span>Contact signataire</span> <i
+                            class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
+            </p>
+
+            <input type="hidden" id="step2_useradd_1" name="step2_useradd_1">
+
+
+        </div>
+
+        <?php } ?>
+
+        <?php if(isset($value_form[0]->step2_email_2) && !empty($value_form[0]->step2_email_2)){ ?>
+
+            <div class="user" id="N_2">
+
+
+                <div class="relative! w-full! min-h-[50px]!">
+                    <button type="button" class="absolute! top-0! right-0!" onclick="suppUser('N_2')"><i class="fa-solid fa-user-minus mr-[20px]"></i> Supprimer le contact</button>
+                </div>
+
+                <div class="relative! w-full!">
+                    <h4> 3ème contact </h4>
+                </div>
+
+
+                <div class="coltwo">
+                    <div class="w-full!">
+                        <p>
+                            <label for="step2_prenom_2"><span>Prénom * :</span> <input type="text" id="step2_prenom_2" name="step2_prenom_2" placeholder="Prénom" value="<?php echo (isset($value_form[0]->step2_prenom_2) && !empty($value_form[0]->step2_prenom_2)) ? $value_form[0]->step2_prenom_2 : ''; ?>" required></label>
+                        </p>
+                    </div>
+                    <div class="w-full!">
+                        <p>
+                            <label for="step2_nom_2"><span>Nom * :</span> <input type="text" id="step2_nom_2" name="step2_nom_2" placeholder="Nom" value="<?php echo (isset($value_form[0]->step2_nom_2) && !empty($value_form[0]->step2_nom_2)) ? $value_form[0]->step2_nom_2 : ''; ?>" required></label>
+                        </p>
+                    </div>
+                </div>
+
+                <p><label for="step2_fonction_2"><span>Fonction dans l’organisation * :</span>
+                        <select name="step2_fonction_2" id="step2_fonction_2" required>
+                            <?php
+                            if ($options):
+                                ?>
+                                <option>Choisir une réponse</option>
+                                <?php
+                                foreach ($options as $option):
+                                    ?>
+                                    <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_fonction_2 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
+                                <?php
+                                endforeach;
+                            endif;
+                            ?>
+                        </select>
+                    </label>
+                </p>
+
+                <p>
+                    <label for="step2_email_2"><span>Email * :</span> <input type="email" id="step2_email_2" name="step2_email_2" placeholder="Email" value="<?php echo (isset($value_form[0]->step2_email_2) && !empty($value_form[0]->step2_email_2)) ? $value_form[0]->step2_email_2 : ''; ?>" required></label>
+                </p>
+
+                <p><label for="step2_role_2"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
+                        <select name="step2_role_2" id="step2_role_2" required>
+                            <?php
+                            if ($options):
+                                ?>
+                                <option>Choisir une réponse</option>
+                                <?php
+                                foreach ($options as $option):
+                                    ?>
+                                    <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_role_2 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
+                                <?php
+                                endforeach;
+                            endif;
+                            ?>
+                        </select>
+                    </label>
+                </p>
+
+                <p>
+                    <label for="step2_signataire_2" class="checkbox"><input type="checkbox" id="step2_signataire_2"
+                                                                            name="step2_signataire_2" value="1" <?php echo ($value_form[0]->step2_signataire_2 == 1) ? 'checked' : ''; ?> /><span>Contact signataire</span> <i
+                                class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
+                </p>
+
+                <input type="hidden" id="step2_useradd_2" name="step2_useradd_2">
+
+
+            </div>
+
+        <?php } ?>
+
+
+        <?php if(isset($value_form[0]->step2_email_3) && !empty($value_form[0]->step2_email_3)){ ?>
+
+            <div class="user" id="N_3">
+
+
+                <div class="relative! w-full! min-h-[50px]!">
+                    <button type="button" class="absolute! top-0! right-0!" onclick="suppUser('N_3')"><i class="fa-solid fa-user-minus mr-[20px]"></i> Supprimer le contact</button>
+                </div>
+
+                <div class="relative! w-full!">
+                    <h4> 4ème contact </h4>
+                </div>
+
+
+                <div class="coltwo">
+                    <div class="w-full!">
+                        <p>
+                            <label for="step2_prenom_3"><span>Prénom * :</span> <input type="text" id="step2_prenom_3" name="step2_prenom_3" placeholder="Prénom" value="<?php echo (isset($value_form[0]->step2_prenom_3) && !empty($value_form[0]->step2_prenom_3)) ? $value_form[0]->step2_prenom_3 : ''; ?>" required></label>
+                        </p>
+                    </div>
+                    <div class="w-full!">
+                        <p>
+                            <label for="step2_nom_3"><span>Nom * :</span> <input type="text" id="step2_nom_3" name="step2_nom_3" placeholder="Nom" value="<?php echo (isset($value_form[0]->step2_nom_3) && !empty($value_form[0]->step2_nom_3)) ? $value_form[0]->step2_nom_3 : ''; ?>" required></label>
+                        </p>
+                    </div>
+                </div>
+
+                <p><label for="step2_fonction_3"><span>Fonction dans l’organisation * :</span>
+                        <select name="step2_fonction_3" id="step2_fonction_3" required>
+                            <?php
+                            if ($options):
+                                ?>
+                                <option>Choisir une réponse</option>
+                                <?php
+                                foreach ($options as $option):
+                                    ?>
+                                    <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_fonction_3 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
+                                <?php
+                                endforeach;
+                            endif;
+                            ?>
+                        </select>
+                    </label>
+                </p>
+
+                <p>
+                    <label for="step2_email_3"><span>Email * :</span> <input type="email" id="step2_email_3" name="step2_email_3" placeholder="Email" value="<?php echo (isset($value_form[0]->step2_email_3) && !empty($value_form[0]->step2_email_3)) ? $value_form[0]->step2_email_3 : ''; ?>" required></label>
+                </p>
+
+                <p><label for="step2_role_3"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
+                        <select name="step2_role_3" id="step2_role_3" required>
+                            <?php
+                            if ($options):
+                                ?>
+                                <option>Choisir une réponse</option>
+                                <?php
+                                foreach ($options as $option):
+                                    ?>
+                                    <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_role_3 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
+                                <?php
+                                endforeach;
+                            endif;
+                            ?>
+                        </select>
+                    </label>
+                </p>
+
+                <p>
+                    <label for="step2_signataire_3" class="checkbox"><input type="checkbox" id="step2_signataire_3"
+                                                                            name="step2_signataire_3" value="1" <?php echo ($value_form[0]->step2_signataire_3 == 1) ? 'checked' : ''; ?> /><span>Contact signataire</span> <i
+                                class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
+                </p>
+
+                <input type="hidden" id="step2_useradd_1" name="step2_useradd_1">
+
+
+            </div>
+
+        <?php } ?>
+
+    </div>
 
     <input type="hidden" id="step2_formStartTime" name="step2_formStartTime">
     <script>document.getElementById('step2_formStartTime').value = Date.now();</script>
@@ -114,9 +359,13 @@
             newDiv.classList.add('user');
             newDiv.id = 'N_' + (currentContacts+1);
             newDiv.innerHTML = `
+
             <div class="relative! w-full! min-h-[50px]!">
-            <button type="button" class="absolute! top-0! right-0!" onclick="suppUser('N_` + (currentContacts+1) + `')"><i class="fa-solid fa-user-minus mr-[20px]"></i> Supprimer le contact</button>
-                <h4>` + (currentContacts+2) + `ème contact </h4>
+                <button type="button" class="absolute! top-0! right-0!" onclick="suppUser('N_` + (currentContacts+1) + `')"><i class="fa-solid fa-user-minus mr-[20px]"></i> Supprimer le contact</button>
+            </div>
+
+            <div class="relative! w-full!">
+               <h4>` + (currentContacts+2) + `ème contact </h4>
             </div>
 
 
@@ -223,11 +472,16 @@
             newUser.classList.add('user');
             newUser.id = 'N_' + (i + 1);
             newUser.innerHTML = `
- <div class="relative! w-full! min-h-[50px]!">
- <button type="button" class="absolute! top-0! right-0!" onclick="suppUser('N_` + (i+1) + `')"><i class="fa-solid fa-user-minus mr-[20px]"></i> Supprimer le contact</button>
-                <h4>` + (i+2) + `ème contact </h4>
-
+            <div class="relative! w-full! min-h-[50px]!">
+                <button type="button" class="absolute! top-0! right-0!" onclick="suppUser('N_` + (i+1) + `')"><i class="fa-solid fa-user-minus mr-[20px]"></i> Supprimer le contact</button>
             </div>
+
+            <div class="relative! w-full!">
+               <h4>` + (i+2) + `ème contact </h4>
+            </div>
+
+
+
             <div class="coltwo">
         <div class="w-full!">
             <p>

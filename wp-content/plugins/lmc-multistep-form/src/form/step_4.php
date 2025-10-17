@@ -1,5 +1,9 @@
 <div class="relative! w-full! min-h-[50px]!">
-    <button type="button" class="absolute! top-0! left-0!" id="go-back"><i class="fa-solid fa-arrow-left"></i> Retour</button>
+    <a href="<?= getCurrentUrl();?>?reload_step=3" class="absolute! top-0! left-0!">
+        <button type="button"><i class="fa-solid fa-arrow-left"></i> Retour</button>
+    </a>
+</div>
+<div class="relative! w-full!">
     <h3>Étape 3 : Votre politique de diversité</h3>
 </div>
 
@@ -12,7 +16,7 @@
                 <?php
                 foreach ($options as $option):
                     ?>
-                    <option value="<?= $option ;?>"><?= $option ;?></option>
+                    <option value="<?= $option ;?>" <?php echo ($value_form[0]->step4_engagement_1 == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -30,7 +34,7 @@
                 <?php
                 foreach ($options as $option):
                     ?>
-                    <option value="<?= $option ;?>"><?= $option ;?></option>
+                    <option value="<?= $option ;?>" <?php echo ($value_form[0]->step4_engagement_2 == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -48,7 +52,7 @@
                 <?php
                 foreach ($options as $option):
                     ?>
-                    <option value="<?= $option ;?>"><?= $option ;?></option>
+                    <option value="<?= $option ;?>" <?php echo ($value_form[0]->step4_engagement_3 == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -66,7 +70,7 @@
                 <?php
                 foreach ($options as $option):
                     ?>
-                    <option value="<?= $option ;?>"><?= $option ;?></option>
+                    <option value="<?= $option ;?>" <?php echo ($value_form[0]->step4_engagement_4 == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -84,7 +88,7 @@
                 <?php
                 foreach ($options as $option):
                     ?>
-                    <option value="<?= $option ;?>"><?= $option ;?></option>
+                    <option value="<?= $option ;?>" <?php echo ($value_form[0]->step4_engagement_5 == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -102,7 +106,7 @@
                 <?php
                 foreach ($options as $option):
                     ?>
-                    <option value="<?= $option ;?>"><?= $option ;?></option>
+                    <option value="<?= $option ;?>" <?php echo ($value_form[0]->step4_engagement_6 == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
                 <?php
                 endforeach;
             endif;

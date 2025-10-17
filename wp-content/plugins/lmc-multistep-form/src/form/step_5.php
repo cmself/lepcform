@@ -1,5 +1,9 @@
 <div class="relative! w-full! min-h-[50px]!">
-    <button type="button" class="absolute! top-0! left-0!" id="go-back"><i class="fa-solid fa-arrow-left"></i> Retour</button>
+    <a href="<?= getCurrentUrl();?>?reload_step=4" class="absolute! top-0! left-0!">
+        <button type="button"><i class="fa-solid fa-arrow-left"></i> Retour</button>
+    </a>
+</div>
+<div class="relative! w-full!">
     <h3>Étape 4 : Paiement</h3>
     <h4>Vous recevrez une facture acquittée ainsi que la charte dès réception de votre règlement.</h4>
 </div>
@@ -7,10 +11,10 @@
 <p>
     <label for="step5_paiement"><span>Choisissez votre méthode de paiement :</span>
         <div class="wrapper flex! flex-col! gap-[5px]! w-full!">
-            <input type="radio" name="step5_paiement" id="option-1" value="CB">
-            <input type="radio" name="step5_paiement" id="option-2" value="VIREMENT">
-            <input type="radio" name="step5_paiement" id="option-3" value="FACTURE">
-            <input type="radio" name="step5_paiement" id="option-4" value="AIDE">
+            <input type="radio" name="step5_paiement" id="option-1" value="CB" <?php echo ($value_form[0]->step5_paiement == "CB") ? 'checked' : ''; ?>>
+            <input type="radio" name="step5_paiement" id="option-2" value="VIREMENT" <?php echo ($value_form[0]->step5_paiement == "VIREMENT") ? 'checked' : ''; ?>>
+            <input type="radio" name="step5_paiement" id="option-3" value="FACTURE" <?php echo ($value_form[0]->step5_paiement == "FACTURE") ? 'checked' : ''; ?>>
+            <input type="radio" name="step5_paiement" id="option-4" value="AIDE" <?php echo ($value_form[0]->step5_paiement == "AIDE") ? 'checked' : ''; ?>>
 
                 <label for="option-1" class="option option-1">
                     <div class="dot"></div>
@@ -51,7 +55,7 @@
 
 <p>
     <label for="step5_rgpd" class="checkbox">
-        <input type="checkbox" id="step5_rgpd" name="step5_rgpd" value="1"/>
+        <input type="checkbox" id="step5_rgpd" name="step5_rgpd" value="1" <?php echo ($value_form[0]->step5_rgpd == 1) ? 'checked' : ''; ?>/>
         <span class="opacity-100!">J'accepte que les informations saisies soient utilisées dans le cadre de la relation qui découle de cette prise de contact. Pour plus d’information, consulter la <a href="#" class="text-[var(--color-rose)]!">politique de confidentialité</a></span>
     </label>
 </p>
@@ -138,7 +142,7 @@
 
         const div_3 = document.createElement('div');
         div_3.classList.add('div_3');
-        div_3.innerHTML = `<h4>Vous avez besoin d’une facture non acquittée ou d’un bon de commande ?</h4><p><label for="bc"><span>Numéro du bon de commande * :</span> <input type="text" id="step5_bc" name="step5_bc" placeholder="Numéro" required></label></p>`;
+        div_3.innerHTML = `<h4>Vous avez besoin d’une facture non acquittée ou d’un bon de commande ?</h4><p><label for="bc"><span>Numéro du bon de commande * :</span> <input type="text" id="step5_bc" name="step5_bc" placeholder="Numéro" value="<?php echo (isset($value_form[0]->step5_bc) && !empty($value_form[0]->step5_bc)) ? $value_form[0]->step5_bc : ''; ?>" required></label></p>`;
         content_3.appendChild(div_3);
     });
 
@@ -160,7 +164,7 @@
 
         const div_4 = document.createElement('div');
         div_4.classList.add('div_3');
-        div_4.innerHTML = `<p><label for="help"><span>Vous avez besoin d'aide pour réaliser le paiement, merci de nous envoyer un message. (1000 caractères max)</span><textarea id="step5_help" name="step5_help" rows="10" placeholder="(1000 caractères max)"></textarea></label></p>`;
+        div_4.innerHTML = `<p><label for="help"><span>Vous avez besoin d'aide pour réaliser le paiement, merci de nous envoyer un message. (1000 caractères max)</span><textarea id="step5_help" name="step5_help" rows="10" placeholder="(1000 caractères max)"><?php echo (isset($value_form[0]->step5_help) && !empty($value_form[0]->step5_help)) ? $value_form[0]->step5_help : ''; ?></textarea></label></p>`;
         content_4.appendChild(div_4);
     });
 

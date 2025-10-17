@@ -111,6 +111,17 @@ function lmc_php_form() {
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     ");
 
+    function getCurrentUrl() {
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
+            || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+        $host = $_SERVER['HTTP_HOST'];
+
+        $uri = $_SERVER['REQUEST_URI'];
+
+        return $protocol . $host . $uri;
+    }
+
 
     function generate_otp(int $digits = 6): string {
         $min = (int) pow(10, $digits - 1);
