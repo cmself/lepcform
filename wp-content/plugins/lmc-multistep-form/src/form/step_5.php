@@ -5,12 +5,12 @@
 </div>
 
 <p>
-    <label for="nom"><span>Choisissez votre méthode de paiement :</span>
+    <label for="step5_paiement"><span>Choisissez votre méthode de paiement :</span>
         <div class="wrapper flex! flex-col! gap-[5px]! w-full!">
-            <input type="radio" name="select" id="option-1">
-            <input type="radio" name="select" id="option-2">
-            <input type="radio" name="select" id="option-3">
-            <input type="radio" name="select" id="option-4">
+            <input type="radio" name="step5_paiement" id="option-1" value="CB">
+            <input type="radio" name="step5_paiement" id="option-2" value="VIREMENT">
+            <input type="radio" name="step5_paiement" id="option-3" value="FACTURE">
+            <input type="radio" name="step5_paiement" id="option-4" value="AIDE">
 
                 <label for="option-1" class="option option-1">
                     <div class="dot"></div>
@@ -50,8 +50,8 @@
 <div id="content_4" class="block! w-full!"></div>
 
 <p>
-    <label for="politique" class="checkbox">
-        <input type="checkbox" id="politique" name="politique"/>
+    <label for="step5_rgpd" class="checkbox">
+        <input type="checkbox" id="step5_rgpd" name="step5_rgpd" value="1"/>
         <span class="opacity-100!">J'accepte que les informations saisies soient utilisées dans le cadre de la relation qui découle de cette prise de contact. Pour plus d’information, consulter la <a href="#" class="text-[var(--color-rose)]!">politique de confidentialité</a></span>
     </label>
 </p>
@@ -138,7 +138,7 @@
 
         const div_3 = document.createElement('div');
         div_3.classList.add('div_3');
-        div_3.innerHTML = `<h4>Vous avez besoin d’une facture non acquittée ou d’un bon de commande ?</h4><p><label for="bc"><span>Numéro du bon de commande * :</span> <input type="text" id="bc" name="bc" placeholder="Numéro" required></label></p>`;
+        div_3.innerHTML = `<h4>Vous avez besoin d’une facture non acquittée ou d’un bon de commande ?</h4><p><label for="bc"><span>Numéro du bon de commande * :</span> <input type="text" id="step5_bc" name="step5_bc" placeholder="Numéro" required></label></p>`;
         content_3.appendChild(div_3);
     });
 
@@ -160,7 +160,7 @@
 
         const div_4 = document.createElement('div');
         div_4.classList.add('div_3');
-        div_4.innerHTML = `<p><label for="help"><span>Vous avez besoin d'aide pour réaliser le paiement, merci de nous envoyer un message. (1000 caractères max)</span><textarea id="help" name="help" rows="10" placeholder="(1000 caractères max)"></textarea></label></p>`;
+        div_4.innerHTML = `<p><label for="help"><span>Vous avez besoin d'aide pour réaliser le paiement, merci de nous envoyer un message. (1000 caractères max)</span><textarea id="step5_help" name="step5_help" rows="10" placeholder="(1000 caractères max)"></textarea></label></p>`;
         content_4.appendChild(div_4);
     });
 

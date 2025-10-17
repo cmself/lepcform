@@ -172,6 +172,8 @@ function lmc_php_form() {
             include_once 'src/actions/step_5.php';
         } elseif ($step == 6) {
             include_once 'src/actions/step_6.php';
+        } elseif ($step == 7) {
+            include_once 'src/actions/step_7.php';
         }
     }
 
@@ -196,6 +198,8 @@ function lmc_php_form() {
                 include_once 'src/form/step_5.php';
             } elseif ($step == 6) {
                 include_once 'src/form/step_6.php';
+            } elseif ($step == 7) {
+                include_once 'src/form/step_7.php';
             }
             ?>
         </form>
