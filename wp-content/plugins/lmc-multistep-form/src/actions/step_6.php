@@ -21,6 +21,8 @@ if (isset($_POST['step5_formStartTime'])) {
     }
 }
 
+$_SESSION['lmc_data']['reload'] = 6;
+
 $_SESSION['lmc_data']['step5_paiement'] = isset($_POST['step5_paiement']) ? sanitize_textarea_field($_POST['step5_paiement']) : "";
 $_SESSION['lmc_data']['step5_bc'] = isset($_POST['step5_bc']) ? sanitize_textarea_field($_POST['step5_bc']) : "";
 $_SESSION['lmc_data']['step5_help'] = isset($_POST['step5_help']) ? sanitize_textarea_field($_POST['step5_help']) : "";

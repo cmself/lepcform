@@ -22,6 +22,8 @@ if (isset($_POST['step4_formStartTime'])) {
     }
 }
 
+$_SESSION['lmc_data']['reload'] = 5;
+
 $_SESSION['lmc_data']['step4_engagement_1'] = isset($_POST['step4_engagement_1']) ? sanitize_text_field($_POST['step4_engagement_1']) : "";
 $_SESSION['lmc_data']['step4_engagement_2'] = isset($_POST['step4_engagement_2']) ? sanitize_text_field($_POST['step4_engagement_2']) : "";
 $_SESSION['lmc_data']['step4_engagement_3'] = isset($_POST['step4_engagement_3']) ? sanitize_text_field($_POST['step4_engagement_3']) : "";

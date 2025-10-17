@@ -22,6 +22,8 @@ die("Erreur : Envoi trop rapide.");
 }
 }
 
+$_SESSION['lmc_data']['reload'] = 4;
+
 
 // vérifier si existe
 $step3_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );

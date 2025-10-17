@@ -21,7 +21,7 @@ if (isset($_POST['step6_formStartTime'])) {
     }
 }
 
-
+$_SESSION['lmc_data']['reload'] = null;
 
 $data = $_SESSION['lmc_data'];
 $data['confirmation'] = 'OK';

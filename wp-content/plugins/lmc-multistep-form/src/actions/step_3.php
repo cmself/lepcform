@@ -25,6 +25,8 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
         }
     }
 
+    $_SESSION['lmc_data']['reload'] = 3;
+
 
     $step3_results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT);
 
