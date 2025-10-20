@@ -1,18 +1,23 @@
 <?php
-
-// Token CSRF
+/*
+ * Token CSRF
+ */
 if (!isset($_POST['step6_csrf_token']) || $_POST['step6_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
     logLmc("Token CSRF invalide");
     die("Erreur : Requête invalide.");
 }
 
-// Honey Pot pour piéger les robots
+/*
+ * Honey Pot pour piéger les robots
+ */
 if (!empty($_POST['step6_honeypot'])) {
     logLmc("Honey Pot rempli (robot détecté)");
     die("Erreur : Robot détecté.");
 }
 
-// Test de rapidité d’envoi
+/*
+ * Test de rapidité d’envoi
+ */
 if (isset($_POST['step6_formStartTime'])) {
     $duration = time() - (int) ($_POST['step6_formStartTime'] / 1000);
     if ($duration < 3) {

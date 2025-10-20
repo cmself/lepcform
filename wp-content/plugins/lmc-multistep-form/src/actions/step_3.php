@@ -2,21 +2,30 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 
+/*
+ * Vérifier si le code par Mail est bon
+ */
 if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_otp'] == 1 ) {
 
-    // Token CSRF
+    /*
+     * Token CSRF
+     */
     if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
         logLmc("Token CSRF invalide");
         die("Erreur : Requête invalide.");
     }
 
-    // Honey Pot pour piéger les robots
+    /*
+    * Honey Pot pour piéger les robots
+    */
     if (!empty($_POST['step3_honeypot'])) {
         logLmc("Honey Pot rempli (robot détecté)");
         die("Erreur : Robot détecté.");
     }
 
-    // Test de rapidité d’envoi
+    /*
+     * Test de rapidité d’envoi
+     */
     if (isset($_POST['step3_formStartTime'])) {
         $duration = time() - (int)($_POST['step3_formStartTime'] / 1000);
         if ($duration < 3) {
@@ -27,7 +36,9 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
 
     $_SESSION['lmc_data']['reload'] = 3;
 
-
+    /*
+     * vérifier si les données existent en base de données
+     */
     $step3_results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT);
 
     if (count($step3_results) === 1) {
@@ -65,22 +76,30 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
 
     }
 
-
+/*
+ * Renvoi du code par Mail
+ */
 }elseif(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_otp'] == 2 ){
 
-    // Token CSRF
+    /*
+      * Token CSRF
+      */
     if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
         logLmc("Token CSRF invalide");
         die("Erreur : Requête invalide.");
     }
 
-    // Honey Pot pour piéger les robots
+    /*
+    * Honey Pot pour piéger les robots
+    */
     if (!empty($_POST['step3_honeypot'])) {
         logLmc("Honey Pot rempli (robot détecté)");
         die("Erreur : Robot détecté.");
     }
 
-    // Test de rapidité d’envoi
+    /*
+     * Test de rapidité d’envoi
+     */
     if (isset($_POST['step3_formStartTime'])) {
         $duration = time() - (int)($_POST['step3_formStartTime'] / 1000);
         if ($duration < 3) {
@@ -89,7 +108,6 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
         }
     }
 
-    // vérifier si existe
     $step2_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
     if (count($step2_results) === 1) {
@@ -152,21 +170,30 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
 
     }
 
+/*
+ * Enregistre les variables de session des étapes
+ */
 }else{
 
-    // Token CSRF
+    /*
+     * Token CSRF
+     */
     if (!isset($_POST['step2_csrf_token']) || $_POST['step2_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
         logLmc("Token CSRF invalide");
         die("Erreur : Requête invalide.");
     }
 
-    // Honey Pot pour piéger les robots
+    /*
+    * Honey Pot pour piéger les robots
+    */
     if (!empty($_POST['step2_honeypot'])) {
         logLmc("Honey Pot rempli (robot détecté)");
         die("Erreur : Robot détecté.");
     }
 
-    // Test de rapidité d’envoi
+    /*
+     * Test de rapidité d’envoi
+     */
     if (isset($_POST['step2_formStartTime'])) {
         $duration = time() - (int) ($_POST['step2_formStartTime'] / 1000);
         if ($duration < 3) {
@@ -175,9 +202,10 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
         }
     }
 
+    /*
+     * Enregistre les variables de session des étapes
+     */
     $_SESSION['lmc_data']['step3_otp'] = '';
-
-
     $_SESSION['lmc_data']['step2_prenom_0'] = isset($_POST['step2_prenom_0']) ? sanitize_text_field($_POST['step2_prenom_0']) : "";
     $_SESSION['lmc_data']['step2_nom_0'] = isset($_POST['step2_nom_0']) ? sanitize_text_field($_POST['step2_nom_0']) : "";
     $_SESSION['lmc_data']['step2_fonction_0'] = isset($_POST['step2_fonction_0']) ? sanitize_text_field($_POST['step2_fonction_0']) : "";
@@ -208,12 +236,16 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
 
 
 
-    // vérifier si existe
+    /*
+     * vérifier si les données existent en base de données
+     */
     $step2_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
     if (count($step2_results) === 1) {
 
-        // Enregistrement les données en base de données
+        /*
+         * Enregistrement les données en base de données
+         */
         $wpdb->update($table_name, [
             'step2_prenom_0' => $_SESSION['lmc_data']['step2_prenom_0'],
             'step2_nom_0' => $_SESSION['lmc_data']['step2_nom_0'],
@@ -246,7 +278,9 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
 
 
 
-
+        /*
+         * Envoyer le code de vérification par mail
+         */
         $otp = generate_otp(5);
         $otpHash = password_hash($otp, PASSWORD_DEFAULT);
         $expiresMinutes = 10;

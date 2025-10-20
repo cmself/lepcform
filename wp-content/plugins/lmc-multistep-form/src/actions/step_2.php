@@ -1,17 +1,24 @@
 <?php
-// Token CSRF
+
+/*
+ * Token CSRF
+ */
 if (!isset($_POST['step1_csrf_token']) || $_POST['step1_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
     logLmc("Token CSRF invalide");
     die("Erreur : Requête invalide.");
 }
 
-// Honey Pot pour piéger les robots
+/*
+ * Honey Pot pour piéger les robots
+ */
 if (!empty($_POST['step1_honeypot'])) {
     logLmc("Honey Pot rempli (robot détecté)");
     die("Erreur : Robot détecté.");
 }
 
-// Test de rapidité d’envoi
+/*
+ * Test de rapidité d’envoi
+ */
 if (isset($_POST['step1_formStartTime'])) {
     $duration = time() - (int) ($_POST['step1_formStartTime'] / 1000);
     if ($duration < 3) {
@@ -20,11 +27,18 @@ if (isset($_POST['step1_formStartTime'])) {
     }
 }
 
-$_SESSION['lmc_data']['reload'] = 2;
 
+/*
+ * Enregistre les variables de session des étapes
+ */
+$_SESSION['lmc_data']['reload'] = 2;
 $_SESSION['lmc_data']['step1_nom'] = isset($_POST['step1_nom']) ? sanitize_text_field($_POST['step1_nom']) : "";
 $_SESSION['lmc_data']['step1_siret'] = isset($_POST['step1_siret']) ? sanitize_text_field($_POST['step1_siret']) : "";
 
+
+/*
+ * Vérifier si la structures existe dans OHME
+ */
 if(isset($_SESSION['lmc_data']['step1_siret']) && !empty($_SESSION['lmc_data']['step1_siret'])) {
 
     try {
@@ -47,6 +61,9 @@ if(count($_SESSION['lmc_data']['structures_siren']) > 0) {
 }
 
 
+/*
+ * Enregistre le logo
+ */
 if (isset($_FILES['step1_logo']) && $_FILES['step1_logo']['error'] === UPLOAD_ERR_OK) {
 
     $fileTmpPath = $_FILES['step1_logo']['tmp_name'];
@@ -91,12 +108,16 @@ $_SESSION['lmc_data']['step1_connaissance'] = isset($_POST['step1_connaissance']
 $_SESSION['lmc_data']['step1_politique'] = isset($_POST['step1_politique']) ? sanitize_textarea_field($_POST['step1_politique']) : "";
 
 
-// vérifier si existe
+/*
+ * vérifier si les données existent en base de données
+ */
 $step1_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
 if (count($step1_results) === 1) {
 
-    // Enregistrement les données en base de données
+    /*
+     * Enregistrement les données en base de données
+     */
     $wpdb->update($table_name, [
         'step1_nom' => $_SESSION['lmc_data']['step1_nom'],
         'step1_siret' => $_SESSION['lmc_data']['step1_siret'],
