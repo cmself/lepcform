@@ -22,7 +22,7 @@
     </div>
 
     <p><label for="step2_fonction_0"><span>Fonction dans l’organisation * :</span>
-            <select name="step2_fonction_0" id="step2_fonction_0" >
+            <select name="step2_fonction_0" id="step2_fonction_0">
                 <?php
                 if ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
                     ?>
@@ -44,17 +44,12 @@
     </p>
 
     <p><label for="step2_role_0"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-            <select name="step2_role_0" id="step2_role_0" required>
+            <select name="step2_role_0" id="step2_role_0" disabled>
                 <?php
                 if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
                     ?>
-                    <option>Choisir une réponse</option>
+                        <option value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][0]); ?>" selected><?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][0]); ?></option>
                     <?php
-                    foreach ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'] as $option):
-                        ?>
-                        <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_role_0 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
-                    <?php
-                    endforeach;
                 endif;
                 ?>
             </select>
@@ -62,7 +57,7 @@
     </p>
 
     <p>
-        <label for="step2_signataire_0" class="checkbox"><input type="checkbox" id="step2_signataire_0"
+        <label for="step2_signataire_0" class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_0"
                                                   name="step2_signataire_0" value="1" <?php echo ($value_form[0]->step2_signataire_0 == 1) ? 'checked' : ''; ?> /><span>Contact signataire</span> <i
                     class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
     </p>
@@ -119,17 +114,13 @@
             </p>
 
             <p><label for="step2_role_1"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-                    <select name="step2_role_1" id="step2_role_1" required>
+                    <select name="step2_role_1" id="step2_role_1" disabled>
                         <?php
                         if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
                             ?>
-                            <option>Choisir une réponse</option>
+                            <option value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" selected><?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?></option>
                             <?php
-                            foreach ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'] as $option):
-                                ?>
-                                <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_role_1 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
-                            <?php
-                            endforeach;
+
                         endif;
                         ?>
                     </select>
@@ -137,7 +128,7 @@
             </p>
 
             <p>
-                <label for="step2_signataire_1" class="checkbox"><input type="checkbox" id="step2_signataire_1"
+                <label for="step2_signataire_1" class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_1"
                                                                         name="step2_signataire_1" value="1" <?php echo ($value_form[0]->step2_signataire_1 == 1) ? 'checked' : ''; ?> /><span>Contact signataire</span> <i
                             class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
             </p>
@@ -199,17 +190,13 @@
                 </p>
 
                 <p><label for="step2_role_2"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-                        <select name="step2_role_2" id="step2_role_2" required>
+                        <select name="step2_role_2" id="step2_role_2" disabled>
                             <?php
                             if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
                                 ?>
-                                <option>Choisir une réponse</option>
+                                <option value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" selected><?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?></option>
                                 <?php
-                                foreach ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'] as $option):
-                                    ?>
-                                    <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_role_2 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
-                                <?php
-                                endforeach;
+
                             endif;
                             ?>
                         </select>
@@ -217,7 +204,7 @@
                 </p>
 
                 <p>
-                    <label for="step2_signataire_2" class="checkbox"><input type="checkbox" id="step2_signataire_2"
+                    <label for="step2_signataire_2" class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_2"
                                                                             name="step2_signataire_2" value="1" <?php echo ($value_form[0]->step2_signataire_2 == 1) ? 'checked' : ''; ?> /><span>Contact signataire</span> <i
                                 class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
                 </p>
@@ -280,17 +267,12 @@
                 </p>
 
                 <p><label for="step2_role_3"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-                        <select name="step2_role_3" id="step2_role_3" required>
+                        <select name="step2_role_3" id="step2_role_3" disabled>
                             <?php
                             if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
                                 ?>
-                                <option>Choisir une réponse</option>
+                                <option value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" selected><?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?></option>
                                 <?php
-                                foreach ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'] as $option):
-                                    ?>
-                                    <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_role_3 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
-                                <?php
-                                endforeach;
                             endif;
                             ?>
                         </select>
@@ -298,7 +280,7 @@
                 </p>
 
                 <p>
-                    <label for="step2_signataire_3" class="checkbox"><input type="checkbox" id="step2_signataire_3"
+                    <label for="step2_signataire_3" class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_3"
                                                                             name="step2_signataire_3" value="1" <?php echo ($value_form[0]->step2_signataire_3 == 1) ? 'checked' : ''; ?> /><span>Contact signataire</span> <i
                                 class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
                 </p>
@@ -407,17 +389,12 @@
     </p>
 
     <p><label for="step2_role_` + (currentContacts+1) + `"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-            <select name="step2_role_` + (currentContacts+1) + `" id="step2_role_` + (currentContacts+1) + `" required>
+            <select name="step2_role_` + (currentContacts+1) + `" id="step2_role_` + (currentContacts+1) + `" disabled>
                 <?php
             if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
             ?>
-                <option>Choisir une réponse</option>
-            <?php
-            foreach ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'] as $option):
-            ?>
-                        <option value="<?= htmlspecialchars($option); ?>"><?= htmlspecialchars($option); ?></option>
+                            <option value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" selected><?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?></option>
                     <?php
-            endforeach;
             endif;
             ?>
             </select>
@@ -425,7 +402,7 @@
     </p>
 
     <p>
-        <label for="step2_signataire_` + (currentContacts+1) + `" class="checkbox"><input type="checkbox" id="step2_signataire_` + (currentContacts+1) + `"
+        <label for="step2_signataire_` + (currentContacts+1) + `" class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_` + (currentContacts+1) + `"
                                                   name="step2_signataire_` + (currentContacts+1) + `" value="1"/><span>Contact signataire</span> <i
                     class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
     </p>
@@ -439,6 +416,20 @@
             tippy('[data-tippy-content]', {
                 theme: 'lmc',
             });
+
+            const checkboxes = document.querySelectorAll('.step2_signataire');
+            if(checkboxes) {
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', () => {
+                        if (checkbox.checked) {
+                            checkboxes.forEach(box => {
+                                if (box !== checkbox) box.checked = false;
+                            });
+                        }
+                    });
+
+                });
+            }
 
         } else {
             addBtn.style.display = 'none';
@@ -520,17 +511,13 @@
     </p>
 
     <p><label for="step2_role_` + (i + 1) + `"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-            <select name="step2_role_` + (i + 1) + `" id="step2_role_` + (i + 1) + `" required>
+            <select name="step2_role_` + (i + 1) + `" id="step2_role_` + (i + 1) + `" disabled>
                 <?php
             if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
             ?>
-                <option>Choisir une réponse</option>
-            <?php
-            foreach ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'] as $option):
-            ?>
-                        <option value="<?= htmlspecialchars($option); ?>"><?= htmlspecialchars($option); ?></option>
+
+                            <option value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" selected><?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?></option>
                     <?php
-            endforeach;
             endif;
             ?>
             </select>
@@ -538,7 +525,7 @@
     </p>
 
     <p>
-        <label for="step2_signataire_` + (i + 1) + ` class="checkbox"><input type="checkbox" id="step2_signataire_` + (i + 1) + `"
+        <label for="step2_signataire_` + (i + 1) + ` class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_` + (i + 1) + `"
                                                   name="step2_signataire_` + (i + 1) + `" value="1"/><span>Contact signataire</span> <i
                     class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
     </p>
@@ -551,6 +538,20 @@
             theme: 'lmc',
         });
 
+        const checkboxes = document.querySelectorAll('.step2_signataire');
+        if(checkboxes) {
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    if (checkbox.checked) {
+                        checkboxes.forEach(box => {
+                            if (box !== checkbox) box.checked = false;
+                        });
+                    }
+                });
+
+            });
+        }
+
 
     }
 
@@ -558,4 +559,19 @@
     tippy('[data-tippy-content]', {
         theme: 'lmc',
     });
+
+    const checkboxes = document.querySelectorAll('.step2_signataire');
+    if(checkboxes) {
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    checkboxes.forEach(box => {
+                        if (box !== checkbox) box.checked = false;
+                    });
+                }
+            });
+
+        });
+    }
+
 </script>

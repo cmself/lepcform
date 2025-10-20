@@ -172,3 +172,15 @@
 <input type="hidden" name="step" value="2">
 <p class="block! w-full! text-center! text-[var(--color-blanc)]! text-[20px]! font-light! py-[20px]! opacity-50!">* champs nécessaires pour valider l’étape</p>
 <p class="block! w-full! text-center!"><button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button></p>
+
+
+<script>
+    const step1_siret = document.getElementById('step1_siret');
+
+    if(step1_siret) {
+        step1_siret.addEventListener('input', () => {
+            // Supprime tout ce qui n'est pas un chiffre
+            step1_siret.value = step1_siret.value.replace(/[^0-9]/g, '');
+        });
+    }
+</script>
