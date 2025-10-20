@@ -284,7 +284,7 @@ function lmc_php_form() {
 
     <div class="w-full! m-auto! max-w-[1140px]! py-[40px]! font-roboto!" id="lmc-multistep-form">
         <?php include_once 'src/form/steps.php'; ?>
-        <form method="post" id="form-lmc-multistep-form" class="w-full!">
+        <form method="post" enctype="multipart/form-data" id="form-lmc-multistep-form" class="w-full!">
             <?php
             if ($step == 1) {
                 include_once 'src/form/step_1.php';

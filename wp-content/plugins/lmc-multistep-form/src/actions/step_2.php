@@ -24,7 +24,39 @@ $_SESSION['lmc_data']['reload'] = 2;
 
 $_SESSION['lmc_data']['step1_nom'] = isset($_POST['step1_nom']) ? sanitize_text_field($_POST['step1_nom']) : "";
 $_SESSION['lmc_data']['step1_siret'] = isset($_POST['step1_siret']) ? sanitize_text_field($_POST['step1_siret']) : "";
-$_SESSION['lmc_data']['step1_logo'] = isset($_POST['step1_logo']) ? sanitize_file_name($_POST['step1_logo']) : "";
+
+
+
+
+if (isset($_FILES['step1_logo']) && $_FILES['step1_logo']['error'] === UPLOAD_ERR_OK) {
+
+    $fileTmpPath = $_FILES['step1_logo']['tmp_name'];
+    $fileName = $_FILES['step1_logo']['name'];
+    $fileSize = $_FILES['step1_logo']['size'];
+    $fileType = $_FILES['step1_logo']['type'];
+    $fileNameCmps = explode(".", $fileName);
+    $fileExtension = strtolower(end($fileNameCmps));
+
+    $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+
+    $uploadFileDir = __DIR__ . '/uploads/';
+
+    if (!is_dir($uploadFileDir)) {
+        mkdir($uploadFileDir, 0755, true);
+    }
+    $dest_path = $uploadFileDir . $newFileName;
+
+    if(move_uploaded_file($fileTmpPath, $dest_path)) {
+        $_SESSION['lmc_data']['step1_logo'] =  $newFileName;
+    } else {
+        $_SESSION['lmc_data']['step1_logo'] = isset($_POST['step1_logoH']) ? sanitize_text_field($_POST['step1_logoH']) : "";
+    }
+
+} else {
+    $_SESSION['lmc_data']['step1_logo'] = isset($_POST['step1_logoH']) ? sanitize_text_field($_POST['step1_logoH']) : "";
+}
+
+
 $_SESSION['lmc_data']['step1_ca'] = isset($_POST['step1_ca']) ? sanitize_text_field($_POST['step1_ca']) : "";
 $_SESSION['lmc_data']['step1_frais'] = isset($_POST['step1_frais']) ? sanitize_text_field($_POST['step1_frais']) : "";
 $_SESSION['lmc_data']['step1_adherent'] = isset($_POST['step1_adherent']) ? sanitize_text_field($_POST['step1_adherent']) : "";
