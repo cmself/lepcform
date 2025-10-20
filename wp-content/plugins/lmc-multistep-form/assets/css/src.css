@@ -89,7 +89,7 @@
                     background-position: right .75rem center !important;
                     background-size: 16px 10px !important;
                     cursor: pointer !important;
-                    @apply bg-[var(--color-blanc)]! text-[var(--color-violet)]! p-[10px]!;
+                    @apply bg-[var(--color-blanc)]! text-[var(--color-violet)]! py-[10px] pl-[10px]! pr-[40px]!;
                 }
 
                 textarea {
@@ -101,7 +101,7 @@
             }
 
             label.checkbox {
-                @apply flex! flex-row! gap-[20px]! justify-start! items-center! w-full! py-[20px]!;
+                @apply flex! flex-row! gap-[20px]! justify-start! items-start! w-full! py-[20px]!;
 
                 input[type="checkbox"] {
                     appearance: none !important;
@@ -109,13 +109,12 @@
                     margin: 0 !important;
                     font: inherit !important;
                     color: currentColor !important;
-                    width: 30px !important;
-                    height: 20px !important;
                     border: 1px solid var(--color-rose) !important;
                     border-radius: 0.15em !important;
                     transform: translateY(-0.075em) !important;
                     display: grid !important;
                     place-content: center !important;
+                    padding: 5px !important;
                 }
 
                 input[type="checkbox"]::before {
@@ -145,7 +144,7 @@
             }
 
             button[type="submit"], button[type="button"] {
-                @apply bg-[var(--color-rose)]! text-[20px]! text-[var(--color-blanc)]! font-normal! cursor-pointer! p-[10px]! px-[20px]! rounded-[5px]!;
+                @apply bg-[var(--color-rose)]! text-[20px]! text-[var(--color-blanc)]! font-normal! cursor-pointer! p-[10px]! px-[20px]! rounded-[5px]! w-full! md:w-auto!;
 
                 :focus {
                     outline: none !important;

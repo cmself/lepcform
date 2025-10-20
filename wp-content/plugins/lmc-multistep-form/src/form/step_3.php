@@ -1,5 +1,5 @@
-<div class="relative! w-full! min-h-[50px]!">
-    <a href="<?= getCurrentUrl();?>?reload_step=2" class="absolute! top-0! left-0!">
+<div class="w-full! mb-[20px]!">
+    <a href="<?= getCurrentUrl();?>?reload_step=2" class="block! w-full!">
         <button type="button"><i class="fa-solid fa-arrow-left"></i> Retour</button>
     </a>
 </div>
@@ -48,10 +48,10 @@ if(isset($stepMAJ) && $stepMAJ == 4){
     <?php
 }
 ?>
-<p class="block! w-full! text-center!">
+<div class="flex! flex-col md:flex-row gap-[10px] justify-center items-center w-full! text-center!">
     <button type="button" id="resend"><i class="fa-solid fa-rotate-left"></i> Renvoyer le code</button>
     <button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button>
-</p>
+</div>
 
 <script>
     const form = document.getElementById('form-lmc-multistep-form');

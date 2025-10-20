@@ -1,5 +1,5 @@
-<div class="relative! w-full! min-h-[50px]!">
-    <a href="<?= getCurrentUrl();?>?reload_step=3" class="absolute! top-0! left-0!">
+<div class="w-full! mb-[20px]!">
+    <a href="<?= getCurrentUrl();?>?reload_step=3" class="block! w-full!">
         <button type="button"><i class="fa-solid fa-arrow-left"></i> Retour</button>
     </a>
 </div>

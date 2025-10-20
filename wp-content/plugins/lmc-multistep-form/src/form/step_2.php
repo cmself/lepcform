@@ -1,5 +1,5 @@
-<div class="relative! w-full! min-h-[50px]!">
-    <a href="<?= getCurrentUrl();?>?reload_step=1" class="absolute! top-0! left-0!">
+<div class="w-full! mb-[20px]!">
+    <a href="<?= getCurrentUrl();?>?reload_step=1" class="block! w-full!">
     <button type="button"><i class="fa-solid fa-arrow-left"></i> Retour</button>
     </a>
 </div>
@@ -319,10 +319,10 @@
     <input type="hidden" name="step" value="3">
     <p class="block! w-full! text-center! text-[var(--color-blanc)]! text-[20px]! font-light! py-[20px]! opacity-50!">* champs
         nécessaires pour valider l’étape</p>
-    <p class="block! w-full! text-center!">
+    <div class="flex! flex-col md:flex-row gap-[10px] justify-center items-center w-full! text-center!">
         <button type="button" id="addBtn"><i class="fa-solid fa-user-plus mr-[20px]"></i> Ajouter un contact</button>
         <button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button>
-    </p>
+    </div>
 
 
 <style>

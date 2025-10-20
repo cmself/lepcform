@@ -207,7 +207,7 @@ function lmc_php_form() {
         // vérifier si existe
         $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
-        if (count($results) === 0) {
+        if (count($results) != 1) {
             // Enregistrement la session en  base de données
             $wpdb->insert($table_name, [
                 'cookie' => $_SESSION['lmc_data']['csrf_token']
@@ -224,7 +224,7 @@ function lmc_php_form() {
         // vérifier si existe
         $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
-        if (count($results) === 0) {
+        if (count($results) != 1) {
             // Enregistrement la session en  base de données
             $wpdb->insert($table_name, [
                 'cookie' => $_SESSION['lmc_data']['csrf_token']

@@ -1,5 +1,5 @@
-<div class="relative! w-full! min-h-[50px]!">
-    <a href="<?= getCurrentUrl();?>?reload_step=5" class="absolute! top-0! left-0!">
+<div class="w-full! mb-[20px]!">
+    <a href="<?= getCurrentUrl();?>?reload_step=5" class="block! w-full!">
         <button type="button"><i class="fa-solid fa-arrow-left"></i> Retour</button>
     </a>
 </div>
@@ -83,5 +83,7 @@
 <input type="text" name="step6_honeypot" id="step6_honeypot" style="display:none;">
 <input type="hidden" name="step6_csrf_token" id="step6_csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
 <input type="hidden" name="step" value="7">
-<p class="block! w-full! text-center!"><button type="submit">Envoyer</button></p>
+<div class="flex! flex-col md:flex-row gap-[10px] justify-center items-center w-full! text-center! mt-[20px]!">
+<button type="submit">Envoyer</button>
+</div>
 
