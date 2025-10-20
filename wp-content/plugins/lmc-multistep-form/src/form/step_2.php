@@ -22,7 +22,7 @@
     </div>
 
     <p><label for="step2_fonction_0"><span>Fonction dans l’organisation * :</span>
-            <select name="step2_fonction_0" id="step2_fonction_0" required>
+            <select name="step2_fonction_0" id="step2_fonction_0" >
                 <?php
                 if ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
                     ?>
@@ -97,7 +97,7 @@
             </div>
 
             <p><label for="step2_fonction_1"><span>Fonction dans l’organisation * :</span>
-                    <select name="step2_fonction_1" id="step2_fonction_1" required>
+                    <select name="step2_fonction_1" id="step2_fonction_1" >
                         <?php
                         if ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
                             ?>
@@ -177,7 +177,7 @@
                 </div>
 
                 <p><label for="step2_fonction_2"><span>Fonction dans l’organisation * :</span>
-                        <select name="step2_fonction_2" id="step2_fonction_2" required>
+                        <select name="step2_fonction_2" id="step2_fonction_2" >
                             <?php
                             if ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
                                 ?>
@@ -258,7 +258,7 @@
                 </div>
 
                 <p><label for="step2_fonction_3"><span>Fonction dans l’organisation * :</span>
-                        <select name="step2_fonction_3" id="step2_fonction_3" required>
+                        <select name="step2_fonction_3" id="step2_fonction_3" >
                             <?php
                             if ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
                                 ?>
@@ -384,7 +384,7 @@
     </div>
 
     <p><label for="step2_fonction_` + (currentContacts+1) + `"><span>Fonction dans l’organisation * :</span>
-            <select name="step2_fonction_` + (currentContacts+1) + `" id="step2_fonction_` + (currentContacts+1) + `" required>
+            <select name="step2_fonction_` + (currentContacts+1) + `" id="step2_fonction_` + (currentContacts+1) + `" >
                 <?php
             if ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
             ?>
@@ -497,7 +497,7 @@
     </div>
 
     <p><label for="step2_fonction_` + (i + 1) + `"><span>Fonction dans l’organisation * :</span>
-            <select name="step2_fonction_` + (i + 1) + `" id="step2_fonction_` + (i + 1) + `" required>
+            <select name="step2_fonction_` + (i + 1) + `" id="step2_fonction_` + (i + 1) + `" >
                 <?php
             if ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
             ?>
