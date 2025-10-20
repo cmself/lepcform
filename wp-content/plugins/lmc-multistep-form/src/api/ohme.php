@@ -1,6 +1,7 @@
 <?php
-// Récupérer les champs personnalisés Contact
-
+/*
+ * Récupérer les champs personnalisés Contact
+ */
 $opt_ohme = [];
 
 try {
@@ -26,8 +27,9 @@ try {
     echo 'Body: ' . $e->getResponse()->getBody();
 }
 
-// Récupérer les champs personnalisés Structure
-
+/*
+ *  Récupérer les champs personnalisés Structure
+ */
 try {
 
     $custom_fields_structure = $client->get('https://api-ohme.oneheart.fr/api/v1/custom-fields?model=Structure');
@@ -52,7 +54,9 @@ try {
 }
 
 
-// Récupérer les champs personnalisés Group
+/*
+ * Récupérer les champs personnalisés Group
+ */
 try {
 
     $custom_fields_group = $client->get('https://api-ohme.oneheart.fr/api/v1/custom-fields?model=Group');
@@ -77,8 +81,9 @@ try {
     echo 'Body: ' . $e->getResponse()->getBody();
 }
 
-// Récupérer les champs personnalisés Payment
-
+/*
+ * Récupérer les champs personnalisés Payment
+ */
 try {
 
     $custom_fields_payment = $client->get('https://api-ohme.oneheart.fr/api/v1/custom-fields?model=Payment');
@@ -103,7 +108,9 @@ try {
     echo 'Body: ' . $e->getResponse()->getBody();
 }
 
-// Récupérer les champs personnalisés Interaction
+/*
+ * Récupérer les champs personnalisés Interaction
+ */
 
 try {
 

@@ -12,6 +12,15 @@
  */
 
 if (!defined('ABSPATH')) exit;
+
+require 'vendor/autoload.php';
+
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+
+/*
+ * Démarrer une session PHP
+ */
 function lmc_start_session() {
     if (!session_id()) {
         session_start();
@@ -19,7 +28,9 @@ function lmc_start_session() {
 }
 add_action('init', 'lmc_start_session');
 
-// Charger les scripts
+/*
+ * Charger les scripts et css
+ */
 function lmc_enqueue_assets() {
     wp_enqueue_style('lmc-tippycss', plugin_dir_url(__FILE__) . 'node_modules/tippy.js/dist/tippy.css');
     wp_enqueue_style('lmc-style', plugin_dir_url(__FILE__) . 'assets/css/style.css');
@@ -30,13 +41,9 @@ function lmc_enqueue_assets() {
 }
 add_action('wp_enqueue_scripts', 'lmc_enqueue_assets');
 
-
-require 'vendor/autoload.php';
-
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
-
-
+/*
+ * définition des variables pour envoyer les mails
+ */
 define('MailHOST', 'mail.gandi.net');
 define('MailUSER', 'hebergement@lmcfrance.com');
 define('MailPWD', '*xSe9r4BA0AndFUEu!0A');
@@ -47,7 +54,9 @@ define('MailNAME', 'lmc france');
 
 function lmc_php_form() {
 
-    // Exemple : Création de la base de données
+    /*
+     * Création de la base de données
+     */
     global $wpdb;
     $table_name = $wpdb->prefix . 'lmc_multistep_submissions';
     $wpdb->query("
@@ -111,6 +120,9 @@ function lmc_php_form() {
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     ");
 
+    /*
+     * Fonction pour récupérer l'URL courante avec variables
+     */
     function getCurrentUrl() {
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
             || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
@@ -122,6 +134,9 @@ function lmc_php_form() {
         return $protocol . $host . $uri;
     }
 
+    /*
+     * Fonction pour récupérer l'URL courante sans variables
+     */
     function getCurrentUrlWithoutQuery() {
         // Détermine le protocole
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
@@ -137,14 +152,18 @@ function lmc_php_form() {
         return $protocol . $host . $path;
     }
 
-
+    /*
+     * Fonction pour générer le code envoyé par mail
+     */
     function generate_otp(int $digits = 6): string {
         $min = (int) pow(10, $digits - 1);
         $max = (int) pow(10, $digits) - 1;
         return (string) random_int($min, $max); // cryptographically secure
     }
 
-    // Enregistrement des tentatives suspectes
+    /*
+     * Enregistrement des tentatives suspectes
+     */
     $logFile = 'lmc-multistep-form.log';
     function logLmc($reason) {
         global $logFile;
@@ -152,7 +171,9 @@ function lmc_php_form() {
         //file_put_contents($logFile, $entry, FILE_APPEND);
     }
 
-    //Vérification du Referer pour bloquer les requêtes externes
+    /*
+     * Vérification du Referer pour bloquer les requêtes externes
+     */
     /*
     if (!isset($_SERVER['HTTP_REFERER']) || parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST) !== $_SERVER['HTTP_HOST']) {
         logLmc("Requête suspecte (Referer invalide)");
@@ -161,6 +182,9 @@ function lmc_php_form() {
     */
 
 
+    /*
+     * Authentification à l'API OHME
+     */
     $client = new Client([
         'verify' => false, // pas sécurisé, uniquement pour test
         'headers' => [
@@ -170,23 +194,37 @@ function lmc_php_form() {
         ]
     ]);
 
+    /*
+     * Récupérer les champs personnalisés de OHME
+     */
     include_once 'src/api/ohme.php';
 
+
+    /*
+     * Variable de session global pour le plugin
+     */
     if (!isset($_SESSION['lmc_data'])) {
         $_SESSION['lmc_data'] = [];
     }
 
+    /*
+     * Variable de session pour les champs personnalisés de OHME
+     */
     if (!isset($_SESSION['lmc_data']['ohme_data'])) {
         $_SESSION['lmc_data']['ohme_data'] = $opt_ohme;
     }
 
-    // Implémentation du compteur de tentatives
+    /*
+     * Implémentation du compteur de tentatives de soumissions du formulaire
+     */
     if (!isset($_SESSION['lmc_data']['attempts'])) {
         $_SESSION['lmc_data']['attempts'] = 0;
         $_SESSION['lmc_data']['attempt_time'] = time();
     }
 
-    // Le cookie
+    /*
+     * COOKIE
+     */
     if (!isset($_COOKIE["lmc-multistep-form"])) {
 
         // Génération du token côté serveur
@@ -194,11 +232,12 @@ function lmc_php_form() {
             $_SESSION['lmc_data']['csrf_token'] = "lmc-multistep-form_" . bin2hex(random_bytes(32)) . "_" . time();
         }
 
+        // Création du cookie
         setcookie(
             "lmc-multistep-form",
             $_SESSION['lmc_data']['csrf_token'],
             [
-                // 1 day = 86400 Seconds
+                // 1 jour = 86400 secondes
                 'expires' => time() + (86400 * 7), // 7 jours
                 'path' => '/',
                 'domain' => 'lmc-lepc.com',
@@ -211,8 +250,8 @@ function lmc_php_form() {
         // vérifier si existe
         $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
+        // Enregistrement la session en  base de données
         if (count($results) != 1) {
-            // Enregistrement la session en  base de données
             $wpdb->insert($table_name, [
                 'cookie' => $_SESSION['lmc_data']['csrf_token']
             ]);
@@ -228,8 +267,8 @@ function lmc_php_form() {
         // vérifier si existe
         $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
+        // Enregistrement la session en  base de données
         if (count($results) != 1) {
-            // Enregistrement la session en  base de données
             $wpdb->insert($table_name, [
                 'cookie' => $_SESSION['lmc_data']['csrf_token']
             ]);
@@ -237,18 +276,24 @@ function lmc_php_form() {
 
     }
 
-
+    /*
+     * Récupération des valeurs en base de données
+     */
     $value_form = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
 
 
+    /*
+     * Vérification si retour en arrière des étape
+     */
     if(isset($_GET['reload_step']) && !empty($_GET['reload_step'])){
         $_SESSION['lmc_data']['reload'] = $_GET['reload_step'];
         header('Location: ' . getCurrentUrlWithoutQuery());
     }
 
-    // Déterminer l’étape actuelle
-
+    /*
+     * Déterminer l’étape actuelle
+     */
     if(isset($_POST['step']) && !empty($_POST['step'])){
         $step = intval($_POST['step']);
     }else{
@@ -260,7 +305,9 @@ function lmc_php_form() {
     }
 
 
-    // Sauvegarder les données de l’étape précédente
+    /*
+     * Sauvegarder les données de l’étape précédente
+     */
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($step == 2) {
             include_once 'src/actions/step_2.php';
@@ -278,7 +325,9 @@ function lmc_php_form() {
     }
 
 
-    // Formulaire multi-étapes
+    /*
+     * Formulaire multi-étapes
+     */
     ob_start();
     ?>
 
