@@ -1,6 +1,6 @@
 <h3>Étape 1 : Organisation signataire</h3>
 <p><label for="step1_nom"><span>Nom de l’organisation * :</span> <input type="text" id="step1_nom" name="step1_nom" placeholder="Nom de l’organisation" value="<?php echo (isset($value_form[0]->step1_nom) && !empty($value_form[0]->step1_nom)) ? $value_form[0]->step1_nom : ''; ?>" required></label></p>
-<p><label for="step1_siret"><span>Numéro de SIRET * :</span> <input type="text" id="step1_siret" name="step1_siret" placeholder="SIRET" value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" required></label></p>
+<p><label for="step1_siret"><span>Numéro de SIRET * :</span> <input type="text" id="step1_siret" pattern="\d{14}" maxlength="14" title="Veuillez entrer exactement 14 chiffres" name="step1_siret" placeholder="SIRET" value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" required><div id="result_siret"></div></label></p>
 <p><label for="step1_logo"><span>Ajouter un logo :</span> <input type="file" id="step1_logo" name="step1_logo" placeholder="Logo"></label></p>
 <p><label for="step1_ca"><span>Le chiffre d’affaires * :</span>
         <select name="step1_ca" id="step1_ca" required>
