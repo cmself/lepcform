@@ -525,8 +525,8 @@
     </p>
 
     <p>
-        <label for="step2_signataire_` + (i + 1) + ` class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_` + (i + 1) + `"
-                                                  name="step2_signataire_` + (i + 1) + `" value="1"/><span>Contact signataire</span> <i
+        <label for="step2_signataire_` + (i+1) + `" class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_` + (i+1) + `"
+                                                  name="step2_signataire_` + (i+1) + `" value="1"/><span>Contact signataire</span> <i
                     class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
     </p>
     <input type="hidden" id="step2_useradd_` + (i + 1) + `" name="step2_useradd_` + (i + 1) + `">`;
