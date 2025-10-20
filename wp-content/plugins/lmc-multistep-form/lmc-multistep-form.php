@@ -172,12 +172,12 @@ function lmc_php_form() {
 
     include_once 'src/api/ohme.php';
 
-    if (!isset($_SESSION['ohme_data'])) {
-        $_SESSION['ohme_data'] = $opt_ohme;
-    }
-
     if (!isset($_SESSION['lmc_data'])) {
         $_SESSION['lmc_data'] = [];
+    }
+
+    if (!isset($_SESSION['lmc_data']['ohme_data'])) {
+        $_SESSION['lmc_data']['ohme_data'] = $opt_ohme;
     }
 
     // Implémentation du compteur de tentatives
