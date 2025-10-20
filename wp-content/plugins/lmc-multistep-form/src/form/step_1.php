@@ -5,13 +5,13 @@
 <p><label for="step1_ca"><span>Le chiffre d’affaires * :</span>
         <select name="step1_ca" id="step1_ca" required>
             <?php
-            if ($options):
+            if ($_SESSION['ohme_data']['Structure']['chiffre_daffaires']['options']):
             ?>
                 <option>Choisir une réponse</option>
             <?php
-                foreach ($options as $option):
+                foreach ($_SESSION['ohme_data']['Structure']['chiffre_daffaires']['options'] as $option):
                     ?>
-                    <option value="<?= $option ;?>" <?php echo ($value_form[0]->step1_ca == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
+                    <option value="<?= htmlspecialchars($option) ;?>" <?php echo ($value_form[0]->step1_ca == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option) ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -22,13 +22,13 @@
 <p><label for="step1_frais"><span>Montant des frais pour la Charte de la diversité * :</span>
         <select name="step1_frais" id="step1_frais" required>
             <?php
-            if ($options):
+            if ($_SESSION['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options']):
                 ?>
                 <option>Choisir une réponse</option>
                 <?php
-                foreach ($options as $option):
+                foreach ($_SESSION['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options'] as $option):
                     ?>
-                    <option value="<?= $option ;?>" <?php echo ($value_form[0]->step1_frais == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
+                    <option value="<?= htmlspecialchars($option) ;?>" <?php echo ($value_form[0]->step1_frais == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option) ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -84,13 +84,13 @@
 <p><label for="step1_collaborateurs"><span>Nombre de collaborateurs en France * :</span>
         <select name="step1_collaborateurs" id="step1_collaborateurs" required>
             <?php
-            if ($options):
+            if ($_SESSION['ohme_data']['Structure']['nombre_de_collaborateurs_en_france']['options']):
                 ?>
                 <option>Choisir une réponse</option>
                 <?php
-                foreach ($options as $option):
+                foreach ($_SESSION['ohme_data']['Structure']['nombre_de_collaborateurs_en_france']['options'] as $option):
                     ?>
-                    <option value="<?= $option ;?>"  <?php echo ($value_form[0]->step1_collaborateurs == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
+                    <option value="<?= htmlspecialchars($option) ;?>"  <?php echo ($value_form[0]->step1_collaborateurs == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option) ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -102,13 +102,13 @@
 <p><label for="step1_activite"><span>Secteur d’activité :</span>
         <select name="step1_activite" id="step1_activite">
             <?php
-            if ($options):
+            if ($_SESSION['ohme_data']['Structure']['secteur_dactivite']['options']):
                 ?>
                 <option>Choisir une réponse</option>
                 <?php
-                foreach ($options as $option):
+                foreach ($_SESSION['ohme_data']['Structure']['secteur_dactivite']['options'] as $option):
                     ?>
-                    <option value="<?= $option ;?>"  <?php echo ($value_form[0]->step1_activite == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
+                    <option value="<?= htmlspecialchars($option) ;?>"  <?php echo ($value_form[0]->step1_activite == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option) ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -120,13 +120,13 @@
 <p><label for="step1_structure"><span>Type de structure :</span>
         <select name="step1_structure" id="step1_structure">
             <?php
-            if ($options):
+            if ($_SESSION['ohme_data']['Structure']['type_de_structure']['options']):
                 ?>
                 <option>Choisir une réponse</option>
                 <?php
-                foreach ($options as $option):
+                foreach ($_SESSION['ohme_data']['Structure']['type_de_structure']['options'] as $option):
                     ?>
-                    <option value="<?= $option ;?>"  <?php echo ($value_form[0]->step1_structure == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
+                    <option value="<?= htmlspecialchars($option) ;?>"  <?php echo ($value_form[0]->step1_structure == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option) ;?></option>
                 <?php
                 endforeach;
             endif;
@@ -138,13 +138,13 @@
 <p><label for="step1_connaissance"><span>Comment avez-vous eu connaissance de la Charte de la diversité ? :</span>
         <select name="step1_connaissance" id="step1_connaissance" required>
             <?php
-            if ($options):
+            if ($_SESSION['ohme_data']['Structure']['comment_avez_vous_eu_connaissance_de_la_charte_de_la_diversite']['options']):
                 ?>
                 <option>Choisir une réponse</option>
                 <?php
-                foreach ($options as $option):
+                foreach ($_SESSION['ohme_data']['Structure']['comment_avez_vous_eu_connaissance_de_la_charte_de_la_diversite']['options'] as $option):
                     ?>
-                    <option value="<?= $option ;?>"  <?php echo ($value_form[0]->step1_connaissance == $option) ? 'selected' : ''; ?>><?= $option ;?></option>
+                    <option value="<?= htmlspecialchars($option) ;?>"  <?php echo ($value_form[0]->step1_connaissance == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option) ;?></option>
                 <?php
                 endforeach;
             endif;

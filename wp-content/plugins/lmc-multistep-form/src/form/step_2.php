@@ -24,13 +24,13 @@
     <p><label for="step2_fonction_0"><span>Fonction dans l’organisation * :</span>
             <select name="step2_fonction_0" id="step2_fonction_0" required>
                 <?php
-                if ($options):
+                if ($_SESSION['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
                     ?>
                     <option>Choisir une réponse</option>
                     <?php
-                    foreach ($options as $option):
+                    foreach ($_SESSION['ohme_data']['Contact']['fonction_dans_lentreprise']['options'] as $option):
                         ?>
-                        <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_fonction_0 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
+                        <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_fonction_0 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
                     <?php
                     endforeach;
                 endif;
@@ -46,13 +46,13 @@
     <p><label for="step2_role_0"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
             <select name="step2_role_0" id="step2_role_0" required>
                 <?php
-                if ($options):
+                if ($_SESSION['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
                     ?>
                     <option>Choisir une réponse</option>
                     <?php
-                    foreach ($options as $option):
+                    foreach ($_SESSION['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'] as $option):
                         ?>
-                        <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_role_0 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
+                        <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_role_0 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
                     <?php
                     endforeach;
                 endif;
@@ -99,13 +99,13 @@
             <p><label for="step2_fonction_1"><span>Fonction dans l’organisation * :</span>
                     <select name="step2_fonction_1" id="step2_fonction_1" required>
                         <?php
-                        if ($options):
+                        if ($_SESSION['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
                             ?>
                             <option>Choisir une réponse</option>
                             <?php
-                            foreach ($options as $option):
+                            foreach ($_SESSION['ohme_data']['Contact']['fonction_dans_lentreprise']['options'] as $option):
                                 ?>
-                                <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_fonction_1 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
+                                <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_fonction_1 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
                             <?php
                             endforeach;
                         endif;
@@ -121,13 +121,13 @@
             <p><label for="step2_role_1"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
                     <select name="step2_role_1" id="step2_role_1" required>
                         <?php
-                        if ($options):
+                        if ($_SESSION['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
                             ?>
                             <option>Choisir une réponse</option>
                             <?php
-                            foreach ($options as $option):
+                            foreach ($_SESSION['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'] as $option):
                                 ?>
-                                <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_role_1 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
+                                <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_role_1 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
                             <?php
                             endforeach;
                         endif;
@@ -179,13 +179,13 @@
                 <p><label for="step2_fonction_2"><span>Fonction dans l’organisation * :</span>
                         <select name="step2_fonction_2" id="step2_fonction_2" required>
                             <?php
-                            if ($options):
+                            if ($_SESSION['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
                                 ?>
                                 <option>Choisir une réponse</option>
                                 <?php
-                                foreach ($options as $option):
+                                foreach ($_SESSION['ohme_data']['Contact']['fonction_dans_lentreprise']['options'] as $option):
                                     ?>
-                                    <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_fonction_2 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
+                                    <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_fonction_2 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
                                 <?php
                                 endforeach;
                             endif;
@@ -201,13 +201,13 @@
                 <p><label for="step2_role_2"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
                         <select name="step2_role_2" id="step2_role_2" required>
                             <?php
-                            if ($options):
+                            if ($_SESSION['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
                                 ?>
                                 <option>Choisir une réponse</option>
                                 <?php
-                                foreach ($options as $option):
+                                foreach ($_SESSION['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'] as $option):
                                     ?>
-                                    <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_role_2 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
+                                    <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_role_2 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
                                 <?php
                                 endforeach;
                             endif;
@@ -260,13 +260,13 @@
                 <p><label for="step2_fonction_3"><span>Fonction dans l’organisation * :</span>
                         <select name="step2_fonction_3" id="step2_fonction_3" required>
                             <?php
-                            if ($options):
+                            if ($_SESSION['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
                                 ?>
                                 <option>Choisir une réponse</option>
                                 <?php
-                                foreach ($options as $option):
+                                foreach ($_SESSION['ohme_data']['Contact']['fonction_dans_lentreprise']['options'] as $option):
                                     ?>
-                                    <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_fonction_3 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
+                                    <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_fonction_3 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
                                 <?php
                                 endforeach;
                             endif;
@@ -282,13 +282,13 @@
                 <p><label for="step2_role_3"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
                         <select name="step2_role_3" id="step2_role_3" required>
                             <?php
-                            if ($options):
+                            if ($_SESSION['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
                                 ?>
                                 <option>Choisir une réponse</option>
                                 <?php
-                                foreach ($options as $option):
+                                foreach ($_SESSION['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'] as $option):
                                     ?>
-                                    <option value="<?= $option; ?>" <?php echo ($value_form[0]->step2_role_3 == $option) ? 'selected' : ''; ?>><?= $option; ?></option>
+                                    <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_role_3 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
                                 <?php
                                 endforeach;
                             endif;
@@ -386,13 +386,13 @@
     <p><label for="step2_fonction_` + (currentContacts+1) + `"><span>Fonction dans l’organisation * :</span>
             <select name="step2_fonction_` + (currentContacts+1) + `" id="step2_fonction_` + (currentContacts+1) + `" required>
                 <?php
-            if ($options):
+            if ($_SESSION['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
             ?>
                 <option>Choisir une réponse</option>
             <?php
-            foreach ($options as $option):
+            foreach ($_SESSION['ohme_data']['Contact']['fonction_dans_lentreprise']['options'] as $option):
             ?>
-                        <option value="<?= $option; ?>"><?= $option; ?></option>
+                        <option value="<?= htmlspecialchars($option); ?>"><?= htmlspecialchars($option); ?></option>
                     <?php
             endforeach;
             endif;
@@ -409,13 +409,13 @@
     <p><label for="step2_role_` + (currentContacts+1) + `"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
             <select name="step2_role_` + (currentContacts+1) + `" id="step2_role_` + (currentContacts+1) + `" required>
                 <?php
-            if ($options):
+            if ($_SESSION['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
             ?>
                 <option>Choisir une réponse</option>
             <?php
-            foreach ($options as $option):
+            foreach ($_SESSION['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'] as $option):
             ?>
-                        <option value="<?= $option; ?>"><?= $option; ?></option>
+                        <option value="<?= htmlspecialchars($option); ?>"><?= htmlspecialchars($option); ?></option>
                     <?php
             endforeach;
             endif;
@@ -499,13 +499,13 @@
     <p><label for="step2_fonction_` + (i + 1) + `"><span>Fonction dans l’organisation * :</span>
             <select name="step2_fonction_` + (i + 1) + `" id="step2_fonction_` + (i + 1) + `" required>
                 <?php
-            if ($options):
+            if ($_SESSION['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
             ?>
                 <option>Choisir une réponse</option>
             <?php
-            foreach ($options as $option):
+            foreach ($_SESSION['ohme_data']['Contact']['fonction_dans_lentreprise']['options'] as $option):
             ?>
-                        <option value="<?= $option; ?>"><?= $option; ?></option>
+                        <option value="<?= htmlspecialchars($option); ?>"><?= htmlspecialchars($option); ?></option>
                     <?php
             endforeach;
             endif;
@@ -522,13 +522,13 @@
     <p><label for="step2_role_` + (i + 1) + `"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
             <select name="step2_role_` + (i + 1) + `" id="step2_role_` + (i + 1) + `" required>
                 <?php
-            if ($options):
+            if ($_SESSION['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
             ?>
                 <option>Choisir une réponse</option>
             <?php
-            foreach ($options as $option):
+            foreach ($_SESSION['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'] as $option):
             ?>
-                        <option value="<?= $option; ?>"><?= $option; ?></option>
+                        <option value="<?= htmlspecialchars($option); ?>"><?= htmlspecialchars($option); ?></option>
                     <?php
             endforeach;
             endif;
