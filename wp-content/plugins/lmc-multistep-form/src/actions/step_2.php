@@ -25,7 +25,26 @@ $_SESSION['lmc_data']['reload'] = 2;
 $_SESSION['lmc_data']['step1_nom'] = isset($_POST['step1_nom']) ? sanitize_text_field($_POST['step1_nom']) : "";
 $_SESSION['lmc_data']['step1_siret'] = isset($_POST['step1_siret']) ? sanitize_text_field($_POST['step1_siret']) : "";
 
+if(isset($_SESSION['lmc_data']['step1_siret']) && !empty($_SESSION['lmc_data']['step1_siret'])) {
 
+    try {
+        $siren = $client->get('https://api-ohme.oneheart.fr/api/v1/structures?siren=' . $_SESSION['lmc_data']['step1_siret']);
+        $data_siren = json_decode($siren->getBody(), true);
+        if (json_last_error() === JSON_ERROR_NONE) {
+            $_SESSION['lmc_data']['structures_siren'] = $data_siren['data'];
+        } else {
+            $_SESSION['lmc_data']['structures_siren'] = [];
+        }
+    } catch (ClientException $e) {
+        $_SESSION['lmc_data']['structures_siren'] = [];
+    }
+}else{
+    $_SESSION['lmc_data']['structures_siren'] = [];
+}
+
+if(count($_SESSION['lmc_data']['structures_siren']) > 0) {
+    header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=1');
+}
 
 
 if (isset($_FILES['step1_logo']) && $_FILES['step1_logo']['error'] === UPLOAD_ERR_OK) {
