@@ -94,7 +94,6 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                         if($_SESSION['lmc_data']['count_structures_ohme'] == 1) {
                                             $_SESSION['lmc_data']['contacts_valide'] = true;
                                             header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=1');
-                                            exit();
                                         }
                                     }
 
