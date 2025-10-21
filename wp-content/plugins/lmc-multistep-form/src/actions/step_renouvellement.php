@@ -55,7 +55,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                     $stepMAJ = 2;
 
                     try {
-                        $email = $client->get('https://api-ohme.oneheart.fr/api/v1/contacts?email=' . $_SESSION['lmc_data']['step0_email']);
+                        $email = $client->get('https://api-ohme.oneheart.fr/api/v1/contacts?email=' . $_SESSION['lmc_data']['step0_email'] . '&limit=1');
                         $data_email = json_decode($email->getBody(), true);
                         if (json_last_error() === JSON_ERROR_NONE) {
                             $_SESSION['lmc_data']['contacts_email'] = $data_email['data'];
@@ -70,27 +70,48 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
 
                     if(count($_SESSION['lmc_data']['contacts_email']) > 0) {
                         if( $_SESSION['lmc_data']['contacts_email'][0]['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite'] == '1 CHARTE CONTACT PRINCIPAL') {
+                            if(isset($_SESSION['lmc_data']['contacts_email'][0]['structure_ohme_ids']) && !empty($_SESSION['lmc_data']['contacts_email'][0]['structure_ohme_ids'])) {
 
-                            $_SESSION['lmc_data']['contacts_valide'] = true;
+                                if(isset($_SESSION['lmc_data']['step0_siret']) && !empty($_SESSION['lmc_data']['step0_siret'])) {
 
-                            if(isset($_SESSION['lmc_data']['contacts_email'][0]['structure_ohme_ids'][0]) && !empty($_SESSION['lmc_data']['contacts_email'][0]['structure_ohme_ids'][0])) {
+                                    foreach ($_SESSION['lmc_data']['contacts_email'][0]['structure_ohme_ids'] as $ohme_ids) {
 
-                                try {
-                                    $step0_structures = $client->get('https://api-ohme.oneheart.fr/api/v1/structures?ohme_id=' . $_SESSION['lmc_data']['contacts_email'][0]['structure_ohme_ids'][0]);
-                                    $data_step0_structures = json_decode($step0_structures->getBody(), true);
-                                    if (json_last_error() === JSON_ERROR_NONE) {
-                                        $_SESSION['lmc_data']['structures_ohme'] = $data_step0_structures['data'];
-                                    } else {
-                                        $_SESSION['lmc_data']['structures_ohme'] = [];
+                                        try {
+                                            $step0_structures = $client->get('https://api-ohme.oneheart.fr/api/v1/structures?ohme_id=' . $ohme_ids . '&siren=' . $_SESSION['lmc_data']['step0_siret']);
+                                            $data_step0_structures = json_decode($step0_structures->getBody(), true);
+                                            if (json_last_error() === JSON_ERROR_NONE) {
+                                                $_SESSION['lmc_data']['count_structures_ohme'] = $data_step0_structures['count'];
+                                                $_SESSION['lmc_data']['structures_ohme'] = $data_step0_structures['data'];
+                                            } else {
+                                                $_SESSION['lmc_data']['count_structures_ohme'] = 0;
+                                                $_SESSION['lmc_data']['structures_ohme'] = [];
+                                            }
+                                        } catch (ClientException $e) {
+                                            $_SESSION['lmc_data']['count_structures_ohme'] = 0;
+                                            $_SESSION['lmc_data']['structures_ohme'] = [];
+                                        }
+
+                                        if(count($_SESSION['lmc_data']['count_structures_ohme']) == 1) {
+                                            $_SESSION['lmc_data']['contacts_valide'] = true;
+                                        }
                                     }
-                                } catch (ClientException $e) {
-                                    $_SESSION['lmc_data']['structures_ohme'] = [];
-                                }
-                            }else{
-                                $_SESSION['lmc_data']['structures_ohme'] = [];
-                            }
 
-                            header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=1');
+                                    if(isset($_SESSION['lmc_data']['contacts_valide']) || !empty($_SESSION['lmc_data']['contacts_valide'])) {
+                                        header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=1');
+                                    }else{
+                                        $stepMAJ = 0;
+                                        $step0_message = 'Le SIREN 1 ne correspond pas au contact principal d’une structure enregistrée.<br>Veuillez entrer un nouveau SIREN';
+                                    }
+
+                                }else{
+                                    $stepMAJ = 0;
+                                    $step0_message = 'Le SIREN ne correspond pas au contact principal d’une structure enregistrée.<br>Veuillez entrer un nouveau SIREN';
+                                }
+
+                            }else{
+                                $stepMAJ = 0;
+                                $step0_message = 'L’adresse ne correspond pas au contact principal d’une structure enregistrée.<br>Veuillez entrer une nouvelle adresse';
+                            }
 
                         }else{
                             $stepMAJ = 0;
@@ -116,6 +137,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
 }else{
 
     $_SESSION['lmc_data']['step0_email'] = isset($_POST['step0_email']) ? sanitize_email($_POST['step0_email']) : "";
+    $_SESSION['lmc_data']['step0_siret'] = isset($_POST['step0_siret']) ? sanitize_text_field($_POST['step0_siret']) : "";
 
     /*
     * Envoyer le code de vérification par mail
@@ -164,7 +186,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
 
         $mail->send();
         $stepMAJ = 1;
-        $step0_message = 'Code renvoyé par mail';
+        $step0_message = 'Code envoyé par mail';
 
     } catch (Exception $e) {
         error_log("Mailer error: " . $mail->ErrorInfo);

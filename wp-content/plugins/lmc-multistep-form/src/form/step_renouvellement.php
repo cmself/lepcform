@@ -75,8 +75,12 @@
         <?php } ?>
     </div>
     <p>
-        <label for="step1_email"><span>Entrer l'email du contact principal de la signature initiale * :</span> <input type="email" id="step0_email" name="step0_email" placeholder="Email" required></label>
+        <label for="step0_email"><span>Entrer l'email du contact principal de la signature initiale * :</span> <input type="email" id="step0_email" name="step0_email" placeholder="Email" required></label>
     </p>
+    <p>
+        <label for="step0_siret"><span>Numéro de SIRET * :</span> <input type="text" id="step0_siret" pattern="\d{14}" maxlength="14" title="Veuillez entrer exactement 14 chiffres" name="step0_siret" placeholder="SIRET" value="<?php if(isset($_SESSION['lmc_data']['structures_siren']) && !empty($_SESSION['lmc_data']['structures_siren'])) {echo (isset($_SESSION['lmc_data']['structures_siren'][0]['siren']) && !empty($_SESSION['lmc_data']['structures_siren'][0]['siren'])) ? $_SESSION['lmc_data']['structures_siren'][0]['siren'] : '';} else { echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; }?>" required><div id="result_siret"></div></label>
+    </p>
+
 
     <div class="relative! w-full! text-center! mb-[100px]">
         <button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button>
