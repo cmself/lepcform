@@ -80,20 +80,14 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                             $step0_structures = $client->get('https://api-ohme.oneheart.fr/api/v1/structures?ohme_id=' . $ohme_ids . '&siren=' . $_SESSION['lmc_data']['step0_siret']);
                                             $data_step0_structures = json_decode($step0_structures->getBody(), true);
                                             if (json_last_error() === JSON_ERROR_NONE) {
-                                                $_SESSION['lmc_data']['count_structures_ohme'] = $data_step0_structures['count'];
-                                                $_SESSION['lmc_data']['structures_ohme'] = $data_step0_structures['data'];
+                                                if($data_step0_structures['count'] == 1) {
+                                                    $_SESSION['lmc_data']['contacts_valide'] = true;
+                                                    $_SESSION['lmc_data']['structures_ohme'] = $data_step0_structures['data'];
+                                                    header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=1');
+                                                }
                                             } else {
-                                                $_SESSION['lmc_data']['count_structures_ohme'] = 0;
-                                                $_SESSION['lmc_data']['structures_ohme'] = [];
                                             }
                                         } catch (ClientException $e) {
-                                            $_SESSION['lmc_data']['count_structures_ohme'] = 0;
-                                            $_SESSION['lmc_data']['structures_ohme'] = [];
-                                        }
-
-                                        if($_SESSION['lmc_data']['count_structures_ohme'] == 1) {
-                                            $_SESSION['lmc_data']['contacts_valide'] = true;
-                                            header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=1');
                                         }
                                     }
 
