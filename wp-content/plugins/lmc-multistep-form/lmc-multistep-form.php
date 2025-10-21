@@ -44,11 +44,7 @@ add_action('wp_enqueue_scripts', 'lmc_enqueue_assets');
 /*
  * définition des variables pour envoyer les mails
  */
-define('MailHOST', 'mail.gandi.net');
-define('MailUSER', 'hebergement@lmcfrance.com');
-define('MailPWD', '*xSe9r4BA0AndFUEu!0A');
-define('MailSENDER', 'hebergement@lmcfrance.com');
-define('MailNAME', 'lmc france');
+include_once 'src/config.php';
 
 
 
@@ -164,23 +160,11 @@ function lmc_php_form() {
     /*
      * Enregistrement des tentatives suspectes
      */
-    $logFile = 'lmc-multistep-form.log';
     function logLmc($reason) {
-        global $logFile;
+        $logFile = __DIR__ . '/log/lmc-multistep-form.log';
         $entry = date('Y-m-d H:i:s') . " - IP: " . $_SERVER['REMOTE_ADDR'] . " - Motif: $reason\n";
-        //file_put_contents($logFile, $entry, FILE_APPEND);
+        file_put_contents($logFile, $entry, FILE_APPEND);
     }
-
-    /*
-     * Vérification du Referer pour bloquer les requêtes externes
-     */
-    /*
-    if (!isset($_SERVER['HTTP_REFERER']) || parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST) !== $_SERVER['HTTP_HOST']) {
-        logLmc("Requête suspecte (Referer invalide)");
-        die("Erreur : Requête suspecte.");
-    }
-    */
-
 
     /*
      * Authentification à l'API OHME
@@ -189,8 +173,8 @@ function lmc_php_form() {
         'verify' => false, // pas sécurisé, uniquement pour test
         'headers' => [
             'Accept' => 'application/json',
-            'client-name' => 'lepc',
-            'client-secret' => '39a39fbf4a0944abfd57f1d14452c7cba242761035a3e8ab3356cbda7a1c5d0a'
+            'client-name' => CLIENTOHME,
+            'client-secret' => SECRETOHME
         ]
     ]);
 
@@ -211,9 +195,8 @@ function lmc_php_form() {
      * Variable de session pour les champs personnalisés de OHME
      */
     if (!isset($_SESSION['lmc_data']['ohme_data'])) {
-        $_SESSION['lmc_data']['ohme_data'] = $opt_ohme;
+        $_SESSION['lmc_data']['ohme_data'] = filter_var_array($opt_ohme);
     }
-
     /*
      * Implémentation du compteur de tentatives de soumissions du formulaire
      */
@@ -287,7 +270,7 @@ function lmc_php_form() {
      * Vérification si retour en arrière des étape
      */
     if(isset($_GET['reload_step']) && !empty($_GET['reload_step'])){
-        $_SESSION['lmc_data']['reload'] = $_GET['reload_step'];
+        $_SESSION['lmc_data']['reload'] = intval($_GET['reload_step']);
         header('Location: ' . getCurrentUrlWithoutQuery());
     }
 
@@ -296,6 +279,7 @@ function lmc_php_form() {
      */
     if(isset($_POST['step']) && !empty($_POST['step'])){
         $step = intval($_POST['step']);
+
     }else{
         if (isset($_SESSION['lmc_data']['reload']) && !empty($_SESSION['lmc_data']['reload'])) {
             $step = $_SESSION['lmc_data']['reload'];
