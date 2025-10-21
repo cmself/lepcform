@@ -18,8 +18,6 @@ if (!empty($_POST['step0_honeypot'])) {
     die("Erreur : Robot détecté.");
 }
 
-$step0_message = '';
-
 
 if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_otp'] == 1 ) {
 

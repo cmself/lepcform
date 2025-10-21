@@ -10,7 +10,9 @@
 
     <div class="relative! w-full!">
         <h3>Renouvellement de la signature</h3>
+       <?php if(isset($step0_message)) { ?>
         <h5><?= $step0_message; ?></h5>
+        <?php } ?>
     </div>
 
     <p class="block! w-full! text-center!">
@@ -68,7 +70,9 @@
     <div class="relative! w-full!">
         <h3>Renouvellement de la signature</h3>
         <h4>Vous êtes le contact principal pour la Charte de la diversité de votre Organisation</h4>
+        <?php if(isset($step0_message)) { ?>
         <h5><?= $step0_message; ?></h5>
+        <?php } ?>
     </div>
     <p>
         <label for="step1_email"><span>Entrer l'email du contact principal de la signature initiale * :</span> <input type="email" id="step0_email" name="step0_email" placeholder="Email" required></label>
