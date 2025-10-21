@@ -59,7 +59,7 @@ if(isset($_SESSION['lmc_data']['step1_siret']) && !empty($_SESSION['lmc_data']['
 }
 
 if(count($_SESSION['lmc_data']['structures_siren']) > 0) {
-    header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=1');
+    header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=8');
 }
 
 
