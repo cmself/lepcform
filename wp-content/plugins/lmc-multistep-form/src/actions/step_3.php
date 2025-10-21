@@ -26,13 +26,15 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
     /*
      * Test de rapidité d’envoi
      */
-    if (isset($_POST['step3_formStartTime'])) {
-        $duration = time() - (int)($_POST['step3_formStartTime'] / 1000);
+    /*
+    if (isset($_POST['step1_formStartTime'])) {
+        $duration = time() - (int) ($_POST['step1_formStartTime'] / 1000);
         if ($duration < 3) {
             logLmc("Envoi trop rapide ($duration s)");
             die("Erreur : Envoi trop rapide.");
         }
     }
+    */
 
     $_SESSION['lmc_data']['reload'] = 3;
 
@@ -100,14 +102,15 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
     /*
      * Test de rapidité d’envoi
      */
-    if (isset($_POST['step3_formStartTime'])) {
-        $duration = time() - (int)($_POST['step3_formStartTime'] / 1000);
+    /*
+    if (isset($_POST['step1_formStartTime'])) {
+        $duration = time() - (int) ($_POST['step1_formStartTime'] / 1000);
         if ($duration < 3) {
             logLmc("Envoi trop rapide ($duration s)");
             die("Erreur : Envoi trop rapide.");
         }
     }
-
+    */
     $step2_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
     if (count($step2_results) === 1) {
@@ -194,13 +197,15 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
     /*
      * Test de rapidité d’envoi
      */
-    if (isset($_POST['step2_formStartTime'])) {
-        $duration = time() - (int) ($_POST['step2_formStartTime'] / 1000);
+    /*
+    if (isset($_POST['step1_formStartTime'])) {
+        $duration = time() - (int) ($_POST['step1_formStartTime'] / 1000);
         if ($duration < 3) {
             logLmc("Envoi trop rapide ($duration s)");
             die("Erreur : Envoi trop rapide.");
         }
     }
+    */
 
     /*
      * Enregistre les variables de session des étapes

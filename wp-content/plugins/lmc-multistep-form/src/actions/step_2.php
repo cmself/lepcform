@@ -19,6 +19,7 @@ if (!empty($_POST['step1_honeypot'])) {
 /*
  * Test de rapidité d’envoi
  */
+/*
 if (isset($_POST['step1_formStartTime'])) {
     $duration = time() - (int) ($_POST['step1_formStartTime'] / 1000);
     if ($duration < 3) {
@@ -26,6 +27,7 @@ if (isset($_POST['step1_formStartTime'])) {
         die("Erreur : Envoi trop rapide.");
     }
 }
+*/
 
 
 /*

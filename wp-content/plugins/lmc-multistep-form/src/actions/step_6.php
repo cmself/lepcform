@@ -19,14 +19,15 @@ if (!empty($_POST['step5_honeypot'])) {
 /*
  * Test de rapidité d’envoi
  */
-if (isset($_POST['step5_formStartTime'])) {
-    $duration = time() - (int) ($_POST['step5_formStartTime'] / 1000);
+/*
+if (isset($_POST['step1_formStartTime'])) {
+    $duration = time() - (int) ($_POST['step1_formStartTime'] / 1000);
     if ($duration < 3) {
         logLmc("Envoi trop rapide ($duration s)");
         die("Erreur : Envoi trop rapide.");
     }
 }
-
+*/
 /*
  * Enregistre les variables de session des étapes
  */

@@ -20,13 +20,15 @@ die("Erreur : Robot détecté.");
 /*
  * Test de rapidité d’envoi
  */
-if (isset($_POST['step3_formStartTime'])) {
-$duration = time() - (int) ($_POST['step3_formStartTime'] / 1000);
-if ($duration < 3) {
-logLmc("Envoi trop rapide ($duration s)");
-die("Erreur : Envoi trop rapide.");
+/*
+if (isset($_POST['step1_formStartTime'])) {
+    $duration = time() - (int) ($_POST['step1_formStartTime'] / 1000);
+    if ($duration < 3) {
+        logLmc("Envoi trop rapide ($duration s)");
+        die("Erreur : Envoi trop rapide.");
+    }
 }
-}
+*/
 
 $_SESSION['lmc_data']['reload'] = 4;
 
