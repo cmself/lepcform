@@ -70,8 +70,28 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
 
                     if(count($_SESSION['lmc_data']['contacts_email']) > 0) {
                         if( $_SESSION['lmc_data']['contacts_email'][0]['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite'] == '1 CHARTE CONTACT PRINCIPAL') {
+
                             $_SESSION['lmc_data']['contacts_valide'] = true;
+
+                            if(isset($_SESSION['lmc_data']['contacts_email'][0]['structure_ohme_ids'][0]) && !empty($_SESSION['lmc_data']['contacts_email'][0]['structure_ohme_ids'][0])) {
+
+                                try {
+                                    $step0_structures = $client->get('https://api-ohme.oneheart.fr/api/v1/structures?ohme_id=' . $_SESSION['lmc_data']['contacts_email'][0]['structure_ohme_ids'][0]);
+                                    $data_step0_structures = json_decode($step0_structures->getBody(), true);
+                                    if (json_last_error() === JSON_ERROR_NONE) {
+                                        $_SESSION['lmc_data']['structures_ohme'] = $data_step0_structures['data'];
+                                    } else {
+                                        $_SESSION['lmc_data']['structures_ohme'] = [];
+                                    }
+                                } catch (ClientException $e) {
+                                    $_SESSION['lmc_data']['structures_ohme'] = [];
+                                }
+                            }else{
+                                $_SESSION['lmc_data']['structures_ohme'] = [];
+                            }
+
                             header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=1');
+
                         }else{
                             $stepMAJ = 0;
                             $step0_message = 'L’adresse ne correspond pas au contact principal d’une structure enregistrée.<br>Veuillez entrer une nouvelle adresse';
