@@ -70,7 +70,13 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                     }
 
                     if(count($_SESSION['lmc_data']['contacts_email']) > 0) {
-                        header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=1');
+                        if( $_SESSION['lmc_data']['contacts_email'][0]['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite'] == '1 CHARTE CONTACT PRINCIPAL') {
+                             header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=1');
+                        }else{
+                            $stepMAJ = 0;
+                            $step0_message = 'L’adresse ne correspond pas au contact principal d’une structure enregistrée.<br>Veuillez entrer une nouvelle adresse';
+                        }
+
                     }else{
 
                         $stepMAJ = 0;
