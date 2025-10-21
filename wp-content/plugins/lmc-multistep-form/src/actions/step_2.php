@@ -41,6 +41,7 @@ $_SESSION['lmc_data']['step1_siret'] = isset($_POST['step1_siret']) ? sanitize_t
 /*
  * Vérifier si la structures existe dans OHME
  */
+
 if(isset($_SESSION['lmc_data']['step1_siret']) && !empty($_SESSION['lmc_data']['step1_siret'])) {
 
     try {
@@ -58,8 +59,11 @@ if(isset($_SESSION['lmc_data']['step1_siret']) && !empty($_SESSION['lmc_data']['
     $_SESSION['lmc_data']['structures_siren'] = [];
 }
 
-if(count($_SESSION['lmc_data']['structures_siren']) > 0) {
-    header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=8');
+
+if(!isset($_SESSION['lmc_data']['contacts_valide']) || empty($_SESSION['lmc_data']['contacts_valide'])) {
+    if(count($_SESSION['lmc_data']['structures_siren']) > 0) {
+        header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=8');
+    }
 }
 
 
