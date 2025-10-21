@@ -91,17 +91,16 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                             $_SESSION['lmc_data']['structures_ohme'] = [];
                                         }
 
-                                        if(count($_SESSION['lmc_data']['count_structures_ohme']) == 1) {
+                                        if($_SESSION['lmc_data']['count_structures_ohme'] == 1) {
                                             $_SESSION['lmc_data']['contacts_valide'] = true;
+                                            header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=1');
+                                            exit();
                                         }
                                     }
 
-                                    if(isset($_SESSION['lmc_data']['contacts_valide']) || !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                                        header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=1');
-                                    }else{
-                                        $stepMAJ = 0;
-                                        $step0_message = 'Le SIREN 1 ne correspond pas au contact principal d’une structure enregistrée.<br>Veuillez entrer un nouveau SIREN';
-                                    }
+                                    $stepMAJ = 0;
+                                    $step0_message = 'Le SIREN ne correspond pas au contact principal d’une structure enregistrée.<br>Veuillez entrer un nouveau SIREN';
+
 
                                 }else{
                                     $stepMAJ = 0;
