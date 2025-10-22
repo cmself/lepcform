@@ -40,7 +40,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
 
     <p>
         <label for="step2_fonction_0"><span>Fonction dans l’organisation * :</span>
-            <input type="text" id="step2_fonction_0" name="step2_fonction_0" placeholder="Tapez une fonction..." />
+            <input type="text" id="step2_fonction_0" name="step2_fonction_0" placeholder="Tapez une fonction..." value="<?php echo (isset($value_form[0]->step2_fonction_0) && !empty($value_form[0]->step2_fonction_0)) ? $value_form[0]->step2_fonction_0 : ''; ?>" />
             <div id="suggestions0" class="suggestions"></div>
         </label>
     </p>
@@ -100,7 +100,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
 
             <p>
                 <label for="step2_fonction_1"><span>Fonction dans l’organisation * :</span>
-                    <input type="text" id="step2_fonction_1" name="step2_fonction_1" placeholder="Tapez une fonction..." />
+                    <input type="text" id="step2_fonction_1" name="step2_fonction_1" placeholder="Tapez une fonction..." value="<?php echo (isset($value_form[0]->step2_fonction_1) && !empty($value_form[0]->step2_fonction_1)) ? $value_form[0]->step2_fonction_1 : ''; ?>" />
                     <div id="suggestions1" class="suggestions"></div>
                 </label>
             </p>
@@ -166,7 +166,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
 
                 <p>
                     <label for="step2_fonction_2"><span>Fonction dans l’organisation * :</span>
-                        <input type="text" id="step2_fonction_2" name="step2_fonction_2" placeholder="Tapez une fonction..." />
+                        <input type="text" id="step2_fonction_2" name="step2_fonction_2" placeholder="Tapez une fonction..." value="<?php echo (isset($value_form[0]->step2_fonction_2) && !empty($value_form[0]->step2_fonction_2)) ? $value_form[0]->step2_fonction_2 : ''; ?>" />
                         <div id="suggestions2" class="suggestions"></div>
                     </label>
                 </p>
@@ -232,7 +232,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
 
                 <p>
                     <label for="step2_fonction_3"><span>Fonction dans l’organisation * :</span>
-                        <input type="text" id="step2_fonction_3" name="step2_fonction_3" placeholder="Tapez une fonction..." />
+                        <input type="text" id="step2_fonction_3" name="step2_fonction_3" placeholder="Tapez une fonction..." value="<?php echo (isset($value_form[0]->step2_fonction_3) && !empty($value_form[0]->step2_fonction_3)) ? $value_form[0]->step2_fonction_3 : ''; ?>" />
                         <div id="suggestions3" class="suggestions"></div>
                     </label>
                 </p>
