@@ -24,17 +24,17 @@ use GuzzleHttp\Client;
 /*
  * Démarrer une session PHP
  */
-function lmc_start_session() {
+function lmc_multistep_form__start_session() {
     if (!session_id()) {
         session_start();
     }
 }
-add_action('init', 'lmc_start_session');
+add_action('init', 'lmc_multistep_form__start_session');
 
 /*
  * Charger les scripts et css
  */
-function lmc_enqueue_assets() {
+function lmc_multistep_form__enqueue_assets() {
     wp_enqueue_style('lmc-tippycss', plugin_dir_url(__FILE__) . 'node_modules/tippy.js/dist/tippy.css');
     wp_enqueue_style('lmc-style', plugin_dir_url(__FILE__) . 'assets/css/style.css');
     wp_enqueue_script('lmc-popperjs','https://unpkg.com/@popperjs/core@2' , false, true);
@@ -42,7 +42,55 @@ function lmc_enqueue_assets() {
     wp_enqueue_script('lmc-recaptcha','https://www.google.com/recaptcha/api.js' , false, true);
     wp_enqueue_script('lmc-script', plugin_dir_url(__FILE__) . 'assets/js/script.js', array('jquery'), false, true);
 }
-add_action('wp_enqueue_scripts', 'lmc_enqueue_assets');
+add_action('wp_enqueue_scripts', 'lmc_multistep_form__enqueue_assets');
+
+
+
+/*
+ * Enregistre le Custom Post Type "Projet"
+ */
+function lmc_multistep_form__register_cpt_projet() {
+
+    $labels = array(
+        'name'               => 'Fonctions dans l\'entreprise',
+        'singular_name'      => 'Fonction dans l\'entreprise',
+        'menu_name'          => 'Fonctions dans l\'entreprise',
+        'name_admin_bar'     => 'Fonction dans l\'entreprise',
+        'add_new'            => 'Ajouter une nouvelle fonction',
+        'add_new_item'       => 'Ajouter une fonction',
+        'edit_item'          => 'Modifier la fonction',
+        'new_item'           => 'Nouvelle fonction',
+        'view_item'          => 'Voir la fonction',
+        'search_items'       => 'Rechercher des fonctions',
+        'not_found'          => 'Aucune fonction trouvée',
+        'not_found_in_trash' => 'Aucune fonction dans la corbeille',
+    );
+
+    $args = array(
+        'labels'             => $labels,
+        'public'             => true,
+        'show_in_menu'       => true,
+        'menu_position'      => 5,
+        'menu_icon'          => 'dashicons-portfolio',
+        'supports'           => array( 'title' ),
+        'has_archive'        => true,
+        'rewrite'            => array( 'slug' => 'lmc-multistep-form-fonctions' ),
+        'show_in_rest'       => true,
+    );
+
+    register_post_type( 'lmc-multistep-form-fonction', $args );
+}
+add_action( 'init', 'lmc_multistep_form__register_cpt_projet' );
+
+/*
+ * Vider les permaliens à l’activation du plugin
+ */
+function lmc_multistep_form__rewrite_flush() {
+    lmc_multistep_form__register_cpt_projet();
+    flush_rewrite_rules();
+}
+register_activation_hook( __FILE__, 'lmc_multistep_form__rewrite_flush' );
+
 
 /*
  * définition des variables pour envoyer les mails
@@ -51,7 +99,7 @@ include_once 'src/config.php';
 
 
 
-function lmc_php_form() {
+function lmc_multistep_form() {
 
     /*
      * Création de la base de données
@@ -360,4 +408,4 @@ function lmc_php_form() {
     <?php
     return ob_get_clean();
 }
-add_shortcode('lmc-multistep-form', 'lmc_php_form');
+add_shortcode('lmc-multistep-form', 'lmc_multistep_form');
