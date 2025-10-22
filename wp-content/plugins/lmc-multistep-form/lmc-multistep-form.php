@@ -92,6 +92,60 @@ function lmc_multistep_form__rewrite_flush() {
 register_activation_hook( __FILE__, 'lmc_multistep_form__rewrite_flush' );
 
 
+
+/*
+     * Fonction pour récupérer l'URL courante avec variables
+     */
+function lmc_multistep_form__getCurrentUrl() {
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
+        || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+    $host = $_SERVER['HTTP_HOST'];
+
+    $uri = $_SERVER['REQUEST_URI'];
+
+    return $protocol . $host . $uri;
+}
+
+/*
+ * Fonction pour récupérer l'URL courante sans variables
+ */
+function lmc_multistep_form__getCurrentUrlWithoutQuery() {
+    // Détermine le protocole
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
+        || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+    // Récupère le nom d’hôte
+    $host = $_SERVER['HTTP_HOST'];
+
+    // Récupère le chemin sans la query string
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+    // Reconstruit l’URL
+    return $protocol . $host . $path;
+}
+
+/*
+ * Fonction pour générer le code envoyé par mail
+ */
+function lmc_multistep_form__generate_otp(int $digits = 6): string {
+    $min = (int) pow(10, $digits - 1);
+    $max = (int) pow(10, $digits) - 1;
+    return (string) random_int($min, $max); // cryptographically secure
+}
+
+/*
+ * Enregistrement des tentatives suspectes
+ */
+function lmc_multistep_form__logLmc($reason) {
+    $logFile = __DIR__ . '/log/lmc-multistep-form.log';
+    $entry = date('Y-m-d H:i:s') . " - IP: " . $_SERVER['REMOTE_ADDR'] . " - Motif: $reason\n";
+    file_put_contents($logFile, $entry, FILE_APPEND);
+    header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=400');
+}
+
+
+
 /*
  * définition des variables pour envoyer les mails
  */
@@ -170,56 +224,6 @@ function lmc_multistep_form() {
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     ");
 
-    /*
-     * Fonction pour récupérer l'URL courante avec variables
-     */
-    function lmc_multistep_form__getCurrentUrl() {
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
-            || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-
-        $host = $_SERVER['HTTP_HOST'];
-
-        $uri = $_SERVER['REQUEST_URI'];
-
-        return $protocol . $host . $uri;
-    }
-
-    /*
-     * Fonction pour récupérer l'URL courante sans variables
-     */
-    function lmc_multistep_form__getCurrentUrlWithoutQuery() {
-        // Détermine le protocole
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
-            || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-
-        // Récupère le nom d’hôte
-        $host = $_SERVER['HTTP_HOST'];
-
-        // Récupère le chemin sans la query string
-        $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-        // Reconstruit l’URL
-        return $protocol . $host . $path;
-    }
-
-    /*
-     * Fonction pour générer le code envoyé par mail
-     */
-    function lmc_multistep_form__generate_otp(int $digits = 6): string {
-        $min = (int) pow(10, $digits - 1);
-        $max = (int) pow(10, $digits) - 1;
-        return (string) random_int($min, $max); // cryptographically secure
-    }
-
-    /*
-     * Enregistrement des tentatives suspectes
-     */
-    function lmc_multistep_form__logLmc($reason) {
-        $logFile = __DIR__ . '/log/lmc-multistep-form.log';
-        $entry = date('Y-m-d H:i:s') . " - IP: " . $_SERVER['REMOTE_ADDR'] . " - Motif: $reason\n";
-        file_put_contents($logFile, $entry, FILE_APPEND);
-        header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=400');
-    }
 
     /*
      * Authentification à l'API OHME
