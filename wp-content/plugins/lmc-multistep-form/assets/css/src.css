@@ -244,6 +244,21 @@
         .twofpin {
             @apply block! w-[40px]! text-center! border-b! border-[var(--color-blanc)]! font-normal! py-[10px]! bg-[var(--color-purple)]! text-[var(--color-blanc)]!;
         }
+
+
+        .suggestions {
+            border: 1px solid #ccc;
+            max-width: 300px;
+            position: absolute;
+            background: #fff;
+        }
+        .suggestion-item {
+            padding: 5px;
+            cursor: pointer;
+        }
+        .suggestion-item:hover {
+            background-color: #f0f0f0;
+        }
     }
 
 }

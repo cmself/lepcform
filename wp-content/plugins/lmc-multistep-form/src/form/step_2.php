@@ -44,15 +44,17 @@
     </p>
 
     <p><label for="step2_role_0"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
+
+            <input type="text" id="step2_role_0" name="step2_role_0" placeholder="Tapez une fonction..." />
+            <div id="suggestions" class="suggestions"></div>
+
+            <!--
             <select name="step2_role_0" id="step2_role_0" disabled>
-                <?php
-                if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
-                    ?>
+                <?php  if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):?>
                         <option value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][0]); ?>" selected><?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][0]); ?></option>
-                    <?php
-                endif;
-                ?>
+                <?php endif; ?>
             </select>
+            -->
         </label>
     </p>
 
@@ -570,8 +572,49 @@
                     });
                 }
             });
-
         });
     }
+
+
+    // Tableau de noms
+    const names = [
+        <?php
+        foreach ( $fonctions_entreprise as $fonction ) {
+            echo '"' . $fonction . '", ';
+        }
+        ?>
+    ];
+
+    // Récupération des éléments
+    const input = document.getElementById("step2_role_0");
+    const suggestionsDiv = document.getElementById("suggestions");
+
+    // Fonction pour filtrer et afficher les suggestions
+    input.addEventListener("input", () => {
+        const query = input.value.toLowerCase();
+        suggestionsDiv.innerHTML = "";
+
+        if (query.length === 0) return;
+
+        const filtered = names.filter(name => name.toLowerCase().includes(query)).slice(0, 5);
+
+        filtered.forEach(name => {
+            const div = document.createElement("div");
+            div.textContent = name;
+            div.classList.add("suggestion-item");
+            div.addEventListener("click", () => {
+                input.value = name;
+                suggestionsDiv.innerHTML = "";
+            });
+            suggestionsDiv.appendChild(div);
+        });
+    });
+
+    // Optionnel : fermer les suggestions si clic en dehors
+    document.addEventListener("click", (e) => {
+        if (!input.contains(e.target)) {
+            suggestionsDiv.innerHTML = "";
+        }
+    });
 
 </script>

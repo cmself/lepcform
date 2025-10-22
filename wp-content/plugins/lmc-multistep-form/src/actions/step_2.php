@@ -31,6 +31,7 @@ if (isset($_POST['step1_formStartTime'])) {
 }
 */
 
+
 /*
  * Récuperer toutes les fonctions enregistrées en BO
  */
@@ -45,7 +46,6 @@ $lmc_multistep_fe = get_posts( array(
 foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
     $fonctions_entreprise[] = esc_html( $fonction_entreprise->post_title );
 }
-
 
 
 /*
