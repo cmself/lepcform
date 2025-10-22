@@ -12,7 +12,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
      * Token CSRF
      */
     if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
-        $_SESSION['lmc_data']['error_step'] = 3;
+        $_SESSION['lmc_data']['error_step'] = 2;
         $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
         lmc_multistep_form__logLmc("Token CSRF invalide");
         die();
@@ -22,7 +22,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
      * Honey Pot pour piéger les robots
      */
     if (!empty($_POST['step3_honeypot'])) {
-        $_SESSION['lmc_data']['error_step'] = 3;
+        $_SESSION['lmc_data']['error_step'] = 2;
         $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
         lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté)");
         die();
@@ -79,7 +79,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
      * Token CSRF
      */
     if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
-        $_SESSION['lmc_data']['error_step'] = 3;
+        $_SESSION['lmc_data']['error_step'] = 2;
         $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
         lmc_multistep_form__logLmc("Token CSRF invalide");
         die();
@@ -89,7 +89,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
      * Honey Pot pour piéger les robots
      */
     if (!empty($_POST['step3_honeypot'])) {
-        $_SESSION['lmc_data']['error_step'] = 3;
+        $_SESSION['lmc_data']['error_step'] = 2;
         $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
         lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté)");
         die();
