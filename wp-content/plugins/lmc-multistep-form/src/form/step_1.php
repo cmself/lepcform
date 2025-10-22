@@ -15,7 +15,7 @@
             <?php
             if ($_SESSION['lmc_data']['ohme_data']['Structure']['chiffre_daffaires']['options']):
             ?>
-                <option>Choisir une réponse</option>
+                <option value="">Choisir une réponse</option>
             <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['chiffre_daffaires']['options'] as $option):
                     ?>
@@ -32,7 +32,7 @@
             <?php
             if ($_SESSION['lmc_data']['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options']):
                 ?>
-                <option>Choisir une réponse</option>
+                <option value="">Choisir une réponse</option>
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options'] as $option):
                     ?>
@@ -94,7 +94,7 @@
             <?php
             if ($_SESSION['lmc_data']['ohme_data']['Structure']['nombre_de_collaborateurs_en_france']['options']):
                 ?>
-                <option>Choisir une réponse</option>
+                <option value="">Choisir une réponse</option>
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['nombre_de_collaborateurs_en_france']['options'] as $option):
                     ?>
@@ -112,7 +112,7 @@
             <?php
             if ($_SESSION['lmc_data']['ohme_data']['Structure']['secteur_dactivite']['options']):
                 ?>
-                <option>Choisir une réponse</option>
+                <option value="">Choisir une réponse</option>
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['secteur_dactivite']['options'] as $option):
                     ?>
@@ -130,7 +130,7 @@
             <?php
             if ($_SESSION['lmc_data']['ohme_data']['Structure']['type_de_structure']['options']):
                 ?>
-                <option>Choisir une réponse</option>
+                <option value="">Choisir une réponse</option>
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['type_de_structure']['options'] as $option):
                     ?>
@@ -148,7 +148,7 @@
             <?php
             if ($_SESSION['lmc_data']['ohme_data']['Structure']['comment_avez_vous_eu_connaissance_de_la_charte_de_la_diversite']['options']):
                 ?>
-                <option>Choisir une réponse</option>
+                <option value="">Choisir une réponse</option>
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['comment_avez_vous_eu_connaissance_de_la_charte_de_la_diversite']['options'] as $option):
                     ?>

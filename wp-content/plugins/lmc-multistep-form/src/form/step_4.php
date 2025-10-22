@@ -12,7 +12,7 @@
             <?php
             if ($_SESSION['lmc_data']['ohme_data']['Structure']['engagement_1_sensibiliser_et_former_nos_dirigeants_et_managers']['options']):
                 ?>
-                <option>Choisir une réponse</option>
+                <option value="">Choisir une réponse</option>
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['engagement_1_sensibiliser_et_former_nos_dirigeants_et_managers']['options'] as $option):
                     ?>
@@ -30,7 +30,7 @@
             <?php
             if ($_SESSION['lmc_data']['ohme_data']['Structure']['engagement_2_promouvoir_lapplication_du_principe_de_non_discrimination']['options']):
                 ?>
-                <option>Choisir une réponse</option>
+                <option value="">Choisir une réponse</option>
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['engagement_2_promouvoir_lapplication_du_principe_de_non_discrimination']['options'] as $option):
                     ?>
@@ -48,7 +48,7 @@
             <?php
             if ($_SESSION['lmc_data']['ohme_data']['Structure']['engagement_3_favoriser_la_representation_de_la_diversite_de_la_societe_francaise']['options']):
                 ?>
-                <option>Choisir une réponse</option>
+                <option value="">Choisir une réponse</option>
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['engagement_3_favoriser_la_representation_de_la_diversite_de_la_societe_francaise']['options'] as $option):
                     ?>
@@ -66,7 +66,7 @@
             <?php
             if ($_SESSION['lmc_data']['ohme_data']['Structure']['engagement_4_communiquer_sur_notre_engagement']['options']):
                 ?>
-                <option>Choisir une réponse</option>
+                <option value="">Choisir une réponse</option>
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['engagement_4_communiquer_sur_notre_engagement']['options'] as $option):
                     ?>
@@ -84,7 +84,7 @@
             <?php
             if ($_SESSION['lmc_data']['ohme_data']['Structure']['engagement_5_faire_de_lelaboration_et_de_la_mise_en_oeuvre_de_la_politique_de_diversite_un_objet_de_dialogue_social_avec_les_representants_du_personnel']['options']):
                 ?>
-                <option>Choisir une réponse</option>
+                <option value="">Choisir une réponse</option>
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['engagement_5_faire_de_lelaboration_et_de_la_mise_en_oeuvre_de_la_politique_de_diversite_un_objet_de_dialogue_social_avec_les_representants_du_personnel']['options'] as $option):
                     ?>
@@ -102,7 +102,7 @@
             <?php
             if ($_SESSION['lmc_data']['ohme_data']['Structure']['engagement_6_evaluer_regulierement_les_progres_realises']['options']):
                 ?>
-                <option>Choisir une réponse</option>
+                <option value="">Choisir une réponse</option>
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['engagement_6_evaluer_regulierement_les_progres_realises']['options'] as $option):
                     ?>
