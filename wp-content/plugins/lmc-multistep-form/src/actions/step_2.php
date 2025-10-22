@@ -79,7 +79,18 @@ if(!isset($_SESSION['lmc_data']['contacts_valide']) || empty($_SESSION['lmc_data
     if(count($_SESSION['lmc_data']['structures_siren']) > 0) {
         header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=8');
     }
+}else{
+    if(count($_SESSION['lmc_data']['structures_siren']) > 0) {
+
+        if($_SESSION['lmc_data']['structures_siren'][0]['statut_adhesion_a_la_charte_de_lentreprise'] != 'Entreprise_non_candidate'){
+            $_SESSION['lmc_data']['error_step'] = 1;
+            $_SESSION['lmc_data']['$error_message'] = "Il semble qu’une signature a déjà été effectuée pour cette entreprise.<br> Veuillez effectuer un renouvellement  ou bien contactez LEPC.";
+            lmc_multistep_form__logLmc("Signature a déjà été effectuée");
+        }
+
+    }
 }
+
 
 
 /*

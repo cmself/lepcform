@@ -6,7 +6,6 @@
     </div>
 
     <div class="relative! w-full!">
-        <h3>Erreur</h3>
         <h4>Nous sommes désolés ....</h4>
         <div class="w-full! text-center!">
             <h5><?= $_SESSION['lmc_data']['$error_message']; ?></h5>
