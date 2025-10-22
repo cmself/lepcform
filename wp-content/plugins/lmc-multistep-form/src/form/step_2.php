@@ -51,16 +51,8 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
 
     <p>
         <label for="step2_role_0"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-            <select name="step2_role_0" id="step2_role_0" disabled>
-                <?php
-                if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
-                    ?>
-                    <option value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][0]); ?>" selected><?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][0]); ?></option>
-                <?php
-
-                endif;
-                ?>
-            </select>
+            <input type="text" id="step2_role_0_disabled" name="step2_role_0_disabled" placeholder="Nom" value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][0]); ?>" disabled required>
+            <input type="hidden" name="step2_role_0" id="step2_role_0" value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][0]); ?>" required>
         </label>
     </p>
 
@@ -111,16 +103,8 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
 
             <p>
                 <label for="step2_role_1"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-                    <select name="step2_role_1" id="step2_role_1" disabled>
-                        <?php
-                        if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
-                            ?>
-                            <option value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" selected><?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?></option>
-                            <?php
-
-                        endif;
-                        ?>
-                    </select>
+                    <input type="text" id="step2_role_1_disabled" name="step2_role_1_disabled" placeholder="Nom" value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" disabled required>
+                    <input type="hidden" name="step2_role_1" id="step2_role_1" value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" required>
                 </label>
             </p>
 
@@ -175,17 +159,10 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
                     <label for="step2_email_2"><span>Email * :</span> <input type="email" id="step2_email_2" name="step2_email_2" placeholder="Email" value="<?php echo (isset($value_form[0]->step2_email_2) && !empty($value_form[0]->step2_email_2)) ? $value_form[0]->step2_email_2 : ''; ?>" required></label>
                 </p>
 
-                <p><label for="step2_role_2"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-                        <select name="step2_role_2" id="step2_role_2" disabled>
-                            <?php
-                            if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
-                                ?>
-                                <option value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" selected><?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?></option>
-                                <?php
-
-                            endif;
-                            ?>
-                        </select>
+                <p>
+                    <label for="step2_role_2"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
+                        <input type="text" id="step2_role_2_disabled" name="step2_role_2_disabled" placeholder="Nom" value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" disabled required>
+                        <input type="hidden" name="step2_role_2" id="step2_role_2" value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" required>
                     </label>
                 </p>
 
@@ -243,15 +220,8 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
 
                 <p>
                     <label for="step2_role_3"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-                        <select name="step2_role_3" id="step2_role_3" disabled>
-                            <?php
-                            if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
-                                ?>
-                                <option value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" selected><?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?></option>
-                                <?php
-                            endif;
-                            ?>
-                        </select>
+                        <input type="text" id="step2_role_3_disabled" name="step2_role_3_disabled" placeholder="Nom" value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" disabled required>
+                        <input type="hidden" name="step2_role_3" id="step2_role_3" value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" required>
                     </label>
                 </p>
 
@@ -354,18 +324,14 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
                                                          required></label>
     </p>
 
-    <p><label for="step2_role_` + (currentContacts+1) + `"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-            <select name="step2_role_` + (currentContacts+1) + `" id="step2_role_` + (currentContacts+1) + `" disabled>
-                <?php
-            if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
-            ?>
-                            <option value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" selected><?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?></option>
-                    <?php
-            endif;
-            ?>
-            </select>
-        </label>
-    </p>
+    <p>
+                    <label for="step2_role_` + (currentContacts+1) + `"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
+                        <input type="text" id="step2_role_` + (currentContacts+1) + `_disabled" name="step2_role_` + (currentContacts+1) + `_disabled" placeholder="Nom" value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" disabled required>
+                        <input type="hidden" name="step2_role_` + (currentContacts+1) + `" id="step2_role_` + (currentContacts+1) + `" value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" required>
+                    </label>
+                </p>
+
+
 
     <p>
         <label for="step2_signataire_` + (currentContacts+1) + `" class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_` + (currentContacts+1) + `"
@@ -540,19 +506,12 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
                                                          required></label>
     </p>
 
-    <p><label for="step2_role_` + (i + 1) + `"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-            <select name="step2_role_` + (i + 1) + `" id="step2_role_` + (i + 1) + `" disabled>
-                <?php
-            if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
-            ?>
-
-                            <option value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" selected><?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?></option>
-                    <?php
-            endif;
-            ?>
-            </select>
-        </label>
-    </p>
+    <p>
+                    <label for="step2_role_` + (i+1) + `"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
+                        <input type="text" id="step2_role_` + (i+1) + `_disabled" name="step2_role_` + (i+1) + `_disabled" placeholder="Nom" value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" disabled required>
+                        <input type="hidden" name="step2_role_` + (i+1) + `" id="step2_role_` + (i+1) + `" value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][1]); ?>" required>
+                    </label>
+                </p>
 
     <p>
         <label for="step2_signataire_` + (i+1) + `" class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_` + (i+1) + `"
