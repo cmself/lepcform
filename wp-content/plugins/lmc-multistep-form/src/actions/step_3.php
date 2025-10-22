@@ -178,8 +178,6 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
     $_SESSION['lmc_data']['step2_role_3'] = isset($_POST['step2_role_3']) ? sanitize_text_field($_POST['step2_role_3']) : "";
     $_SESSION['lmc_data']['step2_signataire_3'] = isset($_POST['step2_signataire_3']) ? sanitize_text_field($_POST['step2_signataire_3']) : "";
 
-
-
     /*
      * vérifier si les données existent en base de données
      */
@@ -219,6 +217,16 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
             ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
 
 
+        if(empty($_SESSION['lmc_data']['step2_signataire_0']) && empty($_SESSION['lmc_data']['step2_signataire_1']) && empty($_SESSION['lmc_data']['step2_signataire_2']) && empty($_SESSION['lmc_data']['step2_signataire_3']) ){
+            $_SESSION['lmc_data']['reload'] = 2;
+            $_SESSION['lmc_data']['step2_otp'] = "Vous devez sélectionner au moins un contact signataire.";
+            header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery());
+            die();
+
+        }else{
+            $_SESSION['lmc_data']['reload'] = 3;
+            $_SESSION['lmc_data']['step2_otp'] = "";
+        }
 
 
 

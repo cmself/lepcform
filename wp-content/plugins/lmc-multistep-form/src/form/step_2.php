@@ -23,6 +23,13 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
 <div class="relative! w-full!">
     <h3>Étape 2 : Interlocuteurs</h3>
     <h4>Informations du contact principal</h4>
+    <?php
+    if(isset($_SESSION['lmc_data']['step2_otp']) && !empty($_SESSION['lmc_data']['step2_otp'])){
+    ?>
+    <h5><?= $_SESSION['lmc_data']['step2_otp'] ?></h5>
+    <?php
+    }
+    ?>
 </div>
 
     <div class="coltwo">
@@ -57,7 +64,8 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
     </p>
 
     <p>
-        <label for="step2_signataire_0" class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_0"
+        <label for="step2_signataire_0" class="checkbox">
+            <input type="checkbox" class="step2_signataire" id="step2_signataire_0"
                                                   name="step2_signataire_0" value="1" <?php echo ($value_form[0]->step2_signataire_0 == 1) ? 'checked' : ''; ?> /><span>Contact signataire</span> <i
                     class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
     </p>
@@ -275,6 +283,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
 
 <script>
 
+
     const container = document.querySelector('.useradd');
     const addBtn = document.getElementById('addBtn');
     const maxContacts = 3;    
@@ -437,7 +446,6 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
                     suggestionsDiv3.innerHTML = "";
                 }
             });
-
 
         } else {
             addBtn.style.display = 'none';
@@ -615,6 +623,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
                 suggestionsDiv3.innerHTML = "";
             }
         });
+
     }
 
 
