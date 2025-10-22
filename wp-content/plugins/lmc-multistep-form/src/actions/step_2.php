@@ -90,6 +90,9 @@ if(!isset($_SESSION['lmc_data']['contacts_valide']) || empty($_SESSION['lmc_data
 
     if(count($_SESSION['lmc_data']['structures_siren']) > 0) {
 
+        /*
+         * Vérifier statut Adhésion à la Charte de l’Entreprise
+         */
         if($_SESSION['lmc_data']['structures_siren'][0]['statut_adhesion_a_la_charte_de_lentreprise'] != 'Entreprise_non_candidate'){
             $_SESSION['lmc_data']['error_step'] = 1;
             $_SESSION['lmc_data']['$error_message'] = 'Il semble qu’une signature a déjà été effectuée pour cette entreprise.<br> <a href="' . lmc_multistep_form__getCurrentUrlWithoutQuery() . '?reload_step=8" class="text-[var(--color-blanc)]!">Veuillez effectuer un renouvellement</a>  ou <a href="#" class="text-[var(--color-blanc)]!">contactez LEPC</a>';
