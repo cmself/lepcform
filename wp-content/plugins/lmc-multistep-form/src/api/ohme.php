@@ -5,8 +5,15 @@
 $opt_ohme = [];
 
 try {
-
-    $custom_fields_contact = $client->get('https://api-ohme.oneheart.fr/api/v1/custom-fields?model=Contact');
+    $custom_fields_contact = $client->request('GET', 'custom-fields', [
+        'query' => ['model' => 'Contact']
+    ]);
+    $code_contact = $custom_fields_contact->getStatusCode();
+    if ($code_contact != 200) {
+        $_SESSION['lmc_data']['error_step'] = 1;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+        logLmc("Json OHME Contact invalide");
+    }
     $data_contact = json_decode($custom_fields_contact->getBody(), true);
     if (json_last_error() === JSON_ERROR_NONE) {
         $options_contact = $data_contact['data'];
@@ -39,7 +46,15 @@ try {
  */
 try {
 
-    $custom_fields_structure = $client->get('https://api-ohme.oneheart.fr/api/v1/custom-fields?model=Structure');
+    $custom_fields_structure = $client->request('GET', 'custom-fields', [
+        'query' => ['model' => 'Structure']
+    ]);
+    $code_structure = $custom_fields_structure->getStatusCode();
+    if ($code_structure != 200) {
+        $_SESSION['lmc_data']['error_step'] = 1;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+        logLmc("Json OHME Structure invalide");
+    }
     $data_structure = json_decode($custom_fields_structure->getBody(), true);
     if (json_last_error() === JSON_ERROR_NONE) {
         $options_structure = $data_structure['data'];
@@ -72,7 +87,15 @@ try {
  */
 try {
 
-    $custom_fields_group = $client->get('https://api-ohme.oneheart.fr/api/v1/custom-fields?model=Group');
+    $custom_fields_group = $client->request('GET', 'custom-fields', [
+        'query' => ['model' => 'Group']
+    ]);
+    $code_group = $custom_fields_group->getStatusCode();
+    if ($code_group != 200) {
+        $_SESSION['lmc_data']['error_step'] = 1;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+        logLmc("Json OHME Group invalide");
+    }
     $data_group = json_decode($custom_fields_group->getBody(), true);
     if (json_last_error() === JSON_ERROR_NONE) {
         $options_group = $data_group['data'];
@@ -104,7 +127,15 @@ try {
  */
 try {
 
-    $custom_fields_payment = $client->get('https://api-ohme.oneheart.fr/api/v1/custom-fields?model=Payment');
+    $custom_fields_payment = $client->request('GET', 'custom-fields', [
+        'query' => ['model' => 'Payment']
+    ]);
+    $code_payment = $custom_fields_payment->getStatusCode();
+    if ($code_payment != 200) {
+        $_SESSION['lmc_data']['error_step'] = 1;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+        logLmc("Json OHME Payment invalide");
+    }
     $data_payment = json_decode($custom_fields_payment->getBody(), true);
     if (json_last_error() === JSON_ERROR_NONE) {
         $options_payment = $data_payment['data'];
@@ -137,7 +168,15 @@ try {
 
 try {
 
-    $custom_fields_interaction = $client->get('https://api-ohme.oneheart.fr/api/v1/custom-fields?model=Interaction');
+    $custom_fields_interaction = $client->request('GET', 'custom-fields', [
+        'query' => ['model' => 'Interaction']
+    ]);
+    $code_interaction = $custom_fields_interaction->getStatusCode();
+    if ($code_interaction != 200) {
+        $_SESSION['lmc_data']['error_step'] = 1;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+        logLmc("Json OHME Interaction invalide");
+    }
     $data_interaction = json_decode($custom_fields_interaction->getBody(), true);
     if (json_last_error() === JSON_ERROR_NONE) {
         $options_interaction = $data_interaction['data'];

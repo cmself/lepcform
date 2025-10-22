@@ -47,7 +47,16 @@ $_SESSION['lmc_data']['step1_siret'] = isset($_POST['step1_siret']) ? sanitize_t
 if(isset($_SESSION['lmc_data']['step1_siret']) && !empty($_SESSION['lmc_data']['step1_siret'])) {
 
     try {
-        $siren = $client->get('https://api-ohme.oneheart.fr/api/v1/structures?siren=' . $_SESSION['lmc_data']['step1_siret']);
+
+        $siren = $client->request('GET', 'structures', [
+            'query' => ['siren' => $_SESSION['lmc_data']['step1_siret']]
+        ]);
+        $code_siren = $siren->getStatusCode();
+        if ($code_siren != 200) {
+            $_SESSION['lmc_data']['error_step'] = 1;
+            $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+            logLmc("Json OHME Contact invalide");
+        }
         $data_siren = json_decode($siren->getBody(), true);
         if (json_last_error() === JSON_ERROR_NONE) {
             $_SESSION['lmc_data']['structures_siren'] = $data_siren['data'];

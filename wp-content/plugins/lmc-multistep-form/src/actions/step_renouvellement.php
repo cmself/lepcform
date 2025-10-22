@@ -58,7 +58,15 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                     $stepMAJ = 2;
 
                     try {
-                        $email = $client->get('https://api-ohme.oneheart.fr/api/v1/contacts?email=' . $_SESSION['lmc_data']['step0_email'] . '&limit=1');
+                        $email = $client->request('GET', 'contacts', [
+                            'query' => ['email' => $_SESSION['lmc_data']['step0_email'], 'limit' => 1]
+                        ]);
+                        $code_email = $email->getStatusCode();
+                        if ($code_email != 200) {
+                            $_SESSION['lmc_data']['error_step'] = 8;
+                            $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+                            logLmc("Json OHME Contact invalide");
+                        }
                         $data_email = json_decode($email->getBody(), true);
                         if (json_last_error() === JSON_ERROR_NONE) {
                             $_SESSION['lmc_data']['contacts_email'] = $data_email['data'];
@@ -82,7 +90,16 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                     foreach ($_SESSION['lmc_data']['contacts_email'][0]['structure_ohme_ids'] as $ohme_ids) {
 
                                         try {
-                                            $step0_structures = $client->get('https://api-ohme.oneheart.fr/api/v1/structures?ohme_id=' . $ohme_ids . '&siren=' . $_SESSION['lmc_data']['step0_siret']);
+                                            $step0_structures = $client->request('GET', 'structures', [
+                                                'query' => ['ohme_id' => $ohme_ids, 'siren' => $_SESSION['lmc_data']['step0_siret']]
+                                            ]);
+                                            $code_step0_structures = $step0_structures->getStatusCode();
+                                            if ($code_step0_structures != 200) {
+                                                $_SESSION['lmc_data']['error_step'] = 8;
+                                                $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+                                                logLmc("Json OHME Contact invalide");
+                                            }
+
                                             $data_step0_structures = json_decode($step0_structures->getBody(), true);
                                             if (json_last_error() === JSON_ERROR_NONE) {
                                                 if($data_step0_structures['count'] == 1) {

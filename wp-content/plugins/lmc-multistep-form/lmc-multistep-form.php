@@ -17,6 +17,8 @@ require 'vendor/autoload.php';
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7\Request;
+
 
 /*
  * Démarrer une session PHP
@@ -175,6 +177,7 @@ function lmc_php_form() {
      */
     $client = new Client([
         'verify' => false, // pas sécurisé, uniquement pour test
+        'base_uri' => 'https://api-ohme.oneheart.fr/api/v1/',
         'headers' => [
             'Accept' => 'application/json',
             'client-name' => CLIENTOHME,
