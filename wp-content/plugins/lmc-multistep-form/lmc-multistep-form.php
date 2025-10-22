@@ -16,8 +16,9 @@ if (!defined('ABSPATH')) exit;
 require 'vendor/autoload.php';
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Psr7\Request;
+//use GuzzleHttp\Exception\ClientException;
+//use GuzzleHttp\Psr7\Request;
+//use GuzzleHttp\Psr7\Response;
 
 
 /*
@@ -66,7 +67,7 @@ function lmc_php_form() {
           `step1_logo` text NOT NULL,
           `step1_ca` varchar(255) NOT NULL,
           `step1_frais` varchar(255) NOT NULL,
-          `step1_adherent` tinyint(1) NOT NULL,
+          `step1_adherent` text NOT NULL,
           `step1_adresse` text NOT NULL,
           `step1_ville` varchar(255) NOT NULL,
           `step1_cp` varchar(10) NOT NULL,

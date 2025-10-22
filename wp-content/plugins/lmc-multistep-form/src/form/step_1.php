@@ -40,8 +40,8 @@
     <label>
         <span>Adhérent Les entreprises pour la Cité :</span>
         <div class="wrapper">
-            <input type="radio" name="step1_adherent" id="option-1" value="1" <?php echo ($value_form[0]->step1_adherent == 1) ? 'checked' : ''; ?>>
-            <input type="radio" name="step1_adherent" id="option-2" value="0"  <?php echo ($value_form[0]->step1_adherent == 0) ? 'checked' : ''; ?>>
+            <input type="radio" name="step1_adherent" id="option-1" value="oui" <?php echo ($value_form[0]->step1_adherent == "oui") ? 'checked' : ''; ?>>
+            <input type="radio" name="step1_adherent" id="option-2" value="non"  <?php echo ($value_form[0]->step1_adherent == "non") ? 'checked' : ''; ?>>
             <label for="option-1" class="option option-1">
                 <div class="dot"></div>
                 <span>Oui</span>
