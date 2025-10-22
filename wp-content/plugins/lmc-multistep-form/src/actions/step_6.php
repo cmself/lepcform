@@ -7,6 +7,7 @@ if (!isset($_POST['step5_csrf_token']) || $_POST['step5_csrf_token'] !== $_SESSI
     $_SESSION['lmc_data']['error_step'] = 6;
     $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
     lmc_multistep_form__logLmc("Token CSRF invalide");
+    die();
 }
 
 /*
@@ -16,6 +17,7 @@ if (!empty($_POST['step5_honeypot'])) {
     $_SESSION['lmc_data']['error_step'] = 6;
     $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
     lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté)");
+    die();
 }
 
 /*

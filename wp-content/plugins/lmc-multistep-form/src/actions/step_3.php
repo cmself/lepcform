@@ -10,6 +10,7 @@ if (!isset($_POST['step2_csrf_token']) || $_POST['step2_csrf_token'] !== $_SESSI
     $_SESSION['lmc_data']['error_step'] = 3;
     $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
     lmc_multistep_form__logLmc("Token CSRF invalide");
+    die();
 }
 
 /*
@@ -19,6 +20,7 @@ if (!empty($_POST['step2_honeypot'])) {
     $_SESSION['lmc_data']['error_step'] = 3;
     $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
     lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté)");
+    die();
 }
 
 /*
@@ -131,6 +133,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
             $_SESSION['lmc_data']['error_step'] = 3;
             $_SESSION['lmc_data']['$error_message'] = "Impossible d'envoyer le mail.";
             lmc_multistep_form__logLmc("IMPOSSIBLE D'ENVOYER LE MAIL :" . $mail->ErrorInfo);
+            die();
         }
 
 
@@ -270,6 +273,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
             $_SESSION['lmc_data']['error_step'] = 3;
             $_SESSION['lmc_data']['$error_message'] = "Impossible d'envoyer le mail.";
             lmc_multistep_form__logLmc("IMPOSSIBLE D'ENVOYER LE MAIL :" . $mail->ErrorInfo);
+            die();
         }
 
         $step3_otp = 'Code envoyé par mail';

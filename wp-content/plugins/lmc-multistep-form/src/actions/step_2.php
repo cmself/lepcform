@@ -7,6 +7,7 @@ if (!isset($_POST['step1_csrf_token']) || $_POST['step1_csrf_token'] !== $_SESSI
     $_SESSION['lmc_data']['error_step'] = 2;
     $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
     lmc_multistep_form__logLmc("Token CSRF invalide");
+    die();
 }
 
 /*
@@ -16,6 +17,7 @@ if (!empty($_POST['step1_honeypot'])) {
     $_SESSION['lmc_data']['error_step'] = 2;
     $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
     lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté)");
+    die();
 }
 
 /*
@@ -37,6 +39,8 @@ if (isset($_POST['step1_formStartTime'])) {
 $_SESSION['lmc_data']['reload'] = 2;
 $_SESSION['lmc_data']['step1_nom'] = isset($_POST['step1_nom']) ? sanitize_text_field($_POST['step1_nom']) : "";
 $_SESSION['lmc_data']['step1_siret'] = isset($_POST['step1_siret']) ? sanitize_text_field($_POST['step1_siret']) : "";
+$_SESSION['lmc_data']['step1_adherent'] = isset($_POST['step1_adherent']) ? sanitize_text_field($_POST['step1_adherent']) : "";
+
 
 
 /*
@@ -55,6 +59,7 @@ if(isset($_SESSION['lmc_data']['step1_siret']) && !empty($_SESSION['lmc_data']['
             $_SESSION['lmc_data']['error_step'] = 1;
             $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
             lmc_multistep_form__logLmc("Json OHME Contact invalide");
+            die();
         }
         $data_siren = json_decode($siren->getBody(), true);
         if (json_last_error() === JSON_ERROR_NONE) {
@@ -63,11 +68,13 @@ if(isset($_SESSION['lmc_data']['step1_siret']) && !empty($_SESSION['lmc_data']['
             $_SESSION['lmc_data']['error_step'] = 1;
             $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
             lmc_multistep_form__logLmc("IMPOSSIBLE DE SE CONNECTER A OHME");
+            die();
         }
     } catch (ClientException $e) {
         $_SESSION['lmc_data']['error_step'] = 1;
         $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
         lmc_multistep_form__logLmc("API OHME Siren invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
+        die();
     }
 }else{
     $_SESSION['lmc_data']['structures_siren'] = [];
@@ -80,13 +87,28 @@ if(!isset($_SESSION['lmc_data']['contacts_valide']) || empty($_SESSION['lmc_data
         header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=8');
     }
 }else{
+
     if(count($_SESSION['lmc_data']['structures_siren']) > 0) {
 
         if($_SESSION['lmc_data']['structures_siren'][0]['statut_adhesion_a_la_charte_de_lentreprise'] != 'Entreprise_non_candidate'){
             $_SESSION['lmc_data']['error_step'] = 1;
-            $_SESSION['lmc_data']['$error_message'] = "Il semble qu’une signature a déjà été effectuée pour cette entreprise.<br> Veuillez effectuer un renouvellement  ou bien contactez LEPC.";
+            $_SESSION['lmc_data']['$error_message'] = 'Il semble qu’une signature a déjà été effectuée pour cette entreprise.<br> <a href="' . lmc_multistep_form__getCurrentUrlWithoutQuery() . '?reload_step=8" class="text-[var(--color-blanc)]!">Veuillez effectuer un renouvellement</a>  ou <a href="#" class="text-[var(--color-blanc)]!">contactez LEPC</a>';
             lmc_multistep_form__logLmc("Signature a déjà été effectuée");
+            die();
         }
+
+        /*
+         * Vérifier l’adhésion au réseau
+         */
+        if(isset($_SESSION['lmc_data']['step1_adherent']) || $_SESSION['lmc_data']['step1_adherent'] == 'Oui') {
+            if($_SESSION['lmc_data']['structures_siren'][0]['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite'] != 'Oui'){
+                $_SESSION['lmc_data']['error_step'] = 1;
+                $_SESSION['lmc_data']['$error_message'] = 'Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité, veuillez <a href="' . lmc_multistep_form__getCurrentUrlWithoutQuery() . '?reload_step=1" class="text-[var(--color-blanc)]!">modifier votre répondre</a> ou <a href="#" class="text-[var(--color-blanc)]!">prendre contact avec LEPC</a>';
+                lmc_multistep_form__logLmc("Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité");
+                die();
+            }
+        }
+
 
     }
 }
@@ -127,7 +149,6 @@ if (isset($_FILES['step1_logo']) && $_FILES['step1_logo']['error'] === UPLOAD_ER
 
 $_SESSION['lmc_data']['step1_ca'] = isset($_POST['step1_ca']) ? sanitize_text_field($_POST['step1_ca']) : "";
 $_SESSION['lmc_data']['step1_frais'] = isset($_POST['step1_frais']) ? sanitize_text_field($_POST['step1_frais']) : "";
-$_SESSION['lmc_data']['step1_adherent'] = isset($_POST['step1_adherent']) ? sanitize_text_field($_POST['step1_adherent']) : "";
 $_SESSION['lmc_data']['step1_adresse'] = isset($_POST['step1_adresse']) ? sanitize_text_field($_POST['step1_adresse']) : "";
 $_SESSION['lmc_data']['step1_ville'] = isset($_POST['step1_ville']) ? sanitize_text_field($_POST['step1_ville']) : "";
 $_SESSION['lmc_data']['step1_cp'] = isset($_POST['step1_cp']) ? sanitize_text_field($_POST['step1_cp']) : "";

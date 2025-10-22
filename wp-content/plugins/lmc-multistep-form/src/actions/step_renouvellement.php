@@ -10,6 +10,7 @@ if (!isset($_POST['step0_csrf_token']) || $_POST['step0_csrf_token'] !== $_SESSI
     $_SESSION['lmc_data']['error_step'] = 8;
     $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
     lmc_multistep_form__logLmc("Token CSRF invalide");
+    die();
 }
 
 /*
@@ -19,6 +20,7 @@ if (!empty($_POST['step0_honeypot'])) {
     $_SESSION['lmc_data']['error_step'] = 8;
     $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
     lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté)");
+    die();
 }
 
 if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_otp'] == 1 ) {
@@ -66,6 +68,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                             $_SESSION['lmc_data']['error_step'] = 8;
                             $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
                             lmc_multistep_form__logLmc("Json OHME Contact invalide");
+                            die();
                         }
                         $data_email = json_decode($email->getBody(), true);
                         if (json_last_error() === JSON_ERROR_NONE) {
@@ -74,11 +77,13 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                             $_SESSION['lmc_data']['error_step'] = 8;
                             $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
                             lmc_multistep_form__logLmc("IMPOSSIBLE DE SE CONNECTER A OHME");
+                            die();
                         }
                     } catch (ClientException $e) {
                         $_SESSION['lmc_data']['error_step'] = 8;
                         $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
                         lmc_multistep_form__logLmc("API OHME Siren invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
+                        die();
                     }
 
                     if(count($_SESSION['lmc_data']['contacts_email']) > 0) {
@@ -98,6 +103,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                                 $_SESSION['lmc_data']['error_step'] = 8;
                                                 $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
                                                 lmc_multistep_form__logLmc("Json OHME Contact invalide");
+                                                die();
                                             }
 
                                             $data_step0_structures = json_decode($step0_structures->getBody(), true);
@@ -111,11 +117,13 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                                 $_SESSION['lmc_data']['error_step'] = 8;
                                                 $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
                                                 lmc_multistep_form__logLmc("IMPOSSIBLE DE SE CONNECTER A OHME");
+                                                die();
                                             }
                                         } catch (ClientException $e) {
                                             $_SESSION['lmc_data']['error_step'] = 8;
                                             $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
                                             lmc_multistep_form__logLmc("API OHME Siren invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
+                                            die();
                                         }
                                     }
 
@@ -212,6 +220,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
         $_SESSION['lmc_data']['error_step'] = 8;
         $_SESSION['lmc_data']['$error_message'] = "Impossible d'envoyer le mail.";
         lmc_multistep_form__logLmc("IMPOSSIBLE D'ENVOYER LE MAIL :" . $mail->ErrorInfo);
+        die();
     }
 
 }
