@@ -24,11 +24,11 @@
     <p><label for="step2_fonction_0"><span>Fonction dans l’organisation * :</span>
             <select name="step2_fonction_0" id="step2_fonction_0">
                 <?php
-                if ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
+                if ($fonctions_entreprise):
                     ?>
                     <option>Choisir une réponse</option>
                     <?php
-                    foreach ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options'] as $option):
+                    foreach ($fonctions_entreprise as $option):
                         ?>
                         <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_fonction_0 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
                     <?php

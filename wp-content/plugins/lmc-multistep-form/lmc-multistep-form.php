@@ -261,6 +261,8 @@ function lmc_multistep_form() {
     if (!isset($_SESSION['lmc_data']['ohme_data'])) {
         $_SESSION['lmc_data']['ohme_data'] = filter_var_array($opt_ohme);
     }
+
+
     /*
      * Implémentation du compteur de tentatives de soumissions du formulaire
      */
