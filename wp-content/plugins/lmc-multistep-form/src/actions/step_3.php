@@ -2,31 +2,31 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-
-/*
- * Token CSRF
- */
-if (!isset($_POST['step2_csrf_token']) || $_POST['step2_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
-    $_SESSION['lmc_data']['error_step'] = 3;
-    $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
-    lmc_multistep_form__logLmc("Token CSRF invalide");
-    die();
-}
-
-/*
- * Honey Pot pour piéger les robots
- */
-if (!empty($_POST['step2_honeypot'])) {
-    $_SESSION['lmc_data']['error_step'] = 3;
-    $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
-    lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté)");
-    die();
-}
-
 /*
  * Vérifier si le code par Mail est bon
  */
 if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_otp'] == 1 ) {
+
+
+    /*
+     * Token CSRF
+     */
+    if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
+        $_SESSION['lmc_data']['error_step'] = 3;
+        $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
+        lmc_multistep_form__logLmc("Token CSRF invalide");
+        die();
+    }
+
+    /*
+     * Honey Pot pour piéger les robots
+     */
+    if (!empty($_POST['step3_honeypot'])) {
+        $_SESSION['lmc_data']['error_step'] = 3;
+        $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
+        lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté)");
+        die();
+    }
 
     $_SESSION['lmc_data']['reload'] = 3;
 
@@ -74,6 +74,26 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
  * Renvoi du code par Mail
  */
 }elseif(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_otp'] == 2 ){
+
+    /*
+     * Token CSRF
+     */
+    if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
+        $_SESSION['lmc_data']['error_step'] = 3;
+        $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
+        lmc_multistep_form__logLmc("Token CSRF invalide");
+        die();
+    }
+
+    /*
+     * Honey Pot pour piéger les robots
+     */
+    if (!empty($_POST['step3_honeypot'])) {
+        $_SESSION['lmc_data']['error_step'] = 3;
+        $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
+        lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté)");
+        die();
+    }
 
     $step2_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
@@ -145,6 +165,27 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
  * Enregistre les variables de session des étapes
  */
 }else{
+
+
+    /*
+     * Token CSRF
+     */
+    if (!isset($_POST['step2_csrf_token']) || $_POST['step2_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
+        $_SESSION['lmc_data']['error_step'] = 2;
+        $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
+        lmc_multistep_form__logLmc("Token CSRF invalide");
+        die();
+    }
+
+    /*
+     * Honey Pot pour piéger les robots
+     */
+    if (!empty($_POST['step2_honeypot'])) {
+        $_SESSION['lmc_data']['error_step'] = 2;
+        $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
+        lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté)");
+        die();
+    }
 
     /*
      * Enregistre les variables de session des étapes
