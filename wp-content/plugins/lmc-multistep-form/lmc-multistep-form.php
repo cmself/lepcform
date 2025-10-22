@@ -167,6 +167,7 @@ function lmc_php_form() {
         $logFile = __DIR__ . '/log/lmc-multistep-form.log';
         $entry = date('Y-m-d H:i:s') . " - IP: " . $_SERVER['REMOTE_ADDR'] . " - Motif: $reason\n";
         file_put_contents($logFile, $entry, FILE_APPEND);
+        header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=400');
     }
 
     /*
@@ -282,7 +283,6 @@ function lmc_php_form() {
      */
     if(isset($_POST['step']) && !empty($_POST['step'])){
         $step = intval($_POST['step']);
-
     }else{
         if (isset($_SESSION['lmc_data']['reload']) && !empty($_SESSION['lmc_data']['reload'])) {
             $step = $_SESSION['lmc_data']['reload'];
@@ -310,6 +310,8 @@ function lmc_php_form() {
             include_once 'src/actions/step_7.php';
         }elseif ($step == 8) {
             include_once 'src/actions/step_renouvellement.php';
+        }elseif ($step == 400) {
+            include_once 'src/actions/error.php';
         }
     }
 
@@ -344,6 +346,8 @@ function lmc_php_form() {
                 include_once 'src/form/step_7.php';
             } elseif ($step == 8) {
                 include_once 'src/form/step_renouvellement.php';
+            } elseif ($step == 400) {
+                include_once 'src/form/error.php';
             }
             ?>
         </form>

@@ -2,39 +2,29 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 
+
+/*
+ * Token CSRF
+ */
+if (!isset($_POST['step1_csrf_token']) || $_POST['step1_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
+    $_SESSION['lmc_data']['error_step'] = 3;
+    $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
+    logLmc("Token CSRF invalide");
+}
+
+/*
+ * Honey Pot pour piéger les robots
+ */
+if (!empty($_POST['step1_honeypot'])) {
+    $_SESSION['lmc_data']['error_step'] = 3;
+    $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
+    logLmc("Honey Pot rempli (robot détecté)");
+}
+
 /*
  * Vérifier si le code par Mail est bon
  */
 if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_otp'] == 1 ) {
-
-    /*
-     * Token CSRF
-     */
-    if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
-        logLmc("Token CSRF invalide");
-        die("Erreur : Requête invalide.");
-    }
-
-    /*
-    * Honey Pot pour piéger les robots
-    */
-    if (!empty($_POST['step3_honeypot'])) {
-        logLmc("Honey Pot rempli (robot détecté)");
-        die("Erreur : Robot détecté.");
-    }
-
-    /*
-     * Test de rapidité d’envoi
-     */
-    /*
-    if (isset($_POST['step1_formStartTime'])) {
-        $duration = time() - (int) ($_POST['step1_formStartTime'] / 1000);
-        if ($duration < 3) {
-            logLmc("Envoi trop rapide ($duration s)");
-            die("Erreur : Envoi trop rapide.");
-        }
-    }
-    */
 
     $_SESSION['lmc_data']['reload'] = 3;
 
@@ -83,34 +73,6 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
  */
 }elseif(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_otp'] == 2 ){
 
-    /*
-      * Token CSRF
-      */
-    if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
-        logLmc("Token CSRF invalide");
-        die("Erreur : Requête invalide.");
-    }
-
-    /*
-    * Honey Pot pour piéger les robots
-    */
-    if (!empty($_POST['step3_honeypot'])) {
-        logLmc("Honey Pot rempli (robot détecté)");
-        die("Erreur : Robot détecté.");
-    }
-
-    /*
-     * Test de rapidité d’envoi
-     */
-    /*
-    if (isset($_POST['step1_formStartTime'])) {
-        $duration = time() - (int) ($_POST['step1_formStartTime'] / 1000);
-        if ($duration < 3) {
-            logLmc("Envoi trop rapide ($duration s)");
-            die("Erreur : Envoi trop rapide.");
-        }
-    }
-    */
     $step2_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
     if (count($step2_results) === 1) {
@@ -165,7 +127,10 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
             $mail->send();
 
         } catch (Exception $e) {
-            error_log("Mailer error: " . $mail->ErrorInfo);
+
+            $_SESSION['lmc_data']['error_step'] = 3;
+            $_SESSION['lmc_data']['$error_message'] = "Impossible d'envoyer le mail.";
+            logLmc("IMPOSSIBLE D'ENVOYER LE MAIL :" . $mail->ErrorInfo);
         }
 
 
@@ -177,35 +142,6 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
  * Enregistre les variables de session des étapes
  */
 }else{
-
-    /*
-     * Token CSRF
-     */
-    if (!isset($_POST['step2_csrf_token']) || $_POST['step2_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
-        logLmc("Token CSRF invalide");
-        die("Erreur : Requête invalide.");
-    }
-
-    /*
-    * Honey Pot pour piéger les robots
-    */
-    if (!empty($_POST['step2_honeypot'])) {
-        logLmc("Honey Pot rempli (robot détecté)");
-        die("Erreur : Robot détecté.");
-    }
-
-    /*
-     * Test de rapidité d’envoi
-     */
-    /*
-    if (isset($_POST['step1_formStartTime'])) {
-        $duration = time() - (int) ($_POST['step1_formStartTime'] / 1000);
-        if ($duration < 3) {
-            logLmc("Envoi trop rapide ($duration s)");
-            die("Erreur : Envoi trop rapide.");
-        }
-    }
-    */
 
     /*
      * Enregistre les variables de session des étapes
@@ -331,7 +267,9 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
             $mail->send();
 
         } catch (Exception $e) {
-            error_log("Mailer error: " . $mail->ErrorInfo);
+            $_SESSION['lmc_data']['error_step'] = 3;
+            $_SESSION['lmc_data']['$error_message'] = "Impossible d'envoyer le mail.";
+            logLmc("IMPOSSIBLE D'ENVOYER LE MAIL :" . $mail->ErrorInfo);
         }
 
         $step3_otp = 'Code envoyé par mail';

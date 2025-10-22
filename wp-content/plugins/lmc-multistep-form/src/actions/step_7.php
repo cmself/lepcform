@@ -1,32 +1,23 @@
 <?php
+
 /*
  * Token CSRF
  */
-if (!isset($_POST['step6_csrf_token']) || $_POST['step6_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
+if (!isset($_POST['step1_csrf_token']) || $_POST['step1_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
+    $_SESSION['lmc_data']['error_step'] = 7;
+    $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
     logLmc("Token CSRF invalide");
-    die("Erreur : Requête invalide.");
 }
 
 /*
  * Honey Pot pour piéger les robots
  */
-if (!empty($_POST['step6_honeypot'])) {
+if (!empty($_POST['step1_honeypot'])) {
+    $_SESSION['lmc_data']['error_step'] = 7;
+    $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
     logLmc("Honey Pot rempli (robot détecté)");
-    die("Erreur : Robot détecté.");
 }
 
-/*
- * Test de rapidité d’envoi
- */
-/*
-if (isset($_POST['step1_formStartTime'])) {
-    $duration = time() - (int) ($_POST['step1_formStartTime'] / 1000);
-    if ($duration < 3) {
-        logLmc("Envoi trop rapide ($duration s)");
-        die("Erreur : Envoi trop rapide.");
-    }
-}
-*/
 
 $_SESSION['lmc_data']['reload'] = null;
 

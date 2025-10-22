@@ -2,20 +2,23 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 
+
 /*
  * Token CSRF
  */
-if (!isset($_POST['step0_csrf_token']) || $_POST['step0_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
+if (!isset($_POST['step1_csrf_token']) || $_POST['step1_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
+    $_SESSION['lmc_data']['error_step'] = 8;
+    $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
     logLmc("Token CSRF invalide");
-    die("Erreur : Requête invalide.");
 }
 
 /*
  * Honey Pot pour piéger les robots
  */
-if (!empty($_POST['step0_honeypot'])) {
+if (!empty($_POST['step1_honeypot'])) {
+    $_SESSION['lmc_data']['error_step'] = 8;
+    $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
     logLmc("Honey Pot rempli (robot détecté)");
-    die("Erreur : Robot détecté.");
 }
 
 if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_otp'] == 1 ) {
@@ -60,12 +63,14 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                         if (json_last_error() === JSON_ERROR_NONE) {
                             $_SESSION['lmc_data']['contacts_email'] = $data_email['data'];
                         } else {
-                            $step0_message = 'Impossibble de vérifier l\'adresse email';
-                            $_SESSION['lmc_data']['contacts_email'] = [];
+                            $_SESSION['lmc_data']['error_step'] = 8;
+                            $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+                            logLmc("IMPOSSIBLE DE SE CONNECTER A OHME");
                         }
                     } catch (ClientException $e) {
-                        $step0_message = 'Impossibble de vérifier l\'adresse email';
-                        $_SESSION['lmc_data']['contacts_email'] = [];
+                        $_SESSION['lmc_data']['error_step'] = 8;
+                        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+                        logLmc("API OHME Siren invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
                     }
 
                     if(count($_SESSION['lmc_data']['contacts_email']) > 0) {
@@ -86,8 +91,14 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                                     header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=1');
                                                 }
                                             } else {
+                                                $_SESSION['lmc_data']['error_step'] = 8;
+                                                $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+                                                logLmc("IMPOSSIBLE DE SE CONNECTER A OHME");
                                             }
                                         } catch (ClientException $e) {
+                                            $_SESSION['lmc_data']['error_step'] = 8;
+                                            $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+                                            logLmc("API OHME Siren invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
                                         }
                                     }
 
@@ -181,7 +192,9 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
         $step0_message = 'Code envoyé par mail';
 
     } catch (Exception $e) {
-        error_log("Mailer error: " . $mail->ErrorInfo);
+        $_SESSION['lmc_data']['error_step'] = 8;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible d'envoyer le mail.";
+        logLmc("IMPOSSIBLE D'ENVOYER LE MAIL :" . $mail->ErrorInfo);
     }
 
 }

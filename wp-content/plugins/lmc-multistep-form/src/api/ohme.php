@@ -20,11 +20,18 @@ try {
                 }
             }
         }
+    }else{
+        $_SESSION['lmc_data']['error_step'] = 1;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+        logLmc("Json OHME Contact invalide");
     }
 
 } catch (ClientException $e) {
-    echo 'HTTP Status Code: ' . $e->getResponse()->getStatusCode() . "\n";
-    echo 'Body: ' . $e->getResponse()->getBody();
+
+    $_SESSION['lmc_data']['error_step'] = 1;
+    $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+    logLmc("API OHME Contact invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
+
 }
 
 /*
@@ -46,11 +53,17 @@ try {
                 }
             }
         }
+    }else{
+        $_SESSION['lmc_data']['error_step'] = 1;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+        logLmc("Json OHME Structure invalide");
     }
 
 } catch (ClientException $e) {
-    echo 'HTTP Status Code: ' . $e->getResponse()->getStatusCode() . "\n";
-    echo 'Body: ' . $e->getResponse()->getBody();
+
+    $_SESSION['lmc_data']['error_step'] = 1;
+    $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+    logLmc("API OHME Structure invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
 }
 
 
@@ -74,11 +87,16 @@ try {
                 }
             }
         }
+    }else{
+        $_SESSION['lmc_data']['error_step'] = 1;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+        logLmc("Json OHME Group invalide");
     }
 
 } catch (ClientException $e) {
-    echo 'HTTP Status Code: ' . $e->getResponse()->getStatusCode() . "\n";
-    echo 'Body: ' . $e->getResponse()->getBody();
+    $_SESSION['lmc_data']['error_step'] = 1;
+    $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+    logLmc("API OHME Group invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
 }
 
 /*
@@ -101,11 +119,16 @@ try {
                 }
             }
         }
+    }else{
+        $_SESSION['lmc_data']['error_step'] = 1;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+        logLmc("Json OHME Payment invalide");
     }
 
 } catch (ClientException $e) {
-    echo 'HTTP Status Code: ' . $e->getResponse()->getStatusCode() . "\n";
-    echo 'Body: ' . $e->getResponse()->getBody();
+    $_SESSION['lmc_data']['error_step'] = 1;
+    $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+    logLmc("API OHME Payment invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
 }
 
 /*
@@ -128,11 +151,16 @@ try {
                 }
             }
         }
+    }else{
+        $_SESSION['lmc_data']['error_step'] = 1;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+        logLmc("Json OHME Interaction invalide");
     }
 
 } catch (ClientException $e) {
-    echo 'HTTP Status Code: ' . $e->getResponse()->getStatusCode() . "\n";
-    echo 'Body: ' . $e->getResponse()->getBody();
+    $_SESSION['lmc_data']['error_step'] = 1;
+    $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+    logLmc("API OHME Interaction invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
 }
 
 

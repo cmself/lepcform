@@ -4,16 +4,18 @@
  * Token CSRF
  */
 if (!isset($_POST['step1_csrf_token']) || $_POST['step1_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
+    $_SESSION['lmc_data']['error_step'] = 2;
+    $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
     logLmc("Token CSRF invalide");
-    die("Erreur : Requête invalide.");
 }
 
 /*
  * Honey Pot pour piéger les robots
  */
 if (!empty($_POST['step1_honeypot'])) {
+    $_SESSION['lmc_data']['error_step'] = 2;
+    $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
     logLmc("Honey Pot rempli (robot détecté)");
-    die("Erreur : Robot détecté.");
 }
 
 /*
@@ -50,13 +52,18 @@ if(isset($_SESSION['lmc_data']['step1_siret']) && !empty($_SESSION['lmc_data']['
         if (json_last_error() === JSON_ERROR_NONE) {
             $_SESSION['lmc_data']['structures_siren'] = $data_siren['data'];
         } else {
-            $_SESSION['lmc_data']['structures_siren'] = [];
+            $_SESSION['lmc_data']['error_step'] = 1;
+            $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+            logLmc("IMPOSSIBLE DE SE CONNECTER A OHME");
         }
     } catch (ClientException $e) {
-        $_SESSION['lmc_data']['structures_siren'] = [];
+        $_SESSION['lmc_data']['error_step'] = 1;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+        logLmc("API OHME Siren invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
     }
 }else{
     $_SESSION['lmc_data']['structures_siren'] = [];
+    header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=1');
 }
 
 
