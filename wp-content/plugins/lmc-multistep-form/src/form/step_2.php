@@ -1,3 +1,20 @@
+<?php
+/*
+ * Récuperer toutes les fonctions enregistrées en BO
+ */
+$fonctions_entreprise = [];
+$lmc_multistep_fe = get_posts( array(
+    'post_type'      => 'lmc_multistep_fe',
+    'posts_per_page' => -1,
+    'post_status'    => 'publish',
+    'orderby' => 'title',
+    'order'   => 'ASC'
+) );
+foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
+    $fonctions_entreprise[] = esc_html( $fonction_entreprise->post_title );
+}
+?>
+
 <div class="w-full! mb-[20px]!">
     <a href="<?= lmc_multistep_form__getCurrentUrl();?>?reload_step=1" class="block! w-full!">
     <button type="button"><i class="fa-solid fa-arrow-left"></i> Retour</button>
@@ -639,9 +656,7 @@
                 suggestionsDiv3.innerHTML = "";
             }
         });
-
     }
-
 
 
 
@@ -661,6 +676,9 @@
             });
         });
     }
+
+
+
 
     // Tableau des fonctions
     const fonctions_entreprise = [
