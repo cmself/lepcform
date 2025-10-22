@@ -4,7 +4,7 @@
 /*
  * Token CSRF
  */
-if (!isset($_POST['step1_csrf_token']) || $_POST['step1_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
+if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
     $_SESSION['lmc_data']['error_step'] = 4;
     $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
     logLmc("Token CSRF invalide");
@@ -13,7 +13,7 @@ if (!isset($_POST['step1_csrf_token']) || $_POST['step1_csrf_token'] !== $_SESSI
 /*
  * Honey Pot pour piéger les robots
  */
-if (!empty($_POST['step1_honeypot'])) {
+if (!empty($_POST['step3_honeypot'])) {
     $_SESSION['lmc_data']['error_step'] = 4;
     $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
     logLmc("Honey Pot rempli (robot détecté)");
