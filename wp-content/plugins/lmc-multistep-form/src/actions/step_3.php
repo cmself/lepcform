@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 if (!isset($_POST['step2_csrf_token']) || $_POST['step2_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
     $_SESSION['lmc_data']['error_step'] = 3;
     $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
-    logLmc("Token CSRF invalide");
+    lmc_multistep_form__logLmc("Token CSRF invalide");
 }
 
 /*
@@ -18,7 +18,7 @@ if (!isset($_POST['step2_csrf_token']) || $_POST['step2_csrf_token'] !== $_SESSI
 if (!empty($_POST['step2_honeypot'])) {
     $_SESSION['lmc_data']['error_step'] = 3;
     $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
-    logLmc("Honey Pot rempli (robot détecté)");
+    lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté)");
 }
 
 /*
@@ -82,7 +82,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
         ],
             ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
 
-        $otp = generate_otp(5);
+        $otp = lmc_multistep_form__generate_otp(5);
         $otpHash = password_hash($otp, PASSWORD_DEFAULT);
         $expiresMinutes = 10;
         $expiresAt = (new DateTime())->modify("+{$expiresMinutes} minutes")->format('Y-m-d H:i:s');
@@ -130,7 +130,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
 
             $_SESSION['lmc_data']['error_step'] = 3;
             $_SESSION['lmc_data']['$error_message'] = "Impossible d'envoyer le mail.";
-            logLmc("IMPOSSIBLE D'ENVOYER LE MAIL :" . $mail->ErrorInfo);
+            lmc_multistep_form__logLmc("IMPOSSIBLE D'ENVOYER LE MAIL :" . $mail->ErrorInfo);
         }
 
 
@@ -222,7 +222,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
         /*
          * Envoyer le code de vérification par mail
          */
-        $otp = generate_otp(5);
+        $otp = lmc_multistep_form__generate_otp(5);
         $otpHash = password_hash($otp, PASSWORD_DEFAULT);
         $expiresMinutes = 10;
         $expiresAt = (new DateTime())->modify("+{$expiresMinutes} minutes")->format('Y-m-d H:i:s');
@@ -269,7 +269,7 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
         } catch (Exception $e) {
             $_SESSION['lmc_data']['error_step'] = 3;
             $_SESSION['lmc_data']['$error_message'] = "Impossible d'envoyer le mail.";
-            logLmc("IMPOSSIBLE D'ENVOYER LE MAIL :" . $mail->ErrorInfo);
+            lmc_multistep_form__logLmc("IMPOSSIBLE D'ENVOYER LE MAIL :" . $mail->ErrorInfo);
         }
 
         $step3_otp = 'Code envoyé par mail';

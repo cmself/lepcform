@@ -3,7 +3,7 @@
 
 
 <div class="w-full! mb-[20px]!">
-    <a href="<?= getCurrentUrl();?>?reload_step=8" class="block! w-full!">
+    <a href="<?= lmc_multistep_form__getCurrentUrl();?>?reload_step=8" class="block! w-full!">
         <button type="button"><i class="fa-solid fa-arrow-left"></i> Retour</button>
     </a>
 </div>
@@ -53,7 +53,7 @@
 <?php }elseif(isset($stepMAJ) && $stepMAJ === 2){ ?>
 
     <div class="w-full! mb-[20px]!">
-        <a href="<?= getCurrentUrl();?>?reload_step=8" class="block! w-full!">
+        <a href="<?= lmc_multistep_form__getCurrentUrl();?>?reload_step=8" class="block! w-full!">
             <button type="button"><i class="fa-solid fa-arrow-left"></i> Retour</button>
         </a>
     </div>

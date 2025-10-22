@@ -173,7 +173,7 @@ function lmc_multistep_form() {
     /*
      * Fonction pour récupérer l'URL courante avec variables
      */
-    function getCurrentUrl() {
+    function lmc_multistep_form__getCurrentUrl() {
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
             || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 
@@ -187,7 +187,7 @@ function lmc_multistep_form() {
     /*
      * Fonction pour récupérer l'URL courante sans variables
      */
-    function getCurrentUrlWithoutQuery() {
+    function lmc_multistep_form__getCurrentUrlWithoutQuery() {
         // Détermine le protocole
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
             || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
@@ -205,7 +205,7 @@ function lmc_multistep_form() {
     /*
      * Fonction pour générer le code envoyé par mail
      */
-    function generate_otp(int $digits = 6): string {
+    function lmc_multistep_form__generate_otp(int $digits = 6): string {
         $min = (int) pow(10, $digits - 1);
         $max = (int) pow(10, $digits) - 1;
         return (string) random_int($min, $max); // cryptographically secure
@@ -214,11 +214,11 @@ function lmc_multistep_form() {
     /*
      * Enregistrement des tentatives suspectes
      */
-    function logLmc($reason) {
+    function lmc_multistep_form__logLmc($reason) {
         $logFile = __DIR__ . '/log/lmc-multistep-form.log';
         $entry = date('Y-m-d H:i:s') . " - IP: " . $_SERVER['REMOTE_ADDR'] . " - Motif: $reason\n";
         file_put_contents($logFile, $entry, FILE_APPEND);
-        header('Location: ' . getCurrentUrlWithoutQuery() .'?reload_step=400');
+        header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=400');
     }
 
     /*
@@ -327,7 +327,7 @@ function lmc_multistep_form() {
      */
     if(isset($_GET['reload_step']) && !empty($_GET['reload_step'])){
         $_SESSION['lmc_data']['reload'] = intval($_GET['reload_step']);
-        header('Location: ' . getCurrentUrlWithoutQuery());
+        header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery());
     }
 
     /*

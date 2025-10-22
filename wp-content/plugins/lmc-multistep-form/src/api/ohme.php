@@ -13,7 +13,7 @@ try {
     if ($code_contact != 200) {
         $_SESSION['lmc_data']['error_step'] = 1;
         $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-        logLmc("Json OHME Contact invalide");
+        lmc_multistep_form__logLmc("Json OHME Contact invalide");
     }
     $data_contact = json_decode($custom_fields_contact->getBody(), true);
     if (json_last_error() === JSON_ERROR_NONE) {
@@ -31,14 +31,14 @@ try {
     }else{
         $_SESSION['lmc_data']['error_step'] = 1;
         $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-        logLmc("Json OHME Contact invalide");
+        lmc_multistep_form__logLmc("Json OHME Contact invalide");
     }
 
 } catch (ClientException $e) {
 
     $_SESSION['lmc_data']['error_step'] = 1;
     $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-    logLmc("API OHME Contact invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
+    lmc_multistep_form__logLmc("API OHME Contact invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
 
 }
 
@@ -54,7 +54,7 @@ try {
     if ($code_structure != 200) {
         $_SESSION['lmc_data']['error_step'] = 1;
         $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-        logLmc("Json OHME Structure invalide");
+        lmc_multistep_form__logLmc("Json OHME Structure invalide");
     }
     $data_structure = json_decode($custom_fields_structure->getBody(), true);
     if (json_last_error() === JSON_ERROR_NONE) {
@@ -72,14 +72,14 @@ try {
     }else{
         $_SESSION['lmc_data']['error_step'] = 1;
         $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-        logLmc("Json OHME Structure invalide");
+        lmc_multistep_form__logLmc("Json OHME Structure invalide");
     }
 
 } catch (ClientException $e) {
 
     $_SESSION['lmc_data']['error_step'] = 1;
     $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-    logLmc("API OHME Structure invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
+    lmc_multistep_form__logLmc("API OHME Structure invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
 }
 
 
@@ -95,7 +95,7 @@ try {
     if ($code_group != 200) {
         $_SESSION['lmc_data']['error_step'] = 1;
         $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-        logLmc("Json OHME Group invalide");
+        lmc_multistep_form__logLmc("Json OHME Group invalide");
     }
     $data_group = json_decode($custom_fields_group->getBody(), true);
     if (json_last_error() === JSON_ERROR_NONE) {
@@ -114,13 +114,13 @@ try {
     }else{
         $_SESSION['lmc_data']['error_step'] = 1;
         $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-        logLmc("Json OHME Group invalide");
+        lmc_multistep_form__logLmc("Json OHME Group invalide");
     }
 
 } catch (ClientException $e) {
     $_SESSION['lmc_data']['error_step'] = 1;
     $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-    logLmc("API OHME Group invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
+    lmc_multistep_form__logLmc("API OHME Group invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
 }
 
 /*
@@ -135,7 +135,7 @@ try {
     if ($code_payment != 200) {
         $_SESSION['lmc_data']['error_step'] = 1;
         $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-        logLmc("Json OHME Payment invalide");
+        lmc_multistep_form__logLmc("Json OHME Payment invalide");
     }
     $data_payment = json_decode($custom_fields_payment->getBody(), true);
     if (json_last_error() === JSON_ERROR_NONE) {
@@ -154,13 +154,13 @@ try {
     }else{
         $_SESSION['lmc_data']['error_step'] = 1;
         $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-        logLmc("Json OHME Payment invalide");
+        lmc_multistep_form__logLmc("Json OHME Payment invalide");
     }
 
 } catch (ClientException $e) {
     $_SESSION['lmc_data']['error_step'] = 1;
     $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-    logLmc("API OHME Payment invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
+    lmc_multistep_form__logLmc("API OHME Payment invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
 }
 
 /*
@@ -176,7 +176,7 @@ try {
     if ($code_interaction != 200) {
         $_SESSION['lmc_data']['error_step'] = 1;
         $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-        logLmc("Json OHME Interaction invalide");
+        lmc_multistep_form__logLmc("Json OHME Interaction invalide");
     }
     $data_interaction = json_decode($custom_fields_interaction->getBody(), true);
     if (json_last_error() === JSON_ERROR_NONE) {
@@ -194,13 +194,13 @@ try {
     }else{
         $_SESSION['lmc_data']['error_step'] = 1;
         $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-        logLmc("Json OHME Interaction invalide");
+        lmc_multistep_form__logLmc("Json OHME Interaction invalide");
     }
 
 } catch (ClientException $e) {
     $_SESSION['lmc_data']['error_step'] = 1;
     $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-    logLmc("API OHME Interaction invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
+    lmc_multistep_form__logLmc("API OHME Interaction invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
 }
 
 
