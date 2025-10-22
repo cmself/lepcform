@@ -46,24 +46,26 @@ add_action('wp_enqueue_scripts', 'lmc_multistep_form__enqueue_assets');
 
 
 
-/*
- * Enregistre le Custom Post Type "Projet"
+
+
+/**
+ * Enregistre le Custom Post Type "Fonctions dans l'entreprise"
  */
-function lmc_multistep_form__register_cpt_projet() {
+function lmc_multistep_form__register_cpt_fe() {
 
     $labels = array(
-        'name'               => 'Fonctions dans l\'entreprise',
-        'singular_name'      => 'Fonction dans l\'entreprise',
-        'menu_name'          => 'Fonctions dans l\'entreprise',
-        'name_admin_bar'     => 'Fonction dans l\'entreprise',
-        'add_new'            => 'Ajouter une nouvelle fonction',
-        'add_new_item'       => 'Ajouter une fonction',
-        'edit_item'          => 'Modifier la fonction',
-        'new_item'           => 'Nouvelle fonction',
-        'view_item'          => 'Voir la fonction',
-        'search_items'       => 'Rechercher des fonctions',
-        'not_found'          => 'Aucune fonction trouvée',
-        'not_found_in_trash' => 'Aucune fonction dans la corbeille',
+        'name'               => 'LMC multistep form - Fonctions dans l\'entreprise',
+        'singular_name'      => 'LMC multistep form - Fonctions dans l\'entreprise',
+        'menu_name'          => 'LMC multistep form - Fonctions dans l\'entreprise',
+        'name_admin_bar'     => 'LMC multistep form - Fonctions dans l\'entreprise',
+        'add_new'            => 'Ajouter une fonction dans l\'entreprise',
+        'add_new_item'       => 'Ajouter une fonction dans l\'entreprise',
+        'edit_item'          => 'Modifier la fonction dans l\'entreprise',
+        'new_item'           => 'Nouvelle fonction dans l\'entreprise',
+        'view_item'          => 'Voir la fonction dans l\'entreprise',
+        'search_items'       => 'Rechercher des fonctions dans l\'entreprise',
+        'not_found'          => 'Aucune fonction dans l\'entreprise trouvée',
+        'not_found_in_trash' => 'Aucune fonction dans l\'entreprise dans la corbeille',
     );
 
     $args = array(
@@ -74,19 +76,21 @@ function lmc_multistep_form__register_cpt_projet() {
         'menu_icon'          => 'dashicons-portfolio',
         'supports'           => array( 'title' ),
         'has_archive'        => true,
-        'rewrite'            => array( 'slug' => 'lmc-multistep-form-fonctions' ),
-        'show_in_rest'       => true,
+        'rewrite'            => array( 'slug' => 'lmc-multistep-fe' ),
+        'show_in_rest'       => true, // pour Gutenberg et API REST
     );
 
-    register_post_type( 'lmc-multistep-form-fonction', $args );
+    register_post_type( 'lmc_multistep_fe', $args );
 }
-add_action( 'init', 'lmc_multistep_form__register_cpt_projet' );
+add_action( 'init', 'lmc_multistep_form__register_cpt_fe' );
+
 
 /*
  * Vider les permaliens à l’activation du plugin
  */
+
 function lmc_multistep_form__rewrite_flush() {
-    lmc_multistep_form__register_cpt_projet();
+    lmc_multistep_form__register_cpt_fe();
     flush_rewrite_rules();
 }
 register_activation_hook( __FILE__, 'lmc_multistep_form__rewrite_flush' );
