@@ -247,17 +247,18 @@
 
 
         .suggestions {
-            border: 1px solid #ccc;
-            max-width: 300px;
-            position: absolute;
-            background: #fff;
+            background: var(--color-blanc);
+            z-index: 1000;
         }
         .suggestion-item {
-            padding: 5px;
+            padding: 10px;
             cursor: pointer;
+            background-color: var(--color-blanc);
+            color: var(--color-purple);
         }
         .suggestion-item:hover {
-            background-color: #f0f0f0;
+            background-color: var(--color-rose);
+            color: var(--color-blanc);
         }
     }
 

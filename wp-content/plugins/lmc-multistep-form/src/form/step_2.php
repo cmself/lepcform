@@ -21,21 +21,10 @@
         </div>
     </div>
 
-    <p><label for="step2_fonction_0"><span>Fonction dans l’organisation * :</span>
-            <select name="step2_fonction_0" id="step2_fonction_0">
-                <?php
-                if ($fonctions_entreprise):
-                    ?>
-                    <option>Choisir une réponse</option>
-                    <?php
-                    foreach ($fonctions_entreprise as $option):
-                        ?>
-                        <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_fonction_0 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
-                    <?php
-                    endforeach;
-                endif;
-                ?>
-            </select>
+    <p>
+        <label for="step2_fonction_0"><span>Fonction dans l’organisation * :</span>
+            <input type="text" id="step2_fonction_0" name="step2_fonction_0" placeholder="Tapez une fonction..." />
+            <div id="suggestions0" class="suggestions"></div>
         </label>
     </p>
 
@@ -43,18 +32,18 @@
         <label for="step2_email_0"><span>Email * :</span> <input type="email" id="step2_email_0" name="step2_email_0" placeholder="Email" value="<?php echo (isset($value_form[0]->step2_email_0) && !empty($value_form[0]->step2_email_0)) ? $value_form[0]->step2_email_0 : ''; ?>" required></label>
     </p>
 
-    <p><label for="step2_role_0"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
-
-            <input type="text" id="step2_role_0" name="step2_role_0" placeholder="Tapez une fonction..." />
-            <div id="suggestions" class="suggestions"></div>
-
-            <!--
+    <p>
+        <label for="step2_role_0"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
             <select name="step2_role_0" id="step2_role_0" disabled>
-                <?php  if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):?>
-                        <option value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][0]); ?>" selected><?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][0]); ?></option>
-                <?php endif; ?>
+                <?php
+                if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
+                    ?>
+                    <option value="<?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][0]); ?>" selected><?= htmlspecialchars($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options'][0]); ?></option>
+                <?php
+
+                endif;
+                ?>
             </select>
-            -->
         </label>
     </p>
 
@@ -65,7 +54,6 @@
     </p>
 
     <div class="useradd">
-
 
         <?php if(isset($value_form[0]->step2_email_1) && !empty($value_form[0]->step2_email_1)){ ?>
 
@@ -93,21 +81,10 @@
                 </div>
             </div>
 
-            <p><label for="step2_fonction_1"><span>Fonction dans l’organisation * :</span>
-                    <select name="step2_fonction_1" id="step2_fonction_1" >
-                        <?php
-                        if ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
-                            ?>
-                            <option>Choisir une réponse</option>
-                            <?php
-                            foreach ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options'] as $option):
-                                ?>
-                                <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_fonction_1 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
-                            <?php
-                            endforeach;
-                        endif;
-                        ?>
-                    </select>
+            <p>
+                <label for="step2_fonction_1"><span>Fonction dans l’organisation * :</span>
+                    <input type="text" id="step2_fonction_1" name="step2_fonction_1" placeholder="Tapez une fonction..." />
+                    <div id="suggestions1" class="suggestions"></div>
                 </label>
             </p>
 
@@ -115,7 +92,8 @@
                 <label for="step2_email_1"><span>Email * :</span> <input type="email" id="step2_email_1" name="step2_email_1" placeholder="Email" value="<?php echo (isset($value_form[0]->step2_email_1) && !empty($value_form[0]->step2_email_1)) ? $value_form[0]->step2_email_1 : ''; ?>" required></label>
             </p>
 
-            <p><label for="step2_role_1"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
+            <p>
+                <label for="step2_role_1"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
                     <select name="step2_role_1" id="step2_role_1" disabled>
                         <?php
                         if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
@@ -169,21 +147,10 @@
                     </div>
                 </div>
 
-                <p><label for="step2_fonction_2"><span>Fonction dans l’organisation * :</span>
-                        <select name="step2_fonction_2" id="step2_fonction_2" >
-                            <?php
-                            if ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
-                                ?>
-                                <option>Choisir une réponse</option>
-                                <?php
-                                foreach ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options'] as $option):
-                                    ?>
-                                    <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_fonction_2 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
-                                <?php
-                                endforeach;
-                            endif;
-                            ?>
-                        </select>
+                <p>
+                    <label for="step2_fonction_2"><span>Fonction dans l’organisation * :</span>
+                        <input type="text" id="step2_fonction_2" name="step2_fonction_2" placeholder="Tapez une fonction..." />
+                        <div id="suggestions2" class="suggestions"></div>
                     </label>
                 </p>
 
@@ -246,21 +213,10 @@
                     </div>
                 </div>
 
-                <p><label for="step2_fonction_3"><span>Fonction dans l’organisation * :</span>
-                        <select name="step2_fonction_3" id="step2_fonction_3" >
-                            <?php
-                            if ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
-                                ?>
-                                <option>Choisir une réponse</option>
-                                <?php
-                                foreach ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options'] as $option):
-                                    ?>
-                                    <option value="<?= htmlspecialchars($option); ?>" <?php echo ($value_form[0]->step2_fonction_3 == htmlspecialchars($option)) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
-                                <?php
-                                endforeach;
-                            endif;
-                            ?>
-                        </select>
+                <p>
+                    <label for="step2_fonction_3"><span>Fonction dans l’organisation * :</span>
+                        <input type="text" id="step2_fonction_3" name="step2_fonction_3" placeholder="Tapez une fonction..." />
+                        <div id="suggestions3" class="suggestions"></div>
                     </label>
                 </p>
 
@@ -268,7 +224,8 @@
                     <label for="step2_email_3"><span>Email * :</span> <input type="email" id="step2_email_3" name="step2_email_3" placeholder="Email" value="<?php echo (isset($value_form[0]->step2_email_3) && !empty($value_form[0]->step2_email_3)) ? $value_form[0]->step2_email_3 : ''; ?>" required></label>
                 </p>
 
-                <p><label for="step2_role_3"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
+                <p>
+                    <label for="step2_role_3"><span>Rôle dans l’organisation pour la Charte de la diversité :</span>
                         <select name="step2_role_3" id="step2_role_3" disabled>
                             <?php
                             if ($_SESSION['lmc_data']['ohme_data']['Contact']['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite']['options']):
@@ -287,7 +244,7 @@
                                 class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
                 </p>
 
-                <input type="hidden" id="step2_useradd_1" name="step2_useradd_1">
+                <input type="hidden" id="step2_useradd_3" name="step2_useradd_3">
 
 
             </div>
@@ -367,23 +324,13 @@
         </div>
     </div>
 
-    <p><label for="step2_fonction_` + (currentContacts+1) + `"><span>Fonction dans l’organisation * :</span>
-            <select name="step2_fonction_` + (currentContacts+1) + `" id="step2_fonction_` + (currentContacts+1) + `" >
-                <?php
-            if ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
-            ?>
-                <option>Choisir une réponse</option>
-            <?php
-            foreach ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options'] as $option):
-            ?>
-                        <option value="<?= htmlspecialchars($option); ?>"><?= htmlspecialchars($option); ?></option>
-                    <?php
-            endforeach;
-            endif;
-            ?>
-            </select>
-        </label>
-    </p>
+
+    <p>
+    <label for="step2_fonction_` + (currentContacts+1) + `"><span>Fonction dans l’organisation * :</span>
+                        <input type="text" id="step2_fonction_` + (currentContacts+1) + `" name="step2_fonction_` + (currentContacts+1) + `" placeholder="Tapez une fonction..." />
+                        <div id="suggestions` + (currentContacts+1) + `" class="suggestions"></div>
+                    </label>
+                </p>
 
     <p>
         <label for="step2_email_` + (currentContacts+1) + `"><span>Email * :</span> <input type="email" id="step2_email_` + (currentContacts+1) + `" name="step2_email_` + (currentContacts+1) + `" placeholder="Email"
@@ -432,6 +379,82 @@
 
                 });
             }
+
+            // Récupération des fonctions_entreprise 1
+            const input1 = document.getElementById("step2_fonction_1");
+            const suggestionsDiv1 = document.getElementById("suggestions1");
+            input1.addEventListener("input", () => {
+                const query = input1.value.toLowerCase();
+                suggestionsDiv1.innerHTML = "";
+                if (query.length === 0) return;
+                const filtered = fonctions_entreprise.filter(name => name.toLowerCase().includes(query)).slice(0, 5);
+                filtered.forEach(name => {
+                    const div = document.createElement("div");
+                    div.textContent = name;
+                    div.classList.add("suggestion-item");
+                    div.addEventListener("click", () => {
+                        input1.value = name;
+                        suggestionsDiv1.innerHTML = "";
+                    });
+                    suggestionsDiv1.appendChild(div);
+                });
+            });
+            document.addEventListener("click", (e) => {
+                if (!input1.contains(e.target)) {
+                    suggestionsDiv1.innerHTML = "";
+                }
+            });
+
+            // Récupération des fonctions_entreprise 2
+            const input2 = document.getElementById("step2_fonction_2");
+            const suggestionsDiv2 = document.getElementById("suggestions2");
+            input2.addEventListener("input", () => {
+                const query = input2.value.toLowerCase();
+                suggestionsDiv2.innerHTML = "";
+                if (query.length === 0) return;
+                const filtered = fonctions_entreprise.filter(name => name.toLowerCase().includes(query)).slice(0, 5);
+                filtered.forEach(name => {
+                    const div = document.createElement("div");
+                    div.textContent = name;
+                    div.classList.add("suggestion-item");
+                    div.addEventListener("click", () => {
+                        input2.value = name;
+                        suggestionsDiv2.innerHTML = "";
+                    });
+                    suggestionsDiv2.appendChild(div);
+                });
+            });
+            document.addEventListener("click", (e) => {
+                if (!input2.contains(e.target)) {
+                    suggestionsDiv2.innerHTML = "";
+                }
+            });
+
+            // Récupération des fonctions_entreprise 3
+            const input3 = document.getElementById("step2_fonction_3");
+            const suggestionsDiv3 = document.getElementById("suggestions3");
+            input3.addEventListener("input", () => {
+                const query = input3.value.toLowerCase();
+                suggestionsDiv3.innerHTML = "";
+                if (query.length === 0) return;
+                const filtered = fonctions_entreprise.filter(name => name.toLowerCase().includes(query)).slice(0, 5);
+                filtered.forEach(name => {
+                    const div = document.createElement("div");
+                    div.textContent = name;
+                    div.classList.add("suggestion-item");
+                    div.addEventListener("click", () => {
+                        input3.value = name;
+                        suggestionsDiv3.innerHTML = "";
+                    });
+                    suggestionsDiv3.appendChild(div);
+                });
+            });
+            document.addEventListener("click", (e) => {
+                if (!input3.contains(e.target)) {
+                    suggestionsDiv3.innerHTML = "";
+                }
+            });
+
 
         } else {
             addBtn.style.display = 'none';
@@ -490,22 +513,10 @@
     </div>
 
     <p><label for="step2_fonction_` + (i + 1) + `"><span>Fonction dans l’organisation * :</span>
-            <select name="step2_fonction_` + (i + 1) + `" id="step2_fonction_` + (i + 1) + `" >
-                <?php
-            if ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options']):
-            ?>
-                <option>Choisir une réponse</option>
-            <?php
-            foreach ($_SESSION['lmc_data']['ohme_data']['Contact']['fonction_dans_lentreprise']['options'] as $option):
-            ?>
-                        <option value="<?= htmlspecialchars($option); ?>"><?= htmlspecialchars($option); ?></option>
-                    <?php
-            endforeach;
-            endif;
-            ?>
-            </select>
-        </label>
-    </p>
+                        <input type="text" id="step2_fonction_` + (i + 1) + `" name="step2_fonction_` + ( i+1 ) + `" placeholder="Tapez une fonction..." />
+                        <div id="suggestions` + ( i + 1) + `" class="suggestions"></div>
+                    </label>
+                </p>
 
     <p>
         <label for="step2_email_` + (i + 1) + `"><span>Email * :</span> <input type="email" id="step2_email_` + (i + 1) + `" name="step2_email_` + (i + 1) + `" placeholder="Email"
@@ -554,8 +565,84 @@
             });
         }
 
+        // Récupération des fonctions_entreprise 1
+        const input1 = document.getElementById("step2_fonction_1");
+        const suggestionsDiv1 = document.getElementById("suggestions1");
+        input1.addEventListener("input", () => {
+            const query = input1.value.toLowerCase();
+            suggestionsDiv1.innerHTML = "";
+            if (query.length === 0) return;
+            const filtered = fonctions_entreprise.filter(name => name.toLowerCase().includes(query)).slice(0, 5);
+            filtered.forEach(name => {
+                const div = document.createElement("div");
+                div.textContent = name;
+                div.classList.add("suggestion-item");
+                div.addEventListener("click", () => {
+                    input1.value = name;
+                    suggestionsDiv1.innerHTML = "";
+                });
+                suggestionsDiv1.appendChild(div);
+            });
+        });
+        document.addEventListener("click", (e) => {
+            if (!input1.contains(e.target)) {
+                suggestionsDiv1.innerHTML = "";
+            }
+        });
+
+        // Récupération des fonctions_entreprise 2
+        const input2 = document.getElementById("step2_fonction_2");
+        const suggestionsDiv2 = document.getElementById("suggestions2");
+        input2.addEventListener("input", () => {
+            const query = input2.value.toLowerCase();
+            suggestionsDiv2.innerHTML = "";
+            if (query.length === 0) return;
+            const filtered = fonctions_entreprise.filter(name => name.toLowerCase().includes(query)).slice(0, 5);
+            filtered.forEach(name => {
+                const div = document.createElement("div");
+                div.textContent = name;
+                div.classList.add("suggestion-item");
+                div.addEventListener("click", () => {
+                    input2.value = name;
+                    suggestionsDiv2.innerHTML = "";
+                });
+                suggestionsDiv2.appendChild(div);
+            });
+        });
+        document.addEventListener("click", (e) => {
+            if (!input2.contains(e.target)) {
+                suggestionsDiv2.innerHTML = "";
+            }
+        });
+
+        // Récupération des fonctions_entreprise 3
+        const input3 = document.getElementById("step2_fonction_3");
+        const suggestionsDiv3 = document.getElementById("suggestions3");
+        input3.addEventListener("input", () => {
+            const query = input3.value.toLowerCase();
+            suggestionsDiv3.innerHTML = "";
+            if (query.length === 0) return;
+            const filtered = fonctions_entreprise.filter(name => name.toLowerCase().includes(query)).slice(0, 5);
+            filtered.forEach(name => {
+                const div = document.createElement("div");
+                div.textContent = name;
+                div.classList.add("suggestion-item");
+                div.addEventListener("click", () => {
+                    input3.value = name;
+                    suggestionsDiv3.innerHTML = "";
+                });
+                suggestionsDiv3.appendChild(div);
+            });
+        });
+        document.addEventListener("click", (e) => {
+            if (!input3.contains(e.target)) {
+                suggestionsDiv3.innerHTML = "";
+            }
+        });
 
     }
+
+
 
 
     tippy('[data-tippy-content]', {
@@ -575,9 +662,8 @@
         });
     }
 
-
-    // Tableau de noms
-    const names = [
+    // Tableau des fonctions
+    const fonctions_entreprise = [
         <?php
         foreach ( $fonctions_entreprise as $fonction ) {
             echo '"' . $fonction . '", ';
@@ -585,36 +671,105 @@
         ?>
     ];
 
-    // Récupération des éléments
-    const input = document.getElementById("step2_role_0");
-    const suggestionsDiv = document.getElementById("suggestions");
-
-    // Fonction pour filtrer et afficher les suggestions
-    input.addEventListener("input", () => {
-        const query = input.value.toLowerCase();
-        suggestionsDiv.innerHTML = "";
-
+    // Récupération des fonctions_entreprise 0
+    const input0 = document.getElementById("step2_fonction_0");
+    const suggestionsDiv0 = document.getElementById("suggestions0");
+    input0.addEventListener("input", () => {
+        const query = input0.value.toLowerCase();
+        suggestionsDiv0.innerHTML = "";
         if (query.length === 0) return;
-
-        const filtered = names.filter(name => name.toLowerCase().includes(query)).slice(0, 5);
-
+        const filtered = fonctions_entreprise.filter(name => name.toLowerCase().includes(query)).slice(0, 5);
         filtered.forEach(name => {
             const div = document.createElement("div");
             div.textContent = name;
             div.classList.add("suggestion-item");
             div.addEventListener("click", () => {
-                input.value = name;
-                suggestionsDiv.innerHTML = "";
+                input0.value = name;
+                suggestionsDiv0.innerHTML = "";
             });
-            suggestionsDiv.appendChild(div);
+            suggestionsDiv0.appendChild(div);
         });
     });
-
-    // Optionnel : fermer les suggestions si clic en dehors
     document.addEventListener("click", (e) => {
-        if (!input.contains(e.target)) {
-            suggestionsDiv.innerHTML = "";
+        if (!input0.contains(e.target)) {
+            suggestionsDiv0.innerHTML = "";
         }
     });
+
+    // Récupération des fonctions_entreprise 1
+    const input1 = document.getElementById("step2_fonction_1");
+    const suggestionsDiv1 = document.getElementById("suggestions1");
+    input1.addEventListener("input", () => {
+        const query = input1.value.toLowerCase();
+        suggestionsDiv1.innerHTML = "";
+        if (query.length === 0) return;
+        const filtered = fonctions_entreprise.filter(name => name.toLowerCase().includes(query)).slice(0, 5);
+        filtered.forEach(name => {
+            const div = document.createElement("div");
+            div.textContent = name;
+            div.classList.add("suggestion-item");
+            div.addEventListener("click", () => {
+                input1.value = name;
+                suggestionsDiv1.innerHTML = "";
+            });
+            suggestionsDiv1.appendChild(div);
+        });
+    });
+    document.addEventListener("click", (e) => {
+        if (!input1.contains(e.target)) {
+            suggestionsDiv1.innerHTML = "";
+        }
+    });
+
+    // Récupération des fonctions_entreprise 2
+    const input2 = document.getElementById("step2_fonction_2");
+    const suggestionsDiv2 = document.getElementById("suggestions2");
+    input2.addEventListener("input", () => {
+        const query = input2.value.toLowerCase();
+        suggestionsDiv2.innerHTML = "";
+        if (query.length === 0) return;
+        const filtered = fonctions_entreprise.filter(name => name.toLowerCase().includes(query)).slice(0, 5);
+        filtered.forEach(name => {
+            const div = document.createElement("div");
+            div.textContent = name;
+            div.classList.add("suggestion-item");
+            div.addEventListener("click", () => {
+                input2.value = name;
+                suggestionsDiv2.innerHTML = "";
+            });
+            suggestionsDiv2.appendChild(div);
+        });
+    });
+    document.addEventListener("click", (e) => {
+        if (!input2.contains(e.target)) {
+            suggestionsDiv2.innerHTML = "";
+        }
+    });
+
+    // Récupération des fonctions_entreprise 3
+    const input3 = document.getElementById("step2_fonction_3");
+    const suggestionsDiv3 = document.getElementById("suggestions3");
+    input3.addEventListener("input", () => {
+        const query = input3.value.toLowerCase();
+        suggestionsDiv3.innerHTML = "";
+        if (query.length === 0) return;
+        const filtered = fonctions_entreprise.filter(name => name.toLowerCase().includes(query)).slice(0, 5);
+        filtered.forEach(name => {
+            const div = document.createElement("div");
+            div.textContent = name;
+            div.classList.add("suggestion-item");
+            div.addEventListener("click", () => {
+                input3.value = name;
+                suggestionsDiv3.innerHTML = "";
+            });
+            suggestionsDiv3.appendChild(div);
+        });
+    });
+    document.addEventListener("click", (e) => {
+        if (!input3.contains(e.target)) {
+            suggestionsDiv3.innerHTML = "";
+        }
+    });
+
 
 </script>
