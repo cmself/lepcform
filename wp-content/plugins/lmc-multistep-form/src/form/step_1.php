@@ -12,8 +12,7 @@
         <?php } else { ?>
             <input type="text" id="step1_siret" pattern="\d{14}" maxlength="14"
                    title="Veuillez entrer exactement 14 chiffres" name="step1_siret" placeholder="SIRET"
-                   value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>"
-                   required>
+                   value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" required>
         <?php } ?>
 
     </label></p>
@@ -251,8 +250,7 @@
 <input type="hidden" id="step1_formStartTime" name="step1_formStartTime">
 <script>document.getElementById('step1_formStartTime').value = Date.now();</script>
 <input type="text" name="step1_honeypot" id="step1_honeypot" style="display:none;">
-<input type="hidden" id="step1_csrf_token" name="step1_csrf_token"
-       value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
+<input type="hidden" id="step1_csrf_token" name="step1_csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
 <input type="hidden" name="step" value="2">
 <p class="block! w-full! text-center! text-[var(--color-blanc)]! text-[20px]! font-light! py-[20px]! opacity-50!">*
     champs nécessaires pour valider l’étape</p>
