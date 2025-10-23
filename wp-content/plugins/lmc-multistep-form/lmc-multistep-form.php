@@ -22,142 +22,16 @@ use GuzzleHttp\Client;
 
 
 /*
- * Démarrer une session PHP
- */
-function lmc_multistep_form__start_session() {
-    if (!session_id()) {
-        session_start();
-    }
-}
-add_action('init', 'lmc_multistep_form__start_session');
-
-/*
- * Charger les scripts et css
- */
-function lmc_multistep_form__enqueue_assets() {
-    wp_enqueue_style('lmc-tippycss', plugin_dir_url(__FILE__) . 'node_modules/tippy.js/dist/tippy.css');
-    wp_enqueue_style('lmc-style', plugin_dir_url(__FILE__) . 'assets/css/style.css');
-    wp_enqueue_script('lmc-popperjs','https://unpkg.com/@popperjs/core@2' , false, true);
-    wp_enqueue_script('lmc-tippyjs','https://unpkg.com/tippy.js@6' , false, true);
-    wp_enqueue_script('lmc-recaptcha','https://www.google.com/recaptcha/api.js' , false, true);
-    wp_enqueue_script('lmc-script', plugin_dir_url(__FILE__) . 'assets/js/script.js', array('jquery'), false, true);
-}
-add_action('wp_enqueue_scripts', 'lmc_multistep_form__enqueue_assets');
-
-
-
-
-
-/**
- * Enregistre le Custom Post Type "Fonctions dans l'entreprise"
- */
-function lmc_multistep_form__register_cpt_fe() {
-
-    $labels = array(
-        'name'               => 'LMC multistep form - Fonctions dans l\'entreprise',
-        'singular_name'      => 'LMC multistep form - Fonctions dans l\'entreprise',
-        'menu_name'          => 'LMC multistep form - Fonctions dans l\'entreprise',
-        'name_admin_bar'     => 'LMC multistep form - Fonctions dans l\'entreprise',
-        'add_new'            => 'Ajouter une fonction dans l\'entreprise',
-        'add_new_item'       => 'Ajouter une fonction dans l\'entreprise',
-        'edit_item'          => 'Modifier la fonction dans l\'entreprise',
-        'new_item'           => 'Nouvelle fonction dans l\'entreprise',
-        'view_item'          => 'Voir la fonction dans l\'entreprise',
-        'search_items'       => 'Rechercher des fonctions dans l\'entreprise',
-        'not_found'          => 'Aucune fonction dans l\'entreprise trouvée',
-        'not_found_in_trash' => 'Aucune fonction dans l\'entreprise dans la corbeille',
-    );
-
-    $args = array(
-        'labels'             => $labels,
-        'public'             => true,
-        'show_in_menu'       => true,
-        'menu_position'      => 5,
-        'menu_icon'          => 'dashicons-portfolio',
-        'supports'           => array( 'title' ),
-        'has_archive'        => true,
-        'rewrite'            => array( 'slug' => 'lmc-multistep-fe' ),
-        'show_in_rest'       => true, // pour Gutenberg et API REST
-    );
-
-    register_post_type( 'lmc_multistep_fe', $args );
-}
-add_action( 'init', 'lmc_multistep_form__register_cpt_fe' );
-
-
-/*
- * Vider les permaliens à l’activation du plugin
- */
-
-function lmc_multistep_form__rewrite_flush() {
-    lmc_multistep_form__register_cpt_fe();
-    flush_rewrite_rules();
-}
-register_activation_hook( __FILE__, 'lmc_multistep_form__rewrite_flush' );
-
-
-
-/*
-     * Fonction pour récupérer l'URL courante avec variables
-     */
-function lmc_multistep_form__getCurrentUrl() {
-    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
-        || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-
-    $host = $_SERVER['HTTP_HOST'];
-
-    $uri = $_SERVER['REQUEST_URI'];
-
-    return $protocol . $host . $uri;
-}
-
-/*
- * Fonction pour récupérer l'URL courante sans variables
- */
-function lmc_multistep_form__getCurrentUrlWithoutQuery() {
-    // Détermine le protocole
-    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
-        || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-
-    // Récupère le nom d’hôte
-    $host = $_SERVER['HTTP_HOST'];
-
-    // Récupère le chemin sans la query string
-    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-    // Reconstruit l’URL
-    return $protocol . $host . $path;
-}
-
-/*
- * Fonction pour générer le code envoyé par mail
- */
-function lmc_multistep_form__generate_otp(int $digits = 6): string {
-    $min = (int) pow(10, $digits - 1);
-    $max = (int) pow(10, $digits) - 1;
-    return (string) random_int($min, $max); // cryptographically secure
-}
-
-/*
- * Enregistrement des tentatives suspectes
- */
-function lmc_multistep_form__logLmc($reason) {
-    $logFile = __DIR__ . '/log/lmc-multistep-form.log';
-    $entry = date('Y-m-d H:i:s') . " - IP: " . $_SERVER['REMOTE_ADDR'] . " - Motif: $reason\n";
-    file_put_contents($logFile, $entry, FILE_APPEND);
-    header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=400');
-}
-
-
-
-/*
  * définition des variables pour envoyer les mails
  */
 include_once 'src/config.php';
 
 
 
-function lmc_multistep_form() {
+/*
+ * Enregistre le Custom Post Type "Fonctions dans l'entreprise"
+ */
+function lmc_multistep_form__actiave_plugin() {
 
     /*
      * Création de la base de données
@@ -228,6 +102,164 @@ function lmc_multistep_form() {
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     ");
 
+
+    /*
+     * Enregistre le Custom Post Type "Fonctions dans l'entreprise"
+     */
+    $post_type = 'lmc-multistep-fe';
+
+    if ( ! post_type_exists( $post_type ) ) {
+
+        $labels = array(
+            'name' => 'LMC multistep form - Fonctions dans l\'entreprise',
+            'singular_name' => 'LMC multistep form - Fonctions dans l\'entreprise',
+            'menu_name' => 'LMC multistep form - Fonctions dans l\'entreprise',
+            'name_admin_bar' => 'LMC multistep form - Fonctions dans l\'entreprise',
+            'add_new' => 'Ajouter une fonction dans l\'entreprise',
+            'add_new_item' => 'Ajouter une fonction dans l\'entreprise',
+            'edit_item' => 'Modifier la fonction dans l\'entreprise',
+            'new_item' => 'Nouvelle fonction dans l\'entreprise',
+            'view_item' => 'Voir la fonction dans l\'entreprise',
+            'search_items' => 'Rechercher des fonctions dans l\'entreprise',
+            'not_found' => 'Aucune fonction dans l\'entreprise trouvée',
+            'not_found_in_trash' => 'Aucune fonction dans l\'entreprise dans la corbeille',
+        );
+
+        $args = array(
+            'labels' => $labels,
+            'public' => true,
+            'show_in_menu' => true,
+            'menu_position' => 5,
+            'menu_icon' => 'dashicons-portfolio',
+            'supports' => array('title'),
+            'has_archive' => true,
+            'rewrite' => array('slug' => 'lmc-multistep-fe'),
+            'show_in_rest' => true, // pour Gutenberg et API REST
+        );
+
+        register_post_type('lmc_multistep_fe', $args);
+    }
+
+
+    /*
+     * Ajoute des fonctions dans le Custom Post Type "Fonctions dans l'entreprise"
+     */
+    $csv_file = __DIR__ . '/import/lmc-multistep-fe.csv';
+
+    if ( ! file_exists($csv_file) ) {
+        return;
+    }
+
+    if ( ! function_exists( 'post_exists' ) ) {
+        require_once ABSPATH . 'wp-admin/includes/post.php';
+    }
+
+    if (($handle = fopen($csv_file, 'r')) !== false) {
+        $header = fgetcsv($handle, 1000, ',');
+        while (($row = fgetcsv($handle, 1000, ',')) !== false) {
+            $data = array_combine($header, $row);
+            if (!post_exists($data['fonction_title'],'','','lmc-multistep-fe')) {
+                wp_insert_post([
+                    'post_title'   => $data['fonction_title'],
+                    'post_status'  => 1,
+                    'post_type'    => 'lmc-multistep-fe'
+                ]);
+            }
+        }
+        fclose($handle);
+    }
+
+    flush_rewrite_rules();
+
+
+}
+//add_action( 'init', 'lmc_multistep_form__actiave_plugin' );
+register_activation_hook( __FILE__, 'lmc_multistep_form__actiave_plugin' );
+//register_deactivation_hook
+
+
+
+/*
+ * Démarrer une session PHP
+ */
+function lmc_multistep_form__start_session() {
+    if (!session_id()) {
+        session_start();
+    }
+}
+add_action('init', 'lmc_multistep_form__start_session');
+
+/*
+ * Charger les scripts et css
+ */
+function lmc_multistep_form__enqueue_assets() {
+    wp_enqueue_style('lmc-tippycss', plugin_dir_url(__FILE__) . 'node_modules/tippy.js/dist/tippy.css');
+    wp_enqueue_style('lmc-style', plugin_dir_url(__FILE__) . 'assets/css/style.css');
+    wp_enqueue_script('lmc-popperjs','https://unpkg.com/@popperjs/core@2' , false, true);
+    wp_enqueue_script('lmc-tippyjs','https://unpkg.com/tippy.js@6' , false, true);
+    wp_enqueue_script('lmc-recaptcha','https://www.google.com/recaptcha/api.js' , false, true);
+    wp_enqueue_script('lmc-script', plugin_dir_url(__FILE__) . 'assets/js/script.js', array('jquery'), false, true);
+}
+add_action('wp_enqueue_scripts', 'lmc_multistep_form__enqueue_assets');
+
+
+/*
+ * Fonction pour récupérer l'URL courante avec variables
+ */
+function lmc_multistep_form__getCurrentUrl() {
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
+        || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+    $host = $_SERVER['HTTP_HOST'];
+
+    $uri = $_SERVER['REQUEST_URI'];
+
+    return $protocol . $host . $uri;
+}
+
+/*
+ * Fonction pour récupérer l'URL courante sans variables
+ */
+function lmc_multistep_form__getCurrentUrlWithoutQuery() {
+    // Détermine le protocole
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
+        || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+    // Récupère le nom d’hôte
+    $host = $_SERVER['HTTP_HOST'];
+
+    // Récupère le chemin sans la query string
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+    // Reconstruit l’URL
+    return $protocol . $host . $path;
+}
+
+/*
+ * Fonction pour générer le code envoyé par mail
+ */
+function lmc_multistep_form__generate_otp(int $digits = 6): string {
+    $min = (int) pow(10, $digits - 1);
+    $max = (int) pow(10, $digits) - 1;
+    return (string) random_int($min, $max); // cryptographically secure
+}
+
+/*
+ * Enregistrement des tentatives suspectes
+ */
+function lmc_multistep_form__logLmc($reason) {
+    $logFile = __DIR__ . '/log/lmc-multistep-form.log';
+    $entry = date('Y-m-d H:i:s') . " - IP: " . $_SERVER['REMOTE_ADDR'] . " - Motif: $reason\n";
+    file_put_contents($logFile, $entry, FILE_APPEND);
+    header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=400');
+}
+
+
+
+function lmc_multistep_form() {
+
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'lmc_multistep_submissions';
 
     /*
      * Authentification à l'API OHME
