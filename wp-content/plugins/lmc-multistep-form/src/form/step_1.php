@@ -108,7 +108,7 @@
 <p><label for="step1_adresse"><span>Adresse postale * :</span> <input type="text" id="step1_adresse"
                                                                       name="step1_adresse" placeholder="Adresse"
                                                                       value="<?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                                                                          echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['name']['street']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['address']['street'])) ? $_SESSION['lmc_data']['structures_ohme'][0]['address']['street'] : '';
+                                                                          echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['address']['street']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['address']['street'])) ? $_SESSION['lmc_data']['structures_ohme'][0]['address']['street'] : '';
                                                                       } else {
                                                                           echo (isset($value_form[0]->step1_adresse) && !empty($value_form[0]->step1_adresse)) ? $value_form[0]->step1_adresse : '';
                                                                       } ?>"
@@ -120,7 +120,7 @@
             <label for="step1_ville"><span>Ville * :</span> <input type="text" id="step1_ville" name="step1_ville"
                                                                    placeholder="ville"
                                                                    value="<?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                                                                       echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['name']['city']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['address']['city'])) ? $_SESSION['lmc_data']['structures_ohme'][0]['address']['city'] : '';
+                                                                       echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['address']['city']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['address']['city'])) ? $_SESSION['lmc_data']['structures_ohme'][0]['address']['city'] : '';
                                                                    } else {
                                                                        echo (isset($value_form[0]->step1_ville) && !empty($value_form[0]->step1_ville)) ? $value_form[0]->step1_ville : '';
                                                                    } ?>"
@@ -132,7 +132,7 @@
             <label for="step1_cp"><span>Code postal * :</span> <input type="text" id="step1_cp" name="step1_cp"
                                                                       placeholder="00000"
                                                                       value="<?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                                                                          echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['name']['post_code']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['address']['post_code'])) ? $_SESSION['lmc_data']['structures_ohme'][0]['address']['post_code'] : '';
+                                                                          echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['address']['post_code']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['address']['post_code'])) ? $_SESSION['lmc_data']['structures_ohme'][0]['address']['post_code'] : '';
                                                                       } else {
                                                                           echo (isset($value_form[0]->step1_cp) && !empty($value_form[0]->step1_cp)) ? $value_form[0]->step1_cp : '';
                                                                       } ?>"
