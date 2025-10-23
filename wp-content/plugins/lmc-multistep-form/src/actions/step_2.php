@@ -52,7 +52,7 @@ if(isset($_SESSION['lmc_data']['step1_siret']) && !empty($_SESSION['lmc_data']['
     try {
 
         $siren = $client->request('GET', 'structures', [
-            'query' => ['siren' => $_SESSION['lmc_data']['step1_siret']]
+            'query' => ['siret' => $_SESSION['lmc_data']['step1_siret']]
         ]);
         $code_siren = $siren->getStatusCode();
         if ($code_siren != 200) {

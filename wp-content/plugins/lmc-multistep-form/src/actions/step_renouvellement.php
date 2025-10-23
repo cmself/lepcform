@@ -96,7 +96,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
 
                                         try {
                                             $step0_structures = $client->request('GET', 'structures', [
-                                                'query' => ['ohme_id' => $ohme_ids, 'siren' => $_SESSION['lmc_data']['step0_siret']]
+                                                'query' => ['ohme_id' => $ohme_ids, 'siret' => $_SESSION['lmc_data']['step0_siret']]
                                             ]);
                                             $code_step0_structures = $step0_structures->getStatusCode();
                                             if ($code_step0_structures != 200) {
@@ -128,12 +128,12 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                     }
 
                                     $stepMAJ = 0;
-                                    $step0_message = 'Le SIREN ne correspond pas au contact principal d’une structure enregistrée.<br>Veuillez entrer un nouveau SIREN';
+                                    $step0_message = 'Le SIRET ne correspond pas au contact principal d’une structure enregistrée.<br>Veuillez entrer un nouveau SIRET';
 
 
                                 }else{
                                     $stepMAJ = 0;
-                                    $step0_message = 'Le SIREN ne correspond pas au contact principal d’une structure enregistrée.<br>Veuillez entrer un nouveau SIREN';
+                                    $step0_message = 'Le SIRET ne correspond pas au contact principal d’une structure enregistrée.<br>Veuillez entrer un nouveau SIRET';
                                 }
 
                             }else{
