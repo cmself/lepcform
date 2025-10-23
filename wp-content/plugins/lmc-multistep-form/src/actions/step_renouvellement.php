@@ -148,12 +148,13 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                                           'step4_engagement_4' => $data_step0_structures['data'][0]['engagement_4_communiquer_sur_notre_engagement'],
                                                           'step4_engagement_5' => $data_step0_structures['data'][0]['engagement_5_faire_de_lelaboration_et_de_la_mise_en_oeuvre_de_la_politique_de_diversite_un_objet_de_dialogue_social_avec_les_representants_du_personnel'],
                                                           'step4_engagement_6' => $data_step0_structures['data'][0]['engagement_6_evaluer_regulierement_les_progres_realises'],
-                                                          'step2_prenom_0' => $_SESSION['lmc_data']['contacts_email']['firstname'],
-                                                          'step2_nom_0' => $_SESSION['lmc_data']['contacts_email']['lastname'],
-                                                          'step2_fonction_0' => $_SESSION['lmc_data']['contacts_email']['fonction_dans_lentreprise'],
-                                                          'step2_email_0' => $_SESSION['lmc_data']['contacts_email']['email'],
+
+                                                            'step2_prenom_0' => $_SESSION['lmc_data']['contacts_email'][0]['firstname'],
+                                                          'step2_nom_0' => $_SESSION['lmc_data']['contacts_email'][0]['lastname'],
+                                                          'step2_fonction_0' => $_SESSION['lmc_data']['contacts_email'][0]['fonction_dans_lentreprise'],
+                                                          'step2_email_0' => $_SESSION['lmc_data']['contacts_email'][0]['email'],
                                                           'step2_role_0' => '1 CHARTE CONTACT PRINCIPAL',
-                                                          'step2_signataire_0' => $_SESSION['lmc_data']['contacts_email']['signataire_de_la_charte_de_la_diversite']
+                                                          'step2_signataire_0' => $_SESSION['lmc_data']['contacts_email'][0]['signataire_de_la_charte_de_la_diversite']
                                                           //'step5_paiement' => $data_step0_structures['data']['ohme_id'],
                                                           //'step5_bc' => $data_step0_structures['data']['ohme_id'],
                                                           //'step5_help' => $data_step0_structures['data']['ohme_id'],
