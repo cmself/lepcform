@@ -24,15 +24,36 @@ use GuzzleHttp\Client;
 /*
  * définition des variables pour envoyer les mails
  */
-include_once 'src/config.php';
+require 'src/config.php';
 
+/*
+ * Démarrer une session PHP
+ */
+function lmc_multistep_form__start_session() {
+    if (!session_id()) {
+        session_start();
+    }
+}
+add_action('init', 'lmc_multistep_form__start_session');
+
+/*
+ * Charger les scripts et css
+ */
+function lmc_multistep_form__enqueue_assets() {
+    wp_enqueue_style('lmc-tippycss', plugin_dir_url(__FILE__) . 'node_modules/tippy.js/dist/tippy.css');
+    wp_enqueue_style('lmc-style', plugin_dir_url(__FILE__) . 'assets/css/style.css');
+    wp_enqueue_script('lmc-popperjs','https://unpkg.com/@popperjs/core@2' , false, true);
+    wp_enqueue_script('lmc-tippyjs','https://unpkg.com/tippy.js@6' , false, true);
+    wp_enqueue_script('lmc-recaptcha','https://www.google.com/recaptcha/api.js' , false, true);
+    wp_enqueue_script('lmc-script', plugin_dir_url(__FILE__) . 'assets/js/script.js', array('jquery'), false, true);
+}
+add_action('wp_enqueue_scripts', 'lmc_multistep_form__enqueue_assets');
 
 
 /*
- * Enregistre le Custom Post Type "Fonctions dans l'entreprise"
+ * Fonction d'activation
  */
-function lmc_multistep_form__actiave_plugin() {
-
+function lmc_multistep_form__activation() {
     /*
      * Création de la base de données
      */
@@ -102,10 +123,27 @@ function lmc_multistep_form__actiave_plugin() {
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     ");
 
+    lmc_multistep_form__register_cpt_fe();
+    lmc_multistep_form__import_csv_fontions_entreprise();
+    flush_rewrite_rules();
+}
+register_activation_hook(__FILE__, 'lmc_multistep_form__activation');
 
-    /*
-     * Enregistre le Custom Post Type "Fonctions dans l'entreprise"
-     */
+
+/*
+ * Fonction de désactivation
+ */
+function lmc_multistep_form__deactivation() {
+    flush_rewrite_rules();
+}
+register_deactivation_hook(__FILE__, 'lmc_multistep_form__deactivation');
+
+
+/*
+ * Enregistre le Custom Post Type "Fonctions dans l'entreprise"
+ */
+function lmc_multistep_form__register_cpt_fe() {
+
     $post_type = 'lmc-multistep-fe';
 
     if ( ! post_type_exists( $post_type ) ) {
@@ -139,11 +177,14 @@ function lmc_multistep_form__actiave_plugin() {
 
         register_post_type('lmc_multistep_fe', $args);
     }
+}
+add_action('init', 'lmc_multistep_form__register_cpt_fe' );
 
+/*
+ * Enregistre des Fonctions dans l'entreprise
+ */
+function lmc_multistep_form__import_csv_fontions_entreprise() {
 
-    /*
-     * Ajoute des fonctions dans le Custom Post Type "Fonctions dans l'entreprise"
-     */
     $csv_file = __DIR__ . '/import/lmc-multistep-fe.csv';
 
     if ( ! file_exists($csv_file) ) {
@@ -168,39 +209,8 @@ function lmc_multistep_form__actiave_plugin() {
         }
         fclose($handle);
     }
-
-    flush_rewrite_rules();
-
-
 }
-//add_action( 'init', 'lmc_multistep_form__actiave_plugin' );
-register_activation_hook( __FILE__, 'lmc_multistep_form__actiave_plugin' );
-//register_deactivation_hook
-
-
-
-/*
- * Démarrer une session PHP
- */
-function lmc_multistep_form__start_session() {
-    if (!session_id()) {
-        session_start();
-    }
-}
-add_action('init', 'lmc_multistep_form__start_session');
-
-/*
- * Charger les scripts et css
- */
-function lmc_multistep_form__enqueue_assets() {
-    wp_enqueue_style('lmc-tippycss', plugin_dir_url(__FILE__) . 'node_modules/tippy.js/dist/tippy.css');
-    wp_enqueue_style('lmc-style', plugin_dir_url(__FILE__) . 'assets/css/style.css');
-    wp_enqueue_script('lmc-popperjs','https://unpkg.com/@popperjs/core@2' , false, true);
-    wp_enqueue_script('lmc-tippyjs','https://unpkg.com/tippy.js@6' , false, true);
-    wp_enqueue_script('lmc-recaptcha','https://www.google.com/recaptcha/api.js' , false, true);
-    wp_enqueue_script('lmc-script', plugin_dir_url(__FILE__) . 'assets/js/script.js', array('jquery'), false, true);
-}
-add_action('wp_enqueue_scripts', 'lmc_multistep_form__enqueue_assets');
+add_action('init', 'lmc_multistep_form__import_csv_fontions_entreprise');
 
 
 /*
@@ -258,6 +268,9 @@ function lmc_multistep_form__logLmc($reason) {
 
 function lmc_multistep_form() {
 
+    /*
+     * Création de la base de données
+     */
     global $wpdb;
     $table_name = $wpdb->prefix . 'lmc_multistep_submissions';
 
