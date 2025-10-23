@@ -82,11 +82,9 @@ if(isset($_SESSION['lmc_data']['step1_siret']) && !empty($_SESSION['lmc_data']['
 }
 
 
-if(!isset($_SESSION['lmc_data']['contacts_valide']) || empty($_SESSION['lmc_data']['contacts_valide'])) {
-    if(count($_SESSION['lmc_data']['structures_siren']) > 0) {
-        header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=8');
-    }
-}else{
+$resign_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}' AND resign = 1", OBJECT );
+
+if (count($resign_results) > 0) {
 
     if(count($_SESSION['lmc_data']['structures_siren']) > 0) {
 
@@ -111,10 +109,14 @@ if(!isset($_SESSION['lmc_data']['contacts_valide']) || empty($_SESSION['lmc_data
                 die();
             }
         }
-
-
-
     }
+
+}else{
+
+    if(count($_SESSION['lmc_data']['structures_siren']) > 0) {
+        header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=8');
+    }
+
 }
 
 
