@@ -147,7 +147,7 @@
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['nombre_de_collaborateurs_en_france']['options'] as $option):
                     ?>
-                    <option value="<?= htmlspecialchars($option); ?>"
+                    <option value="<?= htmlspecialchars($option); ?>"<?php
                         echo ($value_form[0]->step1_collaborateurs == $option) ? 'selected' : '';
                      ?>><?= htmlspecialchars($option); ?></option>
                 <?php
