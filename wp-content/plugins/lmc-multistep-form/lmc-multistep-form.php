@@ -123,8 +123,6 @@ function lmc_multistep_form__activation() {
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     ");
 
-    lmc_multistep_form__register_cpt_fe();
-    lmc_multistep_form__import_csv_fontions_entreprise();
     flush_rewrite_rules();
 }
 register_activation_hook(__FILE__, 'lmc_multistep_form__activation');
@@ -144,7 +142,7 @@ register_deactivation_hook(__FILE__, 'lmc_multistep_form__deactivation');
  */
 function lmc_multistep_form__register_cpt_fe() {
 
-    $post_type = 'lmc-multistep-fe';
+    $post_type = 'lmc_multistep_fe';
 
     if ( ! post_type_exists( $post_type ) ) {
 
@@ -177,14 +175,10 @@ function lmc_multistep_form__register_cpt_fe() {
 
         register_post_type('lmc_multistep_fe', $args);
     }
-}
-add_action('init', 'lmc_multistep_form__register_cpt_fe' );
 
-/*
- * Enregistre des Fonctions dans l'entreprise
- */
-function lmc_multistep_form__import_csv_fontions_entreprise() {
-
+    /*
+     * Enregistre des Fonctions dans l'entreprise
+     */
     $csv_file = __DIR__ . '/import/lmc-multistep-fe.csv';
 
     if ( ! file_exists($csv_file) ) {
@@ -199,18 +193,20 @@ function lmc_multistep_form__import_csv_fontions_entreprise() {
         $header = fgetcsv($handle, 1000, ',');
         while (($row = fgetcsv($handle, 1000, ',')) !== false) {
             $data = array_combine($header, $row);
-            if (!post_exists($data['fonction_title'],'','','lmc-multistep-fe')) {
+            if (!post_exists($data['fonction_title'], '', '', $post_type)) {
                 wp_insert_post([
                     'post_title'   => $data['fonction_title'],
-                    'post_status'  => 1,
-                    'post_type'    => 'lmc-multistep-fe'
+                    'post_status'  => 'publish',
+                    'post_type'    => $post_type
                 ]);
             }
+
         }
         fclose($handle);
     }
 }
-add_action('init', 'lmc_multistep_form__import_csv_fontions_entreprise');
+add_action('init', 'lmc_multistep_form__register_cpt_fe' );
+
 
 
 /*

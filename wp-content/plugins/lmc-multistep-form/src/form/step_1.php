@@ -144,7 +144,7 @@
 </p>
 
 <p><label for="step1_connaissance"><span>Comment avez-vous eu connaissance de la Charte de la diversité ? :</span>
-        <select name="step1_connaissance" id="step1_connaissance" required>
+        <select name="step1_connaissance" id="step1_connaissance">
             <?php
             if ($_SESSION['lmc_data']['ohme_data']['Structure']['comment_avez_vous_eu_connaissance_de_la_charte_de_la_diversite']['options']):
                 ?>
