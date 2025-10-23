@@ -54,78 +54,6 @@ add_action('wp_enqueue_scripts', 'lmc_multistep_form__enqueue_assets');
  * Fonction d'activation
  */
 function lmc_multistep_form__activation() {
-    /*
-     * Création de la base de données
-     */
-    global $wpdb;
-    $table_name = $wpdb->prefix . 'lmc_multistep_submissions';
-    $wpdb->query("
-        CREATE TABLE IF NOT EXISTS $table_name (
-          `id` INT AUTO_INCREMENT PRIMARY KEY,
-          `cookie` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-          `ohme_id` varchar(255) NOT NULL,
-          `resign` tinyint(1) NOT NULL DEFAULT '0',
-          `date_de_signature` varchar(255) NOT NULL,
-          `step1_nom` varchar(255) NOT NULL,
-          `step1_siret` varchar(255) NOT NULL,
-          `step1_logo` text NOT NULL,
-          `step1_ca` varchar(255) NOT NULL,
-          `step1_frais` varchar(255) NOT NULL,
-          `step1_adherent` text NOT NULL,
-          `step1_adresse` text NOT NULL,
-          `step1_ville` varchar(255) NOT NULL,
-          `step1_cp` varchar(10) NOT NULL,
-          `step1_email` text NOT NULL,
-          `step1_internet` text NOT NULL,
-          `step1_collaborateurs` varchar(255) NOT NULL,
-          `step1_activite` varchar(255) NOT NULL,
-          `step1_structure` varchar(255) NOT NULL,
-          `step1_connaissance` varchar(255) NOT NULL,
-          `step1_politique` text NOT NULL,
-          `step2_prenom_0` varchar(255) NOT NULL,
-          `step2_nom_0` varchar(255) NOT NULL,
-          `step2_fonction_0` varchar(255) NOT NULL,
-          `step2_email_0` text NOT NULL,
-          `step2_role_0` varchar(255) NOT NULL,
-          `step2_signataire_0` varchar(10) NOT NULL,
-          `step2_prenom_1` varchar(255) NOT NULL,
-          `step2_nom_1` varchar(255) NOT NULL,
-          `step2_fonction_1` varchar(255) NOT NULL,
-          `step2_email_1` text NOT NULL,
-          `step2_role_1` varchar(255) NOT NULL,
-          `step2_signataire_1` varchar(10) NOT NULL,
-          `step2_prenom_2` varchar(255) NOT NULL,
-          `step2_nom_2` varchar(255) NOT NULL,
-          `step2_fonction_2` varchar(255) NOT NULL,
-          `step2_email_2` text NOT NULL,
-          `step2_role_2` varchar(255) NOT NULL,
-          `step2_signataire_2` varchar(10) NOT NULL,
-          `step2_prenom_3` varchar(255) NOT NULL,
-          `step2_nom_3` varchar(255) NOT NULL,
-          `step2_fonction_3` varchar(255) NOT NULL,
-          `step2_email_3` text NOT NULL,
-          `step2_role_3` varchar(255) NOT NULL,
-          `step2_signataire_3` varchar(10) NOT NULL,
-          `step3_otp_hash` text NOT NULL,
-          `step3_otp_expires` datetime NOT NULL,
-          `step3_otp_used` int NOT NULL DEFAULT '0',
-          `step4_engagement_1` text NOT NULL,
-          `step4_engagement_2` text NOT NULL,
-          `step4_engagement_3` text NOT NULL,
-          `step4_engagement_4` text NOT NULL,
-          `step4_engagement_5` text NOT NULL,
-          `step4_engagement_6` text NOT NULL,
-          `step5_paiement` varchar(255) NOT NULL,
-          `step5_bc` varchar(255) NOT NULL,
-          `step5_help` text NOT NULL,
-          `step5_rgpd` tinyint(1) NOT NULL DEFAULT '0',
-          `step0_otp_hash` text NOT NULL,
-          `step0_otp_expires` datetime NOT NULL,
-          `step0_otp_used` int NOT NULL DEFAULT '0',
-          `date_submitted` datetime DEFAULT CURRENT_TIMESTAMP
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-    ");
-
     flush_rewrite_rules();
 }
 register_activation_hook(__FILE__, 'lmc_multistep_form__activation');
@@ -268,10 +196,76 @@ function lmc_multistep_form__logLmc($reason) {
 function lmc_multistep_form() {
 
     /*
-     * Création de la base de données
-     */
+       * Création de la base de données
+       */
     global $wpdb;
     $table_name = $wpdb->prefix . 'lmc_multistep_submissions';
+    $wpdb->query("
+        CREATE TABLE IF NOT EXISTS $table_name (
+          `id` INT AUTO_INCREMENT PRIMARY KEY,
+          `cookie` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+          `ohme_id` varchar(255) NOT NULL,
+          `resign` tinyint(1) NOT NULL DEFAULT '0',
+          `date_de_signature` varchar(255) NOT NULL,
+          `step1_nom` varchar(255) NOT NULL,
+          `step1_siret` varchar(255) NOT NULL,
+          `step1_logo` text NOT NULL,
+          `step1_ca` varchar(255) NOT NULL,
+          `step1_frais` varchar(255) NOT NULL,
+          `step1_adherent` text NOT NULL,
+          `step1_adresse` text NOT NULL,
+          `step1_ville` varchar(255) NOT NULL,
+          `step1_cp` varchar(10) NOT NULL,
+          `step1_email` text NOT NULL,
+          `step1_internet` text NOT NULL,
+          `step1_collaborateurs` varchar(255) NOT NULL,
+          `step1_activite` varchar(255) NOT NULL,
+          `step1_structure` varchar(255) NOT NULL,
+          `step1_connaissance` varchar(255) NOT NULL,
+          `step1_politique` text NOT NULL,
+          `step2_prenom_0` varchar(255) NOT NULL,
+          `step2_nom_0` varchar(255) NOT NULL,
+          `step2_fonction_0` varchar(255) NOT NULL,
+          `step2_email_0` text NOT NULL,
+          `step2_role_0` varchar(255) NOT NULL,
+          `step2_signataire_0` varchar(10) NOT NULL,
+          `step2_prenom_1` varchar(255) NOT NULL,
+          `step2_nom_1` varchar(255) NOT NULL,
+          `step2_fonction_1` varchar(255) NOT NULL,
+          `step2_email_1` text NOT NULL,
+          `step2_role_1` varchar(255) NOT NULL,
+          `step2_signataire_1` varchar(10) NOT NULL,
+          `step2_prenom_2` varchar(255) NOT NULL,
+          `step2_nom_2` varchar(255) NOT NULL,
+          `step2_fonction_2` varchar(255) NOT NULL,
+          `step2_email_2` text NOT NULL,
+          `step2_role_2` varchar(255) NOT NULL,
+          `step2_signataire_2` varchar(10) NOT NULL,
+          `step2_prenom_3` varchar(255) NOT NULL,
+          `step2_nom_3` varchar(255) NOT NULL,
+          `step2_fonction_3` varchar(255) NOT NULL,
+          `step2_email_3` text NOT NULL,
+          `step2_role_3` varchar(255) NOT NULL,
+          `step2_signataire_3` varchar(10) NOT NULL,
+          `step3_otp_hash` text NOT NULL,
+          `step3_otp_expires` datetime NOT NULL,
+          `step3_otp_used` int NOT NULL DEFAULT '0',
+          `step4_engagement_1` text NOT NULL,
+          `step4_engagement_2` text NOT NULL,
+          `step4_engagement_3` text NOT NULL,
+          `step4_engagement_4` text NOT NULL,
+          `step4_engagement_5` text NOT NULL,
+          `step4_engagement_6` text NOT NULL,
+          `step5_paiement` varchar(255) NOT NULL,
+          `step5_bc` varchar(255) NOT NULL,
+          `step5_help` text NOT NULL,
+          `step5_rgpd` tinyint(1) NOT NULL DEFAULT '0',
+          `step0_otp_hash` text NOT NULL,
+          `step0_otp_expires` datetime NOT NULL,
+          `step0_otp_used` int NOT NULL DEFAULT '0',
+          `date_submitted` datetime DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    ");
 
     /*
      * Authentification à l'API OHME

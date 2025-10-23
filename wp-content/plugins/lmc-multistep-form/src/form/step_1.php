@@ -3,7 +3,7 @@
                                                                         placeholder="Nom de l’organisation"
                                                                         value="<?php echo (isset($value_form[0]->step1_nom) && !empty($value_form[0]->step1_nom)) ? $value_form[0]->step1_nom : ''; ?>" required></label></p>
 <p><label for="step1_siret"><span>Numéro de SIRET * :</span>
-        <?php if (isset($value_form[0]->resign) || !empty($value_form[0]->resign)) { ?>
+        <?php if (isset($value_form[0]->resign) && !empty($value_form[0]->resign)) { ?>
             <input type="text" id="step1_siret_disabled" pattern="\d{14}" maxlength="14"
                    title="Veuillez entrer exactement 14 chiffres" name="step1_siret_disabled" placeholder="SIRET"
                    value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" disabled required>
@@ -231,7 +231,7 @@
 <p>
     <label for="step1_signature"><span>Date de la dernière signature de la Charte : <i class="value">
                 <?php
-                if (isset($value_form[0]->resign) || !empty($value_form[0]->resign)) {
+                if (isset($value_form[0]->resign) && !empty($value_form[0]->resign)) {
                     if (isset($value_form[0]->date_de_signature) && !empty($value_form[0]->date_de_signature)) {
                         $dateString = $value_form[0]->date_de_signature;
                         $date = new DateTime($dateString);
