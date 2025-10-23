@@ -65,11 +65,11 @@
         <div class="wrapper">
             <input type="radio" name="step1_adherent" id="option-1"
                    value="true" <?php
-                echo ($value_form[0]->step1_adherent == "1") ? 'checked' : '';
+                echo ($value_form[0]->step1_adherent == "true" || $value_form[0]->step1_adherent == "1") ? 'checked' : '';
              ?>>
             <input type="radio" name="step1_adherent" id="option-2"
                    value="false" <?php
-                echo ($value_form[0]->step1_adherent == "") ? 'checked' : '';
+                echo ($value_form[0]->step1_adherent == "false" || $value_form[0]->step1_adherent == "0" || $value_form[0]->step1_adherent == "") ? 'checked' : '';
              ?>>
             <label for="option-1" class="option option-1">
                 <div class="dot"></div>
