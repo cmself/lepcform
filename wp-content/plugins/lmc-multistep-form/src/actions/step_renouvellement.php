@@ -61,7 +61,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
 
                     try {
                         $email = $client->request('GET', 'contacts', [
-                            'query' => ['email' => $_SESSION['lmc_data']['step0_email'], 'limit' => 1]
+                            'query' => ['email' => $_SESSION['lmc_data']['step0_email'], 'role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite' => "1 CHARTE CONTACT PRINCIPAL"]
                         ]);
                         $code_email = $email->getStatusCode();
                         if ($code_email != 200) {
@@ -87,7 +87,6 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                     }
 
                     if(count($_SESSION['lmc_data']['contacts_email']) > 0) {
-                        if( $_SESSION['lmc_data']['contacts_email'][0]['role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite'] == '1 CHARTE CONTACT PRINCIPAL') {
                             if(isset($_SESSION['lmc_data']['contacts_email'][0]['structure_ohme_ids']) && !empty($_SESSION['lmc_data']['contacts_email'][0]['structure_ohme_ids'])) {
 
                                 if(isset($_SESSION['lmc_data']['step0_siret']) && !empty($_SESSION['lmc_data']['step0_siret'])) {
@@ -109,9 +108,117 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                             $data_step0_structures = json_decode($step0_structures->getBody(), true);
                                             if (json_last_error() === JSON_ERROR_NONE) {
                                                 if($data_step0_structures['count'] == 1) {
-                                                    $_SESSION['lmc_data']['contacts_valide'] = true;
-                                                    $_SESSION['lmc_data']['structures_ohme'] = $data_step0_structures['data'];
-                                                    header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=1');
+                                                    //$_SESSION['lmc_data']['contacts_valide'] = true;
+                                                    //$_SESSION['lmc_data']['structures_ohme'] = $data_step0_structures['data'];
+
+                                                    /*
+                                                     * vérifier si les données existent en base de données
+                                                     */
+                                                    $stepResign_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
+
+                                                    if (count($stepResign_results) === 1) {
+
+                                                        /*
+                                                         * Enregistrement les données en base de données
+                                                         */
+                                                        $wpdb->update($table_name, [
+
+                                                          'ohme_id' => $data_step0_structures['data']['ohme_id'],
+                                                          'resign' => 1,
+                                                          'date_de_signature' => $data_step0_structures['data']['date_de_signature_de_la_charte_de_la_diversite'],
+                                                          'step1_nom' => $data_step0_structures['data']['name'],
+                                                          'step1_siret' => $data_step0_structures['data']['siret'],
+                                                          'step1_logo' => $data_step0_structures['data']['logo_de_la_structure'],
+                                                          'step1_ca' => $data_step0_structures['data']['chiffre_daffaires'][0],
+                                                          'step1_frais' => $data_step0_structures['data']['montant_des_frais_pour_la_charte_de_la_diversite'],
+                                                          'step1_adherent' => $data_step0_structures['data']['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite'],
+                                                          'step1_adresse' => $data_step0_structures['data']['address']['street'],
+                                                          'step1_ville' => $data_step0_structures['data']['address']['city'],
+                                                          'step1_cp' => $data_step0_structures['data']['address']['post_code'],
+                                                          'step1_email' => $data_step0_structures['data']['email'],
+                                                          'step1_internet' => $data_step0_structures['data']['site_internet'],
+                                                          'step1_collaborateurs' => $data_step0_structures['data']['nombre_de_collaborateurs_en_france'],
+                                                          'step1_activite' => $data_step0_structures['data']['secteur_dactivite'],
+                                                          'step1_structure' => $data_step0_structures['data']['type_de_structure'],
+                                                          'step1_connaissance' => $data_step0_structures['data']['comment_avez_vous_eu_connaissance_de_la_charte_de_la_diversite'],
+                                                          'step1_politique'=> $data_step0_structures['data']['presentation_de_votre_politique_diversite_et_des_raisons_de_votre_engagement'],
+                                                          'step4_engagement_1' => $data_step0_structures['data']['engagement_1_sensibiliser_et_former_nos_dirigeants_et_managers'],
+                                                          'step4_engagement_2' => $data_step0_structures['data']['engagement_2_promouvoir_lapplication_du_principe_de_non_discrimination'],
+                                                          'step4_engagement_3' => $data_step0_structures['data']['engagement_3_favoriser_la_representation_de_la_diversite_de_la_societe_francaise'],
+                                                          'step4_engagement_4' => $data_step0_structures['data']['engagement_4_communiquer_sur_notre_engagement'],
+                                                          'step4_engagement_5' => $data_step0_structures['data']['engagement_5_faire_de_lelaboration_et_de_la_mise_en_oeuvre_de_la_politique_de_diversite_un_objet_de_dialogue_social_avec_les_representants_du_personnel'],
+                                                          'step4_engagement_6' => $data_step0_structures['data']['engagement_6_evaluer_regulierement_les_progres_realises'],
+                                                          'step2_prenom_0' => $_SESSION['lmc_data']['contacts_email']['firstname'],
+                                                          'step2_nom_0' => $_SESSION['lmc_data']['contacts_email']['lastname'],
+                                                          'step2_fonction_0' => $_SESSION['lmc_data']['contacts_email']['fonction_dans_lentreprise'],
+                                                          'step2_email_0' => $_SESSION['lmc_data']['contacts_email']['email'],
+                                                          'step2_role_0' => '1 CHARTE CONTACT PRINCIPAL',
+                                                          'step2_signataire_0' => $_SESSION['lmc_data']['contacts_email']['signataire_de_la_charte_de_la_diversite']
+                                                          //'step5_paiement' => $data_step0_structures['data']['ohme_id'],
+                                                          //'step5_bc' => $data_step0_structures['data']['ohme_id'],
+                                                          //'step5_help' => $data_step0_structures['data']['ohme_id'],
+                                                          //'step5_rgpd' => $data_step0_structures['data']['ohme_id']
+                                                        ],
+                                                            ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
+
+
+
+                                                        try {
+                                                            $structure_fields_contact = $client->request('GET', 'contacts', [
+                                                                'query' => ['structure' => $data_step0_structures['data']['name'], 'role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite' => "2 AUTRE INTERLOCUTEUR CHARTE INTERLOCUTEUR", 'limit' => 3]
+                                                            ]);
+                                                            $code_structure_contact = $structure_fields_contact->getStatusCode();
+                                                            if ($code_structure_contact != 200) {
+                                                                $_SESSION['lmc_data']['error_step'] = 8;
+                                                                $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+                                                                lmc_multistep_form__logLmc("Json OHME Contact invalide");
+                                                                die();
+                                                            }
+                                                            $data_structure_contact = json_decode($structure_fields_contact->getBody(), true);
+                                                            if (json_last_error() === JSON_ERROR_NONE) {
+                                                                $c = 1;
+                                                                foreach ($data_structure_contact['data'] as $structure_contact) {
+
+                                                                    $wpdb->update($table_name, [
+                                                                      'step2_prenom_'. $c => $structure_contact['firstname'],
+                                                                      'step2_nom_'. $c => $structure_contact['lastname'],
+                                                                      'step2_fonction_'. $c => $structure_contact['fonction_dans_lentreprise'],
+                                                                      'step2_email_'. $c => $structure_contact['email'],
+                                                                      'step2_role_'. $c => '2 AUTRE INTERLOCUTEUR CHARTE INTERLOCUTEUR',
+                                                                      'step2_signataire_'. $c => $structure_contact['signataire_de_la_charte_de_la_diversite']
+                                                                    ],
+                                                                        ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
+
+                                                                    $c ++;
+                                                                }
+                                                            }else{
+                                                                $_SESSION['lmc_data']['error_step'] = 8;
+                                                                $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+                                                                lmc_multistep_form__logLmc("IMPOSSIBLE DE SE CONNECTER A OHME");
+                                                                die();
+                                                            }
+
+                                                        } catch (ClientException $e) {
+
+                                                            $_SESSION['lmc_data']['error_step'] = 8;
+                                                            $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
+                                                            lmc_multistep_form__logLmc("API OHME Siren invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
+                                                            die();
+                                                        }
+
+                                                        header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=1');
+
+                                                    }else{
+
+                                                        $_SESSION['lmc_data']['error_step'] = 8;
+                                                        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à la base de données.";
+                                                        lmc_multistep_form__logLmc("IMPOSSIBLE DE SE CONNECTER A BASE DE DONNEES");
+                                                        die();
+
+                                                    }
+                                                }else{
+                                                    $stepMAJ = 0;
+                                                    $step0_message = 'Le SIRET ne correspond pas au contact principal d’une structure enregistrée.<br>Veuillez entrer un nouveau SIRET';
                                                 }
                                             } else {
                                                 $_SESSION['lmc_data']['error_step'] = 8;
@@ -141,10 +248,6 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                 $step0_message = 'L’adresse ne correspond pas au contact principal d’une structure enregistrée.<br>Veuillez entrer une nouvelle adresse';
                             }
 
-                        }else{
-                            $stepMAJ = 0;
-                            $step0_message = 'L’adresse ne correspond pas au contact principal d’une structure enregistrée.<br>Veuillez entrer une nouvelle adresse';
-                        }
 
                     }else{
 

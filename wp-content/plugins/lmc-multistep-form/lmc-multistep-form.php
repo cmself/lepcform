@@ -63,6 +63,9 @@ function lmc_multistep_form__activation() {
         CREATE TABLE IF NOT EXISTS $table_name (
           `id` INT AUTO_INCREMENT PRIMARY KEY,
           `cookie` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+          `ohme_id` varchar(255) NOT NULL,
+          `resign` tinyint(1) NOT NULL DEFAULT '0',
+          `date_de_signature` varchar(255) NOT NULL,
           `step1_nom` varchar(255) NOT NULL,
           `step1_siret` varchar(255) NOT NULL,
           `step1_logo` text NOT NULL,
