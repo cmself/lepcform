@@ -1,26 +1,14 @@
 <h3>Étape 1 : Organisation signataire</h3>
 <p><label for="step1_nom"><span>Nom de l’organisation * :</span> <input type="text" id="step1_nom" name="step1_nom"
                                                                         placeholder="Nom de l’organisation"
-                                                                        value="<?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                                                                            echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['name']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['name'])) ? $_SESSION['lmc_data']['structures_ohme'][0]['name'] : '';
-                                                                        } else {
-                                                                            echo (isset($value_form[0]->step1_nom) && !empty($value_form[0]->step1_nom)) ? $value_form[0]->step1_nom : '';
-                                                                        } ?>" required></label></p>
+                                                                        value="<?php echo (isset($value_form[0]->step1_nom) && !empty($value_form[0]->step1_nom)) ? $value_form[0]->step1_nom : ''; ?>" required></label></p>
 <p><label for="step1_siret"><span>Numéro de SIRET * :</span>
-        <?php if (isset($_SESSION['lmc_data']['contacts_valide']) || !empty($_SESSION['lmc_data']['contacts_valide'])) { ?>
+        <?php if (isset($value_form[0]->resign) || !empty($value_form[0]->resign)) { ?>
             <input type="text" id="step1_siret_disabled" pattern="\d{14}" maxlength="14"
                    title="Veuillez entrer exactement 14 chiffres" name="step1_siret_disabled" placeholder="SIRET"
-                   value="<?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                       echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['siret']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['siret'])) ? $_SESSION['lmc_data']['structures_ohme'][0]['siret'] : '';
-                   } else {
-                       echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : '';
-                   } ?>" disabled required>
+                   value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" disabled required>
             <input type="hidden" name="step1_siret" id="step1_siret"
-                   value="<?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                       echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['siret']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['siret'])) ? $_SESSION['lmc_data']['structures_ohme'][0]['siret'] : '';
-                   } else {
-                       echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : '';
-                   } ?>">
+                   value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" required>
         <?php } else { ?>
             <input type="text" id="step1_siret" pattern="\d{14}" maxlength="14"
                    title="Veuillez entrer exactement 14 chiffres" name="step1_siret" placeholder="SIRET"
@@ -30,7 +18,7 @@
 
     </label></p>
 <p><label for="step1_logo"><span>Ajouter un logo :</span> <input type="hidden" name="step1_logoH" id="step1_logoH"
-                                                                 value="<?= $value_form[0]->step1_logo; ?>"> <input
+                                                                 value="<?php echo (isset($value_form[0]->step1_logo) && !empty($value_form[0]->step1_logo)) ? $value_form[0]->step1_logo : ''; ?>"> <input
                 type="file" accept=".jpg, .jpeg" id="step1_logo" name="step1_logo"
                 placeholder="Logo"> <?php if ($value_form[0]->step1_logo) { ?>
             <div class="mb-[20px]!"> <img class="h-[60px]! w-auto!"
@@ -45,11 +33,8 @@
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['chiffre_daffaires']['options'] as $option):
                     ?>
-                    <option value="<?= htmlspecialchars($option); ?>" <?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                        echo ($_SESSION['lmc_data']['structures_ohme'][0]['chiffre_daffaires'][0] == $option) ? 'selected' : '';
-                    } else {
-                        echo ($value_form[0]->step1_ca == $option) ? 'selected' : '';
-                    } ?>><?= htmlspecialchars($option); ?></option>
+                    <option value="<?= htmlspecialchars($option); ?>"
+                        <?php  echo ($value_form[0]->step1_ca == $option) ? 'selected' : '';?>><?= htmlspecialchars($option); ?></option>
                 <?php
                 endforeach;
             endif;
@@ -66,11 +51,8 @@
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options'] as $option):
                     ?>
-                    <option value="<?= htmlspecialchars($option); ?>" <?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                        echo ($_SESSION['lmc_data']['structures_ohme'][0]['montant_des_frais_pour_la_charte_de_la_diversite'] == $option) ? 'selected' : '';
-                    } else {
-                        echo ($value_form[0]->step1_frais == $option) ? 'selected' : '';
-                    } ?>><?= htmlspecialchars($option); ?></option>
+                    <option value="<?= htmlspecialchars($option); ?>"
+                            <?php  echo ($value_form[0]->step1_frais == $option) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
                 <?php
                 endforeach;
             endif;
@@ -83,17 +65,13 @@
         <span>Adhérent Les entreprises pour la Cité :</span>
         <div class="wrapper">
             <input type="radio" name="step1_adherent" id="option-1"
-                   value="true" <?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                echo (!empty($_SESSION['lmc_data']['structures_ohme'][0]['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite'])) ? 'checked' : '';
-            } else {
+                   value="true" <?php
                 echo ($value_form[0]->step1_adherent == "true") ? 'checked' : '';
-            } ?>>
+             ?>>
             <input type="radio" name="step1_adherent" id="option-2"
-                   value="false" <?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                echo (empty($_SESSION['lmc_data']['structures_ohme'][0]['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite'])) ? 'checked' : '';
-            } else {
+                   value="false" <?php
                 echo ($value_form[0]->step1_adherent == "false") ? 'checked' : '';
-            } ?>>
+             ?>>
             <label for="option-1" class="option option-1">
                 <div class="dot"></div>
                 <span>Oui</span>
@@ -107,11 +85,9 @@
 </p>
 <p><label for="step1_adresse"><span>Adresse postale * :</span> <input type="text" id="step1_adresse"
                                                                       name="step1_adresse" placeholder="Adresse"
-                                                                      value="<?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                                                                          echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['address']['street']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['address']['street'])) ? $_SESSION['lmc_data']['structures_ohme'][0]['address']['street'] : '';
-                                                                      } else {
+                                                                      value="<?php
                                                                           echo (isset($value_form[0]->step1_adresse) && !empty($value_form[0]->step1_adresse)) ? $value_form[0]->step1_adresse : '';
-                                                                      } ?>"
+                                                                       ?>"
                                                                       required></label></p>
 
 <div class="coltwo">
@@ -119,11 +95,9 @@
         <p>
             <label for="step1_ville"><span>Ville * :</span> <input type="text" id="step1_ville" name="step1_ville"
                                                                    placeholder="ville"
-                                                                   value="<?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                                                                       echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['address']['city']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['address']['city'])) ? $_SESSION['lmc_data']['structures_ohme'][0]['address']['city'] : '';
-                                                                   } else {
+                                                                   value="<?php
                                                                        echo (isset($value_form[0]->step1_ville) && !empty($value_form[0]->step1_ville)) ? $value_form[0]->step1_ville : '';
-                                                                   } ?>"
+                                                                    ?>"
                                                                    required></label>
         </p>
     </div>
@@ -131,11 +105,9 @@
         <p>
             <label for="step1_cp"><span>Code postal * :</span> <input type="text" id="step1_cp" name="step1_cp"
                                                                       placeholder="00000"
-                                                                      value="<?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                                                                          echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['address']['post_code']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['address']['post_code'])) ? $_SESSION['lmc_data']['structures_ohme'][0]['address']['post_code'] : '';
-                                                                      } else {
+                                                                      value="<?php
                                                                           echo (isset($value_form[0]->step1_cp) && !empty($value_form[0]->step1_cp)) ? $value_form[0]->step1_cp : '';
-                                                                      } ?>"
+                                                                       ?>"
                                                                       required></label>
         </p>
     </div>
@@ -147,11 +119,9 @@
             <label for="step1_email"><span>Email de l’organisation * :</span> <input type="email" id="step1_email"
                                                                                      name="step1_email"
                                                                                      placeholder="Email"
-                                                                                     value="<?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                                                                                         echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['email']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['email'])) ? $_SESSION['lmc_data']['structures_ohme'][0]['email'] : '';
-                                                                                     } else {
+                                                                                     value="<?php
                                                                                          echo (isset($value_form[0]->step1_email) && !empty($value_form[0]->step1_email)) ? $value_form[0]->step1_email : '';
-                                                                                     } ?>"
+                                                                                      ?>"
                                                                                      required></label>
         </p>
     </div>
@@ -160,11 +130,9 @@
             <label for="step1_internet"><span>Site internet * :</span> <input type="url" id="step1_internet"
                                                                               name="step1_internet"
                                                                               placeholder="Url du site"
-                                                                              value="<?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                                                                                  echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['site_internet']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['site_internet'])) ? $_SESSION['lmc_data']['structures_ohme'][0]['site_internet'] : '';
-                                                                              } else {
+                                                                              value="<?php
                                                                                   echo (isset($value_form[0]->step1_internet) && !empty($value_form[0]->step1_internet)) ? $value_form[0]->step1_internet : '';
-                                                                              } ?>"
+                                                                               ?>"
                                                                               required></label>
         </p>
     </div>
@@ -179,11 +147,9 @@
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['nombre_de_collaborateurs_en_france']['options'] as $option):
                     ?>
-                    <option value="<?= htmlspecialchars($option); ?>" <?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                        echo ($_SESSION['lmc_data']['structures_ohme'][0]['nombre_de_collaborateurs_en_france'] == $option) ? 'selected' : '';
-                    } else {
+                    <option value="<?= htmlspecialchars($option); ?>"
                         echo ($value_form[0]->step1_collaborateurs == $option) ? 'selected' : '';
-                    } ?>><?= htmlspecialchars($option); ?></option>
+                     ?>><?= htmlspecialchars($option); ?></option>
                 <?php
                 endforeach;
             endif;
@@ -201,11 +167,9 @@
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['secteur_dactivite']['options'] as $option):
                     ?>
-                    <option value="<?= htmlspecialchars($option); ?>" <?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                        echo ($_SESSION['lmc_data']['structures_ohme'][0]['secteur_dactivite'] == $option) ? 'selected' : '';
-                    } else {
+                    <option value="<?= htmlspecialchars($option); ?>" <?php
                         echo ($value_form[0]->step1_activite == $option) ? 'selected' : '';
-                    } ?>><?= htmlspecialchars($option); ?></option>
+                     ?>><?= htmlspecialchars($option); ?></option>
                 <?php
                 endforeach;
             endif;
@@ -223,11 +187,9 @@
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['type_de_structure']['options'] as $option):
                     ?>
-                    <option value="<?= htmlspecialchars($option); ?>" <?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                        echo ($_SESSION['lmc_data']['structures_ohme'][0]['type_de_structure'] == $option) ? 'selected' : '';
-                    } else {
+                    <option value="<?= htmlspecialchars($option); ?>" <?php
                         echo ($value_form[0]->step1_structure == $option) ? 'selected' : '';
-                    } ?>><?= htmlspecialchars($option); ?></option>
+                     ?>><?= htmlspecialchars($option); ?></option>
                 <?php
                 endforeach;
             endif;
@@ -245,11 +207,9 @@
                 <?php
                 foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['comment_avez_vous_eu_connaissance_de_la_charte_de_la_diversite']['options'] as $option):
                     ?>
-                    <option value="<?= htmlspecialchars($option); ?>" <?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                        echo ($_SESSION['lmc_data']['structures_ohme'][0]['comment_avez_vous_eu_connaissance_de_la_charte_de_la_diversite'] == $option) ? 'selected' : '';
-                    } else {
+                    <option value="<?= htmlspecialchars($option); ?>" <?php
                         echo ($value_form[0]->step1_connaissance == $option) ? 'selected' : '';
-                    } ?>><?= htmlspecialchars($option); ?></option>
+                     ?>><?= htmlspecialchars($option); ?></option>
                 <?php
                 endforeach;
             endif;
@@ -262,27 +222,24 @@
 <p>
     <label for="step1_politique"><span>Présentation de votre politique diversité et des raisons de votre engagement (1000 caractères max)</span>
         <textarea id="step1_politique" name="step1_politique" rows="10"
-                  placeholder="Présentation (1000 caractères max)"><?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['presentation_de_votre_politique_diversite_et_des_raisons_de_votre_engagement']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['presentation_de_votre_politique_diversite_et_des_raisons_de_votre_engagement'])) ? $_SESSION['lmc_data']['structures_ohme'][0]['presentation_de_votre_politique_diversite_et_des_raisons_de_votre_engagement'] : '';
-            } else {
+                  placeholder="Présentation (1000 caractères max)"><?php
                 echo (isset($value_form[0]->step1_politique) && !empty($value_form[0]->step1_politique)) ? $value_form[0]->step1_politique : '';
-            } ?></textarea>
+             ?></textarea>
     </label>
 </p>
 
 <p>
     <label for="step1_signature"><span>Date de la dernière signature de la Charte : <i class="value">
                 <?php
-                if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-
-                    if (isset($_SESSION['lmc_data']['structures_ohme'][0]['date_de_signature_de_la_charte_de_la_diversite']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['date_de_signature_de_la_charte_de_la_diversite'])) {
-                        $dateString = $_SESSION['lmc_data']['structures_ohme'][0]['date_de_signature_de_la_charte_de_la_diversite'];
+                if (isset($value_form[0]->resign) || !empty($value_form[0]->resign)) {
+                    if (isset($value_form[0]->date_de_signature) && !empty($value_form[0]->date_de_signature)) {
+                        $dateString = $value_form[0]->date_de_signature;
                         $date = new DateTime($dateString);
                         $formattedDate = $date->format('d/m/Y');
                     } else {
                         $formattedDate = ' ... ';
                     }
-                    echo (isset($_SESSION['lmc_data']['structures_ohme'][0]['date_de_signature_de_la_charte_de_la_diversite']) && !empty($_SESSION['lmc_data']['structures_ohme'][0]['date_de_signature_de_la_charte_de_la_diversite'])) ? $formattedDate : ' ... ';
+                    echo $formattedDate;
                 } else {
                     echo ' ... ';
                 }
