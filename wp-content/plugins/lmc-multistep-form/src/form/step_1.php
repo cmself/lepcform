@@ -84,13 +84,13 @@
         <div class="wrapper">
             <input type="radio" name="step1_adherent" id="option-1"
                    value="true" <?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                echo ($_SESSION['lmc_data']['structures_ohme'][0]['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite'] == 'true') ? 'checked' : '';
+                echo (!empty($_SESSION['lmc_data']['structures_ohme'][0]['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite'])) ? 'checked' : '';
             } else {
                 echo ($value_form[0]->step1_adherent == "true") ? 'checked' : '';
             } ?>>
             <input type="radio" name="step1_adherent" id="option-2"
                    value="false" <?php if (isset($_SESSION['lmc_data']['contacts_valide']) && !empty($_SESSION['lmc_data']['contacts_valide'])) {
-                echo ($_SESSION['lmc_data']['structures_ohme'][0]['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite'] == 'false') ? 'checked' : '';
+                echo (empty($_SESSION['lmc_data']['structures_ohme'][0]['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite'])) ? 'checked' : '';
             } else {
                 echo ($value_form[0]->step1_adherent == "false") ? 'checked' : '';
             } ?>>
