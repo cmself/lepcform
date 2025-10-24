@@ -415,6 +415,7 @@ function lmc_multistep_form() {
     /*
      * Formulaire multi-étapes
      */
+    nocache_headers();
     ob_start();
     ?>
 
