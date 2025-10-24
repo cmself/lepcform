@@ -472,3 +472,4 @@
 [24-Oct-2025 11:45:20 UTC] PHP Warning:  Attempt to read property "step1_connaissance" on null in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_1.php on line 210
 [24-Oct-2025 11:45:20 UTC] PHP Warning:  Undefined array key 0 in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_1.php on line 210
 [24-Oct-2025 11:45:20 UTC] PHP Warning:  Attempt to read property "step1_connaissance" on null in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_1.php on line 210
+[24-Oct-2025 11:55:37 UTC] PHP Warning:  Undefined array key "name" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\actions\step_renouvellement.php on line 171
