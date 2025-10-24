@@ -312,7 +312,7 @@ function lmc_multistep_form() {
     /*
      * COOKIE
      */
-    if (!isset($_COOKIE["lmc-multistep-form"])) {
+    if (!isset($_COOKIE["lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST']])) {
 
         // Génération du token côté serveur
         if (!isset($_SESSION['lmc_data']['csrf_token'])) {
@@ -321,16 +321,16 @@ function lmc_multistep_form() {
 
         // Création du cookie
         setcookie(
-            "lmc-multistep-form",
+            "lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST'],
             $_SESSION['lmc_data']['csrf_token'],
             [
                 // 1 jour = 86400 secondes
                 'expires' => time() + (86400 * 7), // 7 jours
                 'path' => '/',
-                'domain' => 'lmc-lepc.com',
-                'secure' => true,     // envoyé seulement via HTTPS
-                'httponly' => true,   // inaccessible en JavaScript
-                'samesite' => 'Strict' // protège contre les attaques CSRF
+                'domain' => '.lmc-lepc.com',
+                'secure' => true,
+                'httponly' => true,
+                'samesite' => 'Strict'
             ]
         );
 
@@ -343,17 +343,19 @@ function lmc_multistep_form() {
                 'cookie' => $_SESSION['lmc_data']['csrf_token']
             ]);
         }else{
+            /*
             $wpdb->delete($table_name, ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
             $wpdb->insert($table_name, [
                 'cookie' => $_SESSION['lmc_data']['csrf_token']
             ]);
+            */
         }
 
     }else{
 
         // Récupération du token côté cookie
         if (!isset($_SESSION['lmc_data']['csrf_token'])) {
-            $_SESSION['lmc_data']['csrf_token'] = $_COOKIE["lmc-multistep-form"];
+            $_SESSION['lmc_data']['csrf_token'] = $_COOKIE["lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST']];
         }
 
         // vérifier si existe
@@ -364,14 +366,11 @@ function lmc_multistep_form() {
             $wpdb->insert($table_name, [
                 'cookie' => $_SESSION['lmc_data']['csrf_token']
             ]);
-        }else{
-            $wpdb->delete($table_name, ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
-            $wpdb->insert($table_name, [
-                'cookie' => $_SESSION['lmc_data']['csrf_token']
-            ]);
         }
 
     }
+
+    echo $_COOKIE["lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST']] ?? 'Cookie not set';
 
     /*
      * Récupération des valeurs en base de données

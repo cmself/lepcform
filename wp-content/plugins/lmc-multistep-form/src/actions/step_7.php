@@ -44,7 +44,7 @@ if (count($step1_results) === 1) {
 
     $wpdb->delete($table_name, ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
     unset($_SESSION['lmc_data']);
-    setcookie("lmc-multistep-form", "", time() - 3600);
+    setcookie("lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST'], "", time() - 3600, "/");
     $messageFin = '<strong>Merci !</strong> Votre formulaire a bien été envoyé.';
 
 }else{

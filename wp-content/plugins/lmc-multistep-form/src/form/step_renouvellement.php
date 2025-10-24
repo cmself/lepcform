@@ -27,6 +27,7 @@
     </p>
 
     <input type="hidden" id="step0_email" name="step0_email" placeholder="Email" value="<?= $_SESSION['lmc_data']['step0_email'] ?>">
+    <input type="hidden" id="step0_siret" name="step0_siret" placeholder="SIRET" value="<?= $_SESSION['lmc_data']['step0_siret'] ?>">
     <input type="hidden" id="step0_otp" name="step0_otp" value="1">
     <input type="hidden" name="step" value="8">
     <input type="hidden" id="step0_formStartTime" name="step0_formStartTime">
