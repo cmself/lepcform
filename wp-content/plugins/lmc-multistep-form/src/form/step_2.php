@@ -1,3 +1,4 @@
+
 <?php
 /*
  * Récuperer toutes les fonctions enregistrées en BO
