@@ -120,7 +120,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                          */
                                         $stepResign_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
-                                        if (count($stepResign_results) === 1) {
+                                        if (count($stepResign_results) == 1) {
 
 
                                             /*
