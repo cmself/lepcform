@@ -15,7 +15,7 @@
 
 
             <?php
-            if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 'false') {
+            if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 0) {
             ?>
 
             <input type="radio" name="step5_paiement" id="option-1" value="CB" <?php echo ($value_form[0]->step5_paiement == "CB") ? 'checked' : ''; ?>>
@@ -56,7 +56,7 @@
             ?>
 
 
-            <input type="radio" name="step5_paiement" id="option-5" value="MEMBER" <?php echo ($value_form[0]->step5_paiement == "CB") ? 'checked' : ''; ?>>
+            <input type="radio" name="step5_paiement" id="option-5" value="MEMBER" <?php echo ($value_form[0]->step5_paiement == "MEMBER") ? 'checked' : ''; ?>>
 
                 <label for="option-5" class="option option-5">
                     <div class="dot"></div>
