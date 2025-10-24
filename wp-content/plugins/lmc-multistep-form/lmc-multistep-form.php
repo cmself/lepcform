@@ -312,6 +312,9 @@ function lmc_multistep_form() {
     /*
      * COOKIE
      */
+
+    var_dump($_COOKIE["lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST']] ?? 'Cookie not set');
+
     if (!isset($_COOKIE["lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST']])) {
 
         // Génération du token côté serveur
@@ -327,7 +330,7 @@ function lmc_multistep_form() {
                 // 1 jour = 86400 secondes
                 'expires' => time() + (86400 * 7), // 7 jours
                 'path' => '/',
-                'domain' => '.lmc-lepc.com',
+                'domain' => '.' . $_SERVER['HTTP_HOST'],
                 'secure' => true,
                 'httponly' => true,
                 'samesite' => 'Strict'
@@ -369,8 +372,6 @@ function lmc_multistep_form() {
         }
 
     }
-
-    echo $_COOKIE["lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST']] ?? 'Cookie not set';
 
     /*
      * Récupération des valeurs en base de données
