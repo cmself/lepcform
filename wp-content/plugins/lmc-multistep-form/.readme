@@ -1,3 +1,6 @@
+https://lmc-lepc.local/
+
+
 https://www.figma.com/design/1kWEJ28PfbHt56LDOHOwP5/LEPC?node-id=429-1130&t=Gtc7KqJT7oyVxlFs-0
 npm install tailwindcss @tailwindcss/cli
 npx @tailwindcss/cli -i assets/css/src.css -o assets/css/style.css --watch --minify --map
