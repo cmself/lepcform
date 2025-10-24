@@ -111,7 +111,6 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                 lmc_multistep_form__logLmc("step8 Json OHME Contact invalide");
                                 die();
                             }
-
                             $data_step0_structures = json_decode($step0_structures->getBody(), true);
                             if (json_last_error() === JSON_ERROR_NONE) {
                                 if ($data_step0_structures['count'] == 1) {
@@ -136,7 +135,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                             'step1_logo' => $data_step0_structures['data'][0]['logo_de_la_structure'],
                                             'step1_ca' => $data_step0_structures['data'][0]['chiffre_daffaires'][0],
                                             'step1_frais' => $data_step0_structures['data'][0]['montant_des_frais_pour_la_charte_de_la_diversite'],
-                                            'step1_adherent' => $data_step0_structures['data'][0]['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite'],
+                                            'step1_adherent' => !empty($data_step0_structures['data'][0]['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite']) ? 1 : 0,
                                             'step1_adresse' => $data_step0_structures['data'][0]['address']['street'],
                                             'step1_ville' => $data_step0_structures['data'][0]['address']['city'],
                                             'step1_cp' => $data_step0_structures['data'][0]['address']['post_code'],
@@ -159,7 +158,8 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                             'step2_fonction_0' => $_SESSION['lmc_data']['contacts_email'][0]['fonction_dans_lentreprise'],
                                             'step2_email_0' => $_SESSION['lmc_data']['contacts_email'][0]['email'],
                                             'step2_role_0' => '1 CHARTE CONTACT PRINCIPAL',
-                                            'step2_signataire_0' => $_SESSION['lmc_data']['contacts_email'][0]['signataire_de_la_charte_de_la_diversite']
+                                            'step2_signataire_0' => !empty($_SESSION['lmc_data']['contacts_email'][0]['signataire_de_la_charte_de_la_diversite']) ? 1 : 0
+
                                             //'step5_paiement' => $data_step0_structures['data']['ohme_id'],
                                             //'step5_bc' => $data_step0_structures['data']['ohme_id'],
                                             //'step5_help' => $data_step0_structures['data']['ohme_id'],
@@ -191,7 +191,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                                         'step2_fonction_' . $c => $structure_contact['fonction_dans_lentreprise'],
                                                         'step2_email_' . $c => $structure_contact['email'],
                                                         'step2_role_' . $c => '2 AUTRE INTERLOCUTEUR CHARTE INTERLOCUTEUR',
-                                                        'step2_signataire_' . $c => $structure_contact['signataire_de_la_charte_de_la_diversite']
+                                                        'step2_signataire_' . $c =>!empty($structure_contact['signataire_de_la_charte_de_la_diversite']) ? 1 : 0
                                                     ],
                                                         ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
 
