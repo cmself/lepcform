@@ -1,3 +1,4 @@
+<?php if (isset($_SESSION['lmc_data']['csrf_token'])) { ?>
 <div class="w-full! mb-[20px]!">
     <a href="<?= lmc_multistep_form__getCurrentUrl();?>?reload_step=5" class="block! w-full!">
         <button type="button"><i class="fa-solid fa-arrow-left"></i> Retour</button>
@@ -86,4 +87,6 @@
 <div class="flex! flex-col md:flex-row gap-[10px] justify-center items-center w-full! text-center! mt-[20px]!">
 <button type="submit">Envoyer</button>
 </div>
+
+<?php } ?>
 
