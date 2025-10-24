@@ -8,7 +8,7 @@
 if (!isset($_POST['step4_csrf_token']) || $_POST['step4_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
     $_SESSION['lmc_data']['error_step'] = 5;
     $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
-    lmc_multistep_form__logLmc("Token CSRF invalide");
+    lmc_multistep_form__logLmc("step5 Token CSRF invalide");
     die();
 }
 
@@ -18,7 +18,7 @@ if (!isset($_POST['step4_csrf_token']) || $_POST['step4_csrf_token'] !== $_SESSI
 if (!empty($_POST['step4_honeypot'])) {
     $_SESSION['lmc_data']['error_step'] = 5;
     $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
-    lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté)");
+    lmc_multistep_form__logLmc("step5 Honey Pot rempli (robot détecté)");
     die();
 }
 
@@ -28,7 +28,7 @@ if (!empty($_POST['step4_honeypot'])) {
 if( $_SESSION['lmc_data']['step3_2fa'] != 1){
     $_SESSION['lmc_data']['error_step'] = 3;
     $_SESSION['lmc_data']['$error_message'] = "Votre Email n'est pas vérifié.";
-    lmc_multistep_form__logLmc("step4 Votre Email n'est pas vérifié.)");
+    lmc_multistep_form__logLmc("step5 Votre Email n'est pas vérifié.)");
     die();
 }
 

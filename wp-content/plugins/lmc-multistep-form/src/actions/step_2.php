@@ -6,7 +6,7 @@
 if (!isset($_POST['step1_csrf_token']) || $_POST['step1_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
     $_SESSION['lmc_data']['error_step'] = 2;
     $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
-    lmc_multistep_form__logLmc("Token CSRF invalide");
+    lmc_multistep_form__logLmc("step2 Token CSRF invalide");
     die();
 }
 
@@ -16,22 +16,10 @@ if (!isset($_POST['step1_csrf_token']) || $_POST['step1_csrf_token'] !== $_SESSI
 if (!empty($_POST['step1_honeypot'])) {
     $_SESSION['lmc_data']['error_step'] = 2;
     $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
-    lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté)");
+    lmc_multistep_form__logLmc("step2 Honey Pot rempli (robot détecté)");
     die();
 }
 
-/*
- * Test de rapidité d’envoi
- */
-/*
-if (isset($_POST['step1_formStartTime'])) {
-    $duration = time() - (int) ($_POST['step1_formStartTime'] / 1000);
-    if ($duration < 3) {
-        lmc_multistep_form__logLmc("Envoi trop rapide ($duration s)");
-        die("Erreur : Envoi trop rapide.");
-    }
-}
-*/
 
 /*
  * Enregistre les variables de session des étapes
@@ -58,7 +46,7 @@ if(isset($_SESSION['lmc_data']['step1_siret']) && !empty($_SESSION['lmc_data']['
         if ($code_siren != 200) {
             $_SESSION['lmc_data']['error_step'] = 1;
             $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-            lmc_multistep_form__logLmc("Json OHME Contact invalide");
+            lmc_multistep_form__logLmc("step2 Json OHME Contact invalide");
             die();
         }
         $data_siren = json_decode($siren->getBody(), true);
@@ -67,13 +55,13 @@ if(isset($_SESSION['lmc_data']['step1_siret']) && !empty($_SESSION['lmc_data']['
         } else {
             $_SESSION['lmc_data']['error_step'] = 1;
             $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-            lmc_multistep_form__logLmc("IMPOSSIBLE DE SE CONNECTER A OHME");
+            lmc_multistep_form__logLmc("step2 IMPOSSIBLE DE SE CONNECTER A OHME");
             die();
         }
     } catch (ClientException $e) {
         $_SESSION['lmc_data']['error_step'] = 1;
         $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-        lmc_multistep_form__logLmc("API OHME Siren invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
+        lmc_multistep_form__logLmc("step2 API OHME Siren invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
         die();
     }
 }else{
@@ -94,7 +82,7 @@ if (count($resign_results) > 0) {
         if($_SESSION['lmc_data']['structures_siren'][0]['statut_adhesion_a_la_charte_de_lentreprise'] != 'Entreprise_non_candidate'){
             $_SESSION['lmc_data']['error_step'] = 1;
             $_SESSION['lmc_data']['$error_message'] = 'Il semble qu’une signature a déjà été effectuée pour cette entreprise.<br> <a href="' . lmc_multistep_form__getCurrentUrlWithoutQuery() . '?reload_step=8" class="text-[var(--color-blanc)]!">Veuillez effectuer un renouvellement</a>  ou <a href="#" class="text-[var(--color-blanc)]!">contactez LEPC</a>';
-            lmc_multistep_form__logLmc("Signature a déjà été effectuée");
+            lmc_multistep_form__logLmc("step2 Signature a déjà été effectuée");
             die();
         }
 
@@ -105,7 +93,7 @@ if (count($resign_results) > 0) {
             if($_SESSION['lmc_data']['structures_siren'][0]['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite'] != 'Oui'){
                 $_SESSION['lmc_data']['error_step'] = 1;
                 $_SESSION['lmc_data']['$error_message'] = 'Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité,<br> veuillez <a href="' . lmc_multistep_form__getCurrentUrlWithoutQuery() . '?reload_step=1" class="text-[var(--color-blanc)]!">modifier votre répondre</a> ou <a href="#" class="text-[var(--color-blanc)]!">prendre contact avec LEPC</a>';
-                lmc_multistep_form__logLmc("Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité");
+                lmc_multistep_form__logLmc("step2 Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité");
                 die();
             }
         }

@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 if (!isset($_POST['step0_csrf_token']) || $_POST['step0_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
     $_SESSION['lmc_data']['error_step'] = 8;
     $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
-    lmc_multistep_form__logLmc("Token CSRF invalide");
+    lmc_multistep_form__logLmc("step8 Token CSRF invalide");
     die();
 }
 
@@ -19,7 +19,7 @@ if (!isset($_POST['step0_csrf_token']) || $_POST['step0_csrf_token'] !== $_SESSI
 if (!empty($_POST['step0_honeypot'])) {
     $_SESSION['lmc_data']['error_step'] = 8;
     $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
-    lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté)");
+    lmc_multistep_form__logLmc("step8 Honey Pot rempli (robot détecté)");
     die();
 }
 
@@ -67,7 +67,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                         if ($code_email != 200) {
                             $_SESSION['lmc_data']['error_step'] = 8;
                             $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-                            lmc_multistep_form__logLmc("Json OHME Contact invalide");
+                            lmc_multistep_form__logLmc("step8 Json OHME Contact invalide");
                             die();
                         }
                         $data_email = json_decode($email->getBody(), true);
@@ -76,13 +76,13 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                         } else {
                             $_SESSION['lmc_data']['error_step'] = 8;
                             $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-                            lmc_multistep_form__logLmc("IMPOSSIBLE DE SE CONNECTER A OHME");
+                            lmc_multistep_form__logLmc("step8 IMPOSSIBLE DE SE CONNECTER A OHME");
                             die();
                         }
                     } catch (ClientException $e) {
                         $_SESSION['lmc_data']['error_step'] = 8;
                         $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-                        lmc_multistep_form__logLmc("API OHME Siren invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
+                        lmc_multistep_form__logLmc("step8 API OHME Siren invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
                         die();
                     }
 
@@ -101,7 +101,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                             if ($code_step0_structures != 200) {
                                                 $_SESSION['lmc_data']['error_step'] = 8;
                                                 $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-                                                lmc_multistep_form__logLmc("Json OHME Contact invalide");
+                                                lmc_multistep_form__logLmc("step8 Json OHME Contact invalide");
                                                 die();
                                             }
 
@@ -172,7 +172,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                                             if ($code_structure_contact != 200) {
                                                                 $_SESSION['lmc_data']['error_step'] = 8;
                                                                 $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-                                                                lmc_multistep_form__logLmc("Json OHME Contact invalide");
+                                                                lmc_multistep_form__logLmc("step8 Json OHME Contact invalide");
                                                                 die();
                                                             }
                                                             $data_structure_contact = json_decode($structure_fields_contact->getBody(), true);
@@ -195,7 +195,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                                             }else{
                                                                 $_SESSION['lmc_data']['error_step'] = 8;
                                                                 $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-                                                                lmc_multistep_form__logLmc("IMPOSSIBLE DE SE CONNECTER A OHME");
+                                                                lmc_multistep_form__logLmc("step8 IMPOSSIBLE DE SE CONNECTER A OHME");
                                                                 die();
                                                             }
 
@@ -203,7 +203,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
 
                                                             $_SESSION['lmc_data']['error_step'] = 8;
                                                             $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-                                                            lmc_multistep_form__logLmc("API OHME Siren invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
+                                                            lmc_multistep_form__logLmc("step8 API OHME Siren invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
                                                             die();
                                                         }
                                                         header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=1');
@@ -212,7 +212,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
 
                                                         $_SESSION['lmc_data']['error_step'] = 8;
                                                         $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à la base de données.";
-                                                        lmc_multistep_form__logLmc("IMPOSSIBLE DE SE CONNECTER A BASE DE DONNEES");
+                                                        lmc_multistep_form__logLmc("step8 IMPOSSIBLE DE SE CONNECTER A BASE DE DONNEES");
                                                         die();
 
                                                     }
@@ -223,13 +223,13 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
                                             } else {
                                                 $_SESSION['lmc_data']['error_step'] = 8;
                                                 $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-                                                lmc_multistep_form__logLmc("IMPOSSIBLE DE SE CONNECTER A OHME");
+                                                lmc_multistep_form__logLmc("step8 IMPOSSIBLE DE SE CONNECTER A OHME");
                                                 die();
                                             }
                                         } catch (ClientException $e) {
                                             $_SESSION['lmc_data']['error_step'] = 8;
                                             $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
-                                            lmc_multistep_form__logLmc("API OHME Siren invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
+                                            lmc_multistep_form__logLmc("step8 API OHME Siren invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
                                             die();
                                         }
                                     }
@@ -322,7 +322,7 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
     } catch (Exception $e) {
         $_SESSION['lmc_data']['error_step'] = 8;
         $_SESSION['lmc_data']['$error_message'] = "Impossible d'envoyer le mail.";
-        lmc_multistep_form__logLmc("IMPOSSIBLE D'ENVOYER LE MAIL :" . $mail->ErrorInfo);
+        lmc_multistep_form__logLmc("step8 IMPOSSIBLE D'ENVOYER LE MAIL :" . $mail->ErrorInfo);
         die();
     }
 
