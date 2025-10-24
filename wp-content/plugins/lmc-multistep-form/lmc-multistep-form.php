@@ -401,6 +401,8 @@ function lmc_multistep_form() {
         }elseif ($step == 400) {
             include_once 'src/actions/error.php';
         }
+    }else{
+        $step == 1;
     }
 
 
