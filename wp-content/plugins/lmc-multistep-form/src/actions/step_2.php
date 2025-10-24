@@ -27,7 +27,7 @@ if (!empty($_POST['step1_honeypot'])) {
 $_SESSION['lmc_data']['reload'] = 2;
 $_SESSION['lmc_data']['step1_nom'] = isset($_POST['step1_nom']) ? sanitize_text_field($_POST['step1_nom']) : "";
 $_SESSION['lmc_data']['step1_siret'] = isset($_POST['step1_siret']) ? sanitize_text_field($_POST['step1_siret']) : "";
-$_SESSION['lmc_data']['step1_adherent'] = isset($_POST['step1_adherent']) ? sanitize_text_field($_POST['step1_adherent']) : "";
+$_SESSION['lmc_data']['step1_adherent'] = isset($_POST['step1_adherent']) ? sanitize_text_field($_POST['step1_adherent']) : 0;
 
 
 
@@ -83,7 +83,7 @@ if (count($resign_results) > 0) {
             /*
              * Vérifier l’adhésion au réseau
              */
-            if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 'true') {
+            if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 1) {
                 if(empty($_SESSION['lmc_data']['structures_siret'][0]['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite'])){
                     $_SESSION['lmc_data']['error_step'] = 1;
                     $_SESSION['lmc_data']['$error_message'] = 'Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité,<br> veuillez <a href="' . lmc_multistep_form__getCurrentUrlWithoutQuery() . '?reload_step=1" class="text-[var(--color-blanc)]!">modifier votre répondre</a> ou <a href="#" class="text-[var(--color-blanc)]!">prendre contact avec LEPC</a>';
@@ -97,7 +97,7 @@ if (count($resign_results) > 0) {
             }
         }else{
 
-            if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 'true') {
+            if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 1) {
                 $_SESSION['lmc_data']['error_step'] = 1;
                 $_SESSION['lmc_data']['$error_message'] = 'Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité,<br> veuillez <a href="' . lmc_multistep_form__getCurrentUrlWithoutQuery() . '?reload_step=1" class="text-[var(--color-blanc)]!">modifier votre répondre</a> ou <a href="#" class="text-[var(--color-blanc)]!">prendre contact avec LEPC</a>';
                 lmc_multistep_form__logLmc("step2 Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité");
@@ -111,8 +111,6 @@ if (count($resign_results) > 0) {
 
     if(count($_SESSION['lmc_data']['structures_siret']) > 0) {
 
-
-
         /*
         * Vérifier statut Adhésion à la Charte de l’Entreprise
         */
@@ -123,12 +121,10 @@ if (count($resign_results) > 0) {
             die();
         }
 
-
-
         /*
          * Vérifier l’adhésion au réseau
          */
-        if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 'true') {
+        if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 1) {
             if(empty($_SESSION['lmc_data']['structures_siret'][0]['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite'])){
                 $_SESSION['lmc_data']['error_step'] = 1;
                 $_SESSION['lmc_data']['$error_message'] = 'Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité,<br> veuillez <a href="' . lmc_multistep_form__getCurrentUrlWithoutQuery() . '?reload_step=1" class="text-[var(--color-blanc)]!">modifier votre répondre</a> ou <a href="#" class="text-[var(--color-blanc)]!">prendre contact avec LEPC</a>';
@@ -142,7 +138,7 @@ if (count($resign_results) > 0) {
         }
     }else{
 
-        if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 'true') {
+        if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 1) {
             $_SESSION['lmc_data']['error_step'] = 1;
             $_SESSION['lmc_data']['$error_message'] = 'Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité,<br> veuillez <a href="' . lmc_multistep_form__getCurrentUrlWithoutQuery() . '?reload_step=1" class="text-[var(--color-blanc)]!">modifier votre répondre</a> ou <a href="#" class="text-[var(--color-blanc)]!">prendre contact avec LEPC</a>';
             lmc_multistep_form__logLmc("step2 Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité");
@@ -152,7 +148,6 @@ if (count($resign_results) > 0) {
     }
 
 }
-
 
 
 /*
