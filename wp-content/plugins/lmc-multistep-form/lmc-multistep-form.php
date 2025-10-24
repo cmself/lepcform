@@ -1,4 +1,12 @@
 <?php
+
+//emecher le cache pour ces page
+/*
+ *
+ *
+ * */
+
+
 /**
  * Plugin Name: LMC Form MultiStep
  * Description: Formulaire multi-étapes en PHP.

@@ -12,6 +12,12 @@
 <p>
     <label for="step5_paiement"><span>Choisissez votre méthode de paiement :</span>
         <div class="wrapper flex! flex-col! gap-[5px]! w-full!">
+
+
+            <?php
+            if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 'false') {
+            ?>
+
             <input type="radio" name="step5_paiement" id="option-1" value="CB" <?php echo ($value_form[0]->step5_paiement == "CB") ? 'checked' : ''; ?>>
             <input type="radio" name="step5_paiement" id="option-2" value="VIREMENT" <?php echo ($value_form[0]->step5_paiement == "VIREMENT") ? 'checked' : ''; ?>>
             <input type="radio" name="step5_paiement" id="option-3" value="FACTURE" <?php echo ($value_form[0]->step5_paiement == "FACTURE") ? 'checked' : ''; ?>>
@@ -20,30 +26,48 @@
                 <label for="option-1" class="option option-1">
                     <div class="dot"></div>
                     <div class="flex! flex-row! justify-between! items-center! w-full!">
-                    <span>Régler par carte bancaire via le service de paiement sécurisé HelloAsso</span> <img src="<?php echo plugin_dir_url('/') . 'lmc-multistep-form/assets/img/helloasso.png'; ?>">
+                        <span>Régler par carte bancaire via le service de paiement sécurisé HelloAsso</span> <img src="<?php echo plugin_dir_url('/') . 'lmc-multistep-form/assets/img/helloasso.png'; ?>">
                     </div>
                 </label>
 
                 <label for="option-2" class="option option-2">
                     <div class="dot"></div>
                     <div class="flex! flex-row! justify-between! items-center! w-full!">
-                    <span>Régler par virement </span><i class="fa-solid fa-building-columns"></i>
+                        <span>Régler par virement </span><i class="fa-solid fa-building-columns"></i>
                     </div>
                 </label>
 
                 <label for="option-3" class="option option-3">
                     <div class="dot"></div>
                     <div class="flex! flex-row! justify-between! items-center! w-full!">
-                    <span>Demander une facture non acquittée</span><i class="fa-regular fa-file-lines"></i>
+                        <span>Demander une facture non acquittée</span><i class="fa-regular fa-file-lines"></i>
                     </div>
                 </label>
 
                 <label for="option-4" class="option option-4">
                     <div class="dot"></div>
                     <div class="flex! flex-row! justify-between! items-center! w-full!">
-                    <span>Besoin d'aide ? Contactez nous</span><i class="fa-regular fa-envelope"></i>
+                        <span>Besoin d'aide ? Contactez nous</span><i class="fa-regular fa-envelope"></i>
                     </div>
                 </label>
+
+            <?php
+            }else{
+            ?>
+
+
+            <input type="radio" name="step5_paiement" id="option-5" value="MEMBER" <?php echo ($value_form[0]->step5_paiement == "CB") ? 'checked' : ''; ?>>
+
+                <label for="option-5" class="option option-5">
+                    <div class="dot"></div>
+                    <div class="flex! flex-row! justify-between! items-center! w-full!">
+                        <span>Mon entreprise est adhérente du Réseau LEPC : je ne règle rien</span>
+                    </div>
+                </label>
+
+            <?php
+            }
+            ?>
 
 
         </div>

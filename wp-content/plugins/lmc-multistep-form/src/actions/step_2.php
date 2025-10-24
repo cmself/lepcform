@@ -27,7 +27,7 @@ if (!empty($_POST['step1_honeypot'])) {
 $_SESSION['lmc_data']['reload'] = 2;
 $_SESSION['lmc_data']['step1_nom'] = isset($_POST['step1_nom']) ? sanitize_text_field($_POST['step1_nom']) : "";
 $_SESSION['lmc_data']['step1_siret'] = isset($_POST['step1_siret']) ? sanitize_text_field($_POST['step1_siret']) : "";
-$_SESSION['lmc_data']['step1_adherent'] = isset($_POST['step1_adherent']) ? sanitize_text_field($_POST['step1_adherent']) : "Non";
+$_SESSION['lmc_data']['step1_adherent'] = isset($_POST['step1_adherent']) ? sanitize_text_field($_POST['step1_adherent']) : "";
 
 
 
@@ -51,7 +51,7 @@ if(isset($_SESSION['lmc_data']['step1_siret']) && !empty($_SESSION['lmc_data']['
         }
         $data_siren = json_decode($siren->getBody(), true);
         if (json_last_error() === JSON_ERROR_NONE) {
-            $_SESSION['lmc_data']['structures_siren'] = $data_siren['data'];
+            $_SESSION['lmc_data']['structures_siret'] = $data_siren['data'];
         } else {
             $_SESSION['lmc_data']['error_step'] = 1;
             $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à OHME.";
@@ -65,44 +65,90 @@ if(isset($_SESSION['lmc_data']['step1_siret']) && !empty($_SESSION['lmc_data']['
         die();
     }
 }else{
-    $_SESSION['lmc_data']['structures_siren'] = [];
+
+    $_SESSION['lmc_data']['structures_siret'] = [];
     header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=1');
 }
 
 
 $resign_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}' AND resign = 1", OBJECT );
 
+
 if (count($resign_results) > 0) {
 
-    if(count($_SESSION['lmc_data']['structures_siren']) > 0) {
+    if(count($_SESSION['lmc_data']['structures_siret']) > 0) {
+
+        if(count($_SESSION['lmc_data']['structures_siret']) > 0) {
+
+            /*
+             * Vérifier l’adhésion au réseau
+             */
+            if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 'true') {
+                if(empty($_SESSION['lmc_data']['structures_siret'][0]['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite'])){
+                    $_SESSION['lmc_data']['error_step'] = 1;
+                    $_SESSION['lmc_data']['$error_message'] = 'Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité,<br> veuillez <a href="' . lmc_multistep_form__getCurrentUrlWithoutQuery() . '?reload_step=1" class="text-[var(--color-blanc)]!">modifier votre répondre</a> ou <a href="#" class="text-[var(--color-blanc)]!">prendre contact avec LEPC</a>';
+                    lmc_multistep_form__logLmc("step2 Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité");
+                    die();
+                }else{
+
+                }
+            }else{
+
+            }
+        }else{
+
+            if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 'true') {
+                $_SESSION['lmc_data']['error_step'] = 1;
+                $_SESSION['lmc_data']['$error_message'] = 'Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité,<br> veuillez <a href="' . lmc_multistep_form__getCurrentUrlWithoutQuery() . '?reload_step=1" class="text-[var(--color-blanc)]!">modifier votre répondre</a> ou <a href="#" class="text-[var(--color-blanc)]!">prendre contact avec LEPC</a>';
+                lmc_multistep_form__logLmc("step2 Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité");
+                die();
+            }
+
+        }
+    }
+
+}else{
+
+    if(count($_SESSION['lmc_data']['structures_siret']) > 0) {
+
+
 
         /*
-         * Vérifier statut Adhésion à la Charte de l’Entreprise
-         */
-        if($_SESSION['lmc_data']['structures_siren'][0]['statut_adhesion_a_la_charte_de_lentreprise'] != 'Entreprise_non_candidate'){
+        * Vérifier statut Adhésion à la Charte de l’Entreprise
+        */
+        if($_SESSION['lmc_data']['structures_siret'][0]['statut_adhesion_a_la_charte_de_lentreprise'] != 'Entreprise_non_candidate'){
             $_SESSION['lmc_data']['error_step'] = 1;
             $_SESSION['lmc_data']['$error_message'] = 'Il semble qu’une signature a déjà été effectuée pour cette entreprise.<br> <a href="' . lmc_multistep_form__getCurrentUrlWithoutQuery() . '?reload_step=8" class="text-[var(--color-blanc)]!">Veuillez effectuer un renouvellement</a>  ou <a href="#" class="text-[var(--color-blanc)]!">contactez LEPC</a>';
             lmc_multistep_form__logLmc("step2 Signature a déjà été effectuée");
             die();
         }
 
+
+
         /*
          * Vérifier l’adhésion au réseau
          */
-        if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 'Oui') {
-            if($_SESSION['lmc_data']['structures_siren'][0]['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite'] != 'Oui'){
+        if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 'true') {
+            if(empty($_SESSION['lmc_data']['structures_siret'][0]['entreprise_membre_adherente_du_reseau_des_entreprises_pour_la_cite'])){
                 $_SESSION['lmc_data']['error_step'] = 1;
                 $_SESSION['lmc_data']['$error_message'] = 'Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité,<br> veuillez <a href="' . lmc_multistep_form__getCurrentUrlWithoutQuery() . '?reload_step=1" class="text-[var(--color-blanc)]!">modifier votre répondre</a> ou <a href="#" class="text-[var(--color-blanc)]!">prendre contact avec LEPC</a>';
                 lmc_multistep_form__logLmc("step2 Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité");
                 die();
+            }else{
+
             }
+        }else{
+
         }
-    }
+    }else{
 
-}else{
+        if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 'true') {
+            $_SESSION['lmc_data']['error_step'] = 1;
+            $_SESSION['lmc_data']['$error_message'] = 'Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité,<br> veuillez <a href="' . lmc_multistep_form__getCurrentUrlWithoutQuery() . '?reload_step=1" class="text-[var(--color-blanc)]!">modifier votre répondre</a> ou <a href="#" class="text-[var(--color-blanc)]!">prendre contact avec LEPC</a>';
+            lmc_multistep_form__logLmc("step2 Nous n’avons pas pu vérifier votre adhésion au Réseau des Entreprises pour la Cité");
+            die();
+        }
 
-    if(count($_SESSION['lmc_data']['structures_siren']) > 0) {
-        header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=8');
     }
 
 }
