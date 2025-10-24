@@ -24,12 +24,13 @@ if (!empty($_POST['step5_honeypot'])) {
 /*
  * Vérification du mail
  */
-if( $_SESSION['lmc_data']['step3_2fa'] != 1){
-    $_SESSION['lmc_data']['error_step'] = 3;
+if( !isset($_SESSION['lmc_data']['step3_2fa']) || $_SESSION['lmc_data']['step3_2fa'] != 1){
+    $_SESSION['lmc_data']['error_step'] = 1;
     $_SESSION['lmc_data']['$error_message'] = "Votre Email n'est pas vérifié.";
     lmc_multistep_form__logLmc("step6 Votre Email n'est pas vérifié.)");
     die();
 }
+
 
 /*
  * Enregistre les variables de session des étapes
@@ -38,7 +39,7 @@ $_SESSION['lmc_data']['reload'] = 6;
 $_SESSION['lmc_data']['step5_paiement'] = isset($_POST['step5_paiement']) ? sanitize_textarea_field($_POST['step5_paiement']) : "";
 $_SESSION['lmc_data']['step5_bc'] = isset($_POST['step5_bc']) ? sanitize_textarea_field($_POST['step5_bc']) : "";
 $_SESSION['lmc_data']['step5_help'] = isset($_POST['step5_help']) ? sanitize_textarea_field($_POST['step5_help']) : "";
-$_SESSION['lmc_data']['step5_rgpd'] = isset($_POST['step5_rgpd']) ? sanitize_textarea_field($_POST['step5_rgpd']) : "0";
+$_SESSION['lmc_data']['step5_rgpd'] = isset($_POST['step5_rgpd']) ? sanitize_textarea_field($_POST['step5_rgpd']) : 0;
 
 
 /*

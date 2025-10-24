@@ -24,8 +24,8 @@ if (!empty($_POST['step6_honeypot'])) {
 /*
  * Vérification du mail
  */
-if( $_SESSION['lmc_data']['step3_2fa'] != 1){
-    $_SESSION['lmc_data']['error_step'] = 3;
+if( !isset($_SESSION['lmc_data']['step3_2fa']) || $_SESSION['lmc_data']['step3_2fa'] != 1){
+    $_SESSION['lmc_data']['error_step'] = 1;
     $_SESSION['lmc_data']['$error_message'] = "Votre Email n'est pas vérifié.";
     lmc_multistep_form__logLmc("step7 Votre Email n'est pas vérifié.)");
     die();

@@ -66,6 +66,8 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
 
             }
 
+        }else{
+            $step3_otp = 'Impossible de créer le Code';
         }
 
     }else{
