@@ -48,7 +48,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
 
     <p>
         <label for="step2_fonction_0"><span>Fonction dans l’organisation * :</span>
-            <input type="text" id="step2_fonction_0" name="step2_fonction_0" placeholder="Tapez une fonction..." value="<?php echo (isset($value_form[0]->step2_fonction_0) && !empty($value_form[0]->step2_fonction_0)) ? $value_form[0]->step2_fonction_0 : ''; ?>" />
+            <input type="text" id="step2_fonction_0" name="step2_fonction_0" placeholder="Tapez une fonction..." value="<?php echo (isset($value_form[0]->step2_fonction_0) && !empty($value_form[0]->step2_fonction_0)) ? $value_form[0]->step2_fonction_0 : ''; ?>" required/>
             <div id="suggestions0" class="suggestions"></div>
         </label>
     </p>
@@ -101,7 +101,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
 
             <p>
                 <label for="step2_fonction_1"><span>Fonction dans l’organisation * :</span>
-                    <input type="text" id="step2_fonction_1" name="step2_fonction_1" placeholder="Tapez une fonction..." value="<?php echo (isset($value_form[0]->step2_fonction_1) && !empty($value_form[0]->step2_fonction_1)) ? $value_form[0]->step2_fonction_1 : ''; ?>" />
+                    <input type="text" id="step2_fonction_1" name="step2_fonction_1" placeholder="Tapez une fonction..." value="<?php echo (isset($value_form[0]->step2_fonction_1) && !empty($value_form[0]->step2_fonction_1)) ? $value_form[0]->step2_fonction_1 : ''; ?>" required/>
                     <div id="suggestions1" class="suggestions"></div>
                 </label>
             </p>
@@ -159,7 +159,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
 
                 <p>
                     <label for="step2_fonction_2"><span>Fonction dans l’organisation * :</span>
-                        <input type="text" id="step2_fonction_2" name="step2_fonction_2" placeholder="Tapez une fonction..." value="<?php echo (isset($value_form[0]->step2_fonction_2) && !empty($value_form[0]->step2_fonction_2)) ? $value_form[0]->step2_fonction_2 : ''; ?>" />
+                        <input type="text" id="step2_fonction_2" name="step2_fonction_2" placeholder="Tapez une fonction..." value="<?php echo (isset($value_form[0]->step2_fonction_2) && !empty($value_form[0]->step2_fonction_2)) ? $value_form[0]->step2_fonction_2 : ''; ?>" required/>
                         <div id="suggestions2" class="suggestions"></div>
                     </label>
                 </p>
@@ -218,7 +218,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
 
                 <p>
                     <label for="step2_fonction_3"><span>Fonction dans l’organisation * :</span>
-                        <input type="text" id="step2_fonction_3" name="step2_fonction_3" placeholder="Tapez une fonction..." value="<?php echo (isset($value_form[0]->step2_fonction_3) && !empty($value_form[0]->step2_fonction_3)) ? $value_form[0]->step2_fonction_3 : ''; ?>" />
+                        <input type="text" id="step2_fonction_3" name="step2_fonction_3" placeholder="Tapez une fonction..." value="<?php echo (isset($value_form[0]->step2_fonction_3) && !empty($value_form[0]->step2_fonction_3)) ? $value_form[0]->step2_fonction_3 : ''; ?>" required/>
                         <div id="suggestions3" class="suggestions"></div>
                     </label>
                 </p>
@@ -324,7 +324,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
 
     <p>
     <label for="step2_fonction_` + (currentContacts+1) + `"><span>Fonction dans l’organisation * :</span>
-                        <input type="text" id="step2_fonction_` + (currentContacts+1) + `" name="step2_fonction_` + (currentContacts+1) + `" placeholder="Tapez une fonction..." />
+                        <input type="text" id="step2_fonction_` + (currentContacts+1) + `" name="step2_fonction_` + (currentContacts+1) + `" placeholder="Tapez une fonction..." required/>
                         <div id="suggestions` + (currentContacts+1) + `" class="suggestions"></div>
                     </label>
                 </p>
@@ -505,7 +505,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
     </div>
 
     <p><label for="step2_fonction_` + (i + 1) + `"><span>Fonction dans l’organisation * :</span>
-                        <input type="text" id="step2_fonction_` + (i + 1) + `" name="step2_fonction_` + ( i+1 ) + `" placeholder="Tapez une fonction..." />
+                        <input type="text" id="step2_fonction_` + (i + 1) + `" name="step2_fonction_` + ( i+1 ) + `" placeholder="Tapez une fonction..." required/>
                         <div id="suggestions` + ( i + 1) + `" class="suggestions"></div>
                     </label>
                 </p>
