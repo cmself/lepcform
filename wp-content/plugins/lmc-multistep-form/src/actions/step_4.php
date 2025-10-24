@@ -7,7 +7,7 @@
 if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
     $_SESSION['lmc_data']['error_step'] = 4;
     $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
-    lmc_multistep_form__logLmc("Token CSRF invalide");
+    lmc_multistep_form__logLmc("step4 Token CSRF invalide");
     die();
 }
 
@@ -17,7 +17,7 @@ if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSI
 if (!empty($_POST['step3_honeypot'])) {
     $_SESSION['lmc_data']['error_step'] = 4;
     $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
-    lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté)");
+    lmc_multistep_form__logLmc("step4 Honey Pot rempli (robot détecté)");
     die();
 }
 
@@ -32,6 +32,18 @@ $step3_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep
 
 if (count($step3_results) === 1) {
     $_SESSION['lmc_data']['step3_2fa'] = $step3_results[0]->step3_otp_used;
+}else{
+    $_SESSION['lmc_data']['error_step'] = 3;
+    $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à la base de données.";
+    lmc_multistep_form__logLmc("step4 Impossible de se connecter à la base de données.)");
+    die();
+}
+
+if( $_SESSION['lmc_data']['step3_2fa'] != 1){
+    $_SESSION['lmc_data']['error_step'] = 3;
+    $_SESSION['lmc_data']['$error_message'] = "Votre Email n'est pas vérifié.";
+    lmc_multistep_form__logLmc("step4 Votre Email n'est pas vérifié.)");
+    die();
 }
 
 ?>

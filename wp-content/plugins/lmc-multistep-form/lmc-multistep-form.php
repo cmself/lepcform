@@ -338,7 +338,12 @@ function lmc_multistep_form() {
         $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
         // Enregistrement la session en  base de données
-        if (count($results) != 1) {
+        if (count($results) == 0) {
+            $wpdb->insert($table_name, [
+                'cookie' => $_SESSION['lmc_data']['csrf_token']
+            ]);
+        }else{
+            $wpdb->delete($table_name, ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
             $wpdb->insert($table_name, [
                 'cookie' => $_SESSION['lmc_data']['csrf_token']
             ]);
@@ -355,7 +360,12 @@ function lmc_multistep_form() {
         $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
 
         // Enregistrement la session en  base de données
-        if (count($results) != 1) {
+        if (count($results) == 0) {
+            $wpdb->insert($table_name, [
+                'cookie' => $_SESSION['lmc_data']['csrf_token']
+            ]);
+        }else{
+            $wpdb->delete($table_name, ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
             $wpdb->insert($table_name, [
                 'cookie' => $_SESSION['lmc_data']['csrf_token']
             ]);
