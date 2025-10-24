@@ -402,7 +402,7 @@ function lmc_multistep_form() {
             include_once 'src/actions/error.php';
         }
     }else{
-        $step == 1;
+        $step = 1;
     }
 
 
