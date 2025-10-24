@@ -68,6 +68,11 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
 
         }
 
+    }else{
+        $_SESSION['lmc_data']['error_step'] = 1;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à la base de données.";
+        lmc_multistep_form__logLmc("step4 Impossible de se connecter à la base de données.)");
+        die();
     }
 
 /*
@@ -159,6 +164,11 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
 
         $step3_otp = 'Code renvoyé par mail';
 
+    }else{
+        $_SESSION['lmc_data']['error_step'] = 1;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à la base de données.";
+        lmc_multistep_form__logLmc("step4 Impossible de se connecter à la base de données.)");
+        die();
     }
 
 /*
@@ -327,6 +337,11 @@ if(isset($_POST['step3_otp']) && !empty($_POST['step3_otp']) && $_POST['step3_ot
 
         $step3_otp = 'Code envoyé par mail';
 
+    }else{
+        $_SESSION['lmc_data']['error_step'] = 1;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à la base de données.";
+        lmc_multistep_form__logLmc("step4 Impossible de se connecter à la base de données.)");
+        die();
     }
 }
 

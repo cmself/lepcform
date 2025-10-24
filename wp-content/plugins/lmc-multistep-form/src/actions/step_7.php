@@ -48,7 +48,10 @@ if (count($step1_results) === 1) {
     $messageFin = '<strong>Merci !</strong> Votre formulaire a bien été envoyé.';
 
 }else{
-    $messageFin = '<strong>Erreur !</strong> Votre formulaire n\'a pas été envoyé.';
+    $_SESSION['lmc_data']['error_step'] = 1;
+    $_SESSION['lmc_data']['$error_message'] = "Votre formulaire n\'a pas été envoyé.";
+    lmc_multistep_form__logLmc("step4 Votre formulaire n\'a pas été envoyé.)");
+    die();
 }
 
 

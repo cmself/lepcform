@@ -58,6 +58,11 @@ if (count($step1_results) === 1) {
         'step5_rgpd' => $_SESSION['lmc_data']['step5_rgpd']
     ],
         ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
+}else{
+    $_SESSION['lmc_data']['error_step'] = 1;
+    $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à la base de données.";
+    lmc_multistep_form__logLmc("step4 Impossible de se connecter à la base de données.)");
+    die();
 }
 
 ?>

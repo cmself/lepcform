@@ -263,6 +263,11 @@ if(isset($_POST['step0_otp']) && !empty($_POST['step0_otp']) && $_POST['step0_ot
         }
 
 
+    }else{
+        $_SESSION['lmc_data']['error_step'] = 1;
+        $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à la base de données.";
+        lmc_multistep_form__logLmc("step8 Impossible de se connecter à la base de données.)");
+        die();
     }
 
 }else{
