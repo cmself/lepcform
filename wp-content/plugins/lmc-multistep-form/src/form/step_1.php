@@ -1,19 +1,17 @@
 <h3>Étape 1 : Organisation signataire</h3>
 
+<div class="w-full! my-[20px]! hidden" id="step_loader">
+    <h5>Veuillez patienter</h5>
+    <div class="w-full! text-center!"><img src="<?= plugins_url('lmc-multistep-form/assets/img/loader.gif') ?>" alt="loader" class="loader inline-block!"></div>
+</div>
+
+<div class="w-full!" id="step_content">
+
 <?php if (isset($errors['step1']['name'])): ?>
     <div class="error bg-[var(--color-error)] border border-[var(--color-blanc)] px-4 py-3 my-[20px] relative w-full!">
         <p class="text-[26px] texte-[var(--color-blanc)]"><?=$errors['step1']['name'] ?></p>
         <p class="text-[16px] texte-[var(--color-blanc)]"><?=$errors['step1']['texte'] ?></p>
     </div>
-<?php else: ?>
-
-    <?php if(isset($_POST['step']) && $_POST['step'] == 1): ?>
-
-        <h5>Veuillez patienter ...</h5>
-        <div class="w-full! text-center!"><img src="<?= plugins_url('lmc-multistep-form/assets/img/loader.gif') ?>" alt="loader" class="loader inline-block!"></div>
-
-    <?php endif; ?>
-
 <?php endif; ?>
 
 <p><label for="step1_nom"><span>Nom de l’organisation * :</span> <input type="text" id="step1_nom" name="step1_nom"
@@ -274,6 +272,8 @@
 <p class="block! w-full! text-center!">
     <button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button>
 </p>
+
+</div>
 
 
 <script>
