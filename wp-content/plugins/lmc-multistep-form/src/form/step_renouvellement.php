@@ -10,13 +10,26 @@
 
     <div class="relative! w-full!">
         <h3>Renouvellement de la signature</h3>
-       <?php if(isset($step0_message)) { ?>
-        <h5><?= $step0_message; ?></h5>
-        <?php } ?>
     </div>
 
+    <?php if (isset($errors['step8']['name'])): ?>
+        <div class="error bg-[var(--color-error)] border border-[var(--color-blanc)] px-4 py-3 my-[20px] relative w-full!">
+            <p class="text-[26px] texte-[var(--color-blanc)]"><?=$errors['step8']['name'] ?></p>
+            <p class="text-[16px] texte-[var(--color-blanc)]"><?=$errors['step8']['texte'] ?></p>
+        </div>
+    <?php else: ?>
+
+        <?php if(isset($_POST['step']) && $_POST['step'] == 8): ?>
+
+            <h5>Veuillez patienter ...</h5>
+            <div class="w-full! text-center!"><img src="<?= plugins_url('lmc-multistep-form/assets/img/loader.gif') ?>" alt="loader" class="loader inline-block!"></div>
+
+        <?php endif; ?>
+
+    <?php endif; ?>
+
     <p class="block! w-full! text-center!">
-        <label for="code" class="w-full! text-center!"><span class="w-full! text-center!">Entrez le code reçu à l’adresse : <i><?= $_SESSION['lmc_data']['step0_email'] ?></i></span></label>
+        <label for="code" class="w-full! text-center!"><span class="w-full! text-center!">Entrez le code reçu à l’adresse : <i><?= $_SESSION['lmc_data'][$id_session]['step0_email'] ?></i></span></label>
     </p>
     <p class="flex! flex-row! justify-center! items-center! gap-[10px]! w-full! mb-[40px]!">
         <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step0_pin1" id="step0_pin1" data-hs-pin-input-item="">
@@ -26,14 +39,14 @@
         <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step0_pin5" id="step0_pin5" data-hs-pin-input-item="">
     </p>
 
-    <input type="hidden" id="step0_email" name="step0_email" placeholder="Email" value="<?= $_SESSION['lmc_data']['step0_email'] ?>">
-    <input type="hidden" id="step0_siret" name="step0_siret" placeholder="SIRET" value="<?= $_SESSION['lmc_data']['step0_siret'] ?>">
+    <input type="hidden" id="step0_email" name="step0_email" placeholder="Email" value="<?= $_SESSION['lmc_data'][$id_session]['step0_email'] ?>">
+    <input type="hidden" id="step0_siret" name="step0_siret" placeholder="SIRET" value="<?= $_SESSION['lmc_data'][$id_session]['step0_siret'] ?>">
     <input type="hidden" id="step0_otp" name="step0_otp" value="1">
     <input type="hidden" name="step" value="8">
     <input type="hidden" id="step0_formStartTime" name="step0_formStartTime">
     <script>document.getElementById('step0_formStartTime').value = Date.now();</script>
     <input type="text" name="step0_honeypot" id="step0_honeypot" style="display:none;">
-    <input type="hidden" name="step0_csrf_token" id="step0_csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
+    <input type="hidden" name="step0_csrf_token" id="step0_csrf_token" value="<?php echo $_SESSION['lmc_data'][$id_session]['csrf_token']; ?>">
 
     <div class="flex! flex-col md:flex-row gap-[10px] justify-center items-center w-full! text-center!">
         <button type="button" id="resend"><i class="fa-solid fa-rotate-left"></i> Renvoyer le code</button>
@@ -79,7 +92,7 @@
         <label for="step0_email"><span>Entrer l'email du contact principal de la signature initiale * :</span> <input type="email" id="step0_email" name="step0_email" placeholder="Email" required></label>
     </p>
     <p>
-        <label for="step0_siret"><span>Numéro de SIRET * :</span> <input type="text" id="step0_siret" pattern="\d{14}" maxlength="14" title="Veuillez entrer exactement 14 chiffres" name="step0_siret" placeholder="SIRET" value="<?php if(isset($_SESSION['lmc_data']['structures_siren']) && !empty($_SESSION['lmc_data']['structures_siren'])) {echo (isset($_SESSION['lmc_data']['structures_siren'][0]['siren']) && !empty($_SESSION['lmc_data']['structures_siren'][0]['siren'])) ? $_SESSION['lmc_data']['structures_siren'][0]['siren'] : '';} else { echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; }?>" required><div id="result_siret"></div></label>
+        <label for="step0_siret"><span>Numéro de SIRET * :</span> <input type="text" id="step0_siret" pattern="\d{14}" maxlength="14" title="Veuillez entrer exactement 14 chiffres" name="step0_siret" placeholder="SIRET" value="<?php if(isset($_SESSION['lmc_data'][$id_session]['structures_siren']) && !empty($_SESSION['lmc_data'][$id_session]['structures_siren'])) {echo (isset($_SESSION['lmc_data'][$id_session]['structures_siren'][0]['siren']) && !empty($_SESSION['lmc_data'][$id_session]['structures_siren'][0]['siren'])) ? $_SESSION['lmc_data'][$id_session]['structures_siren'][0]['siren'] : '';} else { echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; }?>" required><div id="result_siret"></div></label>
     </p>
 
 
@@ -92,7 +105,7 @@
     <input type="hidden" id="step0_formStartTime" name="step0_formStartTime">
     <script>document.getElementById('step0_formStartTime').value = Date.now();</script>
     <input type="text" name="step0_honeypot" id="step0_honeypot" style="display:none;">
-    <input type="hidden" name="step0_csrf_token" id="step0_csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
+    <input type="hidden" name="step0_csrf_token" id="step0_csrf_token" value="<?php echo $_SESSION['lmc_data'][$id_session]['csrf_token']; ?>">
     <div class="flex! flex-col md:flex-row gap-[10px] justify-between items-center w-full!">
         <div class="w-2/3! text-center!">
             <p>Le contact principal de la Charte pour votre entreprise a changé ?</p>

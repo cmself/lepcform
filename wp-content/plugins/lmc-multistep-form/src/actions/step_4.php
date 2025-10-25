@@ -4,7 +4,7 @@
 /*
  * Token CSRF
  */
-if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
+if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSION['lmc_data'][$id_session]['csrf_token']) {
     $_SESSION['lmc_data']['error_step'] = 4;
     $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
     lmc_multistep_form__logLmc("step4 Token CSRF invalide");

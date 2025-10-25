@@ -22,8 +22,15 @@
     ?>
 </div>
 
+<?php if (isset($errors['name'])): ?>
+    <div class="error bg-[var(--color-error)] border border-[var(--color-blanc)] px-4 py-3 my-[20px] relative w-full!">
+        <p class="text-[26px] texte-[var(--color-blanc)]"><?=$errors['name'] ?></p>
+        <p class="text-[16px] texte-[var(--color-blanc)]"><?=$errors['texte'] ?></p>
+    </div>
+<?php endif; ?>
+
     <p class="block! w-full! text-center!">
-        <label for="code" class="w-full! text-center!"><span class="w-full! text-center!">Entrez le code reçu à l’adresse : <i><?= $_SESSION['lmc_data']['step2_email_0'] ?></i></span></label>
+        <label for="code" class="w-full! text-center!"><span class="w-full! text-center!">Entrez le code reçu à l’adresse : <i><?= $_SESSION['lmc_data'][$id_session]['step2_email_0'] ?></i></span></label>
     </p>
     <p class="flex! flex-row! justify-center! items-center! gap-[10px]! w-full! mb-[40px]!">
         <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin1" id="step3_pin1" data-hs-pin-input-item="">
@@ -37,11 +44,11 @@
 <input type="hidden" id="step3_formStartTime" name="step3_formStartTime">
 <script>document.getElementById('step3_formStartTime').value = Date.now();</script>
 <input type="text" name="step3_honeypot" id="step3_honeypot" style="display:none;">
-<input type="hidden" name="step3_csrf_token" id="step3_csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
+<input type="hidden" name="step3_csrf_token" id="step3_csrf_token" value="<?php echo $_SESSION['lmc_data'][$id_session]['csrf_token']; ?>">
 <?php
 if(isset($stepMAJ) && $stepMAJ == 4){
     ?>
-    <input type="hidden" name="step" value="4">
+    <input type="hidden" name="step" value="3">
     <?php
 } else {
     ?>

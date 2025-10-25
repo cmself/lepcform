@@ -269,20 +269,21 @@ function lmc_multistep_form() {
     /*
     * Variable de session global pour le plugin
     */
-    if (!isset($_SESSION['lmc_data'])) {
-        $_SESSION['lmc_data'] = [];
+    $id_session = session_id();
+    if (!isset($_SESSION['lmc_data'][$id_session])) {
+        $_SESSION['lmc_data'][$id_session] = [];
     }
 
     /*
      * COOKIE et SESSION
      */
-    if (!isset($_SESSION['lmc_data']['csrf_token'])) {
+    if (!isset($_SESSION['lmc_data'][$id_session]['csrf_token'])) {
 
         if (!isset($_COOKIE["lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST']])) {
-            $_SESSION['lmc_data']['csrf_token'] = "lmc-multistep-form_" . bin2hex(random_bytes(32)) . "_" . time();
+            $_SESSION['lmc_data'][$id_session]['csrf_token'] = "lmc-multistep-form_" . bin2hex(random_bytes(32)) . "_" . time();
             setcookie(
                 "lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST'],
-                $_SESSION['lmc_data']['csrf_token'],
+                $_SESSION['lmc_data'][$id_session]['csrf_token'],
                 [
                     // 1 jour = 86400 secondes
                     'expires' => time() + (86400 * 7), // 7 jours
@@ -296,12 +297,13 @@ function lmc_multistep_form() {
 
         }else{
 
-            $_SESSION['lmc_data']['csrf_token'] = $_COOKIE["lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST']];
+            $_SESSION['lmc_data'][$id_session]['csrf_token'] = $_COOKIE["lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST']];
+
         }
 
     }
 
-    var_dump($_COOKIE["lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST']] ?? 'Cookie not set');
+    //var_dump($_COOKIE["lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST']] ?? 'Cookie not set');
 
 
 
@@ -329,30 +331,30 @@ function lmc_multistep_form() {
     /*
      * Variable de session pour les champs personnalisés de OHME
      */
-    if (!isset($_SESSION['lmc_data']['ohme_data'])) {
-        $_SESSION['lmc_data']['ohme_data'] = filter_var_array($opt_ohme);
+    if (!isset($_SESSION['lmc_data'][$id_session]['ohme_data'])) {
+        $_SESSION['lmc_data'][$id_session]['ohme_data'] = filter_var_array($opt_ohme);
     }
 
 
     /*
      * Implémentation du compteur de tentatives de soumissions du formulaire
      */
-    if (!isset($_SESSION['lmc_data']['attempts'])) {
-        $_SESSION['lmc_data']['attempts'] = 0;
-        $_SESSION['lmc_data']['attempt_time'] = time();
+    if (!isset($_SESSION['lmc_data'][$id_session]['attempts'])) {
+        $_SESSION['lmc_data'][$id_session]['attempts'] = 0;
+        $_SESSION['lmc_data'][$id_session]['attempt_time'] = time();
     }
 
 
     /*
      * Valeur de la base de données
      */
-    $session_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
+    $session_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data'][$id_session]['csrf_token']}'", OBJECT );
 
     if (count($session_results) == 0) {
         $wpdb->insert($table_name, [
-            'cookie' => $_SESSION['lmc_data']['csrf_token']
+            'cookie' => $_SESSION['lmc_data'][$id_session]['csrf_token']
         ]);
-        $value_form = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
+        $value_form = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data'][$id_session]['csrf_token']}'", OBJECT );
     }else{
         $value_form = $session_results;
     }
@@ -362,7 +364,7 @@ function lmc_multistep_form() {
      * Vérification si retour en arrière des étape
      */
     if(isset($_GET['reload_step']) && !empty($_GET['reload_step'])){
-        $_SESSION['lmc_data']['reload'] = intval($_GET['reload_step']);
+        $_SESSION['lmc_data'][$id_session]['reload'] = intval($_GET['reload_step']);
         header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery());
     }
 
@@ -372,19 +374,20 @@ function lmc_multistep_form() {
     if(isset($_POST['step']) && !empty($_POST['step'])){
         $step = intval($_POST['step']);
     }else{
-        if (isset($_SESSION['lmc_data']['reload']) && !empty($_SESSION['lmc_data']['reload'])) {
-            $step = $_SESSION['lmc_data']['reload'];
+        if (isset($_SESSION['lmc_data'][$id_session]['reload']) && !empty($_SESSION['lmc_data'][$id_session]['reload'])) {
+            $step = $_SESSION['lmc_data'][$id_session]['reload'];
         }else{
             $step = 1;
         }
     }
 
-
     /*
      * Sauvegarder les données de l’étape précédente
      */
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if ($step == 2) {
+        if ($step == 1) {
+            include_once 'src/actions/step_1.php';
+        } elseif ($step == 2) {
             include_once 'src/actions/step_2.php';
         } elseif ($step == 3) {
             include_once 'src/actions/step_3.php';
@@ -401,8 +404,6 @@ function lmc_multistep_form() {
         }elseif ($step == 400) {
             include_once 'src/actions/error.php';
         }
-    }else{
-        $step = 1;
     }
 
 

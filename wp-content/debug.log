@@ -474,3 +474,18 @@
 [24-Oct-2025 11:45:20 UTC] PHP Warning:  Attempt to read property "step1_connaissance" on null in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_1.php on line 210
 [24-Oct-2025 11:55:37 UTC] PHP Warning:  Undefined array key "name" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\actions\step_renouvellement.php on line 171
 [24-Oct-2025 12:04:37 UTC] PHP Warning:  Undefined array key "name" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\actions\step_renouvellement.php on line 173
+[25-Oct-2025 08:44:31 UTC] Automatic updates starting...
+[25-Oct-2025 08:44:33 UTC] Automatic updates complete.
+[25-Oct-2025 09:00:23 UTC] PHP Warning:  Undefined array key "name" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_1.php on line 5
+[25-Oct-2025 09:00:23 UTC] PHP Warning:  Undefined array key "texte" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_1.php on line 6
+[25-Oct-2025 09:01:08 UTC] PHP Warning:  Undefined array key "name" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_1.php on line 5
+[25-Oct-2025 09:01:08 UTC] PHP Warning:  Undefined array key "texte" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_1.php on line 6
+[25-Oct-2025 09:03:03 UTC] PHP Warning:  Undefined array key "name" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_1.php on line 5
+[25-Oct-2025 09:03:03 UTC] PHP Warning:  Undefined array key "texte" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_1.php on line 6
+[25-Oct-2025 09:03:24 UTC] PHP Parse error:  syntax error, unexpected token ";" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_1.php on line 5
+[25-Oct-2025 10:14:56 UTC] Automatic updates starting...
+[25-Oct-2025 10:14:56 UTC] Automatic updates complete.
+[25-Oct-2025 10:44:34 UTC] PHP Warning:  Undefined array key "error_step" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\error.php on line 3
+[25-Oct-2025 10:44:34 UTC] PHP Warning:  Undefined array key "$error_message" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\error.php on line 11
+[25-Oct-2025 10:44:50 UTC] PHP Warning:  Undefined array key "error_step" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\error.php on line 3
+[25-Oct-2025 10:44:50 UTC] PHP Warning:  Undefined array key "$error_message" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\error.php on line 11

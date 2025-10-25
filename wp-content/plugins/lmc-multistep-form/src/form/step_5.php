@@ -9,13 +9,29 @@
     <h4>Vous recevrez une facture acquittée ainsi que la charte dès réception de votre règlement.</h4>
 </div>
 
+<?php if (isset($errors['step5']['name'])): ?>
+    <div class="error bg-[var(--color-error)] border border-[var(--color-blanc)] px-4 py-3 my-[20px] relative w-full!">
+        <p class="text-[26px] texte-[var(--color-blanc)]"><?=$errors['step5']['name'] ?></p>
+        <p class="text-[16px] texte-[var(--color-blanc)]"><?=$errors['step5']['texte'] ?></p>
+    </div>
+<?php else: ?>
+
+    <?php if(isset($_POST['step']) && $_POST['step'] == 5): ?>
+
+        <h5>Veuillez patienter ...</h5>
+        <div class="w-full! text-center!"><img src="<?= plugins_url('lmc-multistep-form/assets/img/loader.gif') ?>" alt="loader" class="loader inline-block!"></div>
+
+    <?php endif; ?>
+
+<?php endif; ?>
+
 <p>
     <label for="step5_paiement"><span>Choisissez votre méthode de paiement :</span>
         <div class="wrapper flex! flex-col! gap-[5px]! w-full!">
 
 
             <?php
-            if(isset($_SESSION['lmc_data']['step1_adherent']) && $_SESSION['lmc_data']['step1_adherent'] == 0) {
+            if(isset($_SESSION['lmc_data'][$id_session]['step1_adherent']) && $_SESSION['lmc_data'][$id_session]['step1_adherent'] == 0) {
             ?>
 
             <input type="radio" name="step5_paiement" id="option-1" value="CB" <?php echo ($value_form[0]->step5_paiement == "CB") ? 'checked' : ''; ?>>
@@ -119,8 +135,8 @@
 <input type="hidden" id="step5_formStartTime" name="step5_formStartTime">
 <script>document.getElementById('step5_formStartTime').value = Date.now();</script>
 <input type="text" name="step5_honeypot" id="step5_honeypot" style="display:none;">
-<input type="hidden" name="step5_csrf_token" id="step5_csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
-<input type="hidden" name="step" value="6">
+<input type="hidden" name="step5_csrf_token" id="step5_csrf_token" value="<?php echo $_SESSION['lmc_data'][$id_session]['csrf_token']; ?>">
+<input type="hidden" name="step" value="5">
 <p class="block! w-full! text-center!"><button type="submit">Valider le formulaire <i class="fa-solid fa-arrow-right"></i></button></p>
 
 <script>

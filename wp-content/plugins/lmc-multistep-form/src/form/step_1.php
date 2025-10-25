@@ -1,4 +1,21 @@
 <h3>Étape 1 : Organisation signataire</h3>
+
+<?php if (isset($errors['step1']['name'])): ?>
+    <div class="error bg-[var(--color-error)] border border-[var(--color-blanc)] px-4 py-3 my-[20px] relative w-full!">
+        <p class="text-[26px] texte-[var(--color-blanc)]"><?=$errors['step1']['name'] ?></p>
+        <p class="text-[16px] texte-[var(--color-blanc)]"><?=$errors['step1']['texte'] ?></p>
+    </div>
+<?php else: ?>
+
+    <?php if(isset($_POST['step']) && $_POST['step'] == 1): ?>
+
+        <h5>Veuillez patienter ...</h5>
+        <div class="w-full! text-center!"><img src="<?= plugins_url('lmc-multistep-form/assets/img/loader.gif') ?>" alt="loader" class="loader inline-block!"></div>
+
+    <?php endif; ?>
+
+<?php endif; ?>
+
 <p><label for="step1_nom"><span>Nom de l’organisation * :</span> <input type="text" id="step1_nom" name="step1_nom"
                                                                         placeholder="Nom de l’organisation"
                                                                         value="<?php echo (isset($value_form[0]->step1_nom) && !empty($value_form[0]->step1_nom)) ? $value_form[0]->step1_nom : ''; ?>" required></label></p>
@@ -26,11 +43,11 @@
 <p><label for="step1_ca"><span>Le chiffre d’affaires * :</span>
         <select name="step1_ca" id="step1_ca" required>
             <?php
-            if ($_SESSION['lmc_data']['ohme_data']['Structure']['chiffre_daffaires']['options']):
+            if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['chiffre_daffaires']['options']):
                 ?>
                 <option value="">Choisir une réponse</option>
                 <?php
-                foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['chiffre_daffaires']['options'] as $option):
+                foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['chiffre_daffaires']['options'] as $option):
                     ?>
                     <option value="<?= htmlspecialchars($option); ?>"
                         <?php  echo ($value_form[0]->step1_ca == $option) ? 'selected' : '';?>><?= htmlspecialchars($option); ?></option>
@@ -44,11 +61,11 @@
 <p><label for="step1_frais"><span>Montant des frais pour la Charte de la diversité * :</span>
         <select name="step1_frais" id="step1_frais" required>
             <?php
-            if ($_SESSION['lmc_data']['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options']):
+            if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options']):
                 ?>
                 <option value="">Choisir une réponse</option>
                 <?php
-                foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options'] as $option):
+                foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options'] as $option):
                     ?>
                     <option value="<?= htmlspecialchars($option); ?>"
                             <?php  echo ($value_form[0]->step1_frais == $option) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
@@ -140,11 +157,11 @@
 <p><label for="step1_collaborateurs"><span>Nombre de collaborateurs en France * :</span>
         <select name="step1_collaborateurs" id="step1_collaborateurs" required>
             <?php
-            if ($_SESSION['lmc_data']['ohme_data']['Structure']['nombre_de_collaborateurs_en_france']['options']):
+            if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['nombre_de_collaborateurs_en_france']['options']):
                 ?>
                 <option value="">Choisir une réponse</option>
                 <?php
-                foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['nombre_de_collaborateurs_en_france']['options'] as $option):
+                foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['nombre_de_collaborateurs_en_france']['options'] as $option):
                     ?>
                     <option value="<?= htmlspecialchars($option); ?>"<?php
                         echo ($value_form[0]->step1_collaborateurs == $option) ? 'selected' : '';
@@ -160,11 +177,11 @@
 <p><label for="step1_activite"><span>Secteur d’activité :</span>
         <select name="step1_activite" id="step1_activite">
             <?php
-            if ($_SESSION['lmc_data']['ohme_data']['Structure']['secteur_dactivite']['options']):
+            if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['secteur_dactivite']['options']):
                 ?>
                 <option value="">Choisir une réponse</option>
                 <?php
-                foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['secteur_dactivite']['options'] as $option):
+                foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['secteur_dactivite']['options'] as $option):
                     ?>
                     <option value="<?= htmlspecialchars($option); ?>" <?php
                         echo ($value_form[0]->step1_activite == $option) ? 'selected' : '';
@@ -180,11 +197,11 @@
 <p><label for="step1_structure"><span>Type de structure :</span>
         <select name="step1_structure" id="step1_structure">
             <?php
-            if ($_SESSION['lmc_data']['ohme_data']['Structure']['type_de_structure']['options']):
+            if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['type_de_structure']['options']):
                 ?>
                 <option value="">Choisir une réponse</option>
                 <?php
-                foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['type_de_structure']['options'] as $option):
+                foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['type_de_structure']['options'] as $option):
                     ?>
                     <option value="<?= htmlspecialchars($option); ?>" <?php
                         echo ($value_form[0]->step1_structure == $option) ? 'selected' : '';
@@ -200,11 +217,11 @@
 <p><label for="step1_connaissance"><span>Comment avez-vous eu connaissance de la Charte de la diversité ? :</span>
         <select name="step1_connaissance" id="step1_connaissance">
             <?php
-            if ($_SESSION['lmc_data']['ohme_data']['Structure']['comment_avez_vous_eu_connaissance_de_la_charte_de_la_diversite']['options']):
+            if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['comment_avez_vous_eu_connaissance_de_la_charte_de_la_diversite']['options']):
                 ?>
                 <option value="">Choisir une réponse</option>
                 <?php
-                foreach ($_SESSION['lmc_data']['ohme_data']['Structure']['comment_avez_vous_eu_connaissance_de_la_charte_de_la_diversite']['options'] as $option):
+                foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['comment_avez_vous_eu_connaissance_de_la_charte_de_la_diversite']['options'] as $option):
                     ?>
                     <option value="<?= htmlspecialchars($option); ?>" <?php
                         echo ($value_form[0]->step1_connaissance == $option) ? 'selected' : '';
@@ -250,8 +267,8 @@
 <input type="hidden" id="step1_formStartTime" name="step1_formStartTime">
 <script>document.getElementById('step1_formStartTime').value = Date.now();</script>
 <input type="text" name="step1_honeypot" id="step1_honeypot" style="display:none;">
-<input type="hidden" id="step1_csrf_token" name="step1_csrf_token" value="<?php echo $_SESSION['lmc_data']['csrf_token']; ?>">
-<input type="hidden" name="step" value="2">
+<input type="hidden" id="step1_csrf_token" name="step1_csrf_token" value="<?php echo $_SESSION['lmc_data'][$id_session]['csrf_token']; ?>">
+<input type="hidden" name="step" value="1">
 <p class="block! w-full! text-center! text-[var(--color-blanc)]! text-[20px]! font-light! py-[20px]! opacity-50!">*
     champs nécessaires pour valider l’étape</p>
 <p class="block! w-full! text-center!">
@@ -264,7 +281,6 @@
 
     if (step1_siret) {
         step1_siret.addEventListener('input', () => {
-            // Supprime tout ce qui n'est pas un chiffre
             step1_siret.value = step1_siret.value.replace(/[^0-9]/g, '');
         });
     }
