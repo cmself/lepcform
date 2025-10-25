@@ -217,6 +217,11 @@ if(isset($_POST['step']) && $_POST['step'] == 1) {
             'step1_politique' => $_SESSION['lmc_data'][$id_session]['step1_politique']
         ],
             ['cookie' => $_SESSION['lmc_data'][$id_session]['csrf_token']]);
+
+
+        header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=2');
+
+
     }else{
         $_SESSION['lmc_data'][$id_session]['error_step'] = 1;
         $_SESSION['lmc_data'][$id_session]['$error_message'] = "Impossible de se connecter à la base de données.";
