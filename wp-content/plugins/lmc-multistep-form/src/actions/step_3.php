@@ -122,7 +122,7 @@ if(isset($_POST['step']) && $_POST['step'] == 3) {
                         $wpdb->update($table_name, [
                             'step3_otp_used' => 1
                         ],
-                            ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
+                            ['cookie' => $_SESSION['lmc_data'][$id_session]['csrf_token']]);
 
                         header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=4');
 
@@ -146,7 +146,8 @@ if(isset($_POST['step']) && $_POST['step'] == 3) {
             die();
         }
     }
-    }
+
+}
 
 
 
