@@ -1,69 +1,32 @@
 <?php
 
 /*
- * Token CSRF
+ * Vérifier si le formulaire a bien été envoyé
  */
-if (!isset($_POST['step5_csrf_token']) || $_POST['step5_csrf_token'] !== $_SESSION['lmc_data']['csrf_token']) {
-    $_SESSION['lmc_data']['error_step'] = 6;
-    $_SESSION['lmc_data']['$error_message'] = "Requête invalide.";
-    lmc_multistep_form__logLmc("step6 Token CSRF invalide");
-    die();
-}
-
-/*
- * Honey Pot pour piéger les robots
- */
-if (!empty($_POST['step5_honeypot'])) {
-    $_SESSION['lmc_data']['error_step'] = 6;
-    $_SESSION['lmc_data']['$error_message'] = "Robot détecté..";
-    lmc_multistep_form__logLmc("step6 Honey Pot rempli (robot détecté)");
-    die();
-}
-
-
-/*
- * Vérification du mail
- */
-if( !isset($_SESSION['lmc_data']['step3_2fa']) || $_SESSION['lmc_data']['step3_2fa'] != 1){
-    $_SESSION['lmc_data']['error_step'] = 1;
-    $_SESSION['lmc_data']['$error_message'] = "Votre Email n'est pas vérifié.";
-    lmc_multistep_form__logLmc("step6 Votre Email n'est pas vérifié.)");
-    die();
-}
-
-
-/*
- * Enregistre les variables de session des étapes
- */
-$_SESSION['lmc_data']['reload'] = 6;
-$_SESSION['lmc_data']['step5_paiement'] = isset($_POST['step5_paiement']) ? sanitize_textarea_field($_POST['step5_paiement']) : "";
-$_SESSION['lmc_data']['step5_bc'] = isset($_POST['step5_bc']) ? sanitize_textarea_field($_POST['step5_bc']) : "";
-$_SESSION['lmc_data']['step5_help'] = isset($_POST['step5_help']) ? sanitize_textarea_field($_POST['step5_help']) : "";
-$_SESSION['lmc_data']['step5_rgpd'] = isset($_POST['step5_rgpd']) ? sanitize_textarea_field($_POST['step5_rgpd']) : 0;
-
-
-/*
- * vérifier si les données existent en base de données
- */
-$step1_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data']['csrf_token']}'", OBJECT );
-
-if (count($step1_results) === 1) {
+if(isset($_POST['step']) && $_POST['step'] == 6) {
 
     /*
-     * Enregistrement les données en base de données
+    * Token CSRF
+    */
+    if (!isset($_POST['step6_csrf_token']) || $_POST['step6_csrf_token'] !== $_SESSION['lmc_data'][$id_session]['csrf_token']) {
+        $_SESSION['lmc_data'][$id_session]['error_step'] = 6;
+        $_SESSION['lmc_data'][$id_session]['$error_message'] = "Jeton de validité du formulaires incorrect";
+        lmc_multistep_form__logLmc("Jeton de validité du formulaires incorrect du STEP 6");
+        die();
+    }
+
+    /*
+     * Honey Pot pour piéger les robots
      */
-    $wpdb->update($table_name, [
-        'step5_paiement' => $_SESSION['lmc_data']['step5_paiement'],
-        'step5_bc' => $_SESSION['lmc_data']['step5_bc'],
-        'step5_help' => $_SESSION['lmc_data']['step5_help'],
-        'step5_rgpd' => $_SESSION['lmc_data']['step5_rgpd']
-    ],
-        ['cookie' => $_SESSION['lmc_data']['csrf_token']]);
-}else{
-    $_SESSION['lmc_data']['error_step'] = 1;
-    $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à la base de données.";
-    lmc_multistep_form__logLmc("step4 Impossible de se connecter à la base de données.)");
-    die();
+    if (!empty($_POST['step6_honeypot'])) {
+        $_SESSION['lmc_data'][$id_session]['error_step'] = 6;
+        $_SESSION['lmc_data'][$id_session]['$error_message'] = "Robot détecté";
+        lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté) du STEP 6");
+        die();
+    }
+
+    header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=7');
+
 }
 
 ?>
