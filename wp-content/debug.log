@@ -497,3 +497,5 @@
 [26-Oct-2025 22:05:15 UTC] Automatic updates starting...
 [26-Oct-2025 22:05:15 UTC] Automatic updates complete.
 [26-Oct-2025 22:38:10 UTC] PHP Warning:  Undefined array key "csrf_token" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\actions\step_3.php on line 125
+[26-Oct-2025 23:15:35 UTC] PHP Warning:  Undefined array key "step3_2fa" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_6.php on line 87
+[26-Oct-2025 23:15:41 UTC] PHP Warning:  Undefined array key "step3_2fa" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_6.php on line 87

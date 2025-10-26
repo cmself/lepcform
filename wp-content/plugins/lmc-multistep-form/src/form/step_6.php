@@ -84,7 +84,7 @@
 <p><strong>Contact signataire :</strong> <?php echo esc_html($_SESSION['lmc_data'][$id_session]['step2_signataire_3']); ?></p>
 <br><br>
 <h4>STEP 3</h4>
-<p><strong>2fa :</strong> <?php echo esc_html($_SESSION['lmc_data'][$id_session]['step3_2fa']); ?></p>
+<p><strong>2fa :</strong> Validée</p>
 <br><br>
 <h4>STEP 4</h4>
 <p><strong>Engagement 1 :</strong> <?php echo esc_html($_SESSION['lmc_data'][$id_session]['step4_engagement_1']); ?></p>
