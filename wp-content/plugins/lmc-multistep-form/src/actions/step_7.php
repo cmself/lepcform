@@ -3,7 +3,7 @@
 // vérifier si existe
 $step7_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data'][$id_session]['csrf_token']}'", OBJECT );
 
-if (count($step1_results) === 1) {
+if (count($step7_results) === 1) {
 
     $messageFin = "Votre demande d'adhésion a été prise en compte.";
     $wpdb->delete($table_name, ['cookie' => $_SESSION['lmc_data'][$id_session]['csrf_token']]);
