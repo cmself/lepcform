@@ -494,3 +494,6 @@
 [26-Oct-2025 21:43:52 UTC] Automatic updates starting...
 [26-Oct-2025 21:43:52 UTC] Automatic updates complete.
 [26-Oct-2025 21:44:25 UTC] PHP Parse error:  syntax error, unexpected token "endif", expecting end of file in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_2.php on line 60
+[26-Oct-2025 22:05:15 UTC] Automatic updates starting...
+[26-Oct-2025 22:05:15 UTC] Automatic updates complete.
+[26-Oct-2025 22:38:10 UTC] PHP Warning:  Undefined array key "csrf_token" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\actions\step_3.php on line 125
