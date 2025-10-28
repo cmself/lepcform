@@ -101,10 +101,13 @@
                 }
             }
 
+
             label.checkbox {
                 @apply flex! flex-row! gap-[20px]! justify-start! items-baseline! w-full! py-[20px]!;
 
                 input[type="checkbox"] {
+                    -webkit-appearance: none !important;
+                    -moz-appearance: none !important;
                     appearance: none !important;
                     background-color: var(--color-blanc) !important;
                     margin: 0 !important;

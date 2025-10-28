@@ -26,29 +26,20 @@
         </div>
     <?php endif; ?>
 
-    <p><label for="step1_nom"><span>Nom de l’organisation * :</span> <input type="text" id="step1_nom" name="step1_nom"
-                                                                            placeholder="Nom de l’organisation"
-                                                                            value="<?php echo (isset($value_form[0]->step1_nom) && !empty($value_form[0]->step1_nom)) ? $value_form[0]->step1_nom : ''; ?>" required></label></p>
+    <p><label for="step1_nom"><span>Nom de l’organisation * :</span> <input type="text" placeholder="NOM" id="step1_nom" name="step1_nom" value="<?php echo (isset($value_form[0]->step1_nom) && !empty($value_form[0]->step1_nom)) ? $value_form[0]->step1_nom : ''; ?>" required></label></p>
     <p><label for="step1_siret"><span>Numéro de SIRET * :</span>
             <?php if (isset($value_form[0]->resign) && !empty($value_form[0]->resign)) { ?>
-                <input type="text" id="step1_siret_disabled" pattern="\d{14}" maxlength="14"
-                       title="Veuillez entrer exactement 14 chiffres" name="step1_siret_disabled" placeholder="SIRET"
-                       value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" disabled required>
-                <input type="hidden" name="step1_siret" id="step1_siret"
-                       value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" required>
+                <input type="text" id="step1_siret_disabled" pattern="\d{14}" maxlength="14" title="Veuillez entrer exactement 14 chiffres" name="step1_siret_disabled" placeholder="SIRET" value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" disabled required>
+                <input type="hidden" name="step1_siret" id="step1_siret" value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" required>
             <?php } else { ?>
-                <input type="text" id="step1_siret" pattern="\d{14}" maxlength="14"
-                       title="Veuillez entrer exactement 14 chiffres" name="step1_siret" placeholder="SIRET"
-                       value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" required>
+                <input type="text" id="step1_siret" pattern="\d{14}" maxlength="14" title="Veuillez entrer exactement 14 chiffres" name="step1_siret" placeholder="SIRET" value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" required>
             <?php } ?>
 
         </label></p>
-    <p><label for="step1_logo"><span>Ajouter un logo :</span> <input type="hidden" name="step1_logoH" id="step1_logoH"
-                                                                     value="<?php echo (isset($value_form[0]->step1_logo) && !empty($value_form[0]->step1_logo)) ? $value_form[0]->step1_logo : ''; ?>"> <input
+    <p><label for="step1_logo"><span>Ajouter un logo :</span> <input type="hidden" name="step1_logoH" id="step1_logoH" value="<?php echo (isset($value_form[0]->step1_logo) && !empty($value_form[0]->step1_logo)) ? $value_form[0]->step1_logo : ''; ?>"> <input
                     type="file" accept=".jpg, .jpeg" id="step1_logo" name="step1_logo"
                     placeholder="Logo"> <?php if ($value_form[0]->step1_logo) { ?>
-                <div class="mb-[20px]!"> <img class="h-[60px]! w-auto!"
-                                              src="<?= plugin_dir_url('') . 'lmc-multistep-form/src/actions/uploads/' . $value_form[0]->step1_logo ?>">
+                <div class="mb-[20px]!"> <img class="h-[60px]! w-auto!" src="<?= plugin_dir_url('') . 'lmc-multistep-form/src/actions/uploads/' . $value_form[0]->step1_logo ?>">
                 </div> <?php } ?></label></p>
     <p><label for="step1_ca"><span>Le chiffre d’affaires * :</span>
             <select name="step1_ca" id="step1_ca" required>
