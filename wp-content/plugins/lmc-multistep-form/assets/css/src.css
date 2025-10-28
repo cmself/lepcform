@@ -41,7 +41,7 @@
             }
 
             label {
-                @apply flex! flex-col! w-full! text-left! font-bold! text-[var(--color-blanc)]! text-[20px]! mb-[20px]!;
+                @apply relative! flex! flex-col! w-full! text-left! font-bold! text-[var(--color-blanc)]! text-[20px]! mb-[20px]!;
 
 
                 span {
@@ -261,6 +261,7 @@
             background-color: var(--color-rose);
             color: var(--color-blanc);
         }
+
     }
 
 }
@@ -269,6 +270,5 @@
 @layer utilities {
     /* Utilitaires personnalisés */
     #lmc-multistep-form {
-
     }
 }

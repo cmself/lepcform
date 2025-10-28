@@ -277,35 +277,31 @@ function lmc_multistep_form() {
     /*
      * COOKIE et SESSION
      */
-    if (!isset($_SESSION['lmc_data'][$id_session]['csrf_token'])) {
-
-        if (!isset($_COOKIE["lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST']])) {
-            $_SESSION['lmc_data'][$id_session]['csrf_token'] = "lmc-multistep-form_" . bin2hex(random_bytes(32)) . "_" . time();
-            setcookie(
-                "lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST'],
-                $_SESSION['lmc_data'][$id_session]['csrf_token'],
-                [
-                    // 1 jour = 86400 secondes
-                    'expires' => time() + (86400 * 7), // 7 jours
-                    'path' => '/',
-                    'domain' => '.' . $_SERVER['HTTP_HOST'],
-                    'secure' => true,
-                    'httponly' => true,
-                    'samesite' => 'Strict'
-                ]
-            );
-
-        }else{
-
-            $_SESSION['lmc_data'][$id_session]['csrf_token'] = $_COOKIE["lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST']];
-
-        }
-
+    if(!isset($_SESSION['lmc_data'][$id_session]['csrf_token'])) {
+        $_SESSION['lmc_data'][$id_session]['csrf_token'] = "lmc-multistep-form_" . bin2hex(random_bytes(32)) . "_" . time();
     }
 
-    //var_dump($_COOKIE["lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST']] ?? 'Cookie not set');
+    $cookieName = "lmc-multistep-form_" . str_replace('.', '-', $_SERVER['HTTP_HOST']);
 
+    if (!isset($_COOKIE[$cookieName])) {
 
+        setcookie(
+            $cookieName,
+            $_SESSION['lmc_data'][$id_session]['csrf_token'],
+            [
+                'expires' => time() + (86400 * 7),
+                'path' => '/',
+                'secure' => true,
+                'httponly' => true,
+                'samesite' => 'Strict'
+            ]
+        );
+
+    } else {
+
+        $_SESSION['lmc_data'][$id_session]['csrf_token'] = $_COOKIE[$cookieName];
+
+    }
 
     /*
      * Authentification à l'API OHME
