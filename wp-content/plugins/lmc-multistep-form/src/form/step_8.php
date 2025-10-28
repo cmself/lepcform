@@ -54,6 +54,18 @@
                 <button type="button" id="faq" class="mt-[20px]!">Consultez la FAQ <i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
+
+    <script>
+
+        const step8_siret = document.getElementById('step8_siret');
+
+        if (step8_siret) {
+            step8_siret.addEventListener('input', () => {
+                step8_siret.value = step8_siret.value.replace(/[^0-9]/g, '');
+            });
+        }
+
+    </script>
 </div>
 
 
