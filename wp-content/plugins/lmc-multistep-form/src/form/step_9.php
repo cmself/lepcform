@@ -76,6 +76,39 @@
         step_content.style.display = "none";
     });
 
+
+
+    const inputs = document.querySelectorAll('.twofpin');
+
+    inputs.forEach((input, index) => {
+        input.addEventListener('input', () => {
+            const value = input.value.replace(/[^0-9]/g, '');
+            input.value = value;
+
+            if (value && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
+        });
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && !input.value && index > 0) {
+                inputs[index - 1].focus();
+            }
+        });
+    });
+
+
+    document.addEventListener('paste', (e) => {
+        const pastedData = (e.clipboardData || window.clipboardData).getData('text').trim();
+        if (/^\d{5}$/.test(pastedData)) {
+            e.preventDefault();
+            [...pastedData].forEach((num, i) => {
+                if (inputs[i]) inputs[i].value = num;
+            });
+            inputs[inputs.length - 1].focus();
+        }
+    });
+
 </script>
 
 </div>

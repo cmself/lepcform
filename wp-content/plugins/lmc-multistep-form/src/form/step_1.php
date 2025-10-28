@@ -289,6 +289,40 @@
 
 
     <script>
+        /*
+        document.getElementById("form-lmc-multistep-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById("email");
+            const password = document.getElementById("password");
+
+
+            email.style.backgroundColor = "";
+            password.style.backgroundColor = "";
+
+            let hasError = false;
+
+
+            if (!email.value.includes("@")) {
+                email.style.backgroundColor = "#ffcccc"; // rouge clair
+                email.focus();
+                hasError = true;
+            }
+
+
+            if (!hasError && password.value.length < 6) {
+                password.style.backgroundColor = "#ffcccc"; // rouge clair
+                password.focus();
+                hasError = true;
+            }
+
+            if (!hasError) {
+
+            }
+        });
+
+         */
+
         const step1_siret = document.getElementById('step1_siret');
 
         if (step1_siret) {
