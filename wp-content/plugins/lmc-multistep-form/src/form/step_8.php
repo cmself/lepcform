@@ -43,7 +43,7 @@
         </p>
 
         <div class="relative! w-full! text-center! mb-[100px]">
-            <button formnovalidate type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button>
+            <button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button>
         </div>
 
     <input type="hidden" name="step" value="8">
