@@ -149,6 +149,6 @@
 <input type="hidden" name="step4_csrf_token" id="step4_csrf_token" value="<?php echo $_SESSION['lmc_data'][$id_session]['csrf_token']; ?>">
 <input type="hidden" name="step" value="4">
 <p class="block! w-full! text-center! text-[var(--color-blanc)]! text-[20px]! font-light! py-[20px]! opacity-50!">* champs nécessaires pour valider l’étape</p>
-<p class="block! w-full! text-center!"><button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button></p>
+<p class="block! w-full! text-center!"><button formnovalidate type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button></p>
 
 </div>

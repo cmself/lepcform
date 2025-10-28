@@ -277,7 +277,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
         nécessaires pour valider l’étape</p>
     <div class="flex! flex-col md:flex-row gap-[10px] justify-center items-center w-full! text-center!">
         <button type="button" id="addBtn"><i class="fa-solid fa-user-plus mr-[20px]"></i> Ajouter un contact</button>
-        <button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button>
+        <button formnovalidate type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button>
     </div>
 
 

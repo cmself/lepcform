@@ -53,7 +53,7 @@
 <input type="hidden" name="step" value="3">
 <div class="flex! flex-col md:flex-row gap-[10px] justify-center items-center w-full! text-center!">
     <button type="button" id="resend"><i class="fa-solid fa-rotate-left"></i> Renvoyer le code</button>
-    <button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button>
+    <button formnovalidate type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button>
 </div>
 
 <script>

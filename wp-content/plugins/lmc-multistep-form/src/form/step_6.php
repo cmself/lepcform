@@ -111,7 +111,7 @@
 <input type="hidden" name="step6_csrf_token" id="step6_csrf_token" value="<?php echo $_SESSION['lmc_data'][$id_session]['csrf_token']; ?>">
 <input type="hidden" name="step" value="6">
 <div class="flex! flex-col md:flex-row gap-[10px] justify-center items-center w-full! text-center! mt-[20px]!">
-<button type="submit">Envoyer</button>
+<button formnovalidate type="submit">Envoyer</button>
 </div>
 
 

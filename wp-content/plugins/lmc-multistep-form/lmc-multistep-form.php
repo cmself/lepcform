@@ -422,7 +422,7 @@ function lmc_multistep_form() {
                 include_once 'src/form/steps.php';
             }
         ?>
-        <form method="post" enctype="multipart/form-data" id="form-lmc-multistep-form" class="w-full!">
+        <form novalidate method="post" enctype="multipart/form-data" id="form-lmc-multistep-form" class="w-full!">
             <?php
             if ($step == 1) {
                 include_once 'src/form/step_1.php';

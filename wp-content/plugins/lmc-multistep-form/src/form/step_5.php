@@ -146,7 +146,7 @@
 <input type="text" name="step5_honeypot" id="step5_honeypot" style="display:none;">
 <input type="hidden" name="step5_csrf_token" id="step5_csrf_token" value="<?php echo $_SESSION['lmc_data'][$id_session]['csrf_token']; ?>">
 <input type="hidden" name="step" value="5">
-<p class="block! w-full! text-center!"><button type="submit">Valider le formulaire <i class="fa-solid fa-arrow-right"></i></button></p>
+<p class="block! w-full! text-center!"><button formnovalidate type="submit">Valider le formulaire <i class="fa-solid fa-arrow-right"></i></button></p>
 
 <script>
 
