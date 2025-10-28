@@ -130,8 +130,6 @@ if (count($step6_results) === 1) {
     $wpdb->delete($table_name, ['cookie' => $_SESSION['lmc_data'][$id_session]['csrf_token']]);
     unset($_SESSION['lmc_data']);
     setcookie("lmc-multistep-form" . "_" . $_SERVER['HTTP_HOST'], "", time() - 3600, "/");
-    //sleep(10);
-    //header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=1');
 
 }else{
 

@@ -7,4 +7,9 @@
     <h5 class="inline-block! w-full! text-center!"><?= isset($messageFin) ? $messageFin : "";  ?></h5>
 </div>
 
+<?php
+sleep(10);
+header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=1');
+?>
+
 
