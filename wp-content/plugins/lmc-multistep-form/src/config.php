@@ -1,5 +1,5 @@
 <?php
-define('MailADMIN', 'nicolas.miquel@lmcfrance.com');
+define('MailADMIN', 'aurelien.boisselet@lmcfrance.com');
 define('MailHOST', 'mail.gandi.net');
 define('MailUSER', 'hebergement@lmcfrance.com');
 define('MailPWD', '*xSe9r4BA0AndFUEu!0A');

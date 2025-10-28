@@ -395,16 +395,10 @@ function lmc_multistep_form() {
             include_once 'src/actions/step_4.php';
         } elseif ($step == 5) {
             include_once 'src/actions/step_5.php';
-        } elseif ($step == 6) {
-            include_once 'src/actions/step_6.php';
-        } elseif ($step == 7) {
-            include_once 'src/actions/step_7.php';
         }elseif ($step == 8) {
             include_once 'src/actions/step_8.php';
         }elseif ($step == 9) {
             include_once 'src/actions/step_9.php';
-        }elseif ($step == 400) {
-            include_once 'src/actions/error.php';
         }
     }
 
@@ -435,14 +429,14 @@ function lmc_multistep_form() {
             } elseif ($step == 5) {
                 include_once 'src/form/step_5.php';
             } elseif ($step == 6) {
+                include_once 'src/actions/step_6.php';
                 include_once 'src/form/step_6.php';
-            } elseif ($step == 7) {
-                include_once 'src/form/step_7.php';
             } elseif ($step == 8) {
                 include_once 'src/form/step_8.php';
             } elseif ($step == 9) {
                 include_once 'src/form/step_9.php';
             } elseif ($step == 400) {
+                include_once 'src/actions/error.php';
                 include_once 'src/form/error.php';
             }
             ?>
