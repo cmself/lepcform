@@ -13,16 +13,16 @@ if (count($step6_results) === 1) {
      * Intégrer le email de notification administrateur
      */
 
-    $message_admin = "Une nouvelle demande de signature de la Charte de la diversité a été soumise :<br>";
+    $message_admin = "Une nouvelle demande de signature de la Charte de la diversité a été soumise :<br><br>";
     $message_admin .= "Structure : " . $_SESSION['lmc_data'][$id_session]['step1_nom'] . "<br>";
-    $message_admin .= "Contact principal : " . $_SESSION['lmc_data'][$id_session]['step2_prenom_0'] . " " . $_SESSION['lmc_data'][$id_session]['step2_nom_0'] . " " . $_SESSION['lmc_data'][$id_session]['step2_email_0'] . "<br>";
-    $message_admin .= "Mode de paiement : " . $_SESSION['lmc_data'][$id_session]['step5_paiement'] . "<br><br>";
+    $message_admin .= "Contact principal : " . $_SESSION['lmc_data'][$id_session]['step2_prenom_0'] . " " . $_SESSION['lmc_data'][$id_session]['step2_nom_0'] . " " . $_SESSION['lmc_data'][$id_session]['step2_email_0'] . "<br><br>";
+    $message_admin .= "Mode de paiement : " . $_SESSION['lmc_data'][$id_session]['step5_paiement'] . "<br>";
 
     if($_SESSION['lmc_data'][$id_session]['step5_paiement'] == 'FACTURE') {
-        $message_admin .= "Numéro de bon de commande : " . $_SESSION['lmc_data'][$id_session]['step5_bc'] . "<br><br>";
+        $message_admin .= "Numéro de bon de commande : " . $_SESSION['lmc_data'][$id_session]['step5_bc'];
     }
     if($_SESSION['lmc_data'][$id_session]['step5_paiement'] == 'AIDE') {
-        $message_admin .= "Demande d’aide :<br><br>";
+        $message_admin .= "Demande d’aide :<br>";
         $message_admin .= $_SESSION['lmc_data'][$id_session]['step5_help'];
     }
 
