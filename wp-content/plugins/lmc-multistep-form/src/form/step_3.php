@@ -38,11 +38,11 @@
         <label for="code" class="w-full! text-center!"><span class="w-full! text-center!">Entrez le code reçu à l’adresse : <i><?= $_SESSION['lmc_data'][$id_session]['step2_email_0'] ?></i></span></label>
     </p>
     <p class="flex! flex-row! justify-center! items-center! gap-[10px]! w-full! mb-[40px]!">
-        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin1" id="step3_pin1" data-hs-pin-input-item="" required>
-        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin2" id="step3_pin2" data-hs-pin-input-item="" required>
-        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin3" id="step3_pin3" data-hs-pin-input-item="" required>
-        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin4" id="step3_pin4" data-hs-pin-input-item="" required>
-        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin5" id="step3_pin5" data-hs-pin-input-item="" required>
+        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin1" id="step3_pin1" data-hs-pin-input-item="">
+        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin2" id="step3_pin2" data-hs-pin-input-item="">
+        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin3" id="step3_pin3" data-hs-pin-input-item="">
+        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin4" id="step3_pin4" data-hs-pin-input-item="">
+        <input type="text" maxlength="1" pattern="[0-9]{1}" class="twofpin" placeholder="0" name="step3_pin5" id="step3_pin5" data-hs-pin-input-item="">
     </p>
 
 <input type="hidden" id="step3_resend" name="step3_resend" value="0">
