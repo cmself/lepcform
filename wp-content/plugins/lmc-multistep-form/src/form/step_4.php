@@ -1,5 +1,5 @@
 <div class="w-full! mb-[20px]!">
-    <a href="<?= lmc_multistep_form__getCurrentUrl();?>?reload_step=3" class="block! w-full!">
+    <a href="<?= lmc_multistep_form__getCurrentUrl();?>?reload_step=3" class="block! w-full!" id="back_step">
         <button type="button"><i class="fa-solid fa-arrow-left"></i> Retour</button>
     </a>
 </div>
@@ -150,5 +150,17 @@
 <input type="hidden" name="step" value="4">
 <p class="block! w-full! text-center! text-[var(--color-blanc)]! text-[20px]! font-light! py-[20px]! opacity-50!">* champs nécessaires pour valider l’étape</p>
 <p class="block! w-full! text-center!"><button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button></p>
+
+
+<script>
+    const step_loader = document.getElementById('step_loader');
+    const step_content = document.getElementById('step_content');
+    const back_step = document.getElementById('back_step');
+
+    back_step.addEventListener('click', () => {
+        step_loader.style.display = "block";
+        step_content.style.display = "none";
+    });
+</script>
 
 </div>

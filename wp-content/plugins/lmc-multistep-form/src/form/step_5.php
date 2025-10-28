@@ -1,5 +1,5 @@
 <div class="w-full! mb-[20px]!">
-    <a href="<?= lmc_multistep_form__getCurrentUrl();?>?reload_step=4" class="block! w-full!">
+    <a href="<?= lmc_multistep_form__getCurrentUrl();?>?reload_step=4" class="block! w-full!" id="back_step">
         <button type="button"><i class="fa-solid fa-arrow-left"></i> Retour</button>
     </a>
 </div>
@@ -258,6 +258,17 @@
 
 
     });
+
+
+        const step_loader = document.getElementById('step_loader');
+        const step_content = document.getElementById('step_content');
+        const back_step = document.getElementById('back_step');
+
+        back_step.addEventListener('click', () => {
+        step_loader.style.display = "block";
+        step_content.style.display = "none";
+    });
+
 
 
 </script>
