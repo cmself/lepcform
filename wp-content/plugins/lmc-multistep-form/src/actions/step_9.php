@@ -1,36 +1,37 @@
 <?php
 
+
 use PHPMailer\PHPMailer\PHPMailer;
 
 
 /*
  * Vérifier si le formulaire a bien été envoyé
  */
-if(isset($_POST['step']) && $_POST['step'] == 3) {
+if(isset($_POST['step']) && $_POST['step'] == 9) {
 
     /*
     * Token CSRF
     */
-    if (!isset($_POST['step3_csrf_token']) || $_POST['step3_csrf_token'] !== $_SESSION['lmc_data'][$id_session]['csrf_token']) {
-        $_SESSION['lmc_data'][$id_session]['error_step'] = 3;
+    if (!isset($_POST['step9_csrf_token']) || $_POST['step9_csrf_token'] !== $_SESSION['lmc_data'][$id_session]['csrf_token']) {
+        $_SESSION['lmc_data'][$id_session]['error_step'] = 9;
         $_SESSION['lmc_data'][$id_session]['$error_message'] = "Jeton de validité du formulaires incorrect";
-        lmc_multistep_form__logLmc("Jeton de validité du formulaires incorrect du STEP 3");
+        lmc_multistep_form__logLmc("Jeton de validité du formulaires incorrect du STEP 9");
         die();
     }
 
     /*
      * Honey Pot pour piéger les robots
      */
-    if (!empty($_POST['step3_honeypot'])) {
+    if (!empty($_POST['step9_honeypot'])) {
         $_SESSION['lmc_data'][$id_session]['error_step'] = 3;
         $_SESSION['lmc_data'][$id_session]['$error_message'] = "Robot détecté";
-        lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté) du STEP 3");
+        lmc_multistep_form__logLmc("Honey Pot rempli (robot détecté) du STEP 9");
         die();
     }
 
 
 
-    if(isset($_POST['step3_resend']) && $_POST['step3_resend'] == 1) {
+    if(isset($_POST['step9_resend']) && $_POST['step9_resend'] == 1) {
 
         /*
          * Envoyer le code de vérification par mail
@@ -42,8 +43,8 @@ if(isset($_POST['step']) && $_POST['step'] == 3) {
         $expiresAt = (new DateTime())->modify("+{$expiresMinutes} minutes")->format('Y-m-d H:i:s');
 
         $wpdb->update($table_name, [
-            'step3_otp_hash' => $otpHash,
-            'step3_otp_expires' => $expiresAt
+            'step8_otp_hash' => $otpHash,
+            'step8_otp_expires' => $expiresAt
         ],
             ['cookie' => $_SESSION['lmc_data'][$id_session]['csrf_token']]);
 
@@ -73,20 +74,20 @@ if(isset($_POST['step']) && $_POST['step'] == 3) {
             ];
 
             $mail->setFrom(MailSENDER);
-            $mail->addAddress($_SESSION['lmc_data'][$id_session]['step2_email_0']);
+            $mail->addAddress($_SESSION['lmc_data'][$id_session]['step8_email']);
 
             $mail->Subject = 'Votre code de vérification';
             $mail->Body = "<p>Votre code de vérification est <strong>{$otp}</strong>. Il expire dans {$expiresMinutes} minutes.</p>";
 
             $mail->send();
 
-            header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=3');
+            header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=9');
 
         } catch (Exception $e) {
 
-            $_SESSION['lmc_data'][$id_session]['error_step'] = 3;
+            $_SESSION['lmc_data'][$id_session]['error_step'] = 9;
             $_SESSION['lmc_data'][$id_session]['$error_message'] = "Impossible d'envoyer le mail.";
-            lmc_multistep_form__logLmc("IMPOSSIBLE D'ENVOYER LE MAIL du STEP 2");
+            lmc_multistep_form__logLmc("IMPOSSIBLE D'ENVOYER LE MAIL du STEP 9");
             die();
 
         }
@@ -95,36 +96,36 @@ if(isset($_POST['step']) && $_POST['step'] == 3) {
         /*
          * vérifier si les données existent en base de données
          */
-        $step3_results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data'][$id_session]['csrf_token']}'", OBJECT);
+        $step9_results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data'][$id_session]['csrf_token']}'", OBJECT);
 
-        if (count($step3_results) === 1) {
+        if (count($step9_results) === 1) {
 
-            if ($step3_results[0]->step3_otp_hash) {
+            if ($step9_results[0]->step8_otp_hash) {
 
                 $now = new DateTime();
-                $expiresAt = new DateTime($step3_results[0]->step3_otp_expires);
+                $expiresAt = new DateTime($step9_results[0]->step8_otp_expires);
                 if ($now > $expiresAt) {
 
-                    $errors['step3']['name'] = 'Le code de vérification a expiré';
-                    $errors['step3']['texte'] = 'Veuillez Renvoyer le code';
+                    $errors['step9']['name'] = 'Le code de vérification a expiré';
+                    $errors['step9']['texte'] = 'Veuillez Renvoyer le code';
 
                 } else {
 
-                    $userOtp = $_POST['step3_pin1'] . $_POST['step3_pin2'] . $_POST['step3_pin3'] . $_POST['step3_pin4'] . $_POST['step3_pin5'];
+                    $userOtp = $_POST['step9_pin1'] . $_POST['step9_pin2'] . $_POST['step9_pin3'] . $_POST['step9_pin4'] . $_POST['step9_pin5'];
 
-                    if (!password_verify($userOtp, $step3_results[0]->step3_otp_hash)) {
+                    if (!password_verify($userOtp, $step9_results[0]->step8_otp_hash)) {
 
-                        $errors['step3']['name'] = 'Le code de vérification est invalide';
-                        $errors['step3']['texte'] = 'Veuillez réessayer le code';
+                        $errors['step9']['name'] = 'Le code de vérification est invalide';
+                        $errors['step9']['texte'] = 'Veuillez réessayer le code';
 
                     } else {
 
                         $wpdb->update($table_name, [
-                            'step3_otp_used' => 1
+                            'step8_otp_used' => 1
                         ],
                             ['cookie' => $_SESSION['lmc_data'][$id_session]['csrf_token']]);
 
-                        header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=4');
+                        header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=1');
 
                     }
 
@@ -132,17 +133,17 @@ if(isset($_POST['step']) && $_POST['step'] == 3) {
 
             }else{
 
-                $errors['step3']['name'] = 'Le code de vérification n\'a pas été créé';
-                $errors['step3']['texte'] = 'Veuillez Renvoyer le code';
+                $errors['step9']['name'] = 'Le code de vérification n\'a pas été créé';
+                $errors['step9']['texte'] = 'Veuillez Renvoyer le code';
 
             }
 
 
         }else{
 
-            $_SESSION['lmc_data'][$id_session]['error_step'] = 3;
+            $_SESSION['lmc_data'][$id_session]['error_step'] = 9;
             $_SESSION['lmc_data'][$id_session]['$error_message'] = "Impossible de se connecter à la base de données.";
-            lmc_multistep_form__logLmc("Impossible de se connecter à la base de données STEP 3)");
+            lmc_multistep_form__logLmc("Impossible de se connecter à la base de données STEP 9)");
             die();
         }
     }

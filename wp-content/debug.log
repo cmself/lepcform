@@ -517,3 +517,6 @@
 [27-Oct-2025 14:18:55 UTC] PHP Warning:  Undefined variable $messageFin in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_7.php on line 7
 [27-Oct-2025 14:19:07 UTC] PHP Warning:  Undefined variable $messageFin in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_7.php on line 7
 [27-Oct-2025 14:19:25 UTC] PHP Warning:  Undefined variable $messageFin in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\form\step_7.php on line 7
+[28-Oct-2025 07:31:40 UTC] Automatic updates starting...
+[28-Oct-2025 07:31:42 UTC] Automatic updates complete.
+[28-Oct-2025 07:53:52 UTC] PHP Warning:  Undefined array key "name" in C:\Users\aurelien.boisselet\Documents\projet_lmc\LEPC\form\wp-content\plugins\lmc-multistep-form\src\actions\step_8.php on line 147

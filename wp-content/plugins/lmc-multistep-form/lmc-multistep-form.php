@@ -259,9 +259,9 @@ function lmc_multistep_form() {
           `step5_bc` varchar(255) NOT NULL,
           `step5_help` text NOT NULL,
           `step5_rgpd` tinyint(1) NOT NULL DEFAULT '0',
-          `step0_otp_hash` text NOT NULL,
-          `step0_otp_expires` datetime NOT NULL,
-          `step0_otp_used` tinyint(1) NOT NULL DEFAULT '0',
+          `step8_otp_hash` text NOT NULL,
+          `step8_otp_expires` datetime NOT NULL,
+          `step8_otp_used` tinyint(1) NOT NULL DEFAULT '0',
           `date_submitted` datetime DEFAULT CURRENT_TIMESTAMP
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     ");
@@ -400,7 +400,9 @@ function lmc_multistep_form() {
         } elseif ($step == 7) {
             include_once 'src/actions/step_7.php';
         }elseif ($step == 8) {
-            include_once 'src/actions/step_renouvellement.php';
+            include_once 'src/actions/step_8.php';
+        }elseif ($step == 9) {
+            include_once 'src/actions/step_9.php';
         }elseif ($step == 400) {
             include_once 'src/actions/error.php';
         }
@@ -435,7 +437,9 @@ function lmc_multistep_form() {
             } elseif ($step == 7) {
                 include_once 'src/form/step_7.php';
             } elseif ($step == 8) {
-                include_once 'src/form/step_renouvellement.php';
+                include_once 'src/form/step_8.php';
+            } elseif ($step == 9) {
+                include_once 'src/form/step_9.php';
             } elseif ($step == 400) {
                 include_once 'src/form/error.php';
             }
