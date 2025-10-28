@@ -81,7 +81,7 @@
             ?>
 
 
-            <input type="radio" name="step5_paiement" id="option-5" value="MEMBER" <?php echo ($value_form[0]->step5_paiement == "MEMBER") ? 'checked' : ''; ?>>
+            <input type="radio" name="step5_paiement" id="option-5" value="MEMBER" checked>
 
                 <label for="option-5" class="option option-5">
                     <div class="dot"></div>
@@ -161,32 +161,33 @@
     const content_4 = document.getElementById('content_4');
     const option_4 = document.querySelector('.option-4');
 
-    option_1.addEventListener('click', () => {
+    if(option_1){
+        option_1.addEventListener('click', () => {
 
-        const element_2 = document.querySelector('.div_2');
-        const element_3 = document.querySelector('.div_3');
-        const element_4 = document.querySelector('.div_4');
+            const element_2 = document.querySelector('.div_2');
+            const element_3 = document.querySelector('.div_3');
+            const element_4 = document.querySelector('.div_4');
 
-        if(element_2){
-            element_2.remove();
-        }
-        if(element_3){
-            element_3.remove();
-        }
-        if(element_4){
-            element_4.remove();
-        }
+            if(element_2){
+                element_2.remove();
+            }
+            if(element_3){
+                element_3.remove();
+            }
+            if(element_4){
+                element_4.remove();
+            }
 
-    });
+        });
+    }
 
 
+    if(option_2) {
+        option_2.addEventListener('click', () => {
 
-    option_2.addEventListener('click', () => {
-
-        const element_2 = document.querySelector('.div_2');
-        const element_3 = document.querySelector('.div_3');
-        const element_4 = document.querySelector('.div_4');
-
+            const element_2 = document.querySelector('.div_2');
+            const element_3 = document.querySelector('.div_3');
+            const element_4 = document.querySelector('.div_4');
 
 
             if (element_2) {
@@ -205,15 +206,16 @@
             content_2.appendChild(div_2);
 
 
-    });
+        });
+    }
 
 
+    if(option_3) {
+        option_3.addEventListener('click', () => {
 
-    option_3.addEventListener('click', () => {
-
-        const element_2 = document.querySelector('.div_2');
-        const element_3 = document.querySelector('.div_3');
-        const element_4 = document.querySelector('.div_4');
+            const element_2 = document.querySelector('.div_2');
+            const element_3 = document.querySelector('.div_3');
+            const element_4 = document.querySelector('.div_4');
 
 
             if (element_2) {
@@ -231,15 +233,16 @@
             div_3.innerHTML = `<h4>Vous avez besoin d’une facture non acquittée ou d’un bon de commande ?</h4><p><label for="bc"><span>Numéro du bon de commande * :</span> <input type="text" id="step5_bc" name="step5_bc" placeholder="Numéro" value="<?php echo (isset($value_form[0]->step5_bc) && !empty($value_form[0]->step5_bc)) ? $value_form[0]->step5_bc : ''; ?>" required></label></p>`;
             content_3.appendChild(div_3);
 
-    });
+        });
+    }
 
 
+    if(option_4) {
+        option_4.addEventListener('click', () => {
 
-    option_4.addEventListener('click', () => {
-
-        const element_2 = document.querySelector('.div_2');
-        const element_3 = document.querySelector('.div_3');
-        const element_4 = document.querySelector('.div_4');
+            const element_2 = document.querySelector('.div_2');
+            const element_3 = document.querySelector('.div_3');
+            const element_4 = document.querySelector('.div_4');
 
             if (element_2) {
                 element_2.remove();
@@ -257,7 +260,8 @@
             content_4.appendChild(div_4);
 
 
-    });
+        });
+    }
 
 
         const step_loader = document.getElementById('step_loader');

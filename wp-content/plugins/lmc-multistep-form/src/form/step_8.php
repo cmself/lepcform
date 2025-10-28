@@ -29,7 +29,8 @@
 
 
         <p>
-            <label for="step8_email"><span>Entrer l'email du contact principal de la signature initiale * :</span> <input type="email" id="step8_email" name="step8_email" placeholder="Email" required></label>
+            <label for="step8_email"><span>Entrer l'email du contact principal de la signature initiale * :</span>
+                <input type="email" id="step8_email" name="step8_email" placeholder="Email" required ></label>
         </p>
         <p>
             <label for="step8_siret"><span>Numéro de SIRET * :</span> <input type="text" id="step8_siret" pattern="\d{14}" maxlength="14" title="Veuillez entrer exactement 14 chiffres" name="step8_siret" placeholder="SIRET" required></label>

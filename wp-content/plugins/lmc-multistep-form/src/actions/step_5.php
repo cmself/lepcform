@@ -30,40 +30,51 @@ if(isset($_POST['step']) && $_POST['step'] == 5) {
 /*
  * Enregistre les variables de session des étapes
  */
-    $_SESSION['lmc_data'][$id_session]['step5_paiement'] = isset($_POST['step5_paiement']) ? sanitize_textarea_field($_POST['step5_paiement']) : "";
-    $_SESSION['lmc_data'][$id_session]['step5_bc'] = isset($_POST['step5_bc']) ? sanitize_textarea_field($_POST['step5_bc']) : "";
-    $_SESSION['lmc_data'][$id_session]['step5_help'] = isset($_POST['step5_help']) ? sanitize_textarea_field($_POST['step5_help']) : "";
-    $_SESSION['lmc_data'][$id_session]['step5_rgpd'] = isset($_POST['step5_rgpd']) ? sanitize_textarea_field($_POST['step5_rgpd']) : 0;
+
+    if (isset($_POST['step5_paiement']) && !empty($_POST['step5_honeypot'])) {
 
 
-/*
- * vérifier si les données existent en base de données
- */
-$step5_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data'][$id_session]['csrf_token']}'", OBJECT );
+        $_SESSION['lmc_data'][$id_session]['step5_paiement'] = isset($_POST['step5_paiement']) ? sanitize_textarea_field($_POST['step5_paiement']) : "";
+        $_SESSION['lmc_data'][$id_session]['step5_bc'] = isset($_POST['step5_bc']) ? sanitize_textarea_field($_POST['step5_bc']) : "";
+        $_SESSION['lmc_data'][$id_session]['step5_help'] = isset($_POST['step5_help']) ? sanitize_textarea_field($_POST['step5_help']) : "";
+        $_SESSION['lmc_data'][$id_session]['step5_rgpd'] = isset($_POST['step5_rgpd']) ? sanitize_textarea_field($_POST['step5_rgpd']) : 0;
 
-if (count($step5_results) === 1) {
 
-    /*
-     * Enregistrement les données en base de données
-     */
-    $wpdb->update($table_name, [
-        'step5_paiement' => $_SESSION['lmc_data'][$id_session]['step5_paiement'],
-        'step5_bc' => $_SESSION['lmc_data'][$id_session]['step5_bc'],
-        'step5_help' => $_SESSION['lmc_data'][$id_session]['step5_help'],
-        'step5_rgpd' => $_SESSION['lmc_data'][$id_session]['step5_rgpd']
-    ],
-        ['cookie' => $_SESSION['lmc_data'][$id_session]['csrf_token']]);
+        /*
+         * vérifier si les données existent en base de données
+         */
+        $step5_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep_submissions WHERE cookie = '{$_SESSION['lmc_data'][$id_session]['csrf_token']}'", OBJECT );
 
-        header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=6');
+        if (count($step5_results) === 1) {
 
-}else{
+            /*
+             * Enregistrement les données en base de données
+             */
+            $wpdb->update($table_name, [
+                'step5_paiement' => $_SESSION['lmc_data'][$id_session]['step5_paiement'],
+                'step5_bc' => $_SESSION['lmc_data'][$id_session]['step5_bc'],
+                'step5_help' => $_SESSION['lmc_data'][$id_session]['step5_help'],
+                'step5_rgpd' => $_SESSION['lmc_data'][$id_session]['step5_rgpd']
+            ],
+                ['cookie' => $_SESSION['lmc_data'][$id_session]['csrf_token']]);
 
-    $_SESSION['lmc_data'][$id_session]['error_step'] = 5;
-    $_SESSION['lmc_data'][$id_session]['$error_message'] = "Impossible de se connecter à la base de données.";
-    lmc_multistep_form__logLmc("Impossible de se connecter à la base de données STEP 5)");
-    die();
+                header('Location: ' . lmc_multistep_form__getCurrentUrlWithoutQuery() .'?reload_step=6');
 
-}
+        }else{
+
+            $_SESSION['lmc_data'][$id_session]['error_step'] = 5;
+            $_SESSION['lmc_data'][$id_session]['$error_message'] = "Impossible de se connecter à la base de données.";
+            lmc_multistep_form__logLmc("Impossible de se connecter à la base de données STEP 5)");
+            die();
+
+        }
+
+    }else{
+
+        $errors['step5']['name'] = 'Choisissez votre méthode de paiement';
+        $errors['step5']['texte'] = 'Veuillez sélectionner votre méthode de paiement';
+
+    }
 
 }
 
