@@ -102,7 +102,7 @@
             }
 
             label.checkbox {
-                @apply flex! flex-row! gap-[20px]! justify-start! items-start! w-full! py-[20px]!;
+                @apply flex! flex-row! gap-[20px]! justify-start! items-baseline! w-full! py-[20px]!;
 
                 input[type="checkbox"] {
                     appearance: none !important;
@@ -215,7 +215,8 @@
         #option-1:checked:checked ~ .option-1,
         #option-2:checked:checked ~ .option-2,
         #option-3:checked:checked ~ .option-3,
-        #option-4:checked:checked ~ .option-4 {
+        #option-4:checked:checked ~ .option-4,
+        #option-5:checked:checked ~ .option-5{
             border-color: var(--color-blanc) !important;
             background: var(--color-rose) !important;
         }
@@ -223,14 +224,16 @@
         #option-1:checked:checked ~ .option-1 .dot,
         #option-2:checked:checked ~ .option-2 .dot,
         #option-3:checked:checked ~ .option-3 .dot,
-        #option-4:checked:checked ~ .option-4 .dot {
+        #option-4:checked:checked ~ .option-4 .dot,
+        #option-5:checked:checked ~ .option-5 .dot{
             background: var(--color-blanc) !important;
         }
 
         #option-1:checked:checked ~ .option-1 .dot::before,
         #option-2:checked:checked ~ .option-2 .dot::before,
         #option-3:checked:checked ~ .option-3 .dot::before,
-        #option-4:checked:checked ~ .option-4 .dot::before {
+        #option-4:checked:checked ~ .option-4 .dot::before,
+        #option-5:checked:checked ~ .option-5 .dot::before{
             opacity: 1 !important;
             transform: scale(1) !important;
         }
@@ -238,7 +241,8 @@
         #option-1:checked:checked ~ .option-1 span,
         #option-2:checked:checked ~ .option-2 span,
         #option-3:checked:checked ~ .option-3 span,
-        #option-4:checked:checked ~ .option-4 span {
+        #option-4:checked:checked ~ .option-4 span,
+        #option-5:checked:checked ~ .option-5 span{
             @apply text-[20px]! text-[var(--color-blanc)]! font-normal! cursor-pointer! py-[10px] px-[20px]!;
         }
 
