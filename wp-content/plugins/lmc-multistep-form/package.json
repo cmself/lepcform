@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@tailwindcss/cli": "^4.1.14",
+    "jquery-validation": "^1.21.0",
     "tailwindcss": "^4.1.14",
     "tippy.js": "^6.3.7"
   }
