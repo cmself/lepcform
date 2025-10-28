@@ -55,7 +55,7 @@
                 <?php
                 if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['chiffre_daffaires']['options']):
                     ?>
-                    <option value="">Choisir une réponse</option>
+                    <option value="" disabled selected hidden>Choisir une réponse</option>
                     <?php
                     foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['chiffre_daffaires']['options'] as $option):
                         ?>
@@ -73,7 +73,7 @@
                 <?php
                 if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options']):
                     ?>
-                    <option value="">Choisir une réponse</option>
+                    <option value="" disabled selected hidden>Choisir une réponse</option>
                     <?php
                     foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options'] as $option):
                         ?>
@@ -142,24 +142,24 @@
     <div class="coltwo">
         <div class="w-full!">
             <p>
-                <label for="step1_email"><span>Email de l’organisation * :</span> <input type="email" id="step1_email"
+                <label for="step1_email"><span>Email de l’organisation :</span> <input type="email" id="step1_email"
                                                                                          name="step1_email"
                                                                                          placeholder="Email"
                                                                                          value="<?php
                                                                                              echo (isset($value_form[0]->step1_email) && !empty($value_form[0]->step1_email)) ? $value_form[0]->step1_email : '';
                                                                                           ?>"
-                                                                                         required></label>
+                                                                                         ></label>
             </p>
         </div>
         <div class="w-full!">
             <p>
-                <label for="step1_internet"><span>Site internet * :</span> <input type="url" id="step1_internet"
+                <label for="step1_internet"><span>Site internet :</span> <input type="url" id="step1_internet"
                                                                                   name="step1_internet"
                                                                                   placeholder="Url du site"
                                                                                   value="<?php
                                                                                       echo (isset($value_form[0]->step1_internet) && !empty($value_form[0]->step1_internet)) ? $value_form[0]->step1_internet : '';
                                                                                    ?>"
-                                                                                  required></label>
+                                                                                  ></label>
             </p>
         </div>
     </div>
@@ -169,7 +169,7 @@
                 <?php
                 if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['nombre_de_collaborateurs_en_france']['options']):
                     ?>
-                    <option value="">Choisir une réponse</option>
+                    <option value="" disabled selected hidden>Choisir une réponse</option>
                     <?php
                     foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['nombre_de_collaborateurs_en_france']['options'] as $option):
                         ?>
@@ -184,12 +184,12 @@
         </label>
     </p>
 
-    <p><label for="step1_activite"><span>Secteur d’activité :</span>
-            <select name="step1_activite" id="step1_activite">
+    <p><label for="step1_activite"><span>Secteur d’activité * :</span>
+            <select name="step1_activite" id="step1_activite" required>
                 <?php
                 if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['secteur_dactivite']['options']):
                     ?>
-                    <option value="">Choisir une réponse</option>
+                    <option value="" disabled selected hidden>Choisir une réponse</option>
                     <?php
                     foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['secteur_dactivite']['options'] as $option):
                         ?>
@@ -204,12 +204,12 @@
         </label>
     </p>
 
-    <p><label for="step1_structure"><span>Type de structure :</span>
-            <select name="step1_structure" id="step1_structure">
+    <p><label for="step1_structure"><span>Type de structure * :</span>
+            <select name="step1_structure" id="step1_structure" required>
                 <?php
                 if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['type_de_structure']['options']):
                     ?>
-                    <option value="">Choisir une réponse</option>
+                    <option value="" disabled selected hidden>Choisir une réponse</option>
                     <?php
                     foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['type_de_structure']['options'] as $option):
                         ?>
@@ -224,12 +224,12 @@
         </label>
     </p>
 
-    <p><label for="step1_connaissance"><span>Comment avez-vous eu connaissance de la Charte de la diversité ? :</span>
-            <select name="step1_connaissance" id="step1_connaissance">
+    <p><label for="step1_connaissance"><span>Comment avez-vous eu connaissance de la Charte de la diversité ? * :</span>
+            <select name="step1_connaissance" id="step1_connaissance" required>
                 <?php
                 if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['comment_avez_vous_eu_connaissance_de_la_charte_de_la_diversite']['options']):
                     ?>
-                    <option value="">Choisir une réponse</option>
+                    <option value="" disabled selected hidden>Choisir une réponse</option>
                     <?php
                     foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['comment_avez_vous_eu_connaissance_de_la_charte_de_la_diversite']['options'] as $option):
                         ?>
@@ -246,9 +246,9 @@
 
 
     <p>
-        <label for="step1_politique"><span>Présentation de votre politique diversité et des raisons de votre engagement (1000 caractères max)</span>
+        <label for="step1_politique"><span>Présentation de votre politique diversité et des raisons de votre engagement (1000 caractères max) * </span>
             <textarea id="step1_politique" name="step1_politique" rows="10"
-                      placeholder="Présentation (1000 caractères max)"><?php
+                      placeholder="Présentation (1000 caractères max)" required><?php
                     echo (isset($value_form[0]->step1_politique) && !empty($value_form[0]->step1_politique)) ? $value_form[0]->step1_politique : '';
                  ?></textarea>
         </label>
