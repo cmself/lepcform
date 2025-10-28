@@ -31,7 +31,7 @@ if(isset($_POST['step']) && $_POST['step'] == 5) {
  * Enregistre les variables de session des étapes
  */
 
-    if (isset($_POST['step5_paiement']) && !empty($_POST['step5_honeypot'])) {
+    if (isset($_POST['step5_paiement']) && !empty($_POST['step5_paiement'])) {
 
 
         $_SESSION['lmc_data'][$id_session]['step5_paiement'] = isset($_POST['step5_paiement']) ? sanitize_textarea_field($_POST['step5_paiement']) : "";

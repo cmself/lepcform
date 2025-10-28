@@ -7,7 +7,7 @@ $step6_results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}lmc_multistep
 
 if (count($step6_results) === 1) {
 
-    $mail = new PHPMailer(true);
+    $mailadmin = new PHPMailer(true);
 
     /*
      * Intégrer le email de notification administrateur
@@ -28,20 +28,20 @@ if (count($step6_results) === 1) {
 
 
     try {
-        $mail->isSMTP();
-        $mail->Host =  MailHOST;
-        $mail->SMTPAuth = true;
-        $mail->CharSet = "UTF-8";
-        $mail->isHTML(true);
+        $mailadmin->isSMTP();
+        $mailadmin->Host =  MailHOST;
+        $mailadmin->SMTPAuth = true;
+        $mailadmin->CharSet = "UTF-8";
+        $mailadmin->isHTML(true);
 
-        $mail->Username = MailUSER;
-        $mail->Password = MailPWD;
+        $mailadmin->Username = MailUSER;
+        $mailadmin->Password = MailPWD;
 
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // PHPMailer::ENCRYPTION_SMTPS;
-        $mail->Port = 587;
+        $mailadmin->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // PHPMailer::ENCRYPTION_SMTPS;
+        $mailadmin->Port = 587;
 
         // pour local à sup en prod
-        $mail->SMTPOptions = [
+        $mailadmin->SMTPOptions = [
             'ssl' => [
                 'verify_peer' => false,
                 'verify_peer_name' => false,
@@ -49,13 +49,13 @@ if (count($step6_results) === 1) {
             ]
         ];
 
-        $mail->setFrom(MailSENDER);
-        $mail->addAddress(MailADMIN);
+        $mailadmin->setFrom(MailSENDER);
+        $mailadmin->addAddress(MailADMIN);
 
-        $mail->Subject = 'Mail de notification à la validation du formulaire d\'adhésion Administrateur';
-        $mail->Body = $message_admin;
+        $mailadmin->Subject = 'Mail de notification à la validation du formulaire d\'adhésion Administrateur';
+        $mailadmin->Body = $message_admin;
 
-        $mail->send();
+        $mailadmin->send();
 
     } catch (Exception $e) {
 
@@ -71,6 +71,8 @@ if (count($step6_results) === 1) {
      * Intégrer le email de notification contact principal
      */
 
+    $mailcontact = new PHPMailer(true);
+
     $message_contact_principal = "Une nouvelle demande de signature de la Charte de la diversité a été soumise :<br>";
     $message_contact_principal .= "Structure : " . $_SESSION['lmc_data'][$id_session]['step1_nom'] . "<br>";
     $message_contact_principal .= "Contact principal : " . $_SESSION['lmc_data'][$id_session]['step2_prenom_0'] . " " . $_SESSION['lmc_data'][$id_session]['step2_nom_0'] . " " . $_SESSION['lmc_data'][$id_session]['step2_email_0'] . "<br>";
@@ -85,20 +87,20 @@ if (count($step6_results) === 1) {
     }
 
     try {
-        $mail->isSMTP();
-        $mail->Host =  MailHOST;
-        $mail->SMTPAuth = true;
-        $mail->CharSet = "UTF-8";
-        $mail->isHTML(true);
+        $mailcontact->isSMTP();
+        $mailcontact->Host =  MailHOST;
+        $mailcontact->SMTPAuth = true;
+        $mailcontact->CharSet = "UTF-8";
+        $mailcontact->isHTML(true);
 
-        $mail->Username = MailUSER;
-        $mail->Password = MailPWD;
+        $mailcontact->Username = MailUSER;
+        $mailcontact->Password = MailPWD;
 
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // PHPMailer::ENCRYPTION_SMTPS;
-        $mail->Port = 587;
+        $mailcontact->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // PHPMailer::ENCRYPTION_SMTPS;
+        $mailcontact->Port = 587;
 
         // pour local à sup en prod
-        $mail->SMTPOptions = [
+        $mailcontact->SMTPOptions = [
             'ssl' => [
                 'verify_peer' => false,
                 'verify_peer_name' => false,
@@ -106,13 +108,13 @@ if (count($step6_results) === 1) {
             ]
         ];
 
-        $mail->setFrom(MailSENDER);
-        $mail->addAddress($_SESSION['lmc_data'][$id_session]['step2_email_0']);
+        $mailcontact->setFrom(MailSENDER);
+        $mailcontact->addAddress($_SESSION['lmc_data'][$id_session]['step2_email_0']);
 
-        $mail->Subject = 'Mail de notification à la validation du formulaire d\'adhésion Contact principal';
-        $mail->Body = $message_contact_principal;
+        $mailcontact->Subject = 'Mail de notification à la validation du formulaire d\'adhésion Contact principal';
+        $mailcontact->Body = $message_contact_principal;
 
-        $mail->send();
+        $mailcontact->send();
 
     } catch (Exception $e) {
 
