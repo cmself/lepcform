@@ -371,7 +371,7 @@ function lmc_multistep_form() {
         $step = intval($_POST['step']);
     }else{
         if (isset($_SESSION['lmc_data'][$id_session]['reload']) && !empty($_SESSION['lmc_data'][$id_session]['reload'])) {
-            $step = $_SESSION['lmc_data'][$id_session]['reload'];
+            $step = intval($_SESSION['lmc_data'][$id_session]['reload']);
         }else{
             $step = 1;
         }
