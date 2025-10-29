@@ -47,12 +47,12 @@
     <input type="hidden" name="step8_csrf_token" id="step8_csrf_token" value="<?php echo $_SESSION['lmc_data'][$id_session]['csrf_token']; ?>">
         <div class="flex! flex-col md:flex-row gap-[10px] justify-between items-center w-full!">
             <div class="w-2/3! text-center!">
-                <p>Le contact principal de la Charte pour votre entreprise a changé ?</p>
-                <button type="button" id="change" class="mt-[20px]!">Demander un accès en tant que nouveau contact principal <i class="fa-solid fa-arrow-right"></i></button>
+                <h4>Le contact principal de la Charte pour votre entreprise a changé ?</h4>
+                <button type="button" id="change">Demander un accès en tant que nouveau contact principal <i class="fa-solid fa-arrow-right"></i></button>
             </div>
             <div class="w-1/3! text-center!">
-                <p>Besoin d'aide ?</p>
-                <button type="button" id="faq" class="mt-[20px]!">Consultez la FAQ <i class="fa-solid fa-arrow-right"></i></button>
+                <h4>Besoin d'aide ?</h4>
+                <button type="button" id="faq">Consultez la FAQ <i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
 
@@ -68,6 +68,3 @@
 
     </script>
 </div>
-
-
-

@@ -93,9 +93,7 @@
             <?php
             }
             ?>
-
-            </fieldset>
-
+                </fieldset>
 
         </div>
     </label>
@@ -104,14 +102,15 @@
 <div id="content_2" class="block! w-full! text-left! font-normal! text-[var(--color-blanc)]! text-[24px]! mb-[20px]!">
     <?php if(isset($value_form[0]->step5_paiement) && $value_form[0]->step5_paiement == "VIREMENT"){ ?>
         <div class="div_2">
-            Pour régler les frais de signature de la Charte de la diversité, merci d’effectuer un virement sur l’IBAN [insérer IBAN], en veillant à indiquer votre numéro de SIRET dans le libellé du virement. Vous pouvez également télécharger nos coordonnées bancaires en <a href="#" class="text-[var(--color-rose)]!">cliquant ici</a>
+            Pour régler les frais de signature de la Charte de la diversité, merci d’effectuer un virement en veillant à indiquer votre numéro de SIRET dans le libellé. Vous pouvez télécharger nos coordonnées bancaires en <a href="#" class="text-[var(--color-blanc)]!">cliquant ici</a>
         </div>
     <?php  } ?>
 </div>
 <div id="content_3" class="block! w-full!">
     <?php if(isset($value_form[0]->step5_paiement) && $value_form[0]->step5_paiement == "FACTURE"){ ?>
         <div class="div_3">
-           <h4>Vous avez besoin d’une facture non acquittée ou d’un bon de commande ?</h4>
+           <h4>Vous avez besoin d’une facture non acquittée ?<br/>
+           Si nécessaire, veuillez indiquer le numéro de bon de commande qui doit y figurer.</h4>
             <p>
                 <label for="bc"><span>Numéro du bon de commande * :</span>
                     <input type="text" id="step5_bc" name="step5_bc" placeholder="Numéro" value="<?php echo (isset($value_form[0]->step5_bc) && !empty($value_form[0]->step5_bc)) ? $value_form[0]->step5_bc : ''; ?>" required>
@@ -135,7 +134,7 @@
 <p>
     <label for="step5_rgpd" class="checkbox">
         <input type="checkbox" id="step5_rgpd" name="step5_rgpd" value="1" <?php echo ($value_form[0]->step5_rgpd == 1) ? 'checked' : ''; ?>/>
-        <span class="opacity-100!">J'accepte que les informations saisies soient utilisées dans le cadre de la relation qui découle de cette prise de contact. Pour plus d’information, consulter la <a href="#" class="text-[var(--color-rose)]!">politique de confidentialité</a></span>
+        <span class="opacity-100!">J'accepte que les informations saisies soient utilisées dans le cadre de la relation qui découle de cette prise de contact. Pour plus d’information, consulter la <a href="#" class="text-[var(--color-blanc)]!">politique de confidentialité</a></span>
     </label>
 </p>
 
@@ -204,7 +203,7 @@
 
             const div_2 = document.createElement('div');
             div_2.classList.add('div_2');
-            div_2.innerHTML = `Pour régler les frais de signature de la Charte de la diversité, merci d’effectuer un virement sur l’IBAN [insérer IBAN], en veillant à indiquer votre numéro de SIRET dans le libellé du virement. Vous pouvez également télécharger nos coordonnées bancaires en <a href="#" class="text-[var(--color-rose)]!">cliquant ici</a>.`;
+            div_2.innerHTML = `Pour régler les frais de signature de la Charte de la diversité, merci d’effectuer un virement en veillant à indiquer votre numéro de SIRET dans le libellé. Vous pouvez télécharger nos coordonnées bancaires en <a href="#" class="text-[var(--color-blanc)]!">cliquant ici</a>.`;
             content_2.appendChild(div_2);
 
 

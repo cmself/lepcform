@@ -41,43 +41,7 @@
                     placeholder="Logo"> <?php if ($value_form[0]->step1_logo) { ?>
                 <div class="mb-[20px]!"> <img class="h-[60px]! w-auto!" src="<?= plugin_dir_url('') . 'lmc-multistep-form/src/actions/uploads/' . $value_form[0]->step1_logo ?>">
                 </div> <?php } ?></label></p>
-    <p><label for="step1_ca"><span>Le chiffre d’affaires * :</span>
-            <select name="step1_ca" id="step1_ca" required>
-                <?php
-                if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['chiffre_daffaires']['options']):
-                    ?>
-                    <option value="" disabled selected hidden>Choisir une réponse</option>
-                    <?php
-                    foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['chiffre_daffaires']['options'] as $option):
-                        ?>
-                        <option value="<?= htmlspecialchars($option); ?>"
-                            <?php  echo ($value_form[0]->step1_ca == $option) ? 'selected' : '';?>><?= htmlspecialchars($option); ?></option>
-                    <?php
-                    endforeach;
-                endif;
-                ?>
-            </select>
-        </label>
-    </p>
-    <p><label for="step1_frais"><span>Montant des frais pour la Charte de la diversité * :</span>
-            <select name="step1_frais" id="step1_frais" required>
-                <?php
-                if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options']):
-                    ?>
-                    <option value="" disabled selected hidden>Choisir une réponse</option>
-                    <?php
-                    foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options'] as $option):
-                        ?>
-                        <option value="<?= htmlspecialchars($option); ?>"
-                                <?php  echo ($value_form[0]->step1_frais == $option) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
-                    <?php
-                    endforeach;
-                endif;
-                ?>
-            </select>
-        </label>
-    </p>
-    <p>
+    <div>
         <label>
             <span>Adhérent Les entreprises pour la Cité :</span>
             <div class="wrapper">
@@ -100,6 +64,43 @@
                 </label>
                 </fieldset>
             </div>
+        </label>
+    </div>
+    <p><label for="step1_ca"><span>Le chiffre d’affaires * :</span>
+            <select name="step1_ca" id="step1_ca" required>
+                <?php
+                if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['chiffre_daffaires']['options']):
+                    ?>
+                    <option value="" disabled selected hidden>Choisir une réponse</option>
+                    <?php
+                    foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['chiffre_daffaires']['options'] as $option):
+                        ?>
+                        <option value="<?= htmlspecialchars($option); ?>"
+                            <?php  echo ($value_form[0]->step1_ca == $option) ? 'selected' : '';?>><?= htmlspecialchars($option); ?></option>
+                    <?php
+                    endforeach;
+                endif;
+                ?>
+            </select>
+        </label>
+    </p>
+    <p><label for="step1_frais"><span>Montant des frais pour la Charte de la diversité * : <i
+class="fa-regular fa-circle-question text-[var(--color-rose)]!" data-tippy-content="Choisissez le montant correspondant à votre situation :<br/><br/>Adhérent &quot;Les entreprises pour la Cité&quot; - 0 €<br/><br/><5 M € de chiffre d'affaires - 300 €<br/>5 à 250 M€ de chiffre d'affaires - 600 €<br/>> 250 M€ de chiffre d'affaires - 1 800 €"></i></span>
+            <select name="step1_frais" id="step1_frais" required>
+                <?php
+                if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options']):
+                    ?>
+                    <option value="" disabled selected hidden>Choisir une réponse</option>
+                    <?php
+                    foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options'] as $option):
+                        ?>
+                        <option value="<?= htmlspecialchars($option); ?>"
+                                <?php  echo ($value_form[0]->step1_frais == $option) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
+                    <?php
+                    endforeach;
+                endif;
+                ?>
+            </select>
         </label>
     </p>
     <p><label for="step1_adresse"><span>Adresse postale * :</span> <input type="text" id="step1_adresse"
@@ -278,8 +279,25 @@
         <button type="submit">Valider <i class="fa-solid fa-arrow-right"></i></button>
     </p>
 
-
-
+    <style>
+        .tippy-box[data-theme~='lmc'] {
+            background-color: var(--color-purple);
+            color: var(--color-blanc);
+            padding: 10px;
+        }
+        .tippy-box[data-theme~='lmc'][data-placement^='top'] > .tippy-arrow::before {
+            border-top-color: var(--color-purple);
+        }
+        .tippy-box[data-theme~='lmc'][data-placement^='bottom'] > .tippy-arrow::before {
+            border-bottom-color: var(--color-purple);
+        }
+        .tippy-box[data-theme~='lmc'][data-placement^='left'] > .tippy-arrow::before {
+            border-left-color: var(--color-purple);
+        }
+        .tippy-box[data-theme~='lmc'][data-placement^='right'] > .tippy-arrow::before {
+            border-right-color: var(--color-purple);
+        }
+    </style>
 
     <script>
 
@@ -290,6 +308,11 @@
                 step1_siret.value = step1_siret.value.replace(/[^0-9]/g, '');
             });
         }
+
+        tippy('[data-tippy-content]', {
+            theme: 'lmc',
+            allowHTML: true,
+        });
 
     </script>
 
