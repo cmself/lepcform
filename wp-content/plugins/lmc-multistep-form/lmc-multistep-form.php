@@ -266,6 +266,19 @@ function lmc_multistep_form() {
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     ");
 
+
+    /*
+     * Nettoyer la base données si date_submitted < à 10 jours depuis dare now
+     */
+    $date_now_delete = date('Y-m-d H:i:s', strtotime('-10 days'));
+    $wpdb->query(
+        $wpdb->prepare(
+            "DELETE FROM $table_name WHERE date_submitted < %s",
+            $date_now_delete
+        )
+    );
+
+
     /*
     * Variable de session global pour le plugin
     */
