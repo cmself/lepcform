@@ -29,8 +29,8 @@
     <p><label for="step1_nom"><span>Nom de l’organisation * :</span> <input type="text" placeholder="NOM" id="step1_nom" name="step1_nom" value="<?php echo (isset($value_form[0]->step1_nom) && !empty($value_form[0]->step1_nom)) ? $value_form[0]->step1_nom : ''; ?>" required></label></p>
     <p><label for="step1_siret"><span>Numéro de SIRET * :</span>
             <?php if (isset($value_form[0]->resign) && !empty($value_form[0]->resign)) { ?>
-                <input type="text" id="step1_siret_disabled" pattern="\d{14}" maxlength="14" title="Veuillez entrer exactement 14 chiffres" name="step1_siret_disabled" placeholder="SIRET" value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" disabled required>
-                <input type="hidden" name="step1_siret" id="step1_siret" value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" required>
+                <input type="text" id="step1_siret_disabled" pattern="\d{14}" maxlength="14" title="Veuillez entrer exactement 14 chiffres" name="step1_siret_disabled" placeholder="SIRET" value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" readonly>
+                <input type="hidden" name="step1_siret" id="step1_siret" value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>">
             <?php } else { ?>
                 <input type="text" id="step1_siret" pattern="\d{14}" maxlength="14" title="Veuillez entrer exactement 14 chiffres" name="step1_siret" placeholder="SIRET" value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" required>
             <?php } ?>
