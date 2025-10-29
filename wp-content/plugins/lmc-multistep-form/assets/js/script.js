@@ -4,6 +4,4 @@ jQuery(document).ready(function($){
         $('#step_content').hide();
         return true;
     });
-
-    //$("#form-lmc-multistep-form").validate();
 });

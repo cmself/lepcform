@@ -58,6 +58,9 @@
                 }
 
                 input[type="text"], input[type="number"], input[type="email"], input[type="url"] {
+                    -webkit-appearance: none !important;
+                    -moz-appearance: none !important;
+                    appearance: none !important;
                     border: none !important;
                     @apply border-b! border-[var(--color-blanc)]! font-normal! py-[5px]! px-[10px]! bg-[var(--color-violet)]! text-[var(--color-blanc)]!;
                 }
@@ -67,6 +70,9 @@
                 }
 
                 input[type="file"] {
+                    -webkit-appearance: none !important;
+                    -moz-appearance: none !important;
+                    appearance: none !important;
                     border: none !important;
                     @apply font-light! text-[var(--color-blanc)]! text-[20px]!;
                 }
@@ -94,6 +100,9 @@
                 }
 
                 textarea {
+                    -webkit-appearance: none !important;
+                    -moz-appearance: none !important;
+                    appearance: none !important;
                     outline: none !important;
                     border: none !important;
                     background: var(--color-purple) !important;
@@ -189,30 +198,38 @@
             justify-content: center !important;
             gap: 20px !important;
 
-
-            .option {
-                background: var(--color-violet) !important;
-                height: 100% !important;
-                width: 100% !important;
+            fieldset {
                 display: flex !important;
+                width: 100% !important;
+                flex-direction: row;
                 align-items: center !important;
-                justify-content: space-between !important;
-                cursor: pointer !important;
-                padding: 0 10px !important;
-                border: 1px solid var(--color-blanc) !important;
-                transition: all 0.3s ease !important;
+                justify-content: center !important;
+                gap: 20px !important;
 
-                .dot {
-                    display: none !important;
-                }
+                .option {
+                    background: var(--color-violet) !important;
+                    height: 100% !important;
+                    width: 100% !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: space-between !important;
+                    cursor: pointer !important;
+                    padding: 0 10px !important;
+                    border: 1px solid var(--color-blanc) !important;
+                    transition: all 0.3s ease !important;
 
-                span {
-                    @apply text-[20px]! text-[var(--color-blanc)]! font-normal! cursor-pointer! py-[10px]  px-[20px]!;
+                    .dot {
+                        display: none !important;
+                    }
+
+                    span {
+                        @apply text-[20px]! text-[var(--color-blanc)]! font-normal! cursor-pointer! py-[10px]  px-[20px]!;
+                    }
                 }
             }
         }
 
-        .wrapper .option .dot::before {
+        .wrapper fieldset .option .dot::before {
         }
 
         #option-1:checked:checked ~ .option-1,
@@ -277,5 +294,6 @@
 @layer utilities {
     /* Utilitaires personnalisés */
     #lmc-multistep-form {
+
     }
 }

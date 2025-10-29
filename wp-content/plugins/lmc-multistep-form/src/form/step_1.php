@@ -81,6 +81,7 @@
         <label>
             <span>Adhérent Les entreprises pour la Cité :</span>
             <div class="wrapper">
+                <fieldset>
                 <input type="radio" name="step1_adherent" id="option-1"
                        value="1" <?php
                     echo ($value_form[0]->step1_adherent == 1) ? 'checked' : '';
@@ -97,6 +98,7 @@
                     <div class="dot"></div>
                     <span>Non</span>
                 </label>
+                </fieldset>
             </div>
         </label>
     </p>

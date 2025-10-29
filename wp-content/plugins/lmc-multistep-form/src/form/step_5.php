@@ -38,7 +38,7 @@
     <label for="step5_paiement"><span>Choisissez votre méthode de paiement :</span>
         <div class="wrapper flex! flex-col! gap-[5px]! w-full!">
 
-
+            <fieldset>
             <?php
             if(isset($_SESSION['lmc_data'][$id_session]['step1_adherent']) && $_SESSION['lmc_data'][$id_session]['step1_adherent'] == 0) {
             ?>
@@ -93,6 +93,8 @@
             <?php
             }
             ?>
+
+            </fieldset>
 
 
         </div>
