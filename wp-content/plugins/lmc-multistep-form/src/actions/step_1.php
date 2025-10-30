@@ -179,6 +179,7 @@ if(isset($_POST['step']) && $_POST['step'] == 1) {
     $_SESSION['lmc_data'][$id_session]['step1_adresse'] = isset($_POST['step1_adresse']) ? sanitize_text_field($_POST['step1_adresse']) : "";
     $_SESSION['lmc_data'][$id_session]['step1_ville'] = isset($_POST['step1_ville']) ? sanitize_text_field($_POST['step1_ville']) : "";
     $_SESSION['lmc_data'][$id_session]['step1_cp'] = isset($_POST['step1_cp']) ? sanitize_text_field($_POST['step1_cp']) : "";
+    $_SESSION['lmc_data'][$id_session]['step1_pays'] = isset($_POST['step1_pays']) ? sanitize_text_field($_POST['step1_pays']) : "";
     $_SESSION['lmc_data'][$id_session]['step1_email'] = isset($_POST['step1_email']) ? sanitize_email($_POST['step1_email']) : "";
     $_SESSION['lmc_data'][$id_session]['step1_internet'] = isset($_POST['step1_internet']) ? sanitize_url($_POST['step1_internet']) : "";
     $_SESSION['lmc_data'][$id_session]['step1_collaborateurs'] = isset($_POST['step1_collaborateurs']) ? sanitize_text_field($_POST['step1_collaborateurs']) : "";

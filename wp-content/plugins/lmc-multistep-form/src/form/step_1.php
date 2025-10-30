@@ -108,14 +108,15 @@
     </div>
 
 
+    <div class="coltwo">
+        <div class="w-full!">
     <p><label for="step1_adresse"><span>Adresse postale * :</span> <input type="text" id="step1_adresse"
                                                                           name="step1_adresse" placeholder="Adresse"
                                                                           value="<?php
                                                                           echo (isset($value_form[0]->step1_adresse) && !empty($value_form[0]->step1_adresse)) ? $value_form[0]->step1_adresse : '';
                                                                           ?>"
                                                                           required readonly></label></p>
-
-    <div class="coltwo">
+        </div>
         <div class="w-full!">
             <p>
                 <label for="step1_ville"><span>Ville * :</span> <input type="text" id="step1_ville" name="step1_ville"
@@ -126,6 +127,9 @@
                                                                        required readonly></label>
             </p>
         </div>
+    </div>
+
+    <div class="coltwo">
         <div class="w-full!">
             <p>
                 <label for="step1_cp"><span>Code postal * :</span> <input type="text" id="step1_cp" name="step1_cp"
@@ -134,6 +138,16 @@
                                                                           echo (isset($value_form[0]->step1_cp) && !empty($value_form[0]->step1_cp)) ? $value_form[0]->step1_cp : '';
                                                                           ?>"
                                                                           required readonly></label>
+            </p>
+        </div>
+        <div class="w-full!">
+            <p>
+                <label for="step1_pays"><span>Pays * :</span> <input type="text" id="step1_pays" name="step1_pays"
+                                                                       placeholder="pays"
+                                                                       value="<?php
+                                                                       echo (isset($value_form[0]->step1_pays) && !empty($value_form[0]->step1_pays)) ? $value_form[0]->step1_pays : '';
+                                                                       ?>"
+                                                                       required readonly></label>
             </p>
         </div>
     </div>
@@ -383,6 +397,8 @@
             const step1_adresse = document.getElementById('step1_adresse');
             const step1_ville = document.getElementById('step1_ville');
             const step1_cp = document.getElementById('step1_cp');
+            const step1_pays = document.getElementById('step1_pays');
+
 
             if(location['properties']['address_line1']) {
                 step1_adresse.value = location['properties']['address_line1'];
@@ -400,6 +416,12 @@
                 step1_cp.value = location['properties']['postcode'];
             }else{
                 step1_cp.value = "";
+            }
+
+            if(location['properties']['country']) {
+                step1_pays.value = location['properties']['country'];
+            }else{
+                step1_pays.value = "";
             }
 
 

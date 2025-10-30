@@ -216,6 +216,7 @@ function lmc_multistep_form() {
           `step1_adresse` text NOT NULL,
           `step1_ville` varchar(255) NOT NULL,
           `step1_cp` varchar(10) NOT NULL,
+          `step1_pays` varchar(255) NOT NULL,
           `step1_email` text NOT NULL,
           `step1_internet` text NOT NULL,
           `step1_collaborateurs` varchar(255) NOT NULL,
