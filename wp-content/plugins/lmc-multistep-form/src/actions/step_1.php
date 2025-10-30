@@ -209,6 +209,7 @@ if(isset($_POST['step']) && $_POST['step'] == 1) {
             'step1_adresse' => $_SESSION['lmc_data'][$id_session]['step1_adresse'],
             'step1_ville' => $_SESSION['lmc_data'][$id_session]['step1_ville'],
             'step1_cp' => $_SESSION['lmc_data'][$id_session]['step1_cp'],
+            'step1_pays' => $_SESSION['lmc_data'][$id_session]['step1_pays'],
             'step1_email' => $_SESSION['lmc_data'][$id_session]['step1_email'],
             'step1_internet' => $_SESSION['lmc_data'][$id_session]['step1_internet'],
             'step1_collaborateurs' => $_SESSION['lmc_data'][$id_session]['step1_collaborateurs'],
