@@ -1,5 +1,5 @@
 <div class="relative! w-full!">
-<h3>Étape 1 : Organisation signataire</h3>
+    <h3>Étape 1 : Organisation signataire</h3>
 </div>
 
 <div class="w-full! my-[20px]! hidden" id="step_loader">
@@ -69,7 +69,7 @@
                     foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options'] as $option):
                         ?>
                         <option value="<?= htmlspecialchars($option); ?>"
-                                <?php  echo ($value_form[0]->step1_frais == $option) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
+                            <?php  echo ($value_form[0]->step1_frais == $option) ? 'selected' : ''; ?>><?= htmlspecialchars($option); ?></option>
                     <?php
                     endforeach;
                 endif;
@@ -82,22 +82,22 @@
             <span>Adhérent Les entreprises pour la Cité :</span>
             <div class="wrapper">
                 <fieldset>
-                <input type="radio" name="step1_adherent" id="option-1"
-                       value="1" <?php
+                    <input type="radio" name="step1_adherent" id="option-1"
+                           value="1" <?php
                     echo ($value_form[0]->step1_adherent == 1) ? 'checked' : '';
-                 ?>>
-                <input type="radio" name="step1_adherent" id="option-2"
-                       value="0" <?php
+                    ?>>
+                    <input type="radio" name="step1_adherent" id="option-2"
+                           value="0" <?php
                     echo ($value_form[0]->step1_adherent == 0) ? 'checked' : '';
-                 ?>>
-                <label for="option-1" class="option option-1">
-                    <div class="dot"></div>
-                    <span>Oui</span>
-                </label>
-                <label for="option-2" class="option option-2">
-                    <div class="dot"></div>
-                    <span>Non</span>
-                </label>
+                    ?>>
+                    <label for="option-1" class="option option-1">
+                        <div class="dot"></div>
+                        <span>Oui</span>
+                    </label>
+                    <label for="option-2" class="option option-2">
+                        <div class="dot"></div>
+                        <span>Non</span>
+                    </label>
                 </fieldset>
             </div>
         </label>
@@ -105,8 +105,8 @@
     <p><label for="step1_adresse"><span>Adresse postale * :</span> <input type="text" id="step1_adresse"
                                                                           name="step1_adresse" placeholder="Adresse"
                                                                           value="<?php
-                                                                              echo (isset($value_form[0]->step1_adresse) && !empty($value_form[0]->step1_adresse)) ? $value_form[0]->step1_adresse : '';
-                                                                           ?>"
+                                                                          echo (isset($value_form[0]->step1_adresse) && !empty($value_form[0]->step1_adresse)) ? $value_form[0]->step1_adresse : '';
+                                                                          ?>"
                                                                           required></label></p>
 
     <div class="coltwo">
@@ -115,8 +115,8 @@
                 <label for="step1_ville"><span>Ville * :</span> <input type="text" id="step1_ville" name="step1_ville"
                                                                        placeholder="ville"
                                                                        value="<?php
-                                                                           echo (isset($value_form[0]->step1_ville) && !empty($value_form[0]->step1_ville)) ? $value_form[0]->step1_ville : '';
-                                                                        ?>"
+                                                                       echo (isset($value_form[0]->step1_ville) && !empty($value_form[0]->step1_ville)) ? $value_form[0]->step1_ville : '';
+                                                                       ?>"
                                                                        required></label>
             </p>
         </div>
@@ -125,8 +125,8 @@
                 <label for="step1_cp"><span>Code postal * :</span> <input type="text" id="step1_cp" name="step1_cp"
                                                                           placeholder="00000"
                                                                           value="<?php
-                                                                              echo (isset($value_form[0]->step1_cp) && !empty($value_form[0]->step1_cp)) ? $value_form[0]->step1_cp : '';
-                                                                           ?>"
+                                                                          echo (isset($value_form[0]->step1_cp) && !empty($value_form[0]->step1_cp)) ? $value_form[0]->step1_cp : '';
+                                                                          ?>"
                                                                           required></label>
             </p>
         </div>
@@ -136,23 +136,23 @@
         <div class="w-full!">
             <p>
                 <label for="step1_email"><span>Email de l’organisation :</span> <input type="email" id="step1_email"
-                                                                                         name="step1_email"
-                                                                                         placeholder="Email"
-                                                                                         value="<?php
-                                                                                             echo (isset($value_form[0]->step1_email) && !empty($value_form[0]->step1_email)) ? $value_form[0]->step1_email : '';
-                                                                                          ?>"
-                                                                                         ></label>
+                                                                                       name="step1_email"
+                                                                                       placeholder="Email"
+                                                                                       value="<?php
+                                                                                       echo (isset($value_form[0]->step1_email) && !empty($value_form[0]->step1_email)) ? $value_form[0]->step1_email : '';
+                                                                                       ?>"
+                    ></label>
             </p>
         </div>
         <div class="w-full!">
             <p>
                 <label for="step1_internet"><span>Site internet :</span> <input type="url" id="step1_internet"
-                                                                                  name="step1_internet"
-                                                                                  placeholder="Url du site"
-                                                                                  value="<?php
-                                                                                      echo (isset($value_form[0]->step1_internet) && !empty($value_form[0]->step1_internet)) ? $value_form[0]->step1_internet : '';
-                                                                                   ?>"
-                                                                                  ></label>
+                                                                                name="step1_internet"
+                                                                                placeholder="Url du site"
+                                                                                value="<?php
+                                                                                echo (isset($value_form[0]->step1_internet) && !empty($value_form[0]->step1_internet)) ? $value_form[0]->step1_internet : '';
+                                                                                ?>"
+                    ></label>
             </p>
         </div>
     </div>
@@ -167,8 +167,8 @@
                     foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['nombre_de_collaborateurs_en_france']['options'] as $option):
                         ?>
                         <option value="<?= htmlspecialchars($option); ?>"<?php
-                            echo ($value_form[0]->step1_collaborateurs == $option) ? 'selected' : '';
-                         ?>><?= htmlspecialchars($option); ?></option>
+                        echo ($value_form[0]->step1_collaborateurs == $option) ? 'selected' : '';
+                        ?>><?= htmlspecialchars($option); ?></option>
                     <?php
                     endforeach;
                 endif;
@@ -187,8 +187,8 @@
                     foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['secteur_dactivite']['options'] as $option):
                         ?>
                         <option value="<?= htmlspecialchars($option); ?>" <?php
-                            echo ($value_form[0]->step1_activite == $option) ? 'selected' : '';
-                         ?>><?= htmlspecialchars($option); ?></option>
+                        echo ($value_form[0]->step1_activite == $option) ? 'selected' : '';
+                        ?>><?= htmlspecialchars($option); ?></option>
                     <?php
                     endforeach;
                 endif;
@@ -207,8 +207,8 @@
                     foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['type_de_structure']['options'] as $option):
                         ?>
                         <option value="<?= htmlspecialchars($option); ?>" <?php
-                            echo ($value_form[0]->step1_structure == $option) ? 'selected' : '';
-                         ?>><?= htmlspecialchars($option); ?></option>
+                        echo ($value_form[0]->step1_structure == $option) ? 'selected' : '';
+                        ?>><?= htmlspecialchars($option); ?></option>
                     <?php
                     endforeach;
                 endif;
@@ -227,8 +227,8 @@
                     foreach ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['comment_avez_vous_eu_connaissance_de_la_charte_de_la_diversite']['options'] as $option):
                         ?>
                         <option value="<?= htmlspecialchars($option); ?>" <?php
-                            echo ($value_form[0]->step1_connaissance == $option) ? 'selected' : '';
-                         ?>><?= htmlspecialchars($option); ?></option>
+                        echo ($value_form[0]->step1_connaissance == $option) ? 'selected' : '';
+                        ?>><?= htmlspecialchars($option); ?></option>
                     <?php
                     endforeach;
                 endif;
@@ -242,8 +242,8 @@
         <label for="step1_politique"><span>Présentation de votre politique diversité et des raisons de votre engagement (1000 caractères max) * </span>
             <textarea id="step1_politique" name="step1_politique" rows="10"
                       placeholder="Présentation (1000 caractères max)" required><?php
-                    echo (isset($value_form[0]->step1_politique) && !empty($value_form[0]->step1_politique)) ? $value_form[0]->step1_politique : '';
-                 ?></textarea>
+                echo (isset($value_form[0]->step1_politique) && !empty($value_form[0]->step1_politique)) ? $value_form[0]->step1_politique : '';
+                ?></textarea>
         </label>
     </p>
 
