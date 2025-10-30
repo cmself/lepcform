@@ -311,9 +311,82 @@
 
         autocompleteInput.on('select', (location) => {
             /*
-            {"type":"Feature","properties":{"country":"France","country_code":"fr","region":"France métropolitaine","state":"Île-de-France","city":"Paris","municipality":"Paris","postcode":"75004","district":"Le Village Saint-Paul","suburb":"Le Marais","street":"Rue de Rivoli","other_names":{"name":"Rue de Rivoli","name:de":"Rue de Rivoli","name:es":"Rue de Rivoli","name:fr":"Rue de Rivoli","name:ru":"Улица Риволи"},"iso3166_2":"FR-75C","datasource":{"sourcename":"openstreetmap","attribution":"© OpenStreetMap contributors","license":"Open Database License","url":"https://www.openstreetmap.org/copyright"},"state_code":"IDF","state_COG":"11","lon":2.358812,"lat":48.8557199,"housenumber":"6","result_type":"building","formatted":"6 Rue de Rivoli, 75004 Paris, France","address_line1":"6 Rue de Rivoli","address_line2":"75004 Paris, France","timezone":{"name":"Europe/Paris","offset_STD":"+01:00","offset_STD_seconds":3600,"offset_DST":"+02:00","offset_DST_seconds":7200,"abbreviation_STD":"CET","abbreviation_DST":"CEST"},"plus_code":"8FW4V945+7G","plus_code_short":"45+7G Paris, Île-de-France, France","rank":{"confidence":0.75,"confidence_street_level":1,"confidence_building_level":0.75,"match_type":"full_match"},"place_id":"517f4c6bd3d8de024059a884cc3a886d4840f00102f901fdab3e0a00000000c00203"},"geometry":{"type":"Point","coordinates":[2.358812,48.8557199]},"bbox":[2.3600815,48.8551111,2.3615537,48.8554573]}
+            {
+            "type":"Feature",
+            "properties":
+                {
+                "country":"France",
+                "country_code":"fr",
+                "region":"France métropolitaine",
+                "state":"Île-de-France",
+                "city":"Paris",
+                "municipality":"Paris",
+                "postcode":"75004",
+                "district":"Le Village Saint-Paul",
+                "suburb":"Le Marais",
+                "street":"Rue de Rivoli",
+                "other_names":
+                    {
+                    "name":"Rue de Rivoli",
+                    "name:de":"Rue de Rivoli",
+                    "name:es":"Rue de Rivoli",
+                    "name:fr":"Rue de Rivoli",
+                    "name:ru":"Улица Риволи"
+                    },
+                "iso3166_2":"FR-75C",
+                "datasource":
+                    {
+                    "sourcename":"openstreetmap",
+                    "attribution":"© OpenStreetMap contributors",
+                    "license":"Open Database License",
+                    "url":"https://www.openstreetmap.org/copyright"
+                    },
+                "state_code":"IDF",
+                "state_COG":"11",
+                "lon":2.358812,
+                "lat":48.8557199,
+                "housenumber":"6",
+                "result_type":"building",
+                "formatted":"6 Rue de Rivoli, 75004 Paris, France",
+                "address_line1":"6 Rue de Rivoli",
+                "address_line2":"75004 Paris, France",
+                "timezone":
+                    {
+                    "name":"Europe/Paris",
+                    "offset_STD":"+01:00",
+                    "offset_STD_seconds":3600,
+                    "offset_DST":"+02:00",
+                    "offset_DST_seconds":7200,
+                    "abbreviation_STD":"CET",
+                    "abbreviation_DST":"CEST"
+                    },
+                "plus_code":"8FW4V945+7G",
+                "plus_code_short":"45+7G Paris, Île-de-France, France",
+                "rank":
+                    {
+                    "confidence":0.75,
+                    "confidence_street_level":1,
+                    "confidence_building_level":0.75,
+                    "match_type":"full_match"},
+                    "place_id":"517f4c6bd3d8de024059a884cc3a886d4840f00102f901fdab3e0a00000000c00203"
+                    },
+               "geometry":
+                    {
+                    "type":"Point",
+                    "coordinates":[2.358812,48.8557199]},
+                    "bbox":[2.3600815,48.8551111,2.3615537,48.8554573]
+                    }
             */
-            alert(location['properties']['country']);
+
+            const step1_adresse = document.getElementById('step1_adresse');
+            const step1_ville = document.getElementById('step1_ville');
+            const step1_cp = document.getElementById('step1_cp');
+
+            step1_adresse.value = location['properties']['address_line1'];
+            step1_ville.value = location['properties']['city']
+            step1_cp.value = location['properties']['postcode']
+
+
         });
 
         autocompleteInput.on('suggestions', (suggestions) => {
