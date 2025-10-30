@@ -25,11 +25,18 @@ if(isset($_POST['step']) && $_POST['step'] == 1) {
         die();
     }
 
-    /*
-     * Enregistre les variables de session des étapes
-     */
+    if((!isset($_POST['step1_adresse']) || empty($_POST['step1_adresse'])) || (!isset($_POST['step1_ville']) || empty($_POST['step1_ville'])) || (!isset($_POST['step1_cp']) || empty($_POST['step1_cp'])) || (!isset($_POST['step1_pays']) || empty($_POST['step1_pays'])) ) {
+        $errors['step1']['name'] = 'Votre adresse postale ne contient pas tous les champs obligatoires';
+        $errors['step1']['texte'] = 'Vous devez renseigner une nouvelle Adresse postale.';
+
+    }else{
+
+
+
+        /*
+         * Enregistre les variables de session des étapes
+         */
     $ohme_structures = [];
-    $_SESSION['lmc_data'][$id_session]['reload'] = 1;
     $_SESSION['lmc_data'][$id_session]['step1_nom'] = isset($_POST['step1_nom']) ? sanitize_text_field($_POST['step1_nom']) : "";
     $_SESSION['lmc_data'][$id_session]['step1_siret'] = isset($_POST['step1_siret']) ? sanitize_text_field($_POST['step1_siret']) : "";
     $_SESSION['lmc_data'][$id_session]['step1_adherent'] = isset($_POST['step1_adherent']) ? sanitize_text_field($_POST['step1_adherent']) : 0;
@@ -231,6 +238,7 @@ if(isset($_POST['step']) && $_POST['step'] == 1) {
         die();
     }
 
+    }
 
 }
 

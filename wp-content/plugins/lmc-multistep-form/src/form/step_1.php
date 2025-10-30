@@ -115,7 +115,7 @@
                                                                           value="<?php
                                                                           echo (isset($value_form[0]->step1_adresse) && !empty($value_form[0]->step1_adresse)) ? $value_form[0]->step1_adresse : '';
                                                                           ?>"
-                                                                          required readonly></label></p>
+                                                                          readonly></label></p>
         </div>
         <div class="w-full!">
             <p>
@@ -124,7 +124,7 @@
                                                                        value="<?php
                                                                        echo (isset($value_form[0]->step1_ville) && !empty($value_form[0]->step1_ville)) ? $value_form[0]->step1_ville : '';
                                                                        ?>"
-                                                                       required readonly></label>
+                                                                       readonly></label>
             </p>
         </div>
     </div>
@@ -137,7 +137,7 @@
                                                                           value="<?php
                                                                           echo (isset($value_form[0]->step1_cp) && !empty($value_form[0]->step1_cp)) ? $value_form[0]->step1_cp : '';
                                                                           ?>"
-                                                                          required readonly></label>
+                                                                          readonly></label>
             </p>
         </div>
         <div class="w-full!">
@@ -147,7 +147,7 @@
                                                                        value="<?php
                                                                        echo (isset($value_form[0]->step1_pays) && !empty($value_form[0]->step1_pays)) ? $value_form[0]->step1_pays : '';
                                                                        ?>"
-                                                                       required readonly></label>
+                                                                       readonly></label>
             </p>
         </div>
     </div>
@@ -403,25 +403,25 @@
             if(location['properties']['address_line1']) {
                 step1_adresse.value = location['properties']['address_line1'];
             }else{
-                step1_adresse.value = "";
+                step1_adresse.value = null;
             }
 
             if(location['properties']['city']) {
                 step1_ville.value = location['properties']['city'];
             }else{
-                step1_ville.value = "";
+                step1_ville.value = null;
             }
 
             if(location['properties']['postcode']) {
                 step1_cp.value = location['properties']['postcode'];
             }else{
-                step1_cp.value = "";
+                step1_cp.value = null;
             }
 
             if(location['properties']['country']) {
                 step1_pays.value = location['properties']['country'];
             }else{
-                step1_pays.value = "";
+                step1_pays.value = null;
             }
 
 
