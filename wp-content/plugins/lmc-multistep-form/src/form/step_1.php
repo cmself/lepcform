@@ -319,7 +319,7 @@
                 lang: 'fr',
                 allowNonVerifiedHouseNumber: false,
                 allowNonVerifiedStreet: false,
-                placeholder: "Tapez l'adresse pour remplir automatiquement les champs suivants",
+                placeholder: "Tapez l'adresse postale pour remplir automatiquement les champs suivants",
                 limit: 5
             });
 
