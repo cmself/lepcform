@@ -378,13 +378,30 @@
                     }
             */
 
+            console.log(location);
+
             const step1_adresse = document.getElementById('step1_adresse');
             const step1_ville = document.getElementById('step1_ville');
             const step1_cp = document.getElementById('step1_cp');
 
-            step1_adresse.value = location['properties']['address_line1'];
-            step1_ville.value = location['properties']['city']
-            step1_cp.value = location['properties']['postcode']
+            if(location['properties']['address_line1']) {
+                step1_adresse.value = location['properties']['address_line1'];
+            }else{
+                step1_adresse.value = "";
+            }
+
+            iflocation['properties']['city']) {
+                step1_ville.value = location['properties']['city'];
+            }else{
+                step1_ville.value = "";
+            }
+
+            if(location['properties']['postcode']) {
+                step1_cp.value = location['properties']['postcode'];
+            }else{
+                step1_cp.value = "";
+            }
+
 
 
         });
