@@ -1,5 +1,8 @@
 https://lmc-lepc.local/
 https://lepc.lmc-dev.fr/signez-la-charte-de-la-diversite/
+
+https://www.npmjs.com/package/@geoapify/geocoder-autocomplete#features
+
 npm install tailwindcss @tailwindcss/cli
 npx @tailwindcss/cli -i assets/css/src.css -o assets/css/style.css --watch --minify --map
 npx @tailwindcss/upgrade

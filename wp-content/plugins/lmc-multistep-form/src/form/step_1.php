@@ -102,12 +102,18 @@
             </div>
         </label>
     </p>
+
+    <div class="w-full my-[20px]">
+    <div id="autocomplete" class="autocomplete-container relative"></div>
+    </div>
+
+
     <p><label for="step1_adresse"><span>Adresse postale * :</span> <input type="text" id="step1_adresse"
                                                                           name="step1_adresse" placeholder="Adresse"
                                                                           value="<?php
                                                                           echo (isset($value_form[0]->step1_adresse) && !empty($value_form[0]->step1_adresse)) ? $value_form[0]->step1_adresse : '';
                                                                           ?>"
-                                                                          required></label></p>
+                                                                          required readonly></label></p>
 
     <div class="coltwo">
         <div class="w-full!">
@@ -117,7 +123,7 @@
                                                                        value="<?php
                                                                        echo (isset($value_form[0]->step1_ville) && !empty($value_form[0]->step1_ville)) ? $value_form[0]->step1_ville : '';
                                                                        ?>"
-                                                                       required></label>
+                                                                       required readonly></label>
             </p>
         </div>
         <div class="w-full!">
@@ -127,7 +133,7 @@
                                                                           value="<?php
                                                                           echo (isset($value_form[0]->step1_cp) && !empty($value_form[0]->step1_cp)) ? $value_form[0]->step1_cp : '';
                                                                           ?>"
-                                                                          required></label>
+                                                                          required readonly></label>
             </p>
         </div>
     </div>
@@ -290,6 +296,22 @@
                 step1_siret.value = step1_siret.value.replace(/[^0-9]/g, '');
             });
         }
+
+
+        const autocompleteInput = new autocomplete.GeocoderAutocomplete(
+            document.getElementById("autocomplete"),
+            '9719cc4df0794d95b89c69609983e4cd',
+            {
+                placeholder: "Tapez l'adresse pour remplir automatiquement les champs suivants"
+            });
+
+        autocompleteInput.on('select', (location) => {
+            // check selected location here
+        });
+
+        autocompleteInput.on('suggestions', (suggestions) => {
+            // process suggestions here
+        });
 
     </script>
 

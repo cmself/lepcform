@@ -41,6 +41,8 @@ add_action('init', 'lmc_multistep_form__start_session');
 function lmc_multistep_form__enqueue_assets() {
     wp_enqueue_style('lmc-tippycss', plugin_dir_url(__FILE__) . 'node_modules/tippy.js/dist/tippy.css');
     wp_enqueue_style('lmc-style', plugin_dir_url(__FILE__) . 'assets/css/style.css');
+    //wp_enqueue_style('lmc-geoapifycss', 'https://unpkg.com/@geoapify/geocoder-autocomplete@latest/styles/minimal.css');
+    wp_enqueue_script('lmc-geoapifyjs','https://unpkg.com/@geoapify/geocoder-autocomplete@latest/dist/index.min.js', false, true);
     wp_enqueue_script('lmc-popperjs','https://unpkg.com/@popperjs/core@2' , false, true);
     wp_enqueue_script('lmc-tippyjs','https://unpkg.com/tippy.js@6' , false, true);
     wp_enqueue_script('lmc-recaptcha','https://www.google.com/recaptcha/api.js' , false, true);

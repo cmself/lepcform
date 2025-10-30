@@ -295,5 +295,92 @@
     /* Utilitaires personnalisés */
     #lmc-multistep-form {
 
+
+        .geoapify-autocomplete-input{
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            appearance: none !important;
+            border: none !important;
+            outline: none !important;
+            @apply border-b! border-[var(--color-blanc)]! font-normal! py-[5px]! px-[10px]! bg-[var(--color-violet)]! text-[var(--color-blanc)]! w-full!;
+        }
+
+        .geoapify-autocomplete-items {
+            position: absolute;
+            border-top: none;
+            background-color: var(--color-purple);
+
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+
+        .geoapify-autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .geoapify-autocomplete-items div:hover {
+            background-color: var(--color-rose);
+        }
+
+        .geoapify-autocomplete-items .active {
+            background-color: var(--color-rose);
+        }
+
+        .geoapify-autocomplete-item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .geoapify-autocomplete-item .icon {
+            display: inline-block;
+            width: 40px;
+            height: 24px;
+            color: var(--color-white);
+        }
+
+        .geoapify-autocomplete-item .icon.emoji {
+            color: unset;
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        .geoapify-close-button {
+            position: absolute;
+            right: 5px;
+            top: 0;
+
+            height: 100%;
+            display: none;
+            align-items: center;
+        }
+
+        .geoapify-close-button.visible {
+            display: flex;
+        }
+
+        .geoapify-close-button {
+            color: var(--color-rose) !important;
+            cursor: pointer;
+        }
+
+        .geoapify-close-button:hover {
+            color: var(--color-rose) !important;
+        }
+
+        .geoapify-autocomplete-items .main-part .non-verified {
+            color:  var(--color-error) !important;
+        }
+
+        .geoapify-autocomplete-items .secondary-part {
+            margin-left: 10px;
+            /*
+            font-size: small;
+            color: rgba(0, 0, 0, 0.6);
+             */
+        }
     }
 }
