@@ -41,6 +41,34 @@
                     placeholder="Logo"> <?php if ($value_form[0]->step1_logo) { ?>
                 <div class="mb-[20px]!"> <img class="h-[60px]! w-auto!" src="<?= plugin_dir_url('') . 'lmc-multistep-form/src/actions/uploads/' . $value_form[0]->step1_logo ?>">
                 </div> <?php } ?></label></p>
+
+    <p>
+        <label>
+            <span>Adhérent Les entreprises pour la Cité :</span>
+            <div class="wrapper">
+                <fieldset>
+                    <input type="radio" name="step1_adherent" id="option-1"
+                           value="1" <?php
+                    echo ($value_form[0]->step1_adherent == 1) ? 'checked' : '';
+                    ?>>
+                    <input type="radio" name="step1_adherent" id="option-2"
+                           value="0" <?php
+                    echo ($value_form[0]->step1_adherent == 0) ? 'checked' : '';
+                    ?>>
+                    <label for="option-1" class="option option-1">
+                        <div class="dot"></div>
+                        <span>Oui</span>
+                    </label>
+                    <label for="option-2" class="option option-2">
+                        <div class="dot"></div>
+                        <span>Non</span>
+                    </label>
+                </fieldset>
+            </div>
+        </label>
+    </p>
+
+
     <p><label for="step1_ca"><span>Le chiffre d’affaires * :</span>
             <select name="step1_ca" id="step1_ca" required>
                 <?php
@@ -77,33 +105,8 @@
             </select>
         </label>
     </p>
-    <p>
-        <label>
-            <span>Adhérent Les entreprises pour la Cité :</span>
-            <div class="wrapper">
-                <fieldset>
-                    <input type="radio" name="step1_adherent" id="option-1"
-                           value="1" <?php
-                    echo ($value_form[0]->step1_adherent == 1) ? 'checked' : '';
-                    ?>>
-                    <input type="radio" name="step1_adherent" id="option-2"
-                           value="0" <?php
-                    echo ($value_form[0]->step1_adherent == 0) ? 'checked' : '';
-                    ?>>
-                    <label for="option-1" class="option option-1">
-                        <div class="dot"></div>
-                        <span>Oui</span>
-                    </label>
-                    <label for="option-2" class="option option-2">
-                        <div class="dot"></div>
-                        <span>Non</span>
-                    </label>
-                </fieldset>
-            </div>
-        </label>
-    </p>
 
-    <div class="w-full my-[20px]">
+    <div class="w-full mt-[40px]! mb-[20px]!">
     <div id="autocomplete" class="autocomplete-container relative"></div>
     </div>
 
@@ -392,8 +395,6 @@
                     }
             */
 
-            console.log(location);
-
             const step1_adresse = document.getElementById('step1_adresse');
             const step1_ville = document.getElementById('step1_ville');
             const step1_cp = document.getElementById('step1_cp');
@@ -424,12 +425,16 @@
                 step1_pays.value = null;
             }
 
-
-
         });
 
-        autocompleteInput.on('suggestions', (suggestions) => {
-        });
+        document.querySelector('.geoapify-autocomplete-input').value ='<?php
+        echo (isset($value_form[0]->step1_adresse) && !empty($value_form[0]->step1_adresse)) ? $value_form[0]->step1_adresse . ', ' : ', ';
+        echo (isset($value_form[0]->step1_cp) && !empty($value_form[0]->step1_cp)) ? $value_form[0]->step1_cp : ' ';
+        echo (isset($value_form[0]->step1_ville) && !empty($value_form[0]->step1_ville)) ? $value_form[0]->step1_ville . ', ' : ', ';
+        echo (isset($value_form[0]->step1_pays) && !empty($value_form[0]->step1_pays)) ? $value_form[0]->step1_pays : '';
+        ?>';
+
+
 
 
     </script>
