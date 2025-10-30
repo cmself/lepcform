@@ -390,7 +390,7 @@
                 step1_adresse.value = "";
             }
 
-            iflocation['properties']['city']) {
+            if(location['properties']['city']) {
                 step1_ville.value = location['properties']['city'];
             }else{
                 step1_ville.value = "";
