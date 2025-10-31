@@ -334,7 +334,6 @@
         });
 
 
-
         /*
          * Authentification à l'API INSEE
          * https://portail-api.insee.fr/applications/58d909d1-ea10-441d-9909-d1ea10b41dfc/subscriptions?subscription=f02bf565-a279-4ba4-abf5-65a2793ba42f#s
@@ -372,6 +371,7 @@
 
                     if (!response.ok) {
                         step1_nom.value = '';
+                        document.querySelector('.geoapify-autocomplete-input').value = '';
                         result.innerHTML  = `<strong class="text-[var(--color-warning)]">SIRET introuvable ou invalide.</strong>`;
                         return;
                     }
@@ -381,6 +381,7 @@
                     // Vérifie que la structure des données est correcte
                     if (!data.etablissement || !data.etablissement.uniteLegale) {
                         step1_nom.value = '';
+                        document.querySelector('.geoapify-autocomplete-input').value = '';
                         result.innerHTML  = `<strong class="text-[var(--color-warning)]"> Données d’entreprise non disponibles.</strong>`;
                         return;
                     }
@@ -389,14 +390,19 @@
                     result.innerHTML = `<strong class="text-[var(--color-good)]">SIRET validé => ${entreprise.denominationUniteLegale || entreprise.nomUniteLegale || "Nom inconnu"}</strong>`;
                     step1_nom.value = `${entreprise.denominationUniteLegale || entreprise.nomUniteLegale || "Nom inconnu"}`;
 
+                    const adresse = data.etablissement.adresseEtablissement;
+                    document.querySelector('.geoapify-autocomplete-input').value = `${adresse.numeroVoieEtablissement || ""} ` + `${adresse.typeVoieEtablissement || ""} ` + `${adresse.libelleVoieEtablissement || ""}, ` + `${adresse.codePostalEtablissement || ""} ` + `${adresse.libelleCommuneEtablissement || ""}, France`;
+
                 } catch (error) {
                     step1_nom.value = '';
+                    document.querySelector('.geoapify-autocomplete-input').value = '';
                     result.innerHTML  = `<strong class="text-[var(--color-error)]"> Erreur de connexion à l’API.</strong>`;
                     console.error(error);
                 }
 
             } else if (siret.length > 0) {
                 step1_nom.value = '';
+                document.querySelector('.geoapify-autocomplete-input').value = '';
                 result.innerHTML  = "Le SIRET doit contenir exactement 14 chiffres.";
             } else {
                 result.innerHTML  = "";
@@ -451,11 +457,11 @@
         });
 
         document.querySelector('.geoapify-autocomplete-input').value ='<?php
-        echo (isset($value_form[0]->step1_adresse) && !empty($value_form[0]->step1_adresse)) ? $value_form[0]->step1_adresse . ',' : '';
-        echo (isset($value_form[0]->step1_cp) && !empty($value_form[0]->step1_cp)) ? ' ' . $value_form[0]->step1_cp . ' ' : '';
-        echo (isset($value_form[0]->step1_ville) && !empty($value_form[0]->step1_ville)) ? ' ' . $value_form[0]->step1_ville . ',' : '';
-        echo (isset($value_form[0]->step1_pays) && !empty($value_form[0]->step1_pays)) ? ' ' . $value_form[0]->step1_pays : '';
-        ?>';
+            echo (isset($value_form[0]->step1_adresse) && !empty($value_form[0]->step1_adresse)) ? $value_form[0]->step1_adresse . ',' : '';
+            echo (isset($value_form[0]->step1_cp) && !empty($value_form[0]->step1_cp)) ? ' ' . $value_form[0]->step1_cp . ' ' : '';
+            echo (isset($value_form[0]->step1_ville) && !empty($value_form[0]->step1_ville)) ? ' ' . $value_form[0]->step1_ville . ',' : '';
+            echo (isset($value_form[0]->step1_pays) && !empty($value_form[0]->step1_pays)) ? ' ' . $value_form[0]->step1_pays : '';
+            ?>';
 
 
     </script>
