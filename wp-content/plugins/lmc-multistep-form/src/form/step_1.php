@@ -87,7 +87,8 @@
             </select>
         </label>
     </p>
-    <p><label for="step1_frais"><span>Montant des frais pour la Charte de la diversité * :</span>
+    <p><label for="step1_frais"><span>Montant des frais pour la Charte de la diversité * : <i
+                        class="fa-regular fa-circle-question text-[var(--color-rose)]!" id="step1_frais_tippy"></i></span>
             <select name="step1_frais" id="step1_frais" required>
                 <?php
                 if ($_SESSION['lmc_data'][$id_session]['ohme_data']['Structure']['montant_des_frais_pour_la_charte_de_la_diversite']['options']):
@@ -302,9 +303,34 @@
     </p>
 
 
+    <style>
+        .tippy-box[data-theme~='lmc'] {
+            background-color: var(--color-purple);
+            color: var(--color-blanc);
+            padding: 10px;
+        }
+        .tippy-box[data-theme~='lmc'][data-placement^='top'] > .tippy-arrow::before {
+            border-top-color: var(--color-purple);
+        }
+        .tippy-box[data-theme~='lmc'][data-placement^='bottom'] > .tippy-arrow::before {
+            border-bottom-color: var(--color-purple);
+        }
+        .tippy-box[data-theme~='lmc'][data-placement^='left'] > .tippy-arrow::before {
+            border-left-color: var(--color-purple);
+        }
+        .tippy-box[data-theme~='lmc'][data-placement^='right'] > .tippy-arrow::before {
+            border-right-color: var(--color-purple);
+        }
+    </style>
 
 
     <script>
+
+        tippy('#step1_frais_tippy', {
+            theme: 'lmc',
+            allowHTML: true,
+            content: "Choisissez le montant correspondant à votre situation :<br/><br/>Adhérent &quot;Les entreprises pour la Cité&quot; - 0 €<br/><br/><5 M € de chiffre d'affaires - 300 €<br/>5 à 250 M€ de chiffre d'affaires - 600 €<br/>> 250 M€ de chiffre d'affaires - 1 800 €",
+        });
 
         const step1_siret = document.getElementById('step1_siret');
 
@@ -327,73 +353,6 @@
             });
 
         autocompleteInput.on('select', (location) => {
-            /*
-            {
-            "type":"Feature",
-            "properties":
-                {
-                "country":"France",
-                "country_code":"fr",
-                "region":"France métropolitaine",
-                "state":"Île-de-France",
-                "city":"Paris",
-                "municipality":"Paris",
-                "postcode":"75004",
-                "district":"Le Village Saint-Paul",
-                "suburb":"Le Marais",
-                "street":"Rue de Rivoli",
-                "other_names":
-                    {
-                    "name":"Rue de Rivoli",
-                    "name:de":"Rue de Rivoli",
-                    "name:es":"Rue de Rivoli",
-                    "name:fr":"Rue de Rivoli",
-                    "name:ru":"Улица Риволи"
-                    },
-                "iso3166_2":"FR-75C",
-                "datasource":
-                    {
-                    "sourcename":"openstreetmap",
-                    "attribution":"© OpenStreetMap contributors",
-                    "license":"Open Database License",
-                    "url":"https://www.openstreetmap.org/copyright"
-                    },
-                "state_code":"IDF",
-                "state_COG":"11",
-                "lon":2.358812,
-                "lat":48.8557199,
-                "housenumber":"6",
-                "result_type":"building",
-                "formatted":"6 Rue de Rivoli, 75004 Paris, France",
-                "address_line1":"6 Rue de Rivoli",
-                "address_line2":"75004 Paris, France",
-                "timezone":
-                    {
-                    "name":"Europe/Paris",
-                    "offset_STD":"+01:00",
-                    "offset_STD_seconds":3600,
-                    "offset_DST":"+02:00",
-                    "offset_DST_seconds":7200,
-                    "abbreviation_STD":"CET",
-                    "abbreviation_DST":"CEST"
-                    },
-                "plus_code":"8FW4V945+7G",
-                "plus_code_short":"45+7G Paris, Île-de-France, France",
-                "rank":
-                    {
-                    "confidence":0.75,
-                    "confidence_street_level":1,
-                    "confidence_building_level":0.75,
-                    "match_type":"full_match"},
-                    "place_id":"517f4c6bd3d8de024059a884cc3a886d4840f00102f901fdab3e0a00000000c00203"
-                    },
-               "geometry":
-                    {
-                    "type":"Point",
-                    "coordinates":[2.358812,48.8557199]},
-                    "bbox":[2.3600815,48.8551111,2.3615537,48.8554573]
-                    }
-            */
 
             const step1_adresse = document.getElementById('step1_adresse');
             const step1_ville = document.getElementById('step1_ville');
