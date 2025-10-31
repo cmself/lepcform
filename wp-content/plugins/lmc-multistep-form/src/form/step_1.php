@@ -359,7 +359,7 @@
 
             if (siret.length === 14 && /^\d+$/.test(siret)) {
 
-                result.textContent = "Vérification en cours...";
+                result.innerHTML  = "Vérification en cours...";
 
                 try {
                     const response = await fetch(`https://api.insee.fr/api-sirene/3.11/siret/${siret}`, {
@@ -372,7 +372,7 @@
 
                     if (!response.ok) {
                         step1_nom.value = '';
-                        result.textContent = "❌ SIRET introuvable ou invalide.";
+                        result.innerHTML  = `<strong class="text-[var(--color-warning)]">SIRET introuvable ou invalide.</strong>`;
                         return;
                     }
 
@@ -381,25 +381,25 @@
                     // Vérifie que la structure des données est correcte
                     if (!data.etablissement || !data.etablissement.uniteLegale) {
                         step1_nom.value = '';
-                        result.textContent = "⚠️ Données d’entreprise non disponibles.";
+                        result.innerHTML  = `<strong class="text-[var(--color-warning)]"> Données d’entreprise non disponibles.</strong>`;
                         return;
                     }
 
                     const entreprise = data.etablissement.uniteLegale;
-                    result.innerHTML = `✅ <strong>${entreprise.denominationUniteLegale || entreprise.nomUniteLegale || "Nom inconnu"}</strong>`;
+                    result.innerHTML = `<strong class="text-[var(--color-good)]">SIRET validé => ${entreprise.denominationUniteLegale || entreprise.nomUniteLegale || "Nom inconnu"}</strong>`;
                     step1_nom.value = `${entreprise.denominationUniteLegale || entreprise.nomUniteLegale || "Nom inconnu"}`;
 
                 } catch (error) {
                     step1_nom.value = '';
-                    result.textContent = "⚠️ Erreur de connexion à l’API.";
+                    result.innerHTML  = `<strong class="text-[var(--color-error)]"> Erreur de connexion à l’API.</strong>`;
                     console.error(error);
                 }
 
             } else if (siret.length > 0) {
                 step1_nom.value = '';
-                result.textContent = "Le SIRET doit contenir exactement 14 chiffres.";
+                result.innerHTML  = "Le SIRET doit contenir exactement 14 chiffres.";
             } else {
-                result.textContent = "";
+                result.innerHTML  = "";
             }
 
         }

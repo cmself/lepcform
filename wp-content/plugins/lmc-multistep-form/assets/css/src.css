@@ -10,6 +10,8 @@
     --color-violet: #4E006F;
     --color-purple: #290033;
     --color-error: #880000;
+    --color-good: #437512;
+    --color-warning: #FFC514;
 }
 
 @layer reset {
