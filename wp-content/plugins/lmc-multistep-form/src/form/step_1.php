@@ -338,7 +338,9 @@
         /*
          * Authentification à l'API INSEE
          * https://portail-api.insee.fr/applications/58d909d1-ea10-441d-9909-d1ea10b41dfc/subscriptions?subscription=f02bf565-a279-4ba4-abf5-65a2793ba42f#s
+         * Exemple test : 42886874900055
          */
+
         const step1_nom = document.getElementById('step1_nom');
         const step1_siret = document.getElementById('step1_siret');
         const result = document.getElementById("result_step1_siret");
@@ -355,7 +357,6 @@
 
             const siret = step1_siret.value.trim();
 
-            // Exemple test : 42886874900055
             if (siret.length === 14 && /^\d+$/.test(siret)) {
 
                 result.textContent = "Vérification en cours...";
