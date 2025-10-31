@@ -396,6 +396,7 @@
                 }
 
             } else if (siret.length > 0) {
+                step1_nom.value = '';
                 result.textContent = "Le SIRET doit contenir exactement 14 chiffres.";
             } else {
                 result.textContent = "";
