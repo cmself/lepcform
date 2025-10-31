@@ -111,8 +111,7 @@
     <div id="content_3" class="block! w-full!">
         <?php if(isset($value_form[0]->step5_paiement) && $value_form[0]->step5_paiement == "FACTURE"){ ?>
             <div class="div_3">
-                <h4>Vous avez besoin d’une facture non acquittée ?<br/>
-                    Si nécessaire, veuillez indiquer le numéro de bon de commande qui doit y figurer.</h4>
+                <h4>Vous avez besoin d’une facture non acquittée ?<br/> Si nécessaire, veuillez indiquer le numéro de bon de commande qui doit y figurer.</h4>
                 <p>
                     <label for="bc"><span>Numéro du bon de commande * :</span>
                         <input type="text" id="step5_bc" name="step5_bc" placeholder="Numéro" value="<?php echo (isset($value_form[0]->step5_bc) && !empty($value_form[0]->step5_bc)) ? $value_form[0]->step5_bc : ''; ?>" required>
