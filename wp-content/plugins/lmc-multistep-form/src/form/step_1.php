@@ -387,9 +387,9 @@
         });
 
         document.querySelector('.geoapify-autocomplete-input').value ='<?php
-        echo (isset($value_form[0]->step1_adresse) && !empty($value_form[0]->step1_adresse)) ? $value_form[0]->step1_adresse . ', ' : ', ';
-        echo (isset($value_form[0]->step1_cp) && !empty($value_form[0]->step1_cp)) ? $value_form[0]->step1_cp . ' ' : ' ';
-        echo (isset($value_form[0]->step1_ville) && !empty($value_form[0]->step1_ville)) ? $value_form[0]->step1_ville . ', ' : ', ';
+        echo (isset($value_form[0]->step1_adresse) && !empty($value_form[0]->step1_adresse)) ? $value_form[0]->step1_adresse . ', ' : '';
+        echo (isset($value_form[0]->step1_cp) && !empty($value_form[0]->step1_cp)) ? $value_form[0]->step1_cp . ' ' : '';
+        echo (isset($value_form[0]->step1_ville) && !empty($value_form[0]->step1_ville)) ? $value_form[0]->step1_ville . ', ' : '';
         echo (isset($value_form[0]->step1_pays) && !empty($value_form[0]->step1_pays)) ? $value_form[0]->step1_pays : '';
         ?>';
 
