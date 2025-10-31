@@ -370,6 +370,7 @@
                     });
 
                     if (!response.ok) {
+                        step1_nom.value = '';
                         result.textContent = "❌ SIRET introuvable ou invalide.";
                         return;
                     }
@@ -378,15 +379,17 @@
 
                     // Vérifie que la structure des données est correcte
                     if (!data.etablissement || !data.etablissement.uniteLegale) {
+                        step1_nom.value = '';
                         result.textContent = "⚠️ Données d’entreprise non disponibles.";
                         return;
                     }
 
                     const entreprise = data.etablissement.uniteLegale;
                     result.innerHTML = `✅ <strong>${entreprise.denominationUniteLegale || entreprise.nomUniteLegale || "Nom inconnu"}</strong>`;
-                    step1_nom.value = entreprise.denominationUniteLegale;
+                    step1_nom.value = `${entreprise.denominationUniteLegale || entreprise.nomUniteLegale || "Nom inconnu"}`;
 
                 } catch (error) {
+                    step1_nom.value = '';
                     result.textContent = "⚠️ Erreur de connexion à l’API.";
                     console.error(error);
                 }
@@ -398,10 +401,6 @@
             }
 
         }
-
-
-
-
 
 
     const autocompleteInput = new autocomplete.GeocoderAutocomplete(
