@@ -87,7 +87,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
         <label for="step2_signataire_0" class="checkbox">
             <input type="checkbox" class="step2_signataire" id="step2_signataire_0"
                    name="step2_signataire_0" value="1" <?php echo ($value_form[0]->step2_signataire_0 == 1) ? 'checked' : ''; ?> /><span>Contact signataire</span> <i
-                    class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
+                    class="fa-regular fa-circle-question" data-tippy-content="Ce nom apparaitra comme signataire sur le document officiel."></i></label>
     </p>
 
     <div class="useradd">
@@ -139,7 +139,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
                 <p>
                     <label for="step2_signataire_1" class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_1"
                                                                             name="step2_signataire_1" value="1" <?php echo ($value_form[0]->step2_signataire_1 == 1) ? 'checked' : ''; ?> /><span>Contact signataire</span> <i
-                                class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
+                                class="fa-regular fa-circle-question" data-tippy-content="Ce nom apparaitra comme signataire sur le document officiel."></i></label>
                 </p>
 
                 <input type="hidden" id="step2_useradd_1" name="step2_useradd_1">
@@ -197,7 +197,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
                 <p>
                     <label for="step2_signataire_2" class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_2"
                                                                             name="step2_signataire_2" value="1" <?php echo ($value_form[0]->step2_signataire_2 == 1) ? 'checked' : ''; ?> /><span>Contact signataire</span> <i
-                                class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
+                                class="fa-regular fa-circle-question" data-tippy-content="Ce nom apparaitra comme signataire sur le document officiel."></i></label>
                 </p>
 
                 <input type="hidden" id="step2_useradd_2" name="step2_useradd_2">
@@ -256,7 +256,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
                 <p>
                     <label for="step2_signataire_3" class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_3"
                                                                             name="step2_signataire_3" value="1" <?php echo ($value_form[0]->step2_signataire_3 == 1) ? 'checked' : ''; ?> /><span>Contact signataire</span> <i
-                                class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
+                                class="fa-regular fa-circle-question" data-tippy-content="Ce nom apparaitra comme signataire sur le document officiel."></i></label>
                 </p>
 
                 <input type="hidden" id="step2_useradd_3" name="step2_useradd_3">
@@ -365,7 +365,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
     <p>
         <label for="step2_signataire_` + (currentContacts+1) + `" class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_` + (currentContacts+1) + `"
                                                   name="step2_signataire_` + (currentContacts+1) + `" value="1"/><span>Contact signataire</span> <i
-                    class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
+                    class="fa-regular fa-circle-question" data-tippy-content="Ce nom apparaitra comme signataire sur le document officiel."></i></label>
     </p>
 
     <input type="hidden" id="step2_useradd_` + (currentContacts+1) + `" name="step2_useradd_` + (currentContacts+1) + `">`;
@@ -544,7 +544,7 @@ foreach ( $lmc_multistep_fe as $fonction_entreprise ) {
     <p>
         <label for="step2_signataire_` + (i+1) + `" class="checkbox"><input type="checkbox" class="step2_signataire" id="step2_signataire_` + (i+1) + `"
                                                   name="step2_signataire_` + (i+1) + `" value="1"/><span>Contact signataire</span> <i
-                    class="fa-regular fa-circle-question" data-tippy-content="Tempore quo primis auspiciis in mundanum fulgorem"></i></label>
+                    class="fa-regular fa-circle-question" data-tippy-content="Ce nom apparaitra comme signataire sur le document officiel."></i></label>
     </p>
     <input type="hidden" id="step2_useradd_` + (i + 1) + `" name="step2_useradd_` + (i + 1) + `">`;
                 containerUser.appendChild(newUser);
