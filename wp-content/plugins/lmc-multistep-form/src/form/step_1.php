@@ -27,7 +27,7 @@
     <?php endif; ?>
 
     <p><label for="step1_nom"><span>Nom de l’organisation * :</span> <input type="text" placeholder="NOM" id="step1_nom" name="step1_nom" value="<?php echo (isset($value_form[0]->step1_nom) && !empty($value_form[0]->step1_nom)) ? $value_form[0]->step1_nom : ''; ?>" required></label></p>
-    <p><label for="step1_siret"><span>Numéro de SIRET * :</span>
+    <p><label for="step1_siret"><span>Numéro de SIRET * : <i id="result_step1_siret" class="text-[var(--color-rose)]!"></i></span>
             <?php if (isset($value_form[0]->resign) && !empty($value_form[0]->resign)) { ?>
                 <input type="text" id="step1_siret_disabled" pattern="\d{14}" maxlength="14" title="Veuillez entrer exactement 14 chiffres" name="step1_siret_disabled" placeholder="SIRET" value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" readonly>
                 <input type="hidden" name="step1_siret" id="step1_siret" value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>">
@@ -35,7 +35,8 @@
                 <input type="text" id="step1_siret" pattern="\d{14}" maxlength="14" title="Veuillez entrer exactement 14 chiffres" name="step1_siret" placeholder="SIRET" value="<?php echo (isset($value_form[0]->step1_siret) && !empty($value_form[0]->step1_siret)) ? $value_form[0]->step1_siret : ''; ?>" required>
             <?php } ?>
 
-        </label></p>
+        </label>
+    </p>
     <p><label for="step1_logo"><span>Ajouter un logo :</span> <input type="hidden" name="step1_logoH" id="step1_logoH" value="<?php echo (isset($value_form[0]->step1_logo) && !empty($value_form[0]->step1_logo)) ? $value_form[0]->step1_logo : ''; ?>"> <input
                     type="file" accept=".jpg, .jpeg" id="step1_logo" name="step1_logo"
                     placeholder="Logo"> <?php if ($value_form[0]->step1_logo) { ?>
@@ -392,6 +393,52 @@
         echo (isset($value_form[0]->step1_ville) && !empty($value_form[0]->step1_ville)) ? ' ' . $value_form[0]->step1_ville . ',' : '';
         echo (isset($value_form[0]->step1_pays) && !empty($value_form[0]->step1_pays)) ? ' ' . $value_form[0]->step1_pays : '';
         ?>';
+
+
+
+        /*
+        test = 42886874900055
+         */
+        const input = document.getElementById("step1_siret");
+        const result = document.getElementById("result_step1_siret");
+
+        input.addEventListener("input", async () => {
+            const siret = input.value.trim();
+
+            if (siret.length === 14 && /^\d+$/.test(siret)) {
+
+                result.textContent = "Vérification en cours...";
+
+                try {
+                    const response = await fetch(`https://api.insee.fr/api-sirene/3.11/siret/${siret}`, {
+                        method: "GET",
+                        headers: {
+                            "Accept": "application/json",
+                            'X-INSEE-Api-Key-Integration' => <?= APIKEYINSEE; ?>,
+                        },
+                    });
+
+                    if (!response.ok) {
+                        result.textContent = "❌ SIREN introuvable ou invalide";
+                        return;
+                    }
+
+                    const data = await response.json();
+                    const entreprise = data.uniteLegale;
+                    result.innerHTML = `
+        ✅ <strong>${entreprise.denominationUniteLegale || entreprise.nomUniteLegale}</strong><br>
+        Activité : ${entreprise.activitePrincipaleUniteLegale || "Non précisée"}
+      `;
+                } catch (error) {
+                    result.textContent = "⚠️ Erreur de connexion à l’API.";
+                    console.error(error);
+                }
+            } else if (siret.length > 0) {
+                result.textContent = "Le SIREN doit contenir exactement 14 chiffres.";
+            } else {
+                result.textContent = "";
+            }
+        });
 
 
 

@@ -321,7 +321,7 @@ function lmc_multistep_form() {
     /*
      * Authentification à l'API OHME
      */
-    $client = new Client([
+    $client_ohme = new Client([
         'verify' => false, // pas sécurisé, uniquement pour test
         'base_uri' => 'https://api-ohme.oneheart.fr/api/v1/',
         'headers' => [
@@ -330,11 +330,67 @@ function lmc_multistep_form() {
             'client-secret' => SECRETOHME
         ]
     ]);
+    include_once 'src/api/ohme.php';
+
+
 
     /*
-     * Récupérer les champs personnalisés de OHME
+     * Authentification à l'API INSEE
+     * https://portail-api.insee.fr/applications/58d909d1-ea10-441d-9909-d1ea10b41dfc/subscriptions?subscription=f02bf565-a279-4ba4-abf5-65a2793ba42f#s
      */
-    include_once 'src/api/ohme.php';
+
+    function lmc_multistep_form__insee_get_siret($siret) {
+
+        $client_insee = new Client([
+            'verify' => false, // pas sécurisé, uniquement pour test
+            'headers' => [
+                'Accept' => 'application/json',
+                'X-INSEE-Api-Key-Integration' => APIKEYINSEE,
+            ],
+        ]);
+
+
+        try {
+            $insee_siret = $client_insee->request('GET', 'https://api.insee.fr/api-sirene/3.11/siret/'.$siret);
+
+            $code_siret = $insee_siret->getStatusCode();
+            if ($code_siret != 200) {
+
+                $_SESSION['lmc_data']['error_step'] = 1;
+                $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à INSEE.";
+                lmc_multistep_form__logLmc("Json INSEE Siret invalide");
+                die();
+            }
+            $data_siret = json_decode($insee_siret->getBody(), true);
+            if (json_last_error() === JSON_ERROR_NONE) {
+
+                if ($data_siret['header']['statut'] === 200) {
+                    return $data_siret['etablissement']['uniteLegale']['denominationUniteLegale'];
+                }else{
+                    $errors['step1']['name'] = 'Le champ Siret n\'est pas valide';
+                    $errors['step1']['texte'] = 'Vous devez renseigner le champ Siret.';
+                }
+
+            }else{
+                $_SESSION['lmc_data']['error_step'] = 1;
+                $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à INSEE.";
+                lmc_multistep_form__logLmc("Json INSEE Siret invalide");
+                die();
+            }
+
+
+        } catch (ClientException $e) {
+
+            $_SESSION['lmc_data']['error_step'] = 1;
+            $_SESSION['lmc_data']['$error_message'] = "Impossible de se connecter à INSEE.";
+            lmc_multistep_form__logLmc("API INSEE Siret invalide : " . $e->getResponse()->getStatusCode() . " = " .  $e->getResponse()->getBody());
+            die();
+
+        }
+
+    }
+
+    //lmc_multistep_form__insee_get_siret('42886874900055');
 
 
 

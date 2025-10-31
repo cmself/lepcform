@@ -49,7 +49,7 @@ if(isset($_POST['step']) && $_POST['step'] == 1) {
 
         try {
 
-            $siren = $client->request('GET', 'structures', [
+            $siren = $client_ohme->request('GET', 'structures', [
                 'query' => ['siret' => $_SESSION['lmc_data'][$id_session]['step1_siret']]
             ]);
             $code_siren = $siren->getStatusCode();

@@ -7,4 +7,5 @@ define('MailSENDER', 'hebergement@lmcfrance.com');
 define('MailNAME', 'lmc france');
 define('CLIENTOHME', 'lepc');
 define('SECRETOHME', '39a39fbf4a0944abfd57f1d14452c7cba242761035a3e8ab3356cbda7a1c5d0a');
+define('APIKEYINSEE', 'b8889a2f-72cc-44d8-889a-2f72cc24d887');
 ?>

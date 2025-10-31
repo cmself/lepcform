@@ -1,12 +1,13 @@
 <?php
 
+$opt_ohme = [];
+
 /*
  * Récupérer les champs personnalisés Contact
  */
-$opt_ohme = [];
 
 try {
-    $custom_fields_contact = $client->request('GET', 'custom-fields', [
+    $custom_fields_contact = $client_ohme->request('GET', 'custom-fields', [
         'query' => ['model' => 'Contact']
     ]);
     $code_contact = $custom_fields_contact->getStatusCode();
@@ -49,7 +50,7 @@ try {
  */
 try {
 
-    $custom_fields_structure = $client->request('GET', 'custom-fields', [
+    $custom_fields_structure = $client_ohme->request('GET', 'custom-fields', [
         'query' => ['model' => 'Structure']
     ]);
     $code_structure = $custom_fields_structure->getStatusCode();
@@ -93,7 +94,7 @@ try {
  */
 try {
 
-    $custom_fields_group = $client->request('GET', 'custom-fields', [
+    $custom_fields_group = $client_ohme->request('GET', 'custom-fields', [
         'query' => ['model' => 'Group']
     ]);
     $code_group = $custom_fields_group->getStatusCode();
@@ -136,7 +137,7 @@ try {
  */
 try {
 
-    $custom_fields_payment = $client->request('GET', 'custom-fields', [
+    $custom_fields_payment = $client_ohme->request('GET', 'custom-fields', [
         'query' => ['model' => 'Payment']
     ]);
     $code_payment = $custom_fields_payment->getStatusCode();
@@ -180,7 +181,7 @@ try {
 
 try {
 
-    $custom_fields_interaction = $client->request('GET', 'custom-fields', [
+    $custom_fields_interaction = $client_ohme->request('GET', 'custom-fields', [
         'query' => ['model' => 'Interaction']
     ]);
     $code_interaction = $custom_fields_interaction->getStatusCode();

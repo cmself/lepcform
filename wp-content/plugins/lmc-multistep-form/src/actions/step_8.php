@@ -31,7 +31,7 @@ if(isset($_POST['step']) && $_POST['step'] == 8) {
         if (isset($_POST['step8_email']) && !empty($_POST['step8_email'])) {
 
             try {
-                $email = $client->request('GET', 'contacts', [
+                $email = $client_ohme->request('GET', 'contacts', [
                     'query' => ['email' => $_POST['step8_email'], 'role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite' => "1 CHARTE CONTACT PRINCIPAL"]
                 ]);
                 $code_email = $email->getStatusCode();
@@ -74,7 +74,7 @@ if(isset($_POST['step']) && $_POST['step'] == 8) {
                     foreach ($ohme_contacts[0]['structure_ohme_ids'] as $ohme_ids) {
 
                         try {
-                            $step8_structures = $client->request('GET', 'structures', [
+                            $step8_structures = $client_ohme->request('GET', 'structures', [
                                 'query' => ['ohme_id' => $ohme_ids, 'siret' => $_POST['step8_siret']]
                             ]);
                             $code_step8_structures = $step8_structures->getStatusCode();
@@ -143,7 +143,7 @@ if(isset($_POST['step']) && $_POST['step'] == 8) {
                                             ['cookie' => $_SESSION['lmc_data'][$id_session]['csrf_token']]);
 
                                         try {
-                                            $structure_fields_contact = $client->request('GET', 'contacts', [
+                                            $structure_fields_contact = $client_ohme->request('GET', 'contacts', [
                                                 'query' => ['structure' => $data_step8_structures['data']['name'], 'role_dans_lentreprise_pour_la_charte_de_la_charte_de_la_diversite' => "2 AUTRE INTERLOCUTEUR CHARTE INTERLOCUTEUR", 'limit' => 3]
                                             ]);
                                             $code_structure_contact = $structure_fields_contact->getStatusCode();
